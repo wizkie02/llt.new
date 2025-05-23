@@ -79,7 +79,7 @@ const RomanticTravel = () => {
         ></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          <span className="inline-block px-6 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
+          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
             Love & Adventure
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -94,17 +94,17 @@ const RomanticTravel = () => {
       {/* Services Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-10">
-            <span className="inline-block px-4 py-2 rounded-full bg-[#daeef6] text-[#0093DE] text-sm font-medium mb-4 shadow-md">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
               For Couples
             </span>
             <h2 className="text-3xl font-bold mb-4">Our Romantic Services</h2>
-            <p className="text-lg opacity-80">
+            <p className="text-lg opacity-80 max-w-2xl mx-auto">
               From wedding photoshoots to honeymoon itineraries, we specialize in creating magical moments for couples
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {services.map((service) => (
               <div 
                 key={service.id}
@@ -119,9 +119,9 @@ const RomanticTravel = () => {
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
                 </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-bold mb-1.5">{service.title}</h3>
-                  <p className="opacity-80">{service.description}</p>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{service.description}</p>
                 </div>
               </div>
             ))}
@@ -130,77 +130,80 @@ const RomanticTravel = () => {
       </section>
       
       {/* Gallery Section */}
-      <section className={`py-16 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
+      <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
+            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+              Inspiration
+            </span>
             <h2 className="text-3xl font-bold mb-4">Gallery of Couples</h2>
-            <p className="text-lg opacity-80">
+            <p className="text-lg opacity-80 max-w-2xl mx-auto">
               Moments of love captured across Vietnam's most romantic destinations
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Couple in Hoi An" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
             
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1566897819059-db42e135fa69?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Beach proposal" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
             
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Couple at sunset" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
             
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1583431978096-e09dc7b7fcf4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Wedding photoshoot" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
             
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Couple in rice fields" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
             
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Couple on boat" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
             
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Lantern festival" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
             
-            <div className="relative h-40 md:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
               <img 
                 src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
                 alt="Couple on beach" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
           </div>
@@ -208,20 +211,23 @@ const RomanticTravel = () => {
       </section>
       
       {/* Testimonials Section */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
+            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+              Testimonials
+            </span>
             <h2 className="text-3xl font-bold mb-4">Love Stories</h2>
-            <p className="text-lg opacity-80">
+            <p className="text-lg opacity-80 max-w-2xl mx-auto">
               Hear from couples who have experienced our romantic services
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {testimonials.map((testimonial) => (
               <div 
                 key={testimonial.id}
-                className={`p-8 rounded-lg ${
+                className={`p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
                   theme === 'light' ? 'bg-white shadow-lg' : 'bg-gray-800 shadow-lg'
                 }`}
               >
@@ -229,14 +235,14 @@ const RomanticTravel = () => {
                   <img 
                     src={testimonial.image} 
                     alt={testimonial.name}
-                    className="w-16 h-16 rounded-full object-cover mr-4"
+                    className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-[#0093DE]"
                   />
                   <div>
                     <h3 className="font-bold">{testimonial.name}</h3>
-                    <p className="text-sm opacity-70">{testimonial.location}</p>
+                    <p className={`text-sm ${theme === 'light' ? 'text-[#0093DE]' : 'text-[#58b7e8]'}`}>{testimonial.location}</p>
                   </div>
                 </div>
-                <p className="italic">"{testimonial.text}"</p>
+                <p className={`italic ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>"{testimonial.text}"</p>
               </div>
             ))}
           </div>
@@ -244,11 +250,14 @@ const RomanticTravel = () => {
       </section>
       
       {/* Booking Section */}
-      <section className={`py-16 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
+      <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
+                <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                  Book Now
+                </span>
                 <h2 className="text-3xl font-bold mb-4">Book Your Romantic Experience</h2>
                 <p className="text-lg mb-6 opacity-80">
                   Select your preferred dates and services to begin planning your romantic journey in Vietnam.
@@ -260,14 +269,14 @@ const RomanticTravel = () => {
                     {addOns.map((addon) => (
                       <div 
                         key={addon.id}
-                        className={`p-4 rounded-lg ${
-                          theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-800'
+                        className={`p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${
+                          theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'
                         }`}
                       >
                         <div className="flex justify-between items-start">
                           <div>
                             <h4 className="font-semibold">{addon.title}</h4>
-                            <p className="text-sm opacity-80 mt-1">{addon.description}</p>
+                            <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'} mt-1`}>{addon.description}</p>
                           </div>
                           <div className="text-right">
                             <p className="font-medium text-[#0093DE]">{addon.price}</p>
@@ -279,7 +288,7 @@ const RomanticTravel = () => {
                 </div>
               </div>
               
-              <div className={`p-8 rounded-lg ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-800'}`}>
+              <div className={`p-8 rounded-2xl shadow-lg ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'}`}>
                 <h3 className="text-xl font-semibold mb-6">Booking Form</h3>
                 
                 <form className="space-y-4">
@@ -289,11 +298,11 @@ const RomanticTravel = () => {
                       <input 
                         type="text" 
                         id="first-name" 
-                        className={`w-full p-3 rounded-lg border ${
+                        className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
-                        } focus:outline-none focus:ring-1 focus:ring-[#0093DE]`}
+                        } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       />
                     </div>
                     
@@ -302,11 +311,11 @@ const RomanticTravel = () => {
                       <input 
                         type="text" 
                         id="last-name" 
-                        className={`w-full p-3 rounded-lg border ${
+                        className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
-                        } focus:outline-none focus:ring-1 focus:ring-[#0093DE]`}
+                        } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       />
                     </div>
                   </div>
@@ -316,11 +325,11 @@ const RomanticTravel = () => {
                     <input 
                       type="email" 
                       id="email" 
-                      className={`w-full p-3 rounded-lg border ${
+                      className={`w-full p-3 rounded-xl border ${
                         theme === 'light' 
                           ? 'border-gray-300 focus:border-[#0093DE]' 
                           : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
-                      } focus:outline-none focus:ring-1 focus:ring-[#0093DE]`}
+                      } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                     />
                   </div>
                   
@@ -328,11 +337,11 @@ const RomanticTravel = () => {
                     <label className="block text-sm font-medium mb-1" htmlFor="service">Service Type</label>
                     <select 
                       id="service" 
-                      className={`w-full p-3 rounded-lg border ${
+                      className={`w-full p-3 rounded-xl border ${
                         theme === 'light' 
                           ? 'border-gray-300 focus:border-[#0093DE]' 
                           : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
-                      } focus:outline-none focus:ring-1 focus:ring-[#0093DE]`}
+                      } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                     >
                       <option value="">Select a service</option>
                       <option value="wedding-photoshoot">Wedding Photoshoot</option>
@@ -348,11 +357,11 @@ const RomanticTravel = () => {
                       <input 
                         type="date" 
                         id="start-date" 
-                        className={`w-full p-3 rounded-lg border ${
+                        className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
-                        } focus:outline-none focus:ring-1 focus:ring-[#0093DE]`}
+                        } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       />
                     </div>
                     
@@ -361,11 +370,11 @@ const RomanticTravel = () => {
                       <input 
                         type="date" 
                         id="end-date" 
-                        className={`w-full p-3 rounded-lg border ${
+                        className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
-                        } focus:outline-none focus:ring-1 focus:ring-[#0093DE]`}
+                        } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       />
                     </div>
                   </div>
@@ -375,24 +384,48 @@ const RomanticTravel = () => {
                     <textarea 
                       id="message" 
                       rows={4}
-                      className={`w-full p-3 rounded-lg border ${
+                      className={`w-full p-3 rounded-xl border ${
                         theme === 'light' 
                           ? 'border-gray-300 focus:border-[#0093DE]' 
                           : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
-                      } focus:outline-none focus:ring-1 focus:ring-[#0093DE]`}
-                      placeholder="Tell us about any special requests or ideas for your romantic experience..."
+                      } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                      placeholder="Tell us about your dream romantic experience in Vietnam..."
                     ></textarea>
                   </div>
                   
                   <button 
                     type="submit"
-                    className="w-full bg-[#0093DE] hover:bg-[#0077b3] text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300"
+                    className="w-full bg-[#0093DE] hover:bg-[#007ab8] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
                   >
-                    Submit Booking Request
+                    Request Booking
                   </button>
                 </form>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-20 rounded-t-3xl">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Create Romantic Memories?</h2>
+          <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
+            Let us help you plan the perfect romantic experience in Vietnam's most beautiful destinations
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="/contact" 
+              className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold"
+            >
+              Contact Our Romance Specialists
+            </a>
+            <a 
+              href="/package-tours" 
+              className="bg-transparent border-2 border-white hover:bg-white/10 text-white py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              Browse Romantic Packages
+            </a>
           </div>
         </div>
       </section>

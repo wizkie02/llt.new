@@ -267,7 +267,7 @@ const Footer = () => {
   ];
   
   return (
-    <footer className="bg-[#F2F7FC] text-gray-800 relative overflow-hidden">
+    <footer className={`${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'} relative overflow-hidden`}>
       {/* Custom animation keyframes - added at the top of component */}
       <style>{`
         @keyframes float {
@@ -291,7 +291,7 @@ const Footer = () => {
       `}</style>
       
       {/* Gradient line at top of footer */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0093DE] via-teal-400 to-[#0093DE]"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb]"></div>
       
       {/* Decorative animated elements */}
       <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-[#0093DE]/5 to-teal-400/5 blur-2xl animate-pulse"></div>
@@ -305,7 +305,7 @@ const Footer = () => {
       <div className="relative z-10 pt-12">
         <div className="container mx-auto px-4">
           <AnimatedCard delay={100} direction="up">
-            <Hover3DCard className="bg-gradient-to-r from-[#0093DE]/10 to-teal-500/10 rounded-xl p-6 backdrop-blur-sm border border-[#0093DE]/10 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Hover3DCard className={`${theme === 'light' ? 'bg-gradient-to-r from-[#0093DE]/10 to-[#6dc0eb]/10' : 'bg-gradient-to-r from-[#0093DE]/20 to-[#6dc0eb]/20'} rounded-2xl p-6 backdrop-blur-sm border border-[#0093DE]/10 shadow-lg hover:shadow-xl transition-all duration-300`}>
               <div className="lg:flex items-center justify-between relative">
                 <div className="lg:w-1/2 mb-4 lg:mb-0">
                   <h3 className="text-xl lg:text-2xl font-bold text-[#0093DE] mb-2 flex items-center">
@@ -318,7 +318,7 @@ const Footer = () => {
                     </div>
                     Subscribe to our newsletter
                   </h3>
-                  <p className="text-gray-700 text-sm mb-0 lg:pr-8">Get exclusive deals and travel insights for your Vietnam adventure</p>
+                  <p className={`${theme === 'light' ? 'text-gray-700' : 'text-gray-300'} text-sm mb-0 lg:pr-8`}>Get exclusive deals and travel insights for your Vietnam adventure</p>
                 </div>
                 <div className="lg:w-1/2 flex justify-center lg:justify-end">
                   {!showSuccessMessage ? (
@@ -326,7 +326,7 @@ const Footer = () => {
                       <input 
                         type="email" 
                         placeholder="Your email address" 
-                        className="flex-grow px-4 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0093DE] bg-white/80 text-gray-700 border border-gray-200 text-sm shadow-inner"
+                        className={`flex-grow px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0093DE] ${theme === 'light' ? 'bg-white/80 text-gray-700' : 'bg-gray-800/80 text-gray-200'} border border-gray-200 text-sm shadow-inner`}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -334,7 +334,7 @@ const Footer = () => {
                       />
                       <button 
                         type="submit" 
-                        className={`bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium px-6 py-3 rounded-full transition-all duration-300 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-1 ${isSubmitted ? 'opacity-70 cursor-not-allowed' : ''} relative overflow-hidden`}
+                        className={`bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium px-6 py-3 rounded-xl transition-all duration-300 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-1 ${isSubmitted ? 'opacity-70 cursor-not-allowed' : ''} relative overflow-hidden`}
                         disabled={isSubmitted}
                       >
                         <span className="relative z-10">
@@ -370,175 +370,157 @@ const Footer = () => {
       
       <div className="container mx-auto px-4 pt-10 pb-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-          <AnimatedCard delay={200} direction="left">
-            <Hover3DCard className="transform transition-all duration-500">
-              <div className="mb-4">                <img 
-                  src="src/assets/horizontal_1.png" 
-                  alt="Vietnam Tours Logo" 
-                  className="h-8 transition-transform duration-300 mix-blend-multiply"
-                  style={{ filter: 'drop-shadow(0 0 0 transparent)' }}
-                />
-                <p className="text-xs italic text-[#0093DE] mt-1">Discover Vietnam with us</p>
-              </div>
-              <p className="text-gray-700 text-sm mb-4">
-                Our expert local guides will help you discover the authentic beauty of Vietnam through carefully crafted experiences.
+          <AnimatedCard delay={200} direction="up">
+            <div>
+              <h4 className="text-lg font-bold mb-4 text-[#0093DE]">About Us</h4>
+              <p className={`text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'} mb-4`}>
+                Loe Loves Travel specializes in authentic Vietnamese experiences, connecting travelers with the heart and soul of Vietnam.
               </p>
-              <div className="flex space-x-3">
-                <SocialIcon href="#" delay={100}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+              <div className="flex space-x-3 mt-6">
+                <SocialIcon href="https://facebook.com" delay={0}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
                   </svg>
                 </SocialIcon>
-                <SocialIcon href="#" delay={200}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                <SocialIcon href="https://twitter.com" delay={100}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
                   </svg>
                 </SocialIcon>
-                <SocialIcon href="#" delay={300}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                <SocialIcon href="https://instagram.com" delay={200}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M7.5 21h9a3 3 0 003-3V6a3 3 0 00-3-3h-9a3 3 0 00-3 3v12a3 3 0 003 3z" />
+                  </svg>
+                </SocialIcon>
+                <SocialIcon href="https://youtube.com" delay={300}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </SocialIcon>
               </div>
-            </Hover3DCard>
+            </div>
           </AnimatedCard>
           
           <AnimatedCard delay={300} direction="up">
-            <Hover3DCard className="transform transition-all duration-500">
-              <h3 className="text-base font-semibold mb-3 relative inline-block text-[#0093DE]">
-                Popular Destinations
-                <span className="absolute -bottom-1 left-0 w-2/3 h-0.5 bg-gradient-to-r from-[#0093DE] to-teal-400"></span>
-              </h3>
+            <div>
+              <h4 className="text-lg font-bold mb-4 text-[#0093DE]">Destinations</h4>
               <ul className="space-y-2 text-sm">
                 {destinations.map((destination, index) => (
-                  <FooterLink 
-                    key={destination.path} 
-                    to={destination.path} 
-                    delay={100 + (index * 50)}
-                  >
+                  <FooterLink key={destination.name} to={destination.path} delay={index * 50}>
                     {destination.name}
                   </FooterLink>
                 ))}
               </ul>
-            </Hover3DCard>
+            </div>
           </AnimatedCard>
           
           <AnimatedCard delay={400} direction="up">
-            <Hover3DCard className="transform transition-all duration-500">
-              <h3 className="text-base font-semibold mb-3 relative inline-block text-[#0093DE]">
-                Our Services
-                <span className="absolute -bottom-1 left-0 w-2/3 h-0.5 bg-gradient-to-r from-[#0093DE] to-teal-400"></span>
-              </h3>
+            <div>
+              <h4 className="text-lg font-bold mb-4 text-[#0093DE]">Services</h4>
               <ul className="space-y-2 text-sm">
                 {services.map((service, index) => (
-                  <FooterLink 
-                    key={service.path} 
-                    to={service.path} 
-                    delay={100 + (index * 50)}
-                  >
+                  <FooterLink key={service.name} to={service.path} delay={index * 50}>
                     {service.name}
                   </FooterLink>
                 ))}
               </ul>
-            </Hover3DCard>
+            </div>
           </AnimatedCard>
           
-          <AnimatedCard delay={500} direction="right">
-            <Hover3DCard className="transform transition-all duration-500">
-              <h3 className="text-base font-semibold mb-3 relative inline-block text-[#0093DE]">
-                Contact Us
-                <span className="absolute -bottom-1 left-0 w-2/3 h-0.5 bg-gradient-to-r from-[#0093DE] to-teal-400"></span>
-              </h3>
+          <AnimatedCard delay={500} direction="up">
+            <div>
+              <h4 className="text-lg font-bold mb-4 text-[#0093DE]">Contact</h4>
               <ul className="space-y-3 text-sm">
-                <li className="flex items-start group hover:translate-x-1 transition-transform duration-300">
-                  <div className="relative bg-gray-200 p-2 rounded-full mr-2 mt-0.5 text-[#0093DE] group-hover:bg-[#0093DE]/20 transition-all duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <div className="absolute inset-0 rounded-full animate-pulse opacity-0 group-hover:opacity-100 bg-[#0093DE]/10"></div>
-                  </div>
-                  <div>
-                    <span className="block text-xs text-gray-500">Address</span>
-                    <span className="block text-gray-700">36 Hang Dao St, Hoan Kiem, Hanoi, Vietnam</span>
-                  </div>
+                <li className={`flex items-start ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#0093DE] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>123 Nguyen Hue Street, District 1, Ho Chi Minh City, Vietnam</span>
                 </li>
-                <li className="flex items-start group hover:translate-x-1 transition-transform duration-300">
-                  <div className="relative bg-gray-200 p-2 rounded-full mr-2 mt-0.5 text-[#0093DE] group-hover:bg-[#0093DE]/20 transition-all duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <div className="absolute inset-0 rounded-full animate-pulse opacity-0 group-hover:opacity-100 bg-[#0093DE]/10"></div>
-                  </div>
-                  <div>
-                    <span className="block text-xs text-gray-500">Email</span>
-                    <span className="block text-gray-700">info@vietnamtours.com</span>
-                  </div>
+                <li className={`flex items-center ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#0093DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span>info@loetravel.com</span>
                 </li>
-                <li className="flex items-start group hover:translate-x-1 transition-transform duration-300">
-                  <div className="relative bg-gray-200 p-2 rounded-full mr-2 mt-0.5 text-[#0093DE] group-hover:bg-[#0093DE]/20 transition-all duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <div className="absolute inset-0 rounded-full animate-pulse opacity-0 group-hover:opacity-100 bg-[#0093DE]/10"></div>
-                  </div>
-                  <div>
-                    <span className="block text-xs text-gray-500">24/7 Hotline</span>
-                    <span className="block text-gray-700">+84 123 456 789</span>
-                  </div>
+                <li className={`flex items-center ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#0093DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span>+84 (0) 123 456 789</span>
                 </li>
-                <li className="mt-3">
-                  <Link 
-                    to="/contact" 
-                    className="inline-flex items-center text-white bg-[#0093DE] hover:bg-[#007ab8] px-4 py-2 rounded-full transition-all duration-300 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-1 relative overflow-hidden group"
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_infinite] bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1.5 relative z-10 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                    </svg>
-                    <span className="relative z-10">Contact Us</span>
-                  </Link>
+                <li className={`flex items-center ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#0093DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Mon-Fri: 9AM-6PM (GMT+7)</span>
                 </li>
               </ul>
-            </Hover3DCard>
+            </div>
           </AnimatedCard>
         </div>
         
-
-        
-        <AnimatedCard delay={700} direction="up">
-          <div className="pt-4 border-t border-gray-200 text-center sm:flex sm:items-center sm:justify-between text-xs">
-            <p className="text-gray-600">&copy; {currentYear} Vietnam Tours. All rights reserved.</p>
-            <div className="mt-3 sm:mt-0 flex flex-wrap justify-center gap-5">
-              {['Terms & Conditions', 'Privacy Policy', 'FAQ'].map((item) => (
-                <Link 
-                  key={item} 
-                  to={`/${item.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`} 
-                  className="text-gray-600 hover:text-[#0093DE] transition-colors hover:underline relative group"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0093DE] group-hover:w-full transition-all duration-300"></span>
-                </Link>
-              ))}
+        {/* Payment Methods */}
+        <AnimatedCard delay={600} direction="up">
+          <div className={`mt-10 pt-8 border-t ${theme === 'light' ? 'border-gray-200' : 'border-gray-700'}`}>
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className="mb-4 md:mb-0">
+                <h5 className="text-sm font-semibold mb-3 text-[#0093DE]">Payment Methods</h5>
+                <div className="flex space-x-3">
+                  {paymentMethods.map((method, index) => (
+                    <PaymentCard 
+                      key={method.name}
+                      imageSrc={method.img}
+                      name={method.name}
+                      delay={index * 50}
+                    />
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <h5 className="text-sm font-semibold mb-3 text-[#0093DE]">Our Partners</h5>
+                <div className="flex space-x-3">
+                  {partners.map((partner, index) => (
+                    <PaymentCard 
+                      key={partner.name}
+                      imageSrc={partner.img}
+                      name={partner.name}
+                      delay={index * 50}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div className="text-center mt-4">
-            {scrollVisible && (
-              <button 
-                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-                className="inline-flex items-center justify-center bg-white/80 hover:bg-[#0093DE]/10 text-[#0093DE] p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group animate-bounce"
-                style={{ animationDuration: '2s' }}
-                aria-label="Scroll to top"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                </svg>
-              </button>
-            )}
+        </AnimatedCard>
+        
+        {/* Copyright */}
+        <AnimatedCard delay={700} direction="up">
+          <div className={`mt-8 pt-6 border-t ${theme === 'light' ? 'border-gray-200' : 'border-gray-700'} text-center`}>
+            <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+              © {currentYear} Loe Loves Travel. All rights reserved. 
+              <span className="mx-2">|</span>
+              <Link to="/privacy-policy" className="hover:text-[#0093DE] transition-colors duration-300">Privacy Policy</Link>
+              <span className="mx-2">|</span>
+              <Link to="/terms-of-service" className="hover:text-[#0093DE] transition-colors duration-300">Terms of Service</Link>
+            </p>
           </div>
         </AnimatedCard>
       </div>
+      
+      {/* Scroll to top button */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className={`fixed bottom-6 right-6 p-3 rounded-full bg-[#0093DE] text-white shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl z-50 ${scrollVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+        aria-label="Scroll to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
     </footer>
   );
 };

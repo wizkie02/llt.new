@@ -162,7 +162,7 @@ const PackageTours = () => {
         ></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          <span className="inline-block px-6 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
+          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
             Vietnam Adventures
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -179,7 +179,7 @@ const PackageTours = () => {
         <div className="md:hidden mb-4">
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="w-full flex items-center justify-center gap-2 bg-white py-3 px-4 rounded-full shadow-md font-medium text-gray-800"
+            className="w-full flex items-center justify-center gap-2 bg-white py-3 px-4 rounded-xl shadow-md font-medium text-gray-800"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -199,8 +199,8 @@ const PackageTours = () => {
                   onClick={() => handleFilterChange('all')}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeFilter === 'all'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'bg-[#0093DE] text-white'
+                      : `${theme === 'light' ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-gray-700 text-gray-200 hover:bg-gray-600'}`
                   }`}
                 >
                   All Tours
@@ -209,8 +209,8 @@ const PackageTours = () => {
                   onClick={() => handleFilterChange('featured')}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeFilter === 'featured'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'bg-[#0093DE] text-white'
+                      : `${theme === 'light' ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-gray-700 text-gray-200 hover:bg-gray-600'}`
                   }`}
                 >
                   Featured
@@ -219,8 +219,8 @@ const PackageTours = () => {
                   onClick={() => handleFilterChange('luxury')}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeFilter === 'luxury'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'bg-[#0093DE] text-white'
+                      : `${theme === 'light' ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-gray-700 text-gray-200 hover:bg-gray-600'}`
                   }`}
                 >
                   Luxury
@@ -229,8 +229,8 @@ const PackageTours = () => {
                   onClick={() => handleFilterChange('adventure')}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeFilter === 'adventure'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'bg-[#0093DE] text-white'
+                      : `${theme === 'light' ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-gray-700 text-gray-200 hover:bg-gray-600'}`
                   }`}
                 >
                   Adventure
@@ -239,8 +239,8 @@ const PackageTours = () => {
                   onClick={() => handleFilterChange('cultural')}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeFilter === 'cultural'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'bg-[#0093DE] text-white'
+                      : `${theme === 'light' ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-gray-700 text-gray-200 hover:bg-gray-600'}`
                   }`}
                 >
                   Cultural
@@ -249,8 +249,8 @@ const PackageTours = () => {
                   onClick={() => handleFilterChange('city')}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeFilter === 'city'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      ? 'bg-[#0093DE] text-white'
+                      : `${theme === 'light' ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-gray-700 text-gray-200 hover:bg-gray-600'}`
                   }`}
                 >
                   City Tours
@@ -268,7 +268,7 @@ const PackageTours = () => {
               <div className="mb-6">
                 <div className="relative h-1 rounded-full bg-gray-200 mb-4">
                   <div 
-                    className="absolute h-1 rounded-full bg-blue-500"
+                    className="absolute h-1 rounded-full bg-[#0093DE]"
                     style={{
                       left: `${((priceRange[0] - minPrice) / (maxPrice - minPrice)) * 100}%`,
                       right: `${100 - ((priceRange[1] - minPrice) / (maxPrice - minPrice)) * 100}%`
@@ -303,7 +303,7 @@ const PackageTours = () => {
                     max={priceRange[1]}
                     value={priceRange[0]}
                     onChange={(e) => handlePriceChange(e, 0)}
-                    className={`w-full pl-8 pr-3 py-2 rounded-xl text-sm ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'} border-0 focus:ring-2 focus:ring-blue-500`}
+                    className={`w-full pl-8 pr-3 py-2 rounded-xl text-sm ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'} border-0 focus:ring-2 focus:ring-[#0093DE]`}
                   />
                 </div>
                 <div className="relative">
@@ -314,7 +314,7 @@ const PackageTours = () => {
                     max={maxPrice}
                     value={priceRange[1]}
                     onChange={(e) => handlePriceChange(e, 1)}
-                    className={`w-full pl-8 pr-3 py-2 rounded-xl text-sm ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'} border-0 focus:ring-2 focus:ring-blue-500`}
+                    className={`w-full pl-8 pr-3 py-2 rounded-xl text-sm ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'} border-0 focus:ring-2 focus:ring-[#0093DE]`}
                   />
                 </div>
               </div>
@@ -325,339 +325,310 @@ const PackageTours = () => {
               <h3 className="font-bold text-lg mb-4">Duration</h3>
               <div className="space-y-2">
                 <label className="flex items-center space-x-3 cursor-pointer">
-                  <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded" />
-                  <span className="text-sm font-medium">1 Day Tours</span>
+                  <input type="checkbox" className="form-checkbox h-5 w-5 text-[#0093DE] rounded" />
+                  <span className={`text-sm font-medium ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>1 Day Tours</span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
-                  <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded" />
-                  <span className="text-sm font-medium">2-3 Days</span>
+                  <input type="checkbox" className="form-checkbox h-5 w-5 text-[#0093DE] rounded" />
+                  <span className={`text-sm font-medium ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>2-3 Days</span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
-                  <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded" />
-                  <span className="text-sm font-medium">4-7 Days</span>
+                  <input type="checkbox" className="form-checkbox h-5 w-5 text-[#0093DE] rounded" />
+                  <span className={`text-sm font-medium ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>4-7 Days</span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
-                  <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-500 rounded" />
-                  <span className="text-sm font-medium">1+ Week</span>
+                  <input type="checkbox" className="form-checkbox h-5 w-5 text-[#0093DE] rounded" />
+                  <span className={`text-sm font-medium ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>8+ Days</span>
                 </label>
-              </div>
-            </div>
-            
-            {/* Popular Locations */}
-            <div className={`p-6 rounded-2xl shadow-md ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
-              <h3 className="font-bold text-lg mb-4">Popular Destinations</h3>
-              <div className="flex flex-wrap gap-2">
-                <button className="px-3 py-1.5 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full text-sm font-medium transition">Halong Bay</button>
-                <button className="px-3 py-1.5 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full text-sm font-medium transition">Hoi An</button>
-                <button className="px-3 py-1.5 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full text-sm font-medium transition">Sapa</button>
-                <button className="px-3 py-1.5 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full text-sm font-medium transition">Mekong Delta</button>
-                <button className="px-3 py-1.5 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full text-sm font-medium transition">Hanoi</button>
-                <button className="px-3 py-1.5 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full text-sm font-medium transition">Phu Quoc</button>
               </div>
             </div>
           </div>
           
-          {/* Main Content - Tours Grid/List */}
+          {/* Main Content */}
           <div className="flex-1">
             {/* Search and Sort Controls */}
-            <div className={`mb-6 p-6 rounded-2xl shadow-md ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
-              <div className="flex flex-col lg:flex-row justify-between gap-4">
-                {/* Search Input */}
-                <div className="relative flex-1">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <div className="flex flex-col md:flex-row gap-4 mb-8">
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search tours..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className={`w-full pl-10 pr-4 py-3 rounded-xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md focus:ring-2 focus:ring-[#0093DE] border-0`}
+                />
+              </div>
+              
+              <div className="flex gap-2">
+                <div className="relative">
+                  <select
+                    value={sortBy}
+                    onChange={handleSortChange}
+                    className={`appearance-none pl-4 pr-10 py-3 rounded-xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md focus:ring-2 focus:ring-[#0093DE] border-0`}
+                  >
+                    <option value="recommended">Recommended</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="duration">Duration</option>
+                    <option value="rating">Rating</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Search tours, destinations, activities..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'}`}
-                  />
                 </div>
                 
-                <div className="flex gap-3">
-                  {/* Sort Select */}
-                  <div className="relative min-w-[180px]">
-                    <select
-                      value={sortBy}
-                      onChange={handleSortChange}
-                      className={`appearance-none w-full pl-4 pr-10 py-3 rounded-xl ${theme === 'light' ? 'bg-gray-100 text-gray-800' : 'bg-gray-700 text-white'} focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                    >
-                      <option value="recommended">Recommended</option>
-                      <option value="price-low">Price: Low to High</option>
-                      <option value="price-high">Price: High to Low</option>
-                      <option value="duration">Duration: Longest First</option>
-                      <option value="rating">Rating: High to Low</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-                  
-                  {/* View Mode Selector */}
-                  <div className="flex rounded-xl overflow-hidden">
-                    <button
-                      onClick={() => setViewMode('grid')}
-                      className={`flex items-center justify-center w-11 h-11 ${
-                        viewMode === 'grid' 
-                          ? 'bg-blue-500 text-white' 
-                          : `${theme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-gray-700 text-gray-300'}`
-                      }`}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={() => setViewMode('list')}
-                      className={`flex items-center justify-center w-11 h-11 ${
-                        viewMode === 'list' 
-                          ? 'bg-blue-500 text-white' 
-                          : `${theme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-gray-700 text-gray-300'}`
-                      }`}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                      </svg>
-                    </button>
-                  </div>
+                <div className={`flex rounded-xl overflow-hidden shadow-md ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-3 ${viewMode === 'grid' ? 'bg-[#0093DE] text-white' : ''}`}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-3 ${viewMode === 'list' ? 'bg-[#0093DE] text-white' : ''}`}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
             
-            {/* Search Results Count */}
-            <div className="mb-6 flex justify-between items-center">
-              <p className="text-lg font-medium">
-                {filteredTours.length} {filteredTours.length === 1 ? 'tour' : 'tours'} found
-                {activeFilter !== 'all' && ` in "${activeFilter}"`}
-                {searchQuery && ` matching "${searchQuery}"`}
+            {/* Results Count */}
+            <div className="mb-6">
+              <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                Showing <span className="font-semibold">{filteredTours.length}</span> tours
               </p>
             </div>
             
-            {/* Tours Display */}
-            {filteredTours.length > 0 ? (
-              viewMode === 'grid' ? (
-                // Grid View
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredTours.map((tour) => (
-                    <div 
-                      key={tour.id} 
-                      className={`rounded-2xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 ${
-                        theme === 'light' ? 'bg-white hover:shadow-xl' : 'bg-gray-800 hover:shadow-2xl hover:shadow-blue-900/20'
-                      }`}
-                    >
-                      <div className="relative h-52 overflow-hidden">
-                        <img 
-                          src={tour.image} 
-                          alt={tour.name} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          onError={handleImageError}
-                        />
-                        {tour.featured && (
-                          <div className="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                            Featured
-                          </div>
-                        )}
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-gray-800 font-bold px-3 py-1.5 rounded-full shadow-lg">
-                          ${tour.price}
-                        </div>
-                      </div>
-                      
-                      <div className="p-6">
-                        <div className="flex items-start justify-between mb-2">
-                          <h3 className="text-xl font-bold line-clamp-1">{tour.name}</h3>
-                        </div>
-                        
-                        <div className="flex items-center gap-1 mb-3">
-                          {renderStars(tour.rating)}
-                          {tour.reviewCount && (
-                            <span className="text-sm text-gray-500">
-                              ({tour.reviewCount} reviews)
-                            </span>
-                          )}
-                        </div>
-                        
-                        <div className="flex items-center mb-4 text-sm">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          <span className="text-gray-600">{tour.location}</span>
-                          <span className="mx-2">•</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span className="text-gray-600">{tour.duration}</span>
-                        </div>
-                        
-                        <p className="text-gray-600 mb-6 line-clamp-3">{tour.description}</p>
-                        
-                        <div className="flex justify-between items-center mt-auto">
-                          <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1.5 rounded-full">
-                            {tour.category}
-                          </span>
-                          <Link 
-                            to={`/tour/${tour.id}`}
-                            className="bg-[#0093DE] hover:bg-[#0077b3] text-white font-medium py-2.5 px-5 rounded-full transition-all duration-300 shadow hover:shadow-lg transform hover:-translate-y-0.5"
-                          >
-                            View Details
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                // List View
-                <div className="space-y-6">
-                  {filteredTours.map((tour) => (
-                    <div 
-                      key={tour.id} 
-                      className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-1 ${
-                        theme === 'light' ? 'bg-white hover:shadow-xl' : 'bg-gray-800 hover:shadow-2xl hover:shadow-blue-900/20'
-                      }`}
-                    >
-                      <div className="relative md:w-1/3 h-52 md:h-auto overflow-hidden">
-                        <img 
-                          src={tour.image} 
-                          alt={tour.name} 
-                          className="w-full h-full object-cover transition-transform duration-700"
-                          onError={handleImageError}
-                        />
-                        {tour.featured && (
-                          <div className="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                            Featured
-                          </div>
-                        )}
-                      </div>
-                      
-                      <div className="p-6 md:w-2/3">
-                        <div className="flex flex-wrap justify-between items-start mb-2">
-                          <h3 className="text-xl font-bold">{tour.name}</h3>
-                          <div className="flex items-center">
-                            <span className="font-bold text-xl text-blue-500">${tour.price}</span>
-                            <span className="text-sm text-gray-500 ml-1">/ person</span>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-1 mb-3">
-                          {renderStars(tour.rating)}
-                          {tour.reviewCount && (
-                            <span className="text-sm text-gray-500">
-                              ({tour.reviewCount} reviews)
-                            </span>
-                          )}
-                        </div>
-                        
-                        <div className="flex items-center mb-4 text-sm">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          <span className="text-gray-600">{tour.location}</span>
-                          <span className="mx-2">•</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span className="text-gray-600">{tour.duration}</span>
-                          <span className="mx-2">•</span>
-                          <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                            {tour.category}
-                          </span>
-                        </div>
-                        
-                        <p className="text-gray-600 mb-6 line-clamp-2">{tour.description}</p>
-                        
-                        {tour.highlights && (
-                          <div className="mb-6">
-                            <h4 className="font-medium text-sm mb-2">Highlights:</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {tour.highlights.slice(0, 3).map((highlight, i) => (
-                                <span 
-                                  key={i} 
-                                  className={`text-xs py-1 px-2 rounded-full ${
-                                    theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'
-                                  }`}
-                                >
-                                  {highlight}
-                                </span>
-                              ))}
-                              {tour.highlights.length > 3 && (
-                                <span 
-                                  className={`text-xs py-1 px-2 rounded-full ${
-                                    theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'
-                                  }`}
-                                >
-                                  +{tour.highlights.length - 3} more
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                        
-                        <div className="flex justify-end mt-auto">
-                          <Link 
-                            to={`/tour/${tour.id}`}
-                            className="bg-[#0093DE] hover:bg-[#0077b3] text-white font-medium py-2.5 px-6 rounded-full transition-all duration-300 shadow hover:shadow-lg transform hover:-translate-y-0.5"
-                          >
-                            View Details
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )
-            ) : (
-              <div className={`text-center py-16 rounded-2xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
+            {/* Tour Results */}
+            {filteredTours.length === 0 ? (
+              <div className={`p-8 rounded-2xl text-center ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h3 className="text-xl font-medium mb-2">No tours found</h3>
-                <p className="text-gray-500 max-w-md mx-auto">We couldn't find any tours matching your criteria. Try adjusting your filters or search query.</p>
-                <button 
+                <h3 className="text-xl font-bold mb-2">No tours found</h3>
+                <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'} mb-4`}>
+                  Try adjusting your filters or search criteria.
+                </p>
+                <button
                   onClick={() => {
                     setActiveFilter('all');
                     setSearchQuery('');
                     setPriceRange([minPrice, maxPrice]);
                   }}
-                  className="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-full transition-all duration-300"
+                  className="px-4 py-2 bg-[#0093DE] text-white rounded-xl hover:bg-[#007ab8] transition-colors"
                 >
                   Reset Filters
                 </button>
               </div>
-            )}
-            
-            {/* Pagination */}
-            {filteredTours.length > 0 && (
-              <div className="mt-10 flex justify-center">
-                <nav className="flex items-center space-x-1">
-                  <button className="px-2 py-2 rounded-full bg-white text-gray-600 hover:bg-blue-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button className="px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600">1</button>
-                  <button className="px-4 py-2 rounded-full bg-white text-gray-600 hover:bg-blue-50">2</button>
-                  <button className="px-4 py-2 rounded-full bg-white text-gray-600 hover:bg-blue-50">3</button>
-                  <span className="px-4 py-2 text-gray-600">...</span>
-                  <button className="px-4 py-2 rounded-full bg-white text-gray-600 hover:bg-blue-50">8</button>
-                  <button className="px-2 py-2 rounded-full bg-white text-gray-600 hover:bg-blue-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </nav>
+            ) : viewMode === 'grid' ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredTours.map((tour) => (
+                  <div 
+                    key={tour.id}
+                    className={`rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                      theme === 'light' ? 'bg-white' : 'bg-gray-800'
+                    }`}
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={tour.image} 
+                        alt={tour.name}
+                        onError={handleImageError}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      />
+                      {tour.featured && (
+                        <div className="absolute top-3 left-3 bg-[#0093DE] text-white text-xs font-bold px-3 py-1 rounded-full">
+                          Featured
+                        </div>
+                      )}
+                      <div className="absolute bottom-3 right-3 bg-white/90 text-[#0093DE] text-sm font-bold px-3 py-1 rounded-full">
+                        ${tour.price}
+                      </div>
+                    </div>
+                    
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-lg font-bold">{tour.name}</h3>
+                        <div className="flex items-center">
+                          <span className="text-sm font-medium mr-1">{tour.rating}</span>
+                          {renderStars(tour.rating)}
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center text-sm mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#0093DE] mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{tour.location}</span>
+                      </div>
+                      
+                      <div className="flex items-center text-sm mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#0093DE] mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{tour.duration}</span>
+                      </div>
+                      
+                      <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'} mb-4 line-clamp-2`}>
+                        {tour.description}
+                      </p>
+                      
+                      <Link 
+                        to={`/tour/${tour.id}`}
+                        className="block w-full text-center bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium py-2 px-4 rounded-xl transition-colors"
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {filteredTours.map((tour) => (
+                  <div 
+                    key={tour.id}
+                    className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                      theme === 'light' ? 'bg-white' : 'bg-gray-800'
+                    }`}
+                  >
+                    <div className="relative md:w-1/3 h-48 md:h-auto overflow-hidden">
+                      <img 
+                        src={tour.image} 
+                        alt={tour.name}
+                        onError={handleImageError}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      />
+                      {tour.featured && (
+                        <div className="absolute top-3 left-3 bg-[#0093DE] text-white text-xs font-bold px-3 py-1 rounded-full">
+                          Featured
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="p-6 md:w-2/3 flex flex-col">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-xl font-bold">{tour.name}</h3>
+                        <div className="flex items-center">
+                          <span className="text-sm font-medium mr-1">{tour.rating}</span>
+                          {renderStars(tour.rating)}
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-4 mb-3">
+                        <div className="flex items-center text-sm">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#0093DE] mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{tour.location}</span>
+                        </div>
+                        
+                        <div className="flex items-center text-sm">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#0093DE] mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{tour.duration}</span>
+                        </div>
+                        
+                        <div className="flex items-center text-sm">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#0093DE] mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                          </svg>
+                          <span className="font-medium text-[#0093DE]">${tour.price}</span>
+                        </div>
+                      </div>
+                      
+                      <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'} mb-4 flex-grow`}>
+                        {tour.description}
+                      </p>
+                      
+                      <div className="flex justify-between items-center mt-auto">
+                        <div className="flex items-center">
+                          <span className={`text-xs ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'} mr-2`}>Category:</span>
+                          <span className="text-xs font-medium px-2 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE]">
+                            {tour.category || 'General'}
+                          </span>
+                        </div>
+                        
+                        <Link 
+                          to={`/tour/${tour.id}`}
+                          className="bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium py-2 px-4 rounded-xl transition-colors"
+                        >
+                          View Details
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
+            
+            {/* Pagination - Static for now */}
+            <div className="mt-12 flex justify-center">
+              <nav className="flex items-center space-x-2">
+                <button className={`p-2 rounded-lg ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                
+                <button className={`px-4 py-2 rounded-lg ${theme === 'light' ? 'bg-[#0093DE]' : 'bg-[#0093DE]'} text-white shadow-md`}>
+                  1
+                </button>
+                
+                <button className={`px-4 py-2 rounded-lg ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md`}>
+                  2
+                </button>
+                
+                <button className={`px-4 py-2 rounded-lg ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md`}>
+                  3
+                </button>
+                
+                <button className={`p-2 rounded-lg ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </nav>
+            </div>
           </div>
         </div>
       </div>
+      
+      {/* Newsletter Section */}
+      <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-20 rounded-t-3xl mt-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Get Exclusive Tour Offers</h2>
+          <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
+            Subscribe to our newsletter and be the first to know about new tours and special discounts
+          </p>
+          
+          <div className="max-w-md mx-auto flex">
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 py-3 px-4 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-white text-gray-800"
+            />
+            <button className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-6 rounded-r-xl font-semibold transition-colors">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
