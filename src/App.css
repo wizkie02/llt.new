@@ -1,0 +1,156 @@
+/* Vietnam-inspired travel website styles */
+:root {
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
+  
+  /* Light theme */
+  --color-primary: #0093DE;      /* Blue */
+  --color-secondary: #BF0603;    /* Red */
+  --color-accent: #28965A;       /* Green */
+  --background-light: #F2F7FC;   /* Light Blue/Gray */
+  --text-light: #2A3B4A;         /* Deep indigo */
+  
+  /* Dark theme */
+  --color-primary-dark: #0093DE; /* Blue */
+  --color-secondary-dark: #BF0603; /* Red */
+  --color-accent-dark: #28965A;  /* Green */
+  --background-dark: #151E26;    /* Dark Blue/Gray */
+  --text-dark: #F7F8F9;          /* Off white */
+}
+
+body {
+  font-family: var(--font-secondary);
+  background-color: var(--background-light);
+  color: var(--text-light);
+  line-height: 1.7;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode body {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.vietnam-hero {
+  position: relative;
+  height: 80vh;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.vietnam-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+}
+
+.vietnam-hero-content {
+  position: relative;
+  z-index: 10;
+  color: white;
+}
+
+.vietnam-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+}
+
+.vietnam-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.vietnam-btn {
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.vietnam-btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.vietnam-btn-primary:hover {
+  background-color: #d46e45;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(228, 120, 77, 0.3);
+}
+
+.vietnam-btn-secondary {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.vietnam-btn-secondary:hover {
+  background-color: #568c5c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(100, 168, 107, 0.3);
+}
+
+.vietnam-btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.vietnam-btn-outline:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Animation for lantern glow effect */
+@keyframes lantern-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 203, 60, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 203, 60, 1);
+  }
+}
+
+.lantern-effect {
+  animation: lantern-glow 3s ease-in-out infinite;
+}
+
+/* Bamboo background pattern */
+.bamboo-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2364a86b' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .vietnam-hero {
+    height: 60vh;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+}

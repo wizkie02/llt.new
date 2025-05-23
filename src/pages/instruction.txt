@@ -1,0 +1,108 @@
+# LoeLovesTravel Website Theme Guidelines
+
+## Color Palette
+- Primary: #0093DE (light blue, used for buttons, highlights, icons)
+- Secondary color variations: 
+  - Light blue gradient: from-[#58b7e8] to-[#6dc0eb]
+  - Additional accent colors: 
+    - #64A86B (green for checkmarks and eco-friendly elements)
+    - #E4784D (orange for highlight elements)
+    - #FFCB3C (yellow for badges and ratings)
+
+## Typography
+- Font hierarchy:
+  - Headings: Bold, larger sizes (text-3xl, text-4xl, etc.)
+  - Subheadings: Semi-bold or medium weight
+  - Body text: Regular weight with proper line height
+  - Font sizes are responsive (using text-sm through text-6xl)
+
+## Layout Structure
+1. **Page Layout**:
+   - Top navigation bar (80px height)
+   - Full-width hero sections with background images and overlay gradients
+   - Content sections with container and padding
+   - Rounded corners (rounded-xl, rounded-2xl, rounded-3xl) for cards and sections
+
+2. **Section Pattern**:
+   - Consistent padding (py-20 for sections)
+   - Container with max-width and centered content
+   - Section headers typically include:
+     - Small colored badge/pill text (inline-block px-4 py-1 rounded-full)
+     - Heading (text-3xl font-bold)
+     - Subtitle paragraph (max-w-2xl mx-auto)
+
+3. **Hero Sections**:
+   - Full-width background images with overlay gradients
+   - Text centered with consistent styling
+   - Rounded-b-3xl on some pages (About)
+   - Consistent height (50vh or 60vh or calc(100vh-80px))
+   - Multiple gradient overlays for text legibility
+
+## UI Components
+
+### Cards
+- Rounded corners (rounded-xl, rounded-2xl)
+- Shadow effects (shadow-lg, shadow-md)
+- Hover animations (transform, hover:-translate-y-2)
+- White background in light mode, gray-800 in dark mode
+- Consistent padding (p-6, p-8)
+
+### Buttons
+- Primary: bg-[#0093DE] text-white
+- Secondary/Ghost: bg-transparent border-[#0093DE]
+- Rounded corners (rounded-xl, rounded-full)
+- Hover effects:
+  - Color changes
+  - Transform: hover:-translate-y-1
+  - Shadow: hover:shadow-lg
+
+### Icons
+- Consistent sizing (h-5 w-5, h-6 w-6, etc.)
+- Usually paired with text in items
+- Colored based on context (success: green, warning: yellow, etc.)
+
+### Decorative Elements
+- Circular blur elements (absolute positioning)
+- Background patterns and gradients
+- Small accent details (before/after elements)
+
+## Special Sections
+- **CTA Areas**: Blue gradient background (from-[#58b7e8] to-[#6dc0eb]) with rounded-t-3xl
+- **Testimonials**: Card-based layout with consistent styling
+- **Form Elements**: Consistent styling with focus states
+
+## Dark/Light Mode
+- Light mode:
+  - Background: bg-[#F7F9FC]
+  - Text: text-[#292F36] or text-[#2A3B4A]
+  - Cards/sections: bg-white
+  
+- Dark mode:
+  - Background: bg-[#1A202C]
+  - Text: text-[#F7F9FC] or text-[#F7F8F9]
+  - Cards/sections: bg-gray-800 or bg-gray-900
+
+## Animation & Transitions
+- Hover effects: transform, scale, translate
+- Transitions: duration-300, ease-in-out
+- Subtle animations for improved UX
+
+## Responsive Design
+- Mobile-first approach
+- Grid layouts change based on screen size:
+  - Small screens: grid-cols-1
+  - Medium screens: grid-cols-2
+  - Large screens: grid-cols-3 or grid-cols-4
+- Stacking elements on mobile, side-by-side on larger screens
+
+## Accessibility Considerations
+- Proper contrast ratios
+- Text alternatives for images
+- Focus states for interactive elements
+
+## Common Design Patterns
+1. **Card Grid Layout**: Used for services, team members, destinations
+2. **Hero with CTA**: Used on most pages with background image and overlay
+3. **Sectioned Content**: Consistent spacing between different topic areas
+4. **Bottom CTA**: Blue gradient section with rounded-t-3xl corners
+5. **Icon + Text Combinations**: Used for features, benefits, and information points
