@@ -462,40 +462,6 @@ const Footer = () => {
           </AnimatedCard>
         </div>
         
-        {/* Payment Methods */}
-        <AnimatedCard delay={600} direction="up">
-          <div className={`mt-10 pt-8 border-t ${theme === 'light' ? 'border-gray-200' : 'border-gray-700'}`}>
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="mb-4 md:mb-0">
-                <h5 className="text-sm font-semibold mb-3 text-[#0093DE]">Payment Methods</h5>
-                <div className="flex space-x-3">
-                  {paymentMethods.map((method, index) => (
-                    <PaymentCard 
-                      key={method.name}
-                      imageSrc={method.img}
-                      name={method.name}
-                      delay={index * 50}
-                    />
-                  ))}
-                </div>
-              </div>
-              
-              <div>
-                <h5 className="text-sm font-semibold mb-3 text-[#0093DE]">Our Partners</h5>
-                <div className="flex space-x-3">
-                  {partners.map((partner, index) => (
-                    <PaymentCard 
-                      key={partner.name}
-                      imageSrc={partner.img}
-                      name={partner.name}
-                      delay={index * 50}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimatedCard>
         
         {/* Copyright */}
         <AnimatedCard delay={700} direction="up">

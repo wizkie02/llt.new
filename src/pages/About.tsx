@@ -1,4 +1,6 @@
 import { useTheme } from '../contexts/ThemeContext';
+import ScrollReveal from '../components/ui/ScrollReveal';
+import { FadeUp, FadeLeft, FadeRight } from '../components/ui/RevealPresets';
 import halongBay from '../assets/images/destinations/halong-bay.jpg';
 import hanoi from '../assets/images/destinations/hanoi.jpg';
 import hoiAn from '../assets/images/destinations/hoi-an.jpg';
@@ -97,15 +99,23 @@ const About = () => {
         ></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
-            Welcome to our story
-          </span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            About Our Vietnam Journey
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto">
-            Discover how our passion for Vietnam's beauty and culture inspired us to create unforgettable travel experiences
-          </p>
+          <ScrollReveal delay={200} direction="down">
+            <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
+              Welcome to our story
+            </span>
+          </ScrollReveal>
+          
+          <ScrollReveal delay={400}>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              About Our Vietnam Journey
+            </h1>
+          </ScrollReveal>
+          
+          <ScrollReveal delay={600} direction="up">
+            <p className="text-xl max-w-3xl mx-auto">
+              Discover how our passion for Vietnam's beauty and culture inspired us to create unforgettable travel experiences
+            </p>
+          </ScrollReveal>
         </div>
       </section>
       
@@ -114,51 +124,55 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-block mb-4 relative">
-                  <h2 className="text-3xl font-bold mb-2 relative">Our Vietnam Story</h2>
-                  <div className="h-1 w-24 bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] rounded-full"></div>
+              <FadeLeft delay={200}>
+                <div>
+                  <div className="inline-block mb-4 relative">
+                    <h2 className="text-3xl font-bold mb-2 relative">Our Vietnam Story</h2>
+                    <div className="h-1 w-24 bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] rounded-full"></div>
+                  </div>
+                  <div className="space-y-4">
+                    <p className="text-lg leading-relaxed">
+                      Founded in 2015, our journey began with a simple vision: to share the authentic beauty and soul of Vietnam with travelers from around the world. What started as a small operation in Hanoi has grown into a full-service travel company specializing in genuine Vietnamese experiences.
+                    </p>
+                    <p className="text-lg leading-relaxed">
+                      Our founder, Linh Nguyen, was born in the northern mountains of Vietnam and raised in Hanoi. After years working for international travel companies, she noticed that many travelers only experienced the surface of Vietnam. She dreamed of creating journeys that would connect visitors with the country's true essence.
+                    </p>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <p className="text-lg leading-relaxed">
-                    Founded in 2015, our journey began with a simple vision: to share the authentic beauty and soul of Vietnam with travelers from around the world. What started as a small operation in Hanoi has grown into a full-service travel company specializing in genuine Vietnamese experiences.
-                  </p>
-                  <p className="text-lg leading-relaxed">
-                    Our founder, Linh Nguyen, was born in the northern mountains of Vietnam and raised in Hanoi. After years working for international travel companies, she noticed that many travelers only experienced the surface of Vietnam. She dreamed of creating journeys that would connect visitors with the country's true essence.
-                  </p>
-                </div>
-              </div>
+              </FadeLeft>
               
-              <div className="grid grid-cols-2 gap-4 relative">
-                <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
-                  <img 
-                    src={halongBay}
-                    alt="Halong Bay, Vietnam" 
-                    className="w-full h-full object-cover"
-                  />
+              <FadeRight delay={400}>
+                <div className="grid grid-cols-2 gap-4 relative">
+                  <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={halongBay}
+                      alt="Halong Bay, Vietnam" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={sapa}
+                      alt="Sapa rice terraces, Vietnam" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={mekong}
+                      alt="Mekong Delta, Vietnam" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={hoiAn}
+                      alt="Hoi An, Vietnam" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
-                <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
-                  <img 
-                    src={sapa}
-                    alt="Sapa rice terraces, Vietnam" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
-                  <img 
-                    src={mekong}
-                    alt="Mekong Delta, Vietnam" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
-                  <img 
-                    src={hoiAn}
-                    alt="Hoi An, Vietnam" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+              </FadeRight>
             </div>
           </div>
         </div>
@@ -167,32 +181,39 @@ const About = () => {
       {/* Mission & Values Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-              Our Guiding Principles
-            </span>
-            <h2 className="text-3xl font-bold mb-4">Our Vietnam Values</h2>
-            <p className="text-lg opacity-80 max-w-2xl mx-auto">
-              "Vietnamese Heart, Global Vision" — We blend authentic local experiences with international service excellence
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={200}>
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                Our Guiding Principles
+              </span>
+              <h2 className="text-3xl font-bold mb-4">Our Vietnam Values</h2>
+              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+                "Vietnamese Heart, Global Vision" — We blend authentic local experiences with international service excellence
+              </p>
+            </div>
+          </ScrollReveal>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {values.map((value) => (
-              <div
+            {values.map((value, index) => (
+              <ScrollReveal 
                 key={value.id} 
-                className={`p-6 rounded-2xl border-l-4 ${value.id % 2 === 0 ? 'border-[#0093DE]' : 'border-[#64A86B]'} transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                  theme === 'light' 
-                  ? 'bg-white shadow-md' 
-                  : 'bg-gray-700 shadow-md'
-                }`}
+                direction={index % 2 === 0 ? "left" : "right"}
+                delay={300 + (index * 100)}
               >
-                <div className={`${value.id % 2 === 0 ? 'text-[#0093DE]' : 'text-[#64A86B]'} mb-4`}>
-                  {value.icon}
+                <div
+                  className={`p-6 rounded-2xl border-l-4 ${value.id % 2 === 0 ? 'border-[#0093DE]' : 'border-[#64A86B]'} transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                    theme === 'light' 
+                    ? 'bg-white shadow-md' 
+                    : 'bg-gray-700 shadow-md'
+                  }`}
+                >
+                  <div className={`${value.id % 2 === 0 ? 'text-[#0093DE]' : 'text-[#64A86B]'} mb-4`}>
+                    {value.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{value.title}</h3>
+                  <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{value.description}</p>
                 </div>
-                <h3 className="text-xl font-bold mb-2">{value.title}</h3>
-                <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{value.description}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -201,37 +222,44 @@ const About = () => {
       {/* Team Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-              Meet Our Team
-            </span>
-            <h2 className="text-3xl font-bold mb-4">The Vietnam Experts</h2>
-            <p className="text-lg opacity-80 max-w-2xl mx-auto">
-              Our passionate team of local Vietnamese travel specialists brings authentic insights and exceptional service to every journey
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={200}>
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                Meet Our Team
+              </span>
+              <h2 className="text-3xl font-bold mb-4">The Vietnam Experts</h2>
+              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+                Our passionate team of local Vietnamese travel specialists brings authentic insights and exceptional service to every journey
+              </p>
+            </div>
+          </ScrollReveal>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {teamMembers.map((member) => (
-              <div 
-                key={member.id}
-                className={`rounded-2xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl ${
-                  theme === 'light' ? 'bg-white' : 'bg-gray-800'
-                }`}
+            {teamMembers.map((member, index) => (
+              <ScrollReveal 
+                key={member.id} 
+                direction="up" 
+                delay={300 + (index * 100)}
               >
-                <div className="h-64 overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
+                <div 
+                  className={`rounded-2xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl ${
+                    theme === 'light' ? 'bg-white' : 'bg-gray-800'
+                  }`}
+                >
+                  <div className="h-64 overflow-hidden">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+                    <p className="text-[#0093DE] font-medium text-sm mb-3">{member.role}</p>
+                    <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{member.bio}</p>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                  <p className="text-[#0093DE] font-medium text-sm mb-3">{member.role}</p>
-                  <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{member.bio}</p>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -242,22 +270,33 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">8+</div>
-                <p className="text-lg font-medium">Years Experience</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">10k+</div>
-                <p className="text-lg font-medium">Happy Travelers</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">63</div>
-                <p className="text-lg font-medium">Provinces Covered</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">100%</div>
-                <p className="text-lg font-medium">Local Expertise</p>
-              </div>
+              <ScrollReveal direction="up" delay={100}>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">8+</div>
+                  <p className="text-lg font-medium">Years Experience</p>
+                </div>
+              </ScrollReveal>
+              
+              <ScrollReveal direction="up" delay={200}>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">10k+</div>
+                  <p className="text-lg font-medium">Happy Travelers</p>
+                </div>
+              </ScrollReveal>
+              
+              <ScrollReveal direction="up" delay={300}>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">63</div>
+                  <p className="text-lg font-medium">Provinces Covered</p>
+                </div>
+              </ScrollReveal>
+              
+              <ScrollReveal direction="up" delay={400}>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-[#0093DE] mb-2">100%</div>
+                  <p className="text-lg font-medium">Local Expertise</p>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
@@ -267,28 +306,30 @@ const About = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className={`p-8 rounded-2xl ${theme === 'light' ? 'bg-[#0093DE]/5' : 'bg-[#0093DE]/10'} relative`}>
-              <svg className="absolute top-4 left-4 h-12 w-12 text-[#0093DE]/20" fill="currentColor" viewBox="0 0 32 32">
-                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-              </svg>
-              
-              <div className="text-center">
-                <p className="text-xl md:text-2xl italic mb-6 pt-6">
-                  "Our team is united by a deep love for Vietnam and a commitment to sharing its wonders with the world. We believe that travel should transform, connect, and inspire."
-                </p>
-                <div className="flex items-center justify-center">
-                  <img 
-                    src={hanoi} 
-                    alt="Linh Nguyen" 
-                    className="w-16 h-16 rounded-full object-cover mr-4 border-4 border-white shadow-md"
-                  />
-                  <div className="text-left">
-                    <div className="font-bold">Linh Nguyen</div>
-                    <div className="text-sm text-[#0093DE]">Founder & CEO</div>
+            <ScrollReveal direction="up" delay={200}>
+              <div className={`p-8 rounded-2xl ${theme === 'light' ? 'bg-[#0093DE]/5' : 'bg-[#0093DE]/10'} relative`}>
+                <svg className="absolute top-4 left-4 h-12 w-12 text-[#0093DE]/20" fill="currentColor" viewBox="0 0 32 32">
+                  <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                </svg>
+                
+                <div className="text-center">
+                  <p className="text-xl md:text-2xl italic mb-6 pt-6">
+                    "Our team is united by a deep love for Vietnam and a commitment to sharing its wonders with the world. We believe that travel should transform, connect, and inspire."
+                  </p>
+                  <div className="flex items-center justify-center">
+                    <img 
+                      src={hanoi} 
+                      alt="Linh Nguyen" 
+                      className="w-16 h-16 rounded-full object-cover mr-4 border-4 border-white shadow-md"
+                    />
+                    <div className="text-left">
+                      <div className="font-bold">Linh Nguyen</div>
+                      <div className="text-sm text-[#0093DE]">Founder & CEO</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -296,24 +337,32 @@ const About = () => {
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-20 rounded-t-3xl">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience Vietnam With Us?</h2>
-          <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
-            Let our team of local experts create your perfect Vietnamese journey
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/contact" 
-              className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold"
-            >
-              Contact Our Team
-            </a>
-            <a 
-              href="/package-tours" 
-              className="bg-transparent border-2 border-white hover:bg-white/10 text-white py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              Browse Our Tours
-            </a>
-          </div>
+          <ScrollReveal direction="up" delay={100}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience Vietnam With Us?</h2>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={200}>
+            <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
+              Let our team of local experts create your perfect Vietnamese journey
+            </p>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={300}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="/contact" 
+                className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold"
+              >
+                Contact Our Team
+              </a>
+              <a 
+                href="/package-tours" 
+                className="bg-transparent border-2 border-white hover:bg-white/10 text-white py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                Browse Our Tours
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>

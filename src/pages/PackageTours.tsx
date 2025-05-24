@@ -155,11 +155,12 @@ const PackageTours = () => {
     <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
       {/* Hero Section */}
       <section className="relative mt-20 py-32 rounded-b-3xl overflow-hidden mb-8">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30 z-0"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')" }}
         ></div>
+        <div className="absolute inset-0 bg-black/60 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/40 z-0"></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">

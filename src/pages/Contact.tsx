@@ -1,4 +1,6 @@
 import { useTheme } from '../contexts/ThemeContext';
+import ScrollReveal from '../components/ui/ScrollReveal';
+import { FadeUp, FadeLeft, FadeRight } from '../components/ui/RevealPresets';
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -20,15 +22,23 @@ const Contact = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90"></div>
         
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-12 text-center text-white">
-          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-4">
-            Get in touch with our team
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Contact Our Vietnam Team
-          </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90">
-            Let our local experts help craft your perfect Vietnamese adventure
-          </p>
+          <ScrollReveal direction="down" delay={200}>
+            <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-4">
+              Get in touch with our team
+            </span>
+          </ScrollReveal>
+          
+          <ScrollReveal delay={400}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              Contact Our Vietnam Team
+            </h1>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={600}>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90">
+              Let our local experts help craft your perfect Vietnamese adventure
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 

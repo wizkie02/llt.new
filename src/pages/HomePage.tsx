@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import wallpaper from '../assets/images/wallpaper.png';
+import Counter from '../components/ui/Counter';
 
 const HomePage = () => {
   const { theme } = useTheme();
@@ -174,15 +175,13 @@ const HomePage = () => {
   return (
     <div className={`${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
       {/* Hero Section */}
-      <section className="relative h-[calc(100vh-80px)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30 z-10"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center animate-slow-zoom"
-          style={{ 
-            backgroundImage: `url(${wallpaper})`,
-            height: 'calc(100vh - 80px)'
-          }}
-        ></div>
+      <section className="relative h-screen w-full overflow-hidden">
+        <img 
+          src={wallpaper} 
+          alt="Vietnam scenic landscape"
+          className="absolute inset-0 w-full h-full object-cover object-center animate-slow-zoom"
+        />
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-black/60 to-black/30 z-10"></div>
         
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
           <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 animate-fade-in-up shadow-lg transform transition-all duration-300 hover:scale-105 hover:bg-white/30" style={{animationDelay: '0.3s'}}>
@@ -231,11 +230,127 @@ const HomePage = () => {
         </div>
         
         <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white animate-bounce cursor-pointer hover:text-[#0093DE] transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-8 w-8 text-white animate-bounce cursor-pointer hover:text-[#0093DE] transition-colors duration-300" 
+            viewBox="0 0 20 20" 
+            fill="currentColor"
+            onClick={() => {
+              document.getElementById('popular-destinations')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
           </svg>
         </div>
       </section>
+      
+      {/* About Us Area start */}
+      <section className={`about-us-area py-20 rel z-1 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap lg:flex-nowrap items-center">
+            <div className="w-full lg:w-5/12 mb-12 lg:mb-0">
+              <div
+                className="about-us-content"
+                data-aos="fade-left"
+                data-aos-duration={1500}
+                data-aos-offset={50}
+              >
+                <div className="mb-6">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    Travel Vietnam with Confidence: Why Choose Leo Loves Travel
+                  </h2>
+                </div>
+                <p className={`text-lg ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>
+                  We go above and beyond to create authentic Vietnamese experiences, 
+                  revealing hidden gems and must-see attractions with local expertise and passion.
+                </p>
+                <div className="divider my-10">
+                  <span className="flex items-center">
+                    <span className="text-lg font-medium">
+                      We have{" "}
+                      <span className="text-[#0093DE] font-bold">
+                        <span className="text-xl">
+                          <Counter end={10} />
+                        </span>{" "}
+                        Years
+                      </span>{" "}
+                      of experience
+                    </span>
+                  </span>
+                </div>
+                <div className="flex flex-wrap">
+                  <div className="w-1/2 mb-4">
+                    <div className="counter-item">
+                      <span className="text-3xl font-bold text-[#0093DE] flex items-center">
+                        <Counter end={30} />
+                        <span className="ml-1">+</span>
+                      </span>
+                      <span className="counter-title block mt-1 text-sm">Vietnam Destinations</span>
+                    </div>
+                  </div>
+                  <div className="w-1/2 mb-4">
+                    <div className="counter-item">
+                      <span className="text-3xl font-bold text-[#0093DE] flex items-center">
+                        <Counter end={5} />
+                        <span className="ml-1">K+</span>
+                      </span>
+                      <span className="counter-title block mt-1 text-sm">Satisfied Travelers</span>
+                    </div>
+                  </div>
+                </div>
+                <Link 
+                  to="/package-tours" 
+                  className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white mt-6 py-3 px-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  Explore Vietnam
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+            <div
+              className="w-full lg:w-7/12 pl-0 lg:pl-12"
+              data-aos="fade-right"
+              data-aos-duration={1500}
+              data-aos-offset={50}
+            >
+              <div className="about-us-image relative">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-4">
+                    <div className="rounded-2xl overflow-hidden shadow-lg h-48 md:h-64">
+                      <img 
+                        src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                        alt="Vietnam landscape" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="rounded-2xl overflow-hidden shadow-lg h-48 md:h-64">
+                      <img 
+                        src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                        alt="Vietnamese food" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-8">
+                    <div className="rounded-2xl overflow-hidden shadow-lg h-72 md:h-[420px]">
+                      <img 
+                        src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                        alt="Halong Bay" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-[#0093DE]/10 z-[-1]"></div>
+                <div className="absolute -top-4 -right-4 w-32 h-32 rounded-full bg-[#0093DE]/20 z-[-1]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* About Us Area end */}
       
       {/* Services Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-[#F7F9FC]' : 'bg-gray-900'}`}>
@@ -281,7 +396,7 @@ const HomePage = () => {
       </section>
       
       {/* Popular Destinations */}
-      <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
+      <section id="popular-destinations" className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
@@ -402,30 +517,6 @@ const HomePage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-20 rounded-t-3xl">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience Vietnam?</h2>
-          <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
-            Let us help you create unforgettable memories with a personalized journey through Vietnam's most beautiful destinations
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              to="/contact" 
-              className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold"
-            >
-              Start Planning
-            </Link>
-            <Link 
-              to="/package-tours" 
-              className="bg-transparent border-2 border-white hover:bg-white/10 text-white py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              Browse Tour Packages
             </Link>
           </div>
         </div>
