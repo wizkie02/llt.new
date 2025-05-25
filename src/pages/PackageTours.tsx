@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTours, TourOption } from '../contexts/ToursContext';
 import { useTheme } from '../contexts/ThemeContext';
+import bg7 from '../assets/images/backgrounds/bg7.jpg';
 
 const PackageTours = () => {
   const { tours, getToursByCategory, getFeaturedTours } = useTours();
@@ -148,7 +149,7 @@ const PackageTours = () => {
   // Function to handle image error
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
-    target.src = 'https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
+    target.src = bg7;
   };
 
   return (
@@ -157,19 +158,22 @@ const PackageTours = () => {
       <section className="relative mt-20 py-32 rounded-b-3xl overflow-hidden mb-8">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')" }}
+          style={{ 
+            backgroundImage: `url(${bg7})`, 
+            backgroundPosition: '50% 50%' 
+          }}
         ></div>
-        <div className="absolute inset-0 bg-black/60 z-0"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/40 z-0"></div>
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
             Vietnam Adventures
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">
             Explore Our Package Tours
           </h1>
-          <p className="text-xl max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
             Discover handcrafted journeys through Vietnam's most breathtaking landscapes, vibrant cities, and cultural treasures
           </p>
         </div>
@@ -609,27 +613,6 @@ const PackageTours = () => {
           </div>
         </div>
       </div>
-      
-      {/* Newsletter Section */}
-      <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-20 rounded-t-3xl mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Get Exclusive Tour Offers</h2>
-          <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
-            Subscribe to our newsletter and be the first to know about new tours and special discounts
-          </p>
-          
-          <div className="max-w-md mx-auto flex">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="flex-1 py-3 px-4 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-white text-gray-800"
-            />
-            <button className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-6 rounded-r-xl font-semibold transition-colors">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

@@ -1,204 +1,251 @@
 import { useState } from 'react';
 import { useTours } from '../../contexts/ToursContext';
+import { useTheme } from '../../contexts/ThemeContext';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/table';
+import { Badge } from '../../components/ui/badge';
+import { Button } from '../../components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
+import { Settings, BarChart3, List, Users, DollarSign, MapPin, Clock, Star, Eye, Edit, Trash2, PlusCircle, Upload, Download, AlertTriangle } from 'lucide-react';
 
 const AdminDashboard = () => {
   const { tours } = useTours();
-  const [activeTab, setActiveTab] = useState('overview');
+  const { theme } = useTheme();
   
   // Calculate statistics
   const totalTours = tours.length;
   const featuredTours = tours.filter(tour => tour.featured).length;
-  const categories = [...new Set(tours.map(tour => tour.category))];
-  
-  // Calculate average price
+  const categories = [...new Set(tours.map(tour => tour.category || 'Uncategorized'))];
   const averagePrice = tours.length > 0 
     ? tours.reduce((sum, tour) => sum + tour.price, 0) / tours.length 
     : 0;
-  
+
+  // Placeholder data for charts
+  const monthlyBookingsData = [
+    { month: 'Jan', bookings: 65 },
+    { month: 'Feb', bookings: 59 },
+    { month: 'Mar', bookings: 80 },
+    { month: 'Apr', bookings: 81 },
+    { month: 'May', bookings: 56 },
+    { month: 'Jun', bookings: 55 },
+  ];
+
+  const tourCategoryData = categories.map(category => ({
+    name: category,
+    count: tours.filter(tour => tour.category === category).length
+  }));
+
   return (
-    <div className="w-full px-4 py-8 mt-16">
-      <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
-      
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 mb-6">
-        <nav className="flex -mb-px">
-          <button
-            onClick={() => setActiveTab('overview')}
-            className={`py-4 px-6 font-medium text-sm ${
-              activeTab === 'overview'
-                ? 'border-b-2 border-[#0093DE] text-[#0093DE]'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            Overview
-          </button>
-          <button
-            onClick={() => setActiveTab('tours')}
-            className={`py-4 px-6 font-medium text-sm ${
-              activeTab === 'tours'
-                ? 'border-b-2 border-[#0093DE] text-[#0093DE]'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            Tour Management
-          </button>
-          <button
-            onClick={() => setActiveTab('settings')}
-            className={`py-4 px-6 font-medium text-sm ${
-              activeTab === 'settings'
-                ? 'border-b-2 border-[#0093DE] text-[#0093DE]'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            Settings
-          </button>
-        </nav>
-      </div>
-      
-      {/* Overview Tab */}
-      {activeTab === 'overview' && (
-        <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="text-gray-500 text-sm font-medium">Total Tours</div>
-              <div className="mt-2 text-3xl font-bold">{totalTours}</div>
-            </div>
-            
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="text-gray-500 text-sm font-medium">Featured Tours</div>
-              <div className="mt-2 text-3xl font-bold">{featuredTours}</div>
-            </div>
-            
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="text-gray-500 text-sm font-medium">Categories</div>
-              <div className="mt-2 text-3xl font-bold">{categories.length}</div>
-            </div>
-            
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="text-gray-500 text-sm font-medium">Average Price</div>
-              <div className="mt-2 text-3xl font-bold">${averagePrice.toFixed(2)}</div>
-            </div>
+    <div className={`w-full min-h-screen px-4 sm:px-6 lg:px-8 py-8 mt-16 ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-900'}`}>
+      <h1 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">Admin Dashboard</h1>
+
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="tours">Tour Management</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Tours</CardTitle>
+                <List className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{totalTours}</div>
+                <p className="text-xs text-muted-foreground">+2 tours from last month</p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Featured Tours</CardTitle>
+                <Star className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{featuredTours}</div>
+                <p className="text-xs text-muted-foreground">+1 featured this week</p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Categories</CardTitle>
+                <MapPin className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{categories.length}</div>
+                <p className="text-xs text-muted-foreground">New 'Adventure' category added</p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Average Price</CardTitle>
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">${averagePrice.toFixed(2)}</div>
+                <p className="text-xs text-muted-foreground">Slight increase from last quarter</p>
+              </CardContent>
+            </Card>
           </div>
-          
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Recent Tours</h2>
-            <div className="overflow-x-auto w-full">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead>
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {tours.slice(0, 5).map((tour) => (
-                    <tr key={tour.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{tour.name}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">{tour.location}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">${tour.price}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          {tour.category}
-                        </span>
-                      </td>
-                    </tr>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle>Monthly Bookings</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={monthlyBookingsData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="bookings" stroke="#0093DE" activeDot={{ r: 8 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle>Tours by Category</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={tourCategoryData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="count" fill="#0093DE" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card className="hover:shadow-lg transition-shadow duration-300">
+            <CardHeader>
+              <CardTitle>Recent Tours Added</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Location</TableHead>
+                    <TableHead>Price</TableHead>
+                    <TableHead>Category</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {tours.slice(-5).reverse().map((tour) => (
+                    <TableRow key={tour.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                      <TableCell className="font-medium">{tour.name}</TableCell>
+                      <TableCell>{tour.location}</TableCell>
+                      <TableCell>${tour.price}</TableCell>
+                      <TableCell>
+                        <Badge variant="secondary">{tour.category || 'Uncategorized'}</Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="icon" asChild>
+                          <Link to={`/tour/${tour.id}`} target="_blank">
+                            <Eye className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                        <Button variant="ghost" size="icon" asChild>
+                           <Link to={`/admin/tour-management?edit=${tour.id}`}>
+                            <Edit className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-      
-      {/* Tour Management Tab */}
-      {activeTab === 'tours' && (
-        <div className="w-full">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Tour Management</h2>
-            <p className="mb-4">Manage your tours directly on this page:</p>
-            <a 
-              href="/admin/tour-management" 
-              className="bg-[#0093DE] hover:bg-[#0077b3] text-white font-bold py-2 px-4 rounded inline-block"
-              target="_self"
-            >
-              Open Tour Management
-            </a>
-          </div>
-        </div>
-      )}
-      
-      {/* Settings Tab */}
-      {activeTab === 'settings' && (
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Admin Settings</h2>
-          
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-md font-medium mb-2">Access Control</h3>
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="require-login"
-                  className="h-4 w-4 text-[#0093DE] border-gray-300 rounded"
-                  defaultChecked
-                />
-                <label htmlFor="require-login" className="ml-2 text-sm text-gray-700">
-                  Require login for admin access
-                </label>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-md font-medium mb-2">Data Management</h3>
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="auto-backup"
-                    className="h-4 w-4 text-[#0093DE] border-gray-300 rounded"
-                    defaultChecked
-                  />
-                  <label htmlFor="auto-backup" className="ml-2 text-sm text-gray-700">
-                    Enable automatic data backup
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="confirm-delete"
-                    className="h-4 w-4 text-[#0093DE] border-gray-300 rounded"
-                    defaultChecked
-                  />
-                  <label htmlFor="confirm-delete" className="ml-2 text-sm text-gray-700">
-                    Confirm before deleting tours
-                  </label>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="tours">
+           <Card className="hover:shadow-lg transition-shadow duration-300">
+            <CardHeader>
+              <CardTitle>Tour Management</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4 text-muted-foreground">Manage all aspects of your tours from the dedicated Tour Management page.</p>
+              <Button asChild>
+                <Link to="/admin/tour-management">
+                  <List className="mr-2 h-4 w-4" /> Open Tour Management
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="settings">
+          <Card className="hover:shadow-lg transition-shadow duration-300">
+            <CardHeader>
+              <CardTitle>Admin Settings</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-8">
+              <div>
+                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                  <Users className="mr-2 h-5 w-5 text-[#0093DE]" /> Access Control
+                </h3>
+                <div className="flex items-center space-x-2">
+                  <input type="checkbox" id="require-login" defaultChecked className="form-checkbox h-5 w-5 text-[#0093DE] rounded" />
+                  <label htmlFor="require-login" className="text-sm font-medium">Require login for admin access</label>
                 </div>
               </div>
-            </div>
-            
-            <div>
-              <h3 className="text-md font-medium mb-2">Export Data</h3>
-              <button
-                className="bg-[#0093DE] hover:bg-[#0077b3] text-white font-medium py-2 px-4 rounded"
-              >
-                Export Tours as CSV
-              </button>
-            </div>
-            
-            <div className="pt-4 border-t border-gray-200">
-              <button
-                className="bg-[#BF0603] hover:bg-red-700 text-white font-medium py-2 px-4 rounded"
-              >
-                Reset to Default Tours
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
+              <div>
+                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                  <Upload className="mr-2 h-5 w-5 text-[#0093DE]" /> Data Management
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="auto-backup" defaultChecked className="form-checkbox h-5 w-5 text-[#0093DE] rounded" />
+                    <label htmlFor="auto-backup" className="text-sm font-medium">Enable automatic daily data backup</label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="confirm-delete" defaultChecked className="form-checkbox h-5 w-5 text-[#0093DE] rounded" />
+                    <label htmlFor="confirm-delete" className="text-sm font-medium">Require confirmation before deleting tours</label>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                  <Download className="mr-2 h-5 w-5 text-[#0093DE]" /> Export Data
+                </h3>
+                <Button variant="outline">
+                  <Download className="mr-2 h-4 w-4" /> Export Tours as CSV
+                </Button>
+              </div>
+
+              <div className="pt-6 border-t dark:border-gray-700">
+                <h3 className="text-lg font-semibold mb-3 flex items-center text-red-600">
+                  <AlertTriangle className="mr-2 h-5 w-5" /> Danger Zone
+                </h3>
+                <Button variant="destructive">
+                  <Trash2 className="mr-2 h-4 w-4" /> Reset to Default Tours
+                </Button>
+                <p className="text-xs text-muted-foreground mt-2">This action cannot be undone.</p>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
 
 export default AdminDashboard;
+

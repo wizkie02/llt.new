@@ -1,6 +1,7 @@
 import { useTheme } from '../contexts/ThemeContext';
 import ScrollReveal from '../components/ui/ScrollReveal';
 import { FadeUp, FadeLeft, FadeRight } from '../components/ui/RevealPresets';
+import bg2 from '../assets/images/backgrounds/bg4.jpg';
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -14,28 +15,32 @@ const Contact = () => {
   return (
     <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#2A3B4A]' : 'bg-[#1A202C] text-[#F7F8F9]'}`}>
       {/* Hero Section */}
-      <section className="relative py-16 h-[50vh] flex items-end">
+      <section className="relative py-20 h-[70vh] flex items-center justify-center rounded-b-3xl overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')" }}
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ 
+            backgroundImage: `url(${bg2})`, 
+            backgroundPosition: '50% 50%' 
+          }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90"></div>
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
         
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-12 text-center text-white">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <ScrollReveal direction="down" delay={200}>
-            <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
               Get in touch with our team
             </span>
           </ScrollReveal>
           
           <ScrollReveal delay={400}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Contact Our Vietnam Team
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">
+              Contact Our <span className="text-[#0093de]">Vietnam</span> Team
             </h1>
           </ScrollReveal>
           
           <ScrollReveal direction="up" delay={600}>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90">
+            <p className="text-lg md:text-xl max-w-2xl mx-auto text-white">
               Let our local experts help craft your perfect Vietnamese adventure
             </p>
           </ScrollReveal>
@@ -101,9 +106,9 @@ const Contact = () => {
                       <h3 className="text-base font-semibold ml-3">Email Contact</h3>
                     </div>
                     <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'} pl-1`}>
-                      vietnam@loelovestravel.com<br />
-                      bookings@loelovestravel.com<br />
-                      custom@loelovestravel.com
+                      vietnam@leolovestravel.com<br />
+                      bookings@leolovestravel.com<br />
+                      custom@leolovestravel.com
                     </p>
                   </div>
 
@@ -259,7 +264,7 @@ const Contact = () => {
               Call Us Now
             </a>
             <a 
-              href="mailto:vietnam@loelovestravel.com" 
+              href="mailto:vietnam@leolovestravel.com" 
               className="bg-transparent border-2 border-white hover:bg-white/10 text-white py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center justify-center"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

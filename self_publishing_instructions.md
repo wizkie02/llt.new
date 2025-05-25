@@ -1,6 +1,6 @@
-# Self-Publishing Instructions for Loelovestravel Website
+# Self-Publishing Instructions for Leo Loves Travel Website
 
-This document provides detailed instructions for self-publishing the Loelovestravel website and explains how the admin functionality works when self-published.
+This document provides detailed instructions for self-publishing the Leo Loves Travel website and explains how the admin functionality works when self-published.
 
 ## Admin Functionality in Self-Published Environment
 

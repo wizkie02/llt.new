@@ -4,12 +4,23 @@ interface CounterProps {
   end: number;
   start?: number;
   duration?: number;
+  shouldAnimate?: boolean;
 }
 
-const Counter: React.FC<CounterProps> = ({ end, start = 0, duration = 2000 }) => {
-  const [count, setCount] = useState(start);
+const Counter: React.FC<CounterProps> = ({ 
+  end, 
+  start = 0, 
+  duration = 2000,
+  shouldAnimate = true
+}) => {
+  const [count, setCount] = useState(shouldAnimate ? start : end);
 
   useEffect(() => {
+    if (!shouldAnimate) {
+      setCount(end);
+      return;
+    }
+    
     let startTime: number | null = null;
     let animationFrame: number;
     
@@ -28,7 +39,7 @@ const Counter: React.FC<CounterProps> = ({ end, start = 0, duration = 2000 }) =>
     return () => {
       window.cancelAnimationFrame(animationFrame);
     };
-  }, [end, start, duration]);
+  }, [end, start, duration, shouldAnimate]);
 
   return <>{count}</>;
 };

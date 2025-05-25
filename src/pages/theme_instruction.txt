@@ -1,4 +1,4 @@
-# LoeLovesTravel Website Theme Guidelines
+# Leo Loves Travel Website Theme Guidelines
 
 ## Color Palette
 - Primary: #0093DE (light blue, used for buttons, highlights, icons)

@@ -1,4 +1,6 @@
 import { useTheme } from '../contexts/ThemeContext';
+import ScrollReveal from '../components/ui/ScrollReveal';
+import bg9 from '../assets/images/backgrounds/bg9.jpg';
 
 const TeamBuilding = () => {
   const { theme } = useTheme();
@@ -57,58 +59,75 @@ const TeamBuilding = () => {
     <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
       {/* Hero Section */}
       <section className="relative mt-20 py-32 rounded-b-3xl overflow-hidden mb-8">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30 z-0"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')" }}
+          style={{ backgroundImage: `url(${bg9})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         ></div>
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
-            Corporate Experiences
-          </span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Team Building in Vietnam
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto">
-            Strengthen team bonds and develop leadership through unique Vietnamese experiences
-          </p>
+          <ScrollReveal direction="down" delay={100} distance={30}>
+            <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
+              Corporate Experiences
+            </span>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={300} distance={40}>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Team Building in Vietnam
+            </h1>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={500} distance={30}>
+            <p className="text-xl max-w-3xl mx-auto">
+              Strengthen team bonds and develop leadership through unique Vietnamese experiences
+            </p>
+          </ScrollReveal>
         </div>
       </section>
       
       {/* Services Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-              Our Solutions
-            </span>
-            <h2 className="text-3xl font-bold mb-4">Team Building Programs</h2>
-            <p className="text-lg opacity-80 max-w-2xl mx-auto">
-              Customized activities designed to foster collaboration, communication, and creativity in your team
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={200} distance={30}>
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                Our Solutions
+              </span>
+              <h2 className="text-3xl font-bold mb-4">Team Building Programs</h2>
+              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+                Customized activities designed to foster collaboration, communication, and creativity in your team
+              </p>
+            </div>
+          </ScrollReveal>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {services.map((service) => (
-              <div 
-                key={service.id}
-                className={`rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                  theme === 'light' ? 'bg-white shadow-md' : 'bg-gray-800 shadow-md'
-                }`}
+            {services.map((service, index) => (
+              <ScrollReveal 
+                key={service.id} 
+                direction={(index % 4 === 0 || index % 4 === 3) ? "left" : "right"}
+                delay={300 + (index * 100)}
+                distance={50}
               >
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
+                <div 
+                  className={`rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                    theme === 'light' ? 'bg-white shadow-md' : 'bg-gray-800 shadow-md'
+                  }`}
+                >
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                    <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{service.description}</p>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{service.description}</p>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -117,24 +136,27 @@ const TeamBuilding = () => {
       {/* Sample Programs Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-              Programs
-            </span>
-            <h2 className="text-3xl font-bold mb-4">Sample Programs</h2>
-            <p className="text-lg opacity-80 max-w-2xl mx-auto">
-              Explore our range of corporate programs, all customizable to meet your team's specific objectives
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={200} distance={30}>
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                Programs
+              </span>
+              <h2 className="text-3xl font-bold mb-4">Sample Programs</h2>
+              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+                Explore our range of corporate programs, all customizable to meet your team's specific objectives
+              </p>
+            </div>
+          </ScrollReveal>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className={`p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'}`}>
-              <div className="text-[#0093DE] mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-2">1-Day Workshop</h3>
+            <ScrollReveal direction="left" delay={300} distance={40}>
+              <div className={`p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'}`}>
+                <div className="text-[#0093DE] mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">1-Day Workshop</h3>
               <ul className="space-y-2 mb-4">
                 <li className="flex items-start">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 mt-0.5 text-[#64A86B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,7 +186,9 @@ const TeamBuilding = () => {
               <p className={`text-sm ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'} mb-4`}>Perfect for local teams looking for a productive day away from the office.</p>
               <p className="font-bold text-[#0093DE]">From $150 per person</p>
             </div>
+            </ScrollReveal>
             
+            <ScrollReveal direction="up" delay={400} distance={40}>
             <div className={`p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'}`}>
               <div className="text-[#0093DE] mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -207,7 +231,9 @@ const TeamBuilding = () => {
               <p className={`text-sm ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'} mb-4`}>Ideal for teams seeking deeper connections and strategic alignment.</p>
               <p className="font-bold text-[#0093DE]">From $599 per person</p>
             </div>
+            </ScrollReveal>
             
+            <ScrollReveal direction="right" delay={500} distance={40}>
             <div className={`p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'}`}>
               <div className="text-[#0093DE] mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -250,6 +276,7 @@ const TeamBuilding = () => {
               <p className={`text-sm ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'} mb-4`}>Designed for leadership teams seeking transformative experiences.</p>
               <p className="font-bold text-[#0093DE]">From $1,299 per person</p>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -257,24 +284,31 @@ const TeamBuilding = () => {
       {/* Case Studies Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-              Success Stories
-            </span>
-            <h2 className="text-3xl font-bold mb-4">Case Studies</h2>
-            <p className="text-lg opacity-80 max-w-2xl mx-auto">
-              See how other organizations have benefited from our corporate travel programs
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={200} distance={30}>
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                Success Stories
+              </span>
+              <h2 className="text-3xl font-bold mb-4">Case Studies</h2>
+              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+                See how other organizations have benefited from our corporate travel programs
+              </p>
+            </div>
+          </ScrollReveal>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {caseStudies.map((study) => (
-              <div 
+            {caseStudies.map((study, index) => (
+              <ScrollReveal 
                 key={study.id}
-                className={`rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                  theme === 'light' ? 'bg-white shadow-lg' : 'bg-gray-800 shadow-lg'
-                }`}
+                direction={index === 0 ? "left" : "right"}
+                delay={300 + (index * 100)}
+                distance={40}
               >
+                <div 
+                  className={`rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                    theme === 'light' ? 'bg-white shadow-lg' : 'bg-gray-800 shadow-lg'
+                  }`}
+                >
                 <div className="h-56 overflow-hidden">
                   <img 
                     src={study.image}
@@ -314,6 +348,7 @@ const TeamBuilding = () => {
                   </div>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -325,12 +360,15 @@ const TeamBuilding = () => {
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
+                <ScrollReveal direction="left" delay={200} distance={30}>
                 <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
                   Why Choose Us
                 </span>
                 <h2 className="text-3xl font-bold mb-6">Benefits of Our Team Building Programs</h2>
+                </ScrollReveal>
                 
                 <div className="space-y-6">
+                  <ScrollReveal direction="left" delay={300} distance={30}>
                   <div className="flex items-start">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -344,7 +382,9 @@ const TeamBuilding = () => {
                       </p>
                     </div>
                   </div>
+                  </ScrollReveal>
                   
+                  <ScrollReveal direction="left" delay={400} distance={30}>
                   <div className="flex items-start">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -358,7 +398,9 @@ const TeamBuilding = () => {
                       </p>
                     </div>
                   </div>
+                  </ScrollReveal>
                   
+                  <ScrollReveal direction="left" delay={500} distance={30}>
                   <div className="flex items-start">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -372,10 +414,12 @@ const TeamBuilding = () => {
                       </p>
                     </div>
                   </div>
+                  </ScrollReveal>
                 </div>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
+                <ScrollReveal direction="right" delay={300} distance={30}>
                 <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <img 
                     src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
@@ -383,6 +427,9 @@ const TeamBuilding = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                </ScrollReveal>
+                
+                <ScrollReveal direction="right" delay={400} distance={30}>
                 <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <img 
                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
@@ -390,6 +437,9 @@ const TeamBuilding = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                </ScrollReveal>
+                
+                <ScrollReveal direction="right" delay={500} distance={30}>
                 <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <img 
                     src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
@@ -397,6 +447,9 @@ const TeamBuilding = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                </ScrollReveal>
+                
+                <ScrollReveal direction="right" delay={600} distance={30}>
                 <div className="rounded-2xl overflow-hidden h-48 md:h-64 shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <img 
                     src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
@@ -404,35 +457,13 @@ const TeamBuilding = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                </ScrollReveal>
               </div>
             </div>
           </div>
         </div>
       </section>
       
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-20 rounded-t-3xl">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Strengthen Your Team?</h2>
-          <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
-            Let us create a customized team building program that meets your organization's specific goals and objectives
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/contact" 
-              className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold"
-            >
-              Request a Proposal
-            </a>
-            <a 
-              href="/package-tours" 
-              className="bg-transparent border-2 border-white hover:bg-white/10 text-white py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              Explore Our Services
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

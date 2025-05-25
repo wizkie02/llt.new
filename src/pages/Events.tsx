@@ -1,4 +1,5 @@
 import { useTheme } from '../contexts/ThemeContext';
+import bg5 from '../assets/images/backgrounds/bg5.jpg';
 
 const Events = () => {
   const { theme } = useTheme();
@@ -65,11 +66,12 @@ const Events = () => {
       
       {/* Hero Section */}
       <section className="relative mt-20 py-32 rounded-b-3xl overflow-hidden mb-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30 z-0"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')" }}
+          style={{ backgroundImage: `url(${bg5})` }}
         ></div>
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-md">
@@ -337,30 +339,6 @@ const Events = () => {
                 <p className={`text-sm ${theme === 'light' ? 'text-[#0093DE]' : 'text-[#58b7e8]'} font-medium`}>{partner.category}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-20 rounded-t-3xl">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Plan Your Vietnam Event?</h2>
-          <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
-            Let our expert team create a memorable and successful event experience for you
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/contact" 
-              className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold"
-            >
-              Request a Proposal
-            </a>
-            <a 
-              href="/package-tours" 
-              className="bg-transparent border-2 border-white hover:bg-white/10 text-white py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              Explore Our Services
-            </a>
           </div>
         </div>
       </section>

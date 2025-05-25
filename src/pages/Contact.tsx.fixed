@@ -83,9 +83,9 @@ const Contact = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-1">Email Addresses</h3>
                     <p className="opacity-80 text-sm">
-                      Vietnam Tours: vietnam@loelovestravel.com<br />
-                      Booking Support: bookings@loelovestravel.com<br />
-                      Custom Itineraries: custom@loelovestravel.com
+                      Vietnam Tours: vietnam@leolovestravel.com<br />
+                      Booking Support: bookings@leolovestravel.com<br />
+                      Custom Itineraries: custom@leolovestravel.com
                     </p>
                   </div>
                 </div>

@@ -246,7 +246,7 @@ const HomePage = () => {
       
       {/* About Us Area start */}
       <section className={`about-us-area py-20 rel z-1 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 md:px-12 lg:px-24 max-w-7xl">
           <div className="flex flex-wrap lg:flex-nowrap items-center">
             <div className="w-full lg:w-5/12 mb-12 lg:mb-0">
               <div

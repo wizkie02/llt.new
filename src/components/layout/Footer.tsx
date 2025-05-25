@@ -1,6 +1,7 @@
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../contexts/ThemeContext';
+import logo from '../../assets/horizontal_1.png';
 
 interface FooterLinkProps {
   to: string;
@@ -372,30 +373,32 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
           <AnimatedCard delay={200} direction="up">
             <div>
-              <h4 className="text-lg font-bold mb-4 text-[#0093DE]">About Us</h4>
+              <div className="flex items-center mb-4">
+                <img 
+                  src={logo} 
+                  alt="Leo Loves Travel" 
+                  className="h-8 w-auto mr-3"
+                />
+                <h4 className="text-lg font-bold text-[#0093DE]">About Us</h4>
+              </div>
               <p className={`text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'} mb-4`}>
-                Loe Loves Travel specializes in authentic Vietnamese experiences, connecting travelers with the heart and soul of Vietnam.
+                Leo Loves Travel specializes in authentic Vietnamese experiences, connecting travelers with the heart and soul of Vietnam.
               </p>
               <div className="flex space-x-3 mt-6">
-                <SocialIcon href="https://facebook.com" delay={0}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                  </svg>
-                </SocialIcon>
-                <SocialIcon href="https://twitter.com" delay={100}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                  </svg>
-                </SocialIcon>
-                <SocialIcon href="https://instagram.com" delay={200}>
+                <SocialIcon href="https://www.instagram.com/leo.lovestravel/" delay={0}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M7.5 21h9a3 3 0 003-3V6a3 3 0 00-3-3h-9a3 3 0 00-3 3v12a3 3 0 003 3z" />
                   </svg>
                 </SocialIcon>
-                <SocialIcon href="https://youtube.com" delay={300}>
+                <SocialIcon href="https://www.tiktok.com/@leolovestravel1999" delay={100}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.321 5.562a5.124 5.124 0 01-.443-.258 6.228 6.228 0 01-1.137-.966c-.849-.849-1.304-1.99-1.304-3.215V0h-3.094v16.108c0 .695-.224 1.347-.632 1.838-.408.49-.96.76-1.555.76-.595 0-1.147-.27-1.555-.76-.408-.491-.632-1.143-.632-1.838 0-.695.224-1.347.632-1.838.408-.49.96-.76 1.555-.76.173 0 .344.018.51.053V9.497c-.17-.023-.34-.035-.51-.035-1.62 0-3.142.631-4.287 1.776S5.093 13.99 5.093 15.61c0 1.62.63 3.142 1.776 4.287s2.667 1.776 4.287 1.776c1.62 0 3.142-.631 4.287-1.776s1.776-2.667 1.776-4.287V8.562c1.297.813 2.82 1.242 4.374 1.233V6.701c-.835.007-1.64-.234-2.272-.698z"/>
+                  </svg>
+                </SocialIcon>
+                <SocialIcon href="https://www.linkedin.com/in/leo-loves-travel-a0064b366/" delay={200}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                    <circle cx="4" cy="4" r="2" strokeWidth={1.5}/>
                   </svg>
                 </SocialIcon>
               </div>
@@ -443,7 +446,7 @@ const Footer = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#0093DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span>info@loetravel.com</span>
+                  <span>info@leolovestravel.com</span>
                 </li>
                 <li className={`flex items-center ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#0093DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -466,13 +469,23 @@ const Footer = () => {
         {/* Copyright */}
         <AnimatedCard delay={700} direction="up">
           <div className={`mt-8 pt-6 border-t ${theme === 'light' ? 'border-gray-200' : 'border-gray-700'} text-center`}>
-            <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
-              © {currentYear} Loe Loves Travel. All rights reserved. 
-              <span className="mx-2">|</span>
-              <Link to="/privacy-policy" className="hover:text-[#0093DE] transition-colors duration-300">Privacy Policy</Link>
-              <span className="mx-2">|</span>
-              <Link to="/terms-of-service" className="hover:text-[#0093DE] transition-colors duration-300">Terms of Service</Link>
-            </p>
+            <div className="flex flex-col items-center space-y-3">
+              <div className="flex items-center">
+                <img 
+                  src={logo} 
+                  alt="Leo Loves Travel" 
+                  className="h-6 w-auto mr-2"
+                />
+                <span className={`text-sm font-medium ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                  © {currentYear} Leo Loves Travel. All rights reserved.
+                </span>
+              </div>
+              <div className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                <Link to="/privacy-policy" className="hover:text-[#0093DE] transition-colors duration-300">Privacy Policy</Link>
+                <span className="mx-2">|</span>
+                <Link to="/terms-of-service" className="hover:text-[#0093DE] transition-colors duration-300">Terms of Service</Link>
+              </div>
+            </div>
           </div>
         </AnimatedCard>
       </div>

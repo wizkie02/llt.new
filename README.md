@@ -1,6 +1,6 @@
-# Loelovestravel Website
+# Leo Loves Travel Website
 
-A fully functional multipage website for Loelovestravel, built with React and following the LLT brand guidelines.
+A fully functional multipage website for Leo Loves Travel, built with React and following the LLT brand guidelines.
 
 ## Features
 
