@@ -26,7 +26,7 @@ const Header = () => {
 
         // Calculate scroll progress for a single smooth transition (0 to 1)
         // Use a smaller divisor for faster completion of the transition
-        const progress = Math.min(scrollY / 150, 1);
+        const progress = Math.min(scrollY / 1000, 1);
         setScrollProgress(progress);
       } else {
         // For non-homepage, always use solid header
@@ -91,7 +91,7 @@ const Header = () => {
       }}
     >
       <div
-        className="container mx-auto px-4 transition-all duration-500 h-full flex items-center"
+        className="container flex items-center h-full px-4 mx-auto transition-all duration-500"
         style={{
           paddingTop: `${Math.max(24 - scrollProgress * 8, 16)}px`,
           paddingBottom: `${Math.max(24 - scrollProgress * 8, 16)}px`,
@@ -147,7 +147,7 @@ const Header = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full py-2 pl-4 pr-10 text-sm border-0 rounded-full focus:ring-2 transition-all duration-500 focus:ring-[#0093DE]/50`}
                   style={{
-                    backgroundColor: `rgba(${255 - scrollProgress * 12}, ${255 - scrollProgress * 8}, ${255 - scrollProgress * 5}, ${0.8 + scrollProgress * 0.1})`,
+                    backgroundColor: `rgba(${255 - scrollProgress * 32}, ${255 - scrollProgress * 32}, ${255 - scrollProgress * 32}, ${0.8 + scrollProgress * 0.1})`,
                     color: '#2A3B4A',
                     backdropFilter: `blur(${scrollProgress * 4}px)`
                   }}
@@ -156,7 +156,7 @@ const Header = () => {
                   type="submit"
                   className="absolute right-0 top-0 h-full px-3 text-gray-500 hover:text-[#E4784D] transition-colors duration-300"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </button>
@@ -165,7 +165,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="items-center hidden space-x-1 lg:flex">
             <Link
               to="/"
               className={`relative font-medium text-sm px-4 py-2 rounded-full transition-all duration-500 ${
@@ -387,34 +387,19 @@ const Header = () => {
               }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4M3 10h18l-1 10H4L3 10z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               Book Now
             </Link>
 
-            {/* Mobile Search Button */}
-            <button
-              className="md:hidden p-2 rounded-full focus:outline-none transition-all duration-300 transform hover:scale-110 hover:bg-white/10"
-              aria-label="Search"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" 
-                stroke="currentColor"
-                style={{ 
-                  color: scrollProgress > 0.5 ? "#2A3B4A" : "white",
-                  transition: "color 0.5s ease"
-                }}>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-full focus:outline-none transition-all duration-300 transform hover:scale-110 hover:bg-white/10"
+              className="p-2 transition-all duration-300 transform rounded-full lg:hidden focus:outline-none hover:scale-110 hover:bg-white/10"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" 
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" 
                   stroke="currentColor"
                   style={{ 
                     color: scrollProgress > 0.5 ? "#2A3B4A" : "white",
@@ -423,7 +408,7 @@ const Header = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" 
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" 
                   stroke="currentColor"
                   style={{ 
                     color: scrollProgress > 0.5 ? "#2A3B4A" : "white",
@@ -464,7 +449,7 @@ const Header = () => {
                   type="submit"
                   className="absolute right-0 top-0 h-full px-3 text-gray-500 hover:text-[#0093DE]"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </button>
@@ -498,8 +483,8 @@ const Header = () => {
               
               {/* Experiences Section */}
               <div className="px-4 py-2">
-                <div className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Experiences</div>
-                <div className="space-y-1 pl-2">
+                <div className="mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase">Experiences</div>
+                <div className="pl-2 space-y-1">
                   <Link
                     to="/travel-services"
                     className={`block px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
@@ -583,14 +568,14 @@ const Header = () => {
             </nav>
 
             {/* Mobile CTA Button */}
-            <div className="mt-6 pt-6 border-t border-gray-200">
+            <div className="pt-6 mt-6 border-t border-gray-200">
               <Link
                 to="/booking"
                 className="flex items-center justify-center w-full bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4M3 10h18l-1 10H4L3 10z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 Book Now
               </Link>
