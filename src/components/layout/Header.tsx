@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logoWhite from '../../assets/white-horizontal.png';
+import logoRegular from '../../assets/horizontal_1.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -96,16 +98,35 @@ const Header = () => {
         }}
       >
         <div className="flex justify-between items-center w-full">
-          {/* Logo without hover effects */}
-          <Link to="/" className="flex items-center">
+          {/* Logo with conditional white/regular version */}
+          <Link to="/" className="flex items-center relative">
+            {/* White logo - visible when at top of homepage */}
             <img
-              src="src/assets/horizontal_1.png"
+              src={logoWhite}
               alt="Explore Vietnam"
-              className="transition-all duration-500 mix-blend-multiply"
+              className={`transition-all duration-500 absolute ${
+                isHome && !isScrolled ? 'opacity-100' : 'opacity-0'
+              }`}
               style={{
                 height: `${Math.max(60 - scrollProgress * 15, 45)}px`,
                 filter: 'drop-shadow(0 0 0 transparent)',
-                opacity: 1,
+                transform: `scale(${1 - scrollProgress * 0.05})`
+              }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = "https://placehold.co/200x80/0093DE/FFFFFF/png?text=Vietnam+Travel";
+              }}
+            />
+            {/* Regular logo - visible when scrolled or not on homepage */}
+            <img
+              src={logoRegular}
+              alt="Explore Vietnam"
+              className={`transition-all duration-500 ${
+                isHome && !isScrolled ? 'opacity-0' : 'opacity-100'
+              }`}
+              style={{
+                height: `${Math.max(60 - scrollProgress * 15, 45)}px`,
+                filter: 'drop-shadow(0 0 0 transparent)',
                 transform: `scale(${1 - scrollProgress * 0.05})`
               }}
               onError={(e) => {
@@ -249,53 +270,53 @@ const Header = () => {
                     to="/travel-services"
                     className="block px-4 py-2 text-sm rounded-xl hover:bg-gray-50 text-gray-700 hover:text-[#0093DE] flex items-center transition-all duration-300"
                   >
-                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#64A86B] bg-[#64A86B]/10 rounded-full">
+                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#0093DE] bg-[#0093DE]/10 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     </span>
-                    Cultural Journeys
+                    Travel Services
                   </Link>
                   <Link
                     to="/team-building"
                     className="block px-4 py-2 text-sm rounded-xl hover:bg-gray-50 text-gray-700 hover:text-[#0093DE] flex items-center transition-all duration-300"
                   >
-                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#64A86B] bg-[#64A86B]/10 rounded-full">
+                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#0093DE] bg-[#0093DE]/10 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
                     </span>
-                    Adventure Tours
+                    Team Building
                   </Link>
                   <Link
                     to="/events"
                     className="block px-4 py-2 text-sm rounded-xl hover:bg-gray-50 text-gray-700 hover:text-[#0093DE] flex items-center transition-all duration-300"
                   >
-                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#64A86B] bg-[#64A86B]/10 rounded-full">
+                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#0093DE] bg-[#0093DE]/10 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                     </span>
-                    Local Cuisine
+                    Events & Conferences
                   </Link>
                   <Link
                     to="/romantic-travel"
                     className="block px-4 py-2 text-sm rounded-xl hover:bg-gray-50 text-gray-700 hover:text-[#0093DE] flex items-center transition-all duration-300"
                   >
-                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#64A86B] bg-[#64A86B]/10 rounded-full">
+                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#0093DE] bg-[#0093DE]/10 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                       </svg>
                     </span>
-                    Romantic Getaways
+                    Romantic Travel
                   </Link>
                   <Link
                     to="/medical-travel"
                     className="block px-4 py-2 text-sm rounded-xl hover:bg-gray-50 text-gray-700 hover:text-[#0093DE] flex items-center transition-all duration-300"
                   >
-                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#64A86B] bg-[#64A86B]/10 rounded-full">
+                    <span className="w-7 h-7 mr-3 flex items-center justify-center text-[#0093DE] bg-[#0093DE]/10 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </span>
                     Medical Travel
@@ -358,7 +379,7 @@ const Header = () => {
           <div className="flex items-center space-x-2">
             {/* Contact Button (Desktop) */}
             <Link
-              to="/contact"
+              to="/booking"
               className="hidden md:flex items-center bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-500 transform hover:-translate-y-1 hover:shadow-lg"
               style={{ 
                 boxShadow: `0 ${Math.min(4 * scrollProgress, 4)}px ${Math.min(6 * scrollProgress, 6)}px -1px rgba(0, 0, 0, ${0.1 * scrollProgress}), 0 ${Math.min(2 * scrollProgress, 2)}px ${Math.min(4 * scrollProgress, 4)}px -1px rgba(0, 0, 0, ${0.06 * scrollProgress})`,
@@ -366,7 +387,7 @@ const Header = () => {
               }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4M3 10h18l-1 10H4L3 10z" />
               </svg>
               Book Now
             </Link>
@@ -488,7 +509,7 @@ const Header = () => {
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Cultural Journeys
+                    Travel Services
                   </Link>
                   <Link
                     to="/team-building"
@@ -499,7 +520,7 @@ const Header = () => {
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Adventure Tours
+                    Team Building
                   </Link>
                   <Link
                     to="/events"
@@ -510,7 +531,7 @@ const Header = () => {
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Local Cuisine
+                    Events & Conferences
                   </Link>
                   <Link
                     to="/romantic-travel"
@@ -521,7 +542,7 @@ const Header = () => {
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Romantic Getaways
+                    Romantic Travel
                   </Link>
                   <Link
                     to="/medical-travel"
@@ -564,12 +585,12 @@ const Header = () => {
             {/* Mobile CTA Button */}
             <div className="mt-6 pt-6 border-t border-gray-200">
               <Link
-                to="/contact"
+                to="/booking"
                 className="flex items-center justify-center w-full bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4M3 10h18l-1 10H4L3 10z" />
                 </svg>
                 Book Now
               </Link>

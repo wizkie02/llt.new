@@ -63,7 +63,7 @@ const HomePage = () => {
     },
     {
       id: 3,
-      title: 'Nature Adventures',
+      title: 'Team Building',
       description: 'Trek through misty Sapa rice terraces, cruise emerald waters of Halong Bay, and explore lush national parks',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -74,7 +74,7 @@ const HomePage = () => {
     },
     {
       id: 4,
-      title: 'Romantic Getaways',
+      title: 'Romantic Travel',
       description: 'Private beach dinners under Hoi An lantern light, sunrise over limestone karsts, and mountain spa retreats',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -85,7 +85,7 @@ const HomePage = () => {
     },
     {
       id: 5,
-      title: 'Local Experiences',
+      title: 'Travel Services',
       description: 'Connect with hill tribe families, learn traditional crafts, and participate in authentic Vietnamese customs',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -187,7 +187,7 @@ const HomePage = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 animate-fade-in-up shadow-lg transform transition-all duration-300 hover:scale-105 hover:bg-white/30" style={{ animationDelay: '0.3s' }}>
             Welcome to Vietnam
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl animate-fade-in-up drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ animationDelay: '0.5s' }}>
             Experience <span className="text-[#0093DE]">Vietnam's</span> Hidden <span className="text-[#0093DE]">Treasures</span>
           </h1>
           <p className="text-xl md:text-2xl mb-10 max-w-3xl opacity-90 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>

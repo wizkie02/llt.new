@@ -77,7 +77,7 @@ const Events = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-md">
             Corporate & Private Events
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ color: '#e2f1f9' }}>
             Events & Conferences in Vietnam
           </h1>
           <p className="text-xl max-w-3xl mx-auto opacity-90">

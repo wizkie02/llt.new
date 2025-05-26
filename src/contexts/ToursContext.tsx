@@ -16,6 +16,9 @@ export interface TourOption {
   highlights?: string[];
   included?: string[];
   itinerary?: { day: string, activities: string }[];
+  whatToBring?: string[];
+  maxGroupSize?: number;
+  languages?: string;
 }
 
 interface ToursContextType {
@@ -39,7 +42,7 @@ const initialTours: TourOption[] = [
     price: 299,
     duration: '3 days, 2 nights',
     location: 'Halong Bay',
-    image: '/src/assets/images/destinations/halong-bay.jpg',
+    image: 'https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?q=80&w=800',
     featured: true,
     category: 'luxury',
     rating: 4.9,
@@ -51,7 +54,15 @@ const initialTours: TourOption[] = [
       'Tai Chi classes at sunrise',
       'Swimming and sunset cocktails'
     ],
-    included: ['Luxury accommodation', 'All meals', 'Guided excursions', 'Kayak and activities', 'Transfers from Hanoi']
+    included: ['Luxury accommodation', 'All meals', 'Guided excursions', 'Kayak and activities', 'Transfers from Hanoi'],
+    whatToBring: ['Comfortable walking shoes', 'Swimwear', 'Sun protection', 'Light jacket for evening', 'Camera'],
+    maxGroupSize: 24,
+    languages: 'English, Vietnamese',
+    itinerary: [
+      { day: '1', activities: 'Pickup from Hanoi, transfer to Halong Bay, board cruise, lunch, kayaking, sunset dinner' },
+      { day: '2', activities: 'Tai Chi at sunrise, cave exploration, cooking class, swimming, overnight on cruise' },
+      { day: '3', activities: 'Early morning activities, brunch, disembark, return to Hanoi' }
+    ]
   },
   {
     id: '2',
@@ -60,7 +71,7 @@ const initialTours: TourOption[] = [
     price: 199,
     duration: '4 days, 3 nights',
     location: 'Sapa',
-    image: '/src/assets/images/destinations/sapa.jpg',
+    image: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=800',
     featured: true,
     category: 'adventure',
     rating: 4.8,
@@ -72,7 +83,16 @@ const initialTours: TourOption[] = [
       'Visit to local markets',
       'Bamboo rafting experience'
     ],
-    included: ['Local homestay accommodation', 'Meals', 'Local guide', 'Trekking permits', 'Overnight train to/from Hanoi']
+    included: ['Local homestay accommodation', 'Meals', 'Local guide', 'Trekking permits', 'Overnight train to/from Hanoi'],
+    whatToBring: ['Hiking boots', 'Rain jacket', 'Warm clothing', 'Personal toiletries', 'Insect repellent', 'Camera'],
+    maxGroupSize: 12,
+    languages: 'English, Vietnamese, Local dialect guide',
+    itinerary: [
+      { day: '1', activities: 'Night train from Hanoi to Lao Cai, pickup and transfer to Sapa, village trek, homestay dinner' },
+      { day: '2', activities: 'Full day trek through Cat Cat and Sin Chai villages, lunch with local family, cultural activities' },
+      { day: '3', activities: 'Silver Waterfall and Heaven Gate visit, Fansipan cable car option, traditional market visit' },
+      { day: '4', activities: 'Morning free time, cooking class, return train to Hanoi' }
+    ]
   },
   {
     id: '3',

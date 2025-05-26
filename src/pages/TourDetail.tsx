@@ -43,62 +43,56 @@ const TourDetail = () => {
   }, [tour]);
 
   const handleBookNow = () => {
-    if (!date) {
-      alert("Please select a date for your tour");
-      return;
-    }
-    
-    setIsBooking(true);
-    
-    // Simulate booking process
-    setTimeout(() => {
-      setIsBooking(false);
-      // Navigate to booking confirmation page
-      navigate(`/booking-confirmation/${id}`, { 
-        state: { 
-          tourId: id,
-          tourName: tour?.name,
-          date: date,
-          guests: guests,
-          totalPrice: (tour?.price || 0) * guests
-        } 
-      });
-    }, 1500);
+    // Navigate to booking page with tour information
+    navigate(`/booking?tourId=${id}`, { 
+      state: { 
+        selectedTour: tour,
+        prefilledDate: date,
+        prefilledGuests: guests
+      } 
+    });
   };
   
-  // Sample itinerary data
-  const itinerary = [
-    {
-      day: 1,
-      title: "Arrival & Welcome",
-      description: "Arrive in Vietnam and transfer to your hotel. Enjoy a welcome dinner with your tour group and guide.",
-      activities: ["Airport pickup", "Hotel check-in", "Welcome dinner"]
-    },
-    {
-      day: 2,
-      title: "City Exploration",
-      description: "Explore the vibrant streets and cultural landmarks of the city. Visit historical sites and enjoy local cuisine.",
-      activities: ["Morning market visit", "Historical site tour", "Street food experience"]
-    },
-    {
-      day: 3,
-      title: "Nature & Adventure",
-      description: "Journey to the countryside for a day of natural beauty and adventure activities in Vietnam's stunning landscapes.",
-      activities: ["Countryside excursion", "Hiking", "Traditional village visit"]
-    },
-    {
-      day: 4,
-      title: "Cultural Immersion",
-      description: "Immerse yourself in Vietnamese culture with traditional craft workshops and cultural performances.",
-      activities: ["Craft workshop", "Cultural performance", "Local family dinner"]
-    },
-    {
-      day: 5,
-      title: "Departure Day",
-      description: "Final day to shop for souvenirs and prepare for departure. Transfer to airport for your flight home.",
-      activities: ["Souvenir shopping", "Farewell lunch", "Airport transfer"]
-    }
-  ];
+  // Prepare itinerary data from tour or use sample data
+  const itinerary = tour?.itinerary && tour.itinerary.length > 0 
+    ? tour.itinerary.map((item, index) => ({
+        day: parseInt(item.day),
+        title: `Day ${item.day}`,
+        description: item.activities,
+        activities: [item.activities] // Convert single activity string to array
+      }))
+    : [
+        {
+          day: 1,
+          title: "Arrival & Welcome",
+          description: "Arrive in Vietnam and transfer to your hotel. Enjoy a welcome dinner with your tour group and guide.",
+          activities: ["Airport pickup", "Hotel check-in", "Welcome dinner"]
+        },
+        {
+          day: 2,
+          title: "City Exploration",
+          description: "Explore the vibrant streets and cultural landmarks of the city. Visit historical sites and enjoy local cuisine.",
+          activities: ["Morning market visit", "Historical site tour", "Street food experience"]
+        },
+        {
+          day: 3,
+          title: "Nature & Adventure",
+          description: "Journey to the countryside for a day of natural beauty and adventure activities in Vietnam's stunning landscapes.",
+          activities: ["Countryside excursion", "Hiking", "Traditional village visit"]
+        },
+        {
+          day: 4,
+          title: "Cultural Immersion",
+          description: "Immerse yourself in Vietnamese culture with traditional craft workshops and cultural performances.",
+          activities: ["Craft workshop", "Cultural performance", "Local family dinner"]
+        },
+        {
+          day: 5,
+          title: "Departure Day",
+          description: "Final day to shop for souvenirs and prepare for departure. Transfer to airport for your flight home.",
+          activities: ["Souvenir shopping", "Farewell lunch", "Airport transfer"]
+        }
+      ];
   
   // Sample reviews data
   const reviews = [
@@ -233,12 +227,12 @@ const TourDetail = () => {
                       <div className="flex flex-col items-center p-4 rounded-xl bg-[#0093DE]/5 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
                         <Users className="h-6 w-6 text-[#64A86B] mb-2" />
                         <h3 className="font-semibold text-sm mb-1">Group Size</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">Max 12 travelers</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">Max {tour.maxGroupSize || 12} travelers</p>
                       </div>
                       <div className="flex flex-col items-center p-4 rounded-xl bg-[#0093DE]/5 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
                         <CalendarIcon2 className="h-6 w-6 text-[#0093DE] mb-2" />
                         <h3 className="font-semibold text-sm mb-1">Languages</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">English, Vietnamese</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">{tour.languages || 'English, Vietnamese'}</p>
                       </div>
                     </div>
                     
@@ -252,26 +246,38 @@ const TourDetail = () => {
                         Vietnamese Experience Highlights
                       </h3>
                       <ul className="list-none pl-6 mb-6 space-y-3">
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-600 dark:text-gray-300">Experience the unique culture and landscapes of {tour.location} with local insight</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-600 dark:text-gray-300">Authentic Vietnamese cuisine with regional specialties</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-600 dark:text-gray-300">Professional guides with extensive Vietnamese cultural knowledge</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-600 dark:text-gray-300">Carefully curated itinerary to maximize your Vietnamese experience</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-600 dark:text-gray-300">Comfortable accommodations in beautiful Vietnamese settings</span>
-                        </li>
+                        {tour.highlights && tour.highlights.length > 0 ? (
+                          tour.highlights.map((highlight, index) => (
+                            <li key={index} className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">{highlight}</span>
+                            </li>
+                          ))
+                        ) : (
+                          // Default highlights if none are provided
+                          <>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Experience the unique culture and landscapes of {tour.location} with local insight</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Authentic Vietnamese cuisine with regional specialties</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Professional guides with extensive Vietnamese cultural knowledge</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Carefully curated itinerary to maximize your Vietnamese experience</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Comfortable accommodations in beautiful Vietnamese settings</span>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                     
@@ -285,22 +291,71 @@ const TourDetail = () => {
                         What to Bring
                       </h3>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                        <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
-                          <span className="text-gray-600 dark:text-gray-300">Valid passport</span>
-                        </li>
-                        <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
-                          <span className="text-gray-600 dark:text-gray-300">Local currency (VND)</span>
-                        </li>
-                        <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
-                          <span className="text-gray-600 dark:text-gray-300">Travel insurance</span>
-                        </li>
-                        <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
-                          <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
-                          <span className="text-gray-600 dark:text-gray-300">Camera</span>
-                        </li>
+                        {tour.whatToBring && tour.whatToBring.length > 0 ? (
+                          tour.whatToBring.map((item, index) => (
+                            <li key={index} className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
+                              <span className="text-gray-600 dark:text-gray-300">{item}</span>
+                            </li>
+                          ))
+                        ) : (
+                          // Default items if no specific items are provided
+                          <>
+                            <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
+                              <span className="text-gray-600 dark:text-gray-300">Valid passport</span>
+                            </li>
+                            <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
+                              <span className="text-gray-600 dark:text-gray-300">Local currency (VND)</span>
+                            </li>
+                            <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
+                              <span className="text-gray-600 dark:text-gray-300">Travel insurance</span>
+                            </li>
+                            <li className="flex items-center py-2 px-3 rounded-xl bg-[#0093DE]/5 dark:bg-gray-700">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#0093DE]" />
+                              <span className="text-gray-600 dark:text-gray-300">Camera</span>
+                            </li>
+                          </>
+                        )}
+                      </ul>
+                    </div>
+                    
+                    <Separator />
+                    
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3 flex items-center">
+                        <span className="w-8 h-8 flex items-center justify-center bg-[#64A86B]/10 rounded-full mr-2">
+                          <CheckCircle className="h-4 w-4 text-[#64A86B]" />
+                        </span>
+                        What's Included
+                      </h3>
+                      <ul className="list-none pl-6 mb-6 space-y-3">
+                        {tour.included && tour.included.length > 0 ? (
+                          tour.included.map((item, index) => (
+                            <li key={index} className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">{item}</span>
+                            </li>
+                          ))
+                        ) : (
+                          // Default included items if none are provided
+                          <>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Professional tour guide</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Transportation during tour</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 mr-2 text-[#64A86B] flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-600 dark:text-gray-300">Entrance fees to attractions</span>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   </CardContent>

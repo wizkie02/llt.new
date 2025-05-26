@@ -1,9 +1,11 @@
 import { useTheme } from '../contexts/ThemeContext';
+import { useNavigate } from 'react-router-dom';
 import ScrollReveal from '../components/ui/ScrollReveal';
 import bg10 from '../assets/images/backgrounds/bg10.jpg';
 
 const RomanticTravel = () => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   
   const services = [
     {
@@ -448,7 +450,13 @@ const RomanticTravel = () => {
                     </div>
                     
                     <button 
-                      type="submit"
+                      type="button"
+                      onClick={() => navigate('/booking', { 
+                        state: { 
+                          serviceType: 'romantic',
+                          prefilledServices: ['Wedding Photoshoot', 'Couple Getaway']
+                        } 
+                      })}
                       className="w-full bg-[#0093DE] hover:bg-[#007ab8] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
                     >
                       Request Booking

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTours, TourOption } from '../contexts/ToursContext';
 import { useTheme } from '../contexts/ThemeContext';
 import bg7 from '../assets/images/backgrounds/bg7.jpg';
@@ -7,6 +7,7 @@ import bg7 from '../assets/images/backgrounds/bg7.jpg';
 const PackageTours = () => {
   const { tours, getToursByCategory, getFeaturedTours } = useTours();
   const { theme } = useTheme();
+  const navigate = useNavigate();
   const [filteredTours, setFilteredTours] = useState<TourOption[]>([]);
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -491,12 +492,25 @@ const PackageTours = () => {
                         {tour.description}
                       </p>
                       
-                      <Link 
-                        to={`/tour/${tour.id}`}
-                        className="block w-full text-center bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium py-2 px-4 rounded-xl transition-colors"
-                      >
-                        View Details
-                      </Link>
+                      <div className="flex gap-2">
+                        <Link 
+                          to={`/tour/${tour.id}`}
+                          className="flex-1 text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-xl transition-colors"
+                        >
+                          View Details
+                        </Link>
+                        <button
+                          onClick={() => navigate('/booking', { 
+                            state: { 
+                              selectedTour: tour,
+                              prefilledGuests: 2
+                            } 
+                          })}
+                          className="flex-1 bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium py-2 px-4 rounded-xl transition-colors"
+                        >
+                          Book Now
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -569,12 +583,25 @@ const PackageTours = () => {
                           </span>
                         </div>
                         
-                        <Link 
-                          to={`/tour/${tour.id}`}
-                          className="bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium py-2 px-4 rounded-xl transition-colors"
-                        >
-                          View Details
-                        </Link>
+                        <div className="flex gap-2">
+                          <Link 
+                            to={`/tour/${tour.id}`}
+                            className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-xl transition-colors"
+                          >
+                            View Details
+                          </Link>
+                          <button
+                            onClick={() => navigate('/booking', { 
+                              state: { 
+                                selectedTour: tour,
+                                prefilledGuests: 2
+                              } 
+                            })}
+                            className="bg-[#0093DE] hover:bg-[#007ab8] text-white font-medium py-2 px-4 rounded-xl transition-colors"
+                          >
+                            Book Now
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

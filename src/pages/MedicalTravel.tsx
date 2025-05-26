@@ -73,7 +73,10 @@ const MedicalTravel = () => {
         <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-0"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
         <ScrollReveal direction="up" delay={200} className="relative z-10 text-center text-white px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Medical Travel in Vietnam</h1>
+          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
+            Healthcare Tourism
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ color: '#e2f1f9' }}>Medical Travel in Vietnam</h1>
           <p className="text-xl md:text-2xl">World-class healthcare combined with luxurious recovery experiences</p>
         </ScrollReveal>
       </div>

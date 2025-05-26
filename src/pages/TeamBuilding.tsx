@@ -74,7 +74,7 @@ const TeamBuilding = () => {
           </ScrollReveal>
           
           <ScrollReveal direction="up" delay={300} distance={40}>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ color: '#e2f1f9' }}>
               Team Building in Vietnam
             </h1>
           </ScrollReveal>

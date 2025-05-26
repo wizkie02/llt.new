@@ -259,11 +259,11 @@ const Footer = () => {
   ];
   
   const services = [
-    { name: 'Cultural Tours', path: '/travel-services' },
-    { name: 'Adventure Tours', path: '/team-building' },
-    { name: 'Food & Culinary', path: '/events' },
-    { name: 'Romantic Getaways', path: '/romantic-travel' },
-    { name: 'Wellness Retreats', path: '/medical-travel' },
+    { name: 'Travel Services', path: '/travel-services' },
+    { name: 'Team Building', path: '/team-building' },
+    { name: 'Events & Conferences', path: '/events' },
+    { name: 'Romantic Travel', path: '/romantic-travel' },
+    { name: 'Medical Travel', path: '/medical-travel' },
     { name: 'Package Tours', path: '/package-tours' }
   ];
   

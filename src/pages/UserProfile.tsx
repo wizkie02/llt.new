@@ -262,7 +262,7 @@ const UserProfile = () => {
                               </div>
                               <div className="flex flex-wrap gap-2 mt-4">
                                 <Button size="sm" variant="outline" asChild>
-                                  <Link to={`/booking-confirmation/${booking.id}`}>View Details</Link>
+                                  <Link to={`/booking-confirmation`} state={{ tour: { id: booking.id, name: booking.tourName, price: booking.price }, bookingData: { departureDate: booking.date, numberOfTravelers: 2, contactFirstName: "Alex", contactLastName: "Johnson", email: "alex.johnson@example.com" } }}>View Details</Link>
                                 </Button>
                                 <Button size="sm" variant="outline">Modify Booking</Button>
                               </div>
@@ -301,7 +301,7 @@ const UserProfile = () => {
                               </div>
                               <div className="flex flex-wrap gap-2 mt-4">
                                 <Button size="sm" variant="outline" asChild>
-                                  <Link to={`/booking-confirmation/${booking.id}`}>View Details</Link>
+                                  <Link to={`/booking-confirmation`} state={{ tour: { id: booking.id, name: booking.tourName, price: booking.price }, bookingData: { departureDate: booking.date, numberOfTravelers: 2, contactFirstName: "Alex", contactLastName: "Johnson", email: "alex.johnson@example.com" } }}>View Details</Link>
                                 </Button>
                                 <Button size="sm" variant="outline">Leave Review</Button>
                               </div>

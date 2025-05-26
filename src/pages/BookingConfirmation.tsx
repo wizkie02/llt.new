@@ -13,12 +13,16 @@ const BookingConfirmation = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   
   // Get booking details from location state
-  const bookingDetails = location.state || {
-    tourId: 'unknown',
-    tourName: 'Tour Package',
-    date: new Date(),
-    guests: 2,
-    totalPrice: 299
+  const { bookingData, tour, bookingId } = location.state || {};
+  
+  const bookingDetails = {
+    tourId: tour?.id || 'unknown',
+    tourName: tour?.name || 'Tour Package',
+    date: bookingData?.departureDate || new Date(),
+    guests: bookingData?.numberOfTravelers || 2,
+    totalPrice: (tour?.price * (bookingData?.numberOfTravelers || 1)) || 299,
+    contactName: bookingData ? `${bookingData.contactFirstName} ${bookingData.contactLastName}` : 'Guest',
+    email: bookingData?.email || 'guest@example.com'
   };
   
   // Generate booking reference
@@ -37,7 +41,7 @@ const BookingConfirmation = () => {
   
   return (
     <div className={`w-full min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'} pt-24 pb-16`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#64A86B]/20 mb-4">
             <CheckCircle className="h-8 w-8 text-[#64A86B]" />
@@ -61,6 +65,16 @@ const BookingConfirmation = () => {
                 <h3 className="font-semibold text-lg mb-4">{bookingDetails.tourName}</h3>
                 
                 <div className="space-y-3">
+                  <div className="flex items-center">
+                    <Users className="h-5 w-5 mr-3 text-[#0093DE]" />
+                    <div>
+                      <p className="text-sm font-medium">Booking Name</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        {bookingDetails.contactName}
+                      </p>
+                    </div>
+                  </div>
+                  
                   <div className="flex items-center">
                     <Calendar className="h-5 w-5 mr-3 text-[#0093DE]" />
                     <div>
@@ -125,11 +139,11 @@ const BookingConfirmation = () => {
             </div>
           </CardContent>
           <CardFooter className="bg-gray-50 dark:bg-gray-800 p-6 rounded-b-xl flex flex-wrap gap-4">
-            <Button variant="outline" className="flex-1" onClick={handleDownloadItinerary}>
+            <Button variant="outline" className="flex-1 h-12" onClick={handleDownloadItinerary}>
               <Download className="mr-2 h-4 w-4" />
               {isDownloading ? 'Preparing...' : 'Download Itinerary'}
             </Button>
-            <Button variant="outline" className="flex-1">
+            <Button variant="outline" className="flex-1 h-12">
               <Printer className="mr-2 h-4 w-4" />
               Print Confirmation
             </Button>
@@ -208,7 +222,7 @@ const BookingConfirmation = () => {
         <div className="text-center">
           <Button 
             onClick={() => navigate('/package-tours')}
-            className="bg-[#0093DE] hover:bg-[#007ab8]"
+            className="bg-[#0093DE] hover:bg-[#007ab8] h-12 px-8"
           >
             Explore More Tours <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

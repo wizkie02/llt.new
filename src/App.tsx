@@ -17,6 +17,7 @@ import Contact from './pages/Contact';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminTourManagement from './pages/admin/AdminTourManagement';
 import TourDetail from './pages/TourDetail';
+import Booking from './pages/Booking';
 import BookingConfirmation from './pages/BookingConfirmation';
 import UserProfile from './pages/UserProfile';
 import HelpCenter from './pages/HelpCenter';
@@ -45,7 +46,8 @@ function App() {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/tour-management" element={<AdminTourManagement />} />
               <Route path="/tour/:id" element={<TourDetail />} />
-              <Route path="/booking-confirmation/:id" element={<BookingConfirmation />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/booking-confirmation" element={<BookingConfirmation />} />
               <Route path="/profile" element={<UserProfile />} />
               <Route path="/help-center" element={<HelpCenter />} />
               <Route path="/blog" element={<TravelBlog />} />
