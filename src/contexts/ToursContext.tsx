@@ -307,15 +307,15 @@ const initialTours: TourOption[] = [
 ];
 
 export const ToursProvider = ({ children }: { children: ReactNode }) => {
-  // Initialize state with tours from localStorage or default to initialTours
+  // Initialize state with tours from sessionStorage or default to initialTours
   const [tours, setTours] = useState<TourOption[]>(() => {
-    const savedTours = localStorage.getItem('tours');
+    const savedTours = sessionStorage.getItem('tours');
     return savedTours ? JSON.parse(savedTours) : initialTours;
   });
 
-  // Save tours to localStorage whenever they change
+  // Save tours to sessionStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('tours', JSON.stringify(tours));
+    sessionStorage.setItem('tours', JSON.stringify(tours));
   }, [tours]);
 
   // Add a new tour

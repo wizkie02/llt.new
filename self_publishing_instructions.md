@@ -104,7 +104,7 @@ If you want to enhance the admin functionality beyond local storage:
 
 1. **Add a Backend API**:
    - Create a simple API using Node.js/Express, PHP, or any backend technology
-   - Replace the ToursContext.tsx file with one that uses API calls instead of localStorage
+   - Replace the ToursContext.tsx file with one that uses API calls instead of sessionStorage
    - Add proper authentication to protect admin routes
 
 2. **Use a Headless CMS**:
