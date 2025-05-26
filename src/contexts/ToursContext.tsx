@@ -269,7 +269,7 @@ const initialTours: TourOption[] = [
     price: 189,
     duration: '3 days, 2 nights',
     location: 'Central Highlands',
-    image: 'https://images.unsplash.com/photo-1512830414785-3c4d915402f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    image: '/src/assets/images/destinations/taynguyen.jpg',
     featured: true,
     category: 'cultural',
     rating: 4.8,
