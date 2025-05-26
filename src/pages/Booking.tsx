@@ -11,7 +11,7 @@ import { Separator } from '../components/ui/separator';
 import { Calendar } from '../components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
 import { Badge } from '../components/ui/badge';
-import { CalendarIcon, Users, MapPin, Clock, Check, AlertCircle } from 'lucide-react';
+import { CalendarIcon, Users, MapPin, Clock, Plus, Trash2, Check, AlertCircle } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface Traveler {
@@ -53,24 +53,9 @@ const Booking = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const [error, setError] = useState<string | null>(null);
-  
-  let tours: any[] = [];
-  let getTourById: (id: string) => any = () => null;
-  let selectedTour = null;
-  let tourId = null;
-  
-  try {
-    // Attempt to get tour data
-    const toursContext = useTours();
-    tours = toursContext.tours;
-    getTourById = toursContext.getTourById;
-    tourId = searchParams.get('tourId');
-    selectedTour = tourId ? getTourById(tourId) : null;
-  } catch (err) {
-    console.error("Error loading tours:", err);
-    setError("Không thể tải dữ liệu tour. Vui lòng thử lại sau.");
-  }
+  const { tours, getTourById } = useTours();
+  const tourId = searchParams.get('tourId');
+  const selectedTour = tourId ? getTourById(tourId) : null;
 
   // Get prefilled data from navigation state
   const navigationState = location.state as {
@@ -107,21 +92,18 @@ const Booking = () => {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Handle prefilled data from navigation state
   useEffect(() => {
-    // Debug logging
-    console.log('Navigation state:', navigationState);
-    console.log('Available tours:', tours);
-    console.log('Selected tour:', selectedTour);
-    
     if (navigationState) {
       if (navigationState.prefilledDate) {
         setFormData(prev => ({ ...prev, departureDate: navigationState.prefilledDate }));
-      }      if (navigationState.prefilledGuests) {
-        setFormData(prev => ({ ...prev, numberOfTravelers: navigationState.prefilledGuests || 1 }));
+      }
+      if (navigationState.prefilledGuests !== undefined) {
+        setFormData(prev => ({ ...prev, numberOfTravelers: navigationState.prefilledGuests ?? 1 }));
       }
     }
-  }, [navigationState, tours, selectedTour]);
+  }, [navigationState]);
 
   // Update travelers array when numberOfTravelers changes
   useEffect(() => {
@@ -151,13 +133,13 @@ const Booking = () => {
       }));
     }
   }, [formData.numberOfTravelers]);
+
   const handleInputChange = (field: keyof BookingFormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
     }
-    console.log(`Field ${field} changed to:`, value); // Debug log
   };
 
   const handleTravelerChange = (travelerId: string, field: keyof Traveler, value: any) => {
@@ -168,6 +150,7 @@ const Booking = () => {
       )
     }));
   };
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
@@ -182,11 +165,6 @@ const Booking = () => {
     // Email validation
     if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
-    }
-    
-    // Phone validation
-    if (formData.phone && !/^[\d\s+()-]{7,20}$/.test(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
     }
 
     // Travelers validation
@@ -208,15 +186,11 @@ const Booking = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
-      // Scroll to the first error
-      const firstErrorElement = document.querySelector('.border-red-500');
-      if (firstErrorElement) {
-        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
       return;
     }
 
@@ -239,17 +213,10 @@ const Booking = () => {
       setIsSubmitting(false);
     }
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 pt-24 pb-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-        {/* Error message */}
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 relative" role="alert">
-            <strong className="font-bold">Lỗi! </strong>
-            <span className="block sm:inline">{error}</span>
-          </div>
-        )}
-        
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -262,7 +229,8 @@ const Booking = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Column - Form */}
             <div className="lg:col-span-2 space-y-6">
-                {/* Tour Selection */}
+              
+              {/* Tour Selection */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -270,25 +238,22 @@ const Booking = () => {
                     Tour Selection
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-4">
                   <div>
                     <Label htmlFor="tourId">Select Tour *</Label>
                     <Select value={formData.tourId} onValueChange={(value) => handleInputChange('tourId', value)}>
                       <SelectTrigger className={errors.tourId ? 'border-red-500' : ''}>
                         <SelectValue placeholder="Choose your tour" />
-                      </SelectTrigger>                      <SelectContent>
-                        {Array.isArray(tours) && tours.length > 0 ? (
-                          tours.map((tour) => (
-                            <SelectItem key={tour.id} value={tour.id}>
-                              <div className="flex items-center justify-between w-full">
-                                <span>{tour.name}</span>
-                                <Badge variant="secondary">${tour.price}</Badge>
-                              </div>
-                            </SelectItem>
-                          ))
-                        ) : (
-                          <SelectItem value="no-tours" disabled>No tours available</SelectItem>
-                        )}
+                      </SelectTrigger>
+                      <SelectContent>
+                        {tours.map((tour) => (
+                          <SelectItem key={tour.id} value={tour.id}>
+                            <div className="flex items-center justify-between w-full">
+                              <span>{tour.name}</span>
+                              <Badge variant="secondary">${tour.price}</Badge>
+                            </div>
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     {errors.tourId && <p className="text-red-500 text-sm mt-1">{errors.tourId}</p>}
@@ -298,9 +263,10 @@ const Booking = () => {
                     <div>
                       <Label>Departure Date *</Label>
                       <Popover>
-                        <PopoverTrigger asChild>                          <Button
+                        <PopoverTrigger asChild>
+                          <Button
                             variant="outline"
-                            className={`w-full justify-start text-left font-normal h-12 ${
+                            className={`w-full justify-start text-left font-normal ${
                               !formData.departureDate ? 'text-muted-foreground' : ''
                             } ${errors.departureDate ? 'border-red-500' : ''}`}
                           >
@@ -324,9 +290,10 @@ const Booking = () => {
                     <div>
                       <Label>Return Date</Label>
                       <Popover>
-                        <PopoverTrigger asChild>                          <Button
+                        <PopoverTrigger asChild>
+                          <Button
                             variant="outline"
-                            className={`w-full justify-start text-left font-normal h-12 ${
+                            className={`w-full justify-start text-left font-normal ${
                               !formData.returnDate ? 'text-muted-foreground' : ''
                             }`}
                           >
@@ -346,11 +313,13 @@ const Booking = () => {
                       </Popover>
                     </div>
 
-                    <div>                      <Label htmlFor="numberOfTravelers">Number of Travelers *</Label>
+                    <div>
+                      <Label htmlFor="numberOfTravelers">Number of Travelers *</Label>
                       <Select 
                         value={String(formData.numberOfTravelers)} 
                         onValueChange={(value) => handleInputChange('numberOfTravelers', parseInt(value))}
-                      >                        <SelectTrigger className="h-10">
+                      >
+                        <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -364,30 +333,34 @@ const Booking = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>              {/* Contact Information */}
+              </Card>
+
+              {/* Contact Information */}
               <Card>
                 <CardHeader>
                   <CardTitle>Contact Information</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="contactFirstName">First Name *</Label>                      <Input
+                      <Label htmlFor="contactFirstName">First Name *</Label>
+                      <Input
                         id="contactFirstName"
                         value={formData.contactFirstName}
                         onChange={(e) => handleInputChange('contactFirstName', e.target.value)}
                         className={errors.contactFirstName ? 'border-red-500' : ''}
-                        placeholder="First name"
+                        placeholder="Enter your first name"
                       />
                       {errors.contactFirstName && <p className="text-red-500 text-sm mt-1">{errors.contactFirstName}</p>}
                     </div>
                     <div>
-                      <Label htmlFor="contactLastName">Last Name *</Label>                      <Input
+                      <Label htmlFor="contactLastName">Last Name *</Label>
+                      <Input
                         id="contactLastName"
                         value={formData.contactLastName}
                         onChange={(e) => handleInputChange('contactLastName', e.target.value)}
                         className={errors.contactLastName ? 'border-red-500' : ''}
-                        placeholder="Last name"
+                        placeholder="Enter your last name"
                       />
                       {errors.contactLastName && <p className="text-red-500 text-sm mt-1">{errors.contactLastName}</p>}
                     </div>
@@ -416,44 +389,37 @@ const Booking = () => {
                         placeholder="+84 xxx xxx xxx"
                       />
                       {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-                    </div>                  </div>                 
-                  
-                  <div>
-                    <Label htmlFor="address">Address</Label>
-                    <Input
-                      id="address"
-                      value={formData.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
-                      placeholder="Your address"
-                    />
-                  </div>
+                    </div>
+                  </div>                    <div>
+                      <Label htmlFor="address">Address</Label>
+                      <Textarea
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange('address', e.target.value)}
+                        placeholder="Your full address"
+                        className="min-h-[60px] resize-none"
+                        rows={2}
+                      />
+                    </div>
 
-                  <div className="mt-2">
-                    <h4 className="text-sm font-medium mb-3 flex items-center text-gray-700 dark:text-gray-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-[#0093DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      Emergency Contact Information
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="emergencyContact">Contact Name</Label>
-                        <Input
-                          id="emergencyContact"
-                          value={formData.emergencyContact}
-                          onChange={(e) => handleInputChange('emergencyContact', e.target.value)}
-                          placeholder="Emergency contact person"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="emergencyPhone">Contact Phone</Label>
-                        <Input
-                          id="emergencyPhone"
-                          value={formData.emergencyPhone}
-                          onChange={(e) => handleInputChange('emergencyPhone', e.target.value)}
-                          placeholder="Emergency contact number"
-                        />
-                      </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="emergencyContact">Emergency Contact Name</Label>
+                      <Input
+                        id="emergencyContact"
+                        value={formData.emergencyContact}
+                        onChange={(e) => handleInputChange('emergencyContact', e.target.value)}
+                        placeholder="Emergency contact person"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="emergencyPhone">Emergency Contact Phone</Label>
+                      <Input
+                        id="emergencyPhone"
+                        value={formData.emergencyPhone}
+                        onChange={(e) => handleInputChange('emergencyPhone', e.target.value)}
+                        placeholder="Emergency contact number"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -466,12 +432,13 @@ const Booking = () => {
                     <Users className="h-5 w-5 mr-2 text-[#0093DE]" />
                     Travelers Information
                   </CardTitle>
-                </CardHeader>                <CardContent className="space-y-5">
+                </CardHeader>
+                <CardContent className="space-y-6">
                   {formData.travelers.map((traveler, index) => (
-                    <div key={traveler.id} className="border rounded-lg p-3 space-y-3">
+                    <div key={traveler.id} className="border rounded-lg p-4 space-y-4">
                       <div className="flex items-center justify-between">
                         <h4 className="font-medium">Traveler {index + 1}</h4>
-                        <Badge variant="outline" className="text-xs">Required</Badge>
+                        <Badge variant="outline">Required</Badge>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -522,16 +489,16 @@ const Booking = () => {
                             placeholder="Nationality"
                           />
                         </div>
-                      </div>                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label>
-                            Date of Birth
-                            <span className="text-xs text-gray-500 ml-1">(Optional)</span>
-                          </Label>
+                          <Label>Date of Birth</Label>
                           <Popover>
-                            <PopoverTrigger asChild>                              <Button
+                            <PopoverTrigger asChild>
+                              <Button
                                 variant="outline"
-                                className={`w-full justify-start text-left font-normal h-12 ${
+                                className={`w-full justify-start text-left font-normal ${
                                   !traveler.dateOfBirth ? 'text-muted-foreground' : ''
                                 }`}
                               >
@@ -553,9 +520,10 @@ const Booking = () => {
                         <div>
                           <Label>Passport Expiry Date *</Label>
                           <Popover>
-                            <PopoverTrigger asChild>                              <Button
+                            <PopoverTrigger asChild>
+                              <Button
                                 variant="outline"
-                                className={`w-full justify-start text-left font-normal h-12 ${
+                                className={`w-full justify-start text-left font-normal ${
                                   !traveler.passportExpiry ? 'text-muted-foreground' : ''
                                 } ${errors[`traveler_${index}_passportExpiry`] ? 'border-red-500' : ''}`}
                               >
@@ -634,35 +602,32 @@ const Booking = () => {
                   <CardHeader>
                     <CardTitle>Booking Summary</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">                    {selectedTour && typeof selectedTour === 'object' ? (
+                  <CardContent className="space-y-4">
+                    {selectedTour ? (
                       <>
                         <div>
                           <img
-                            src={selectedTour.image || 'https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?q=80&w=800'}
-                            alt={selectedTour.name || 'Tour'}
+                            src={selectedTour.image}
+                            alt={selectedTour.name}
                             className="w-full h-32 object-cover rounded-lg mb-3"
-                            onError={(e) => {
-                              // Fallback image if the original fails to load
-                              const target = e.target as HTMLImageElement;
-                              target.onerror = null;
-                              target.src = 'https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?q=80&w=800';
-                            }}
                           />
-                          <h3 className="font-semibold text-lg">{selectedTour.name || 'Selected Tour'}</h3>
+                          <h3 className="font-semibold text-lg">{selectedTour.name}</h3>
                           <p className="text-sm text-gray-600 flex items-center mt-1">
                             <MapPin className="h-4 w-4 mr-1" />
-                            {selectedTour.location || 'Vietnam'}
+                            {selectedTour.location}
                           </p>
                           <p className="text-sm text-gray-600 flex items-center mt-1">
                             <Clock className="h-4 w-4 mr-1" />
-                            {selectedTour.duration || 'Multi-day tour'}
+                            {selectedTour.duration}
                           </p>
                         </div>
 
-                        <Separator />                        <div className="space-y-2">
+                        <Separator />
+
+                        <div className="space-y-2">
                           <div className="flex justify-between">
                             <span>Price per person:</span>
-                            <span className="font-medium">${selectedTour?.price || 0}</span>
+                            <span className="font-medium">${selectedTour.price}</span>
                           </div>
                           <div className="flex justify-between">
                             <span>Number of travelers:</span>
@@ -671,62 +636,43 @@ const Booking = () => {
                           {formData.departureDate && (
                             <div className="flex justify-between">
                               <span>Departure:</span>
-                              <span className="font-medium">
-                                {formData.departureDate instanceof Date ? 
-                                  format(formData.departureDate, 'MMM dd, yyyy') : 
-                                  'Select date'}
-                              </span>
+                              <span className="font-medium">{format(formData.departureDate, 'MMM dd, yyyy')}</span>
                             </div>
                           )}
                           {formData.returnDate && (
                             <div className="flex justify-between">
                               <span>Return:</span>
-                              <span className="font-medium">
-                                {formData.returnDate instanceof Date ? 
-                                  format(formData.returnDate, 'MMM dd, yyyy') : 
-                                  'Select date'}
-                              </span>
+                              <span className="font-medium">{format(formData.returnDate, 'MMM dd, yyyy')}</span>
                             </div>
                           )}
                         </div>
 
-                        <Separator />                        <div className="space-y-2">
+                        <Separator />
+
+                        <div className="space-y-2">
                           <div className="flex justify-between text-lg font-semibold">
                             <span>Total Amount:</span>
                             <span className="text-[#0093DE]">
-                              ${((selectedTour?.price || 0) * formData.numberOfTravelers).toLocaleString()}
+                              ${(selectedTour.price * formData.numberOfTravelers).toLocaleString()}
                             </span>
                           </div>
                         </div>
-                      </>                    ) : (
-                      <div className="text-center py-6">
-                        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-4">
-                          <AlertCircle className="h-10 w-10 mx-auto mb-2 text-[#0093DE]" />
-                          <p className="font-medium text-gray-700 dark:text-gray-300">Select a tour to get started</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Your booking summary will appear here</p>
-                        </div>
-                        <div className="space-y-3">
-                          <div className="flex justify-between text-sm">
-                            <span>Price per person:</span>
-                            <span className="font-medium">-</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span>Number of travelers:</span>
-                            <span className="font-medium">{formData.numberOfTravelers}</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span>Total:</span>
-                            <span className="font-medium">-</span>
-                          </div>
-                        </div>
+                      </>
+                    ) : (
+                      <div className="text-center text-gray-500 py-8">
+                        <AlertCircle className="h-12 w-12 mx-auto mb-3 text-gray-400" />
+                        <p>Please select a tour to see pricing details</p>
                       </div>
                     )}
                   </CardContent>
-                </Card>                {/* Submit Button */}
-                <div className="mt-6">                  <Button
+                </Card>
+
+                {/* Submit Button */}
+                <div className="mt-6">
+                  <Button
                     type="submit"
-                    className="w-full bg-[#0093DE] hover:bg-[#0077b3] text-white py-3 h-14 text-lg font-semibold"
-                    disabled={isSubmitting || !formData.tourId || !formData.departureDate}
+                    className="w-full bg-[#0093DE] hover:bg-[#0077b3] text-white py-3 text-lg font-semibold"
+                    disabled={isSubmitting || !selectedTour}
                   >
                     {isSubmitting ? (
                       <>
