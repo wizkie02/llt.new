@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTours, TourOption } from '../contexts/ToursContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { getImageUrl } from '../lib/imageUtils';
 import bg7 from '../assets/images/backgrounds/bg7.jpg';
 
 const PackageTours = () => {
@@ -446,10 +447,9 @@ const PackageTours = () => {
                     className={`rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
                       theme === 'light' ? 'bg-white' : 'bg-gray-800'
                     }`}
-                  >
-                    <div className="relative h-48 overflow-hidden">
+                  >                    <div className="relative h-48 overflow-hidden">
                       <img 
-                        src={tour.image} 
+                        src={getImageUrl(tour.image)} 
                         alt={tour.name}
                         onError={handleImageError}
                         className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
@@ -523,10 +523,9 @@ const PackageTours = () => {
                     className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                       theme === 'light' ? 'bg-white' : 'bg-gray-800'
                     }`}
-                  >
-                    <div className="relative h-48 overflow-hidden md:w-1/3 md:h-auto">
+                  >                    <div className="relative h-48 overflow-hidden md:w-1/3 md:h-auto">
                       <img 
-                        src={tour.image} 
+                        src={getImageUrl(tour.image)} 
                         alt={tour.name}
                         onError={handleImageError}
                         className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"

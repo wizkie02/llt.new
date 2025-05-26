@@ -188,6 +188,8 @@ const Hover3DCard = ({ children, className = "" }: Hover3DCardProps) => {
   );
 };
 
+// Commented out unused PaymentCard component
+/*
 interface PaymentCardProps {
   imageSrc: string;
   name: string;
@@ -214,6 +216,7 @@ const PaymentCard = ({ imageSrc, name, delay = 0 }: PaymentCardProps) => {
     </div>
   );
 };
+*/
 
 const Footer = () => {
   const { theme } = useTheme();
@@ -251,10 +254,30 @@ const Footer = () => {
         setShowSuccessMessage(false);
       }, 3000);
     }, 600);
-  };
+  };  const currentYear = new Date().getFullYear();
 
-  const currentYear = new Date().getFullYear();
+  // Arrays used in the component
+  const destinations = [
+    { name: "Halong Bay", path: "/destination/halong-bay" },
+    { name: "Hoi An Ancient Town", path: "/destination/hoi-an" },
+    { name: "Sapa Rice Terraces", path: "/destination/sapa" },
+    { name: "Mekong Delta", path: "/destination/mekong" },
+    { name: "Hanoi Old Quarter", path: "/destination/hanoi" },
+    { name: "Hue Imperial City", path: "/destination/hue" },
+  ];
 
+  const services = [
+    { name: 'Cultural Tours', path: '/travel-services' },
+    { name: 'Adventure Tours', path: '/team-building' },
+    { name: 'Food & Culinary', path: '/events' },
+    { name: 'Romantic Getaways', path: '/romantic-travel' },
+    { name: 'Wellness Retreats', path: '/medical-travel' },
+    { name: 'Package Tours', path: '/package-tours' }
+  ];
+
+  // TODO: Use these arrays for future payment methods and partners sections
+  // Commented out unused arrays to fix TypeScript errors
+  /*
   const paymentMethods = [
     {
       name: "Visa",
@@ -296,24 +319,7 @@ const Footer = () => {
       img: "https://dtinews.vn/upload/news/old/tintuc/2016/08/13/VN-guide.jpg",
     },
   ];
-
-  const destinations = [
-    { name: "Halong Bay", path: "/destination/halong-bay" },
-    { name: "Hoi An Ancient Town", path: "/destination/hoi-an" },
-    { name: "Sapa Rice Terraces", path: "/destination/sapa" },
-    { name: "Mekong Delta", path: "/destination/mekong" },
-    { name: "Hanoi Old Quarter", path: "/destination/hanoi" },
-    { name: "Hue Imperial City", path: "/destination/hue" },
-  ];
-
-  const services = [
-    { name: 'Cultural Tours', path: '/travel-services' },
-    { name: 'Adventure Tours', path: '/team-building' },
-    { name: 'Food & Culinary', path: '/events' },
-    { name: 'Romantic Getaways', path: '/romantic-travel' },
-    { name: 'Wellness Retreats', path: '/medical-travel' },
-    { name: 'Package Tours', path: '/package-tours' }
-  ];
+  */
 
   return (
     <footer

@@ -10,7 +10,6 @@ interface TypeWriterProps {
 const TypeWriter: React.FC<TypeWriterProps> = ({ 
   text, 
   speed = 40, // Reduced typing speed (higher number = slower typing)
-  delay = 0,
   className = ""
 }) => {
   const [displayedText, setDisplayedText] = useState('');

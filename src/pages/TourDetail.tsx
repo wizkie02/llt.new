@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTours } from '../contexts/ToursContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { getImageUrl } from '../lib/imageUtils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Separator } from '../components/ui/separator';
@@ -21,11 +21,10 @@ const TourDetail = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('overview');
   const [showFullItinerary, setShowFullItinerary] = useState(false);
   const [date, setDate] = useState<Date>();
   const [guests, setGuests] = useState(2);
-  const [isBooking, setIsBooking] = useState(false);
+  const [isBooking] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
   
   const tour = getTourById(id || '');
@@ -55,7 +54,7 @@ const TourDetail = () => {
   
   // Prepare itinerary data from tour or use sample data
   const itinerary = tour?.itinerary && tour.itinerary.length > 0 
-    ? tour.itinerary.map((item, index) => ({
+    ? tour.itinerary.map((item) => ({
         day: parseInt(item.day),
         title: `Day ${item.day}`,
         description: item.activities,
@@ -172,7 +171,7 @@ const TourDetail = () => {
       {/* Hero Section */}
       <div 
         className="w-full h-[60vh] bg-cover bg-center relative mb-8"
-        style={{ backgroundImage: `url(${tour.image})` }}
+        style={{ backgroundImage: `url(${getImageUrl(tour.image)})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70 flex items-end">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">

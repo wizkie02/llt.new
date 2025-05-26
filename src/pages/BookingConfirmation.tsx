@@ -13,7 +13,7 @@ const BookingConfirmation = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   
   // Get booking details from location state
-  const { bookingData, tour, bookingId } = location.state || {};
+  const { bookingData, tour } = location.state || {};
   
   const bookingDetails = {
     tourId: tour?.id || 'unknown',

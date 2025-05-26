@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../componen
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Checkbox } from '../../components/ui/checkbox';
 import { Eye, Edit, Trash2, PlusCircle, Search, Filter, ArrowUpDown, Star, StarOff, CheckCircle2, XCircle } from 'lucide-react';
+import { getImageUrl } from '../../lib/imageUtils';
 
 const AdminTourManagement = () => {
   const { tours, addTour, updateTour, removeTour } = useTours();
@@ -332,12 +333,12 @@ const AdminTourManagement = () => {
                       placeholder="Search tours..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 w-full sm:w-64 border-gray-300 focus:border-[#0093DE] focus:ring-[#0093DE] rounded-xl"
+                      className="pl-10 h-12 w-full sm:w-52 border-gray-300 focus:border-[#0093DE] focus:ring-[#0093DE] rounded-xl"
                     />
                   </div>
                   
                   <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                    <SelectTrigger className="w-full sm:w-[180px] border-gray-300 focus:border-[#0093DE] focus:ring-[#0093DE] rounded-xl">
+                    <SelectTrigger className="h-12 w-full sm:w-[150px] border-gray-300 focus:border-[#0093DE] focus:ring-[#0093DE] rounded-xl">
                       <Filter className="mr-2 h-4 w-4" />
                       <SelectValue placeholder="Filter by category" />
                     </SelectTrigger>
@@ -365,11 +366,11 @@ const AdminTourManagement = () => {
               </div>
             </CardHeader>
             
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto rounded-t-xl">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-gradient-to-r from-gray-50 to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 border-b">
-                    <TableHead className="w-[40px] pl-6">
+                  <TableRow className="bg-gradient-to-r from-gray-50 to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 border-b first:rounded-tl-xl last:rounded-tr-xl">
+                    <TableHead className="w-[40px] pl-6 first:rounded-tl-xl">
                       <Checkbox 
                         checked={selectedTours.length === filteredTours.length && filteredTours.length > 0}
                         onCheckedChange={toggleAllSelection}
@@ -411,7 +412,7 @@ const AdminTourManagement = () => {
                         )}
                       </div>
                     </TableHead>
-                    <TableHead className="text-right font-semibold pr-6">Actions</TableHead>
+                    <TableHead className="text-right font-semibold pr-6 last:rounded-tr-xl">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -441,7 +442,7 @@ const AdminTourManagement = () => {
                             <div className="flex-shrink-0 h-14 w-14 rounded-xl overflow-hidden shadow-md border-2 border-white dark:border-gray-700">
                               <img 
                                 className="h-14 w-14 object-cover transition-transform hover:scale-110 duration-300" 
-                                src={tour.image} 
+                                src={getImageUrl(tour.image)} 
                                 alt={tour.name}
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).src = 'https://via.placeholder.com/100?text=No+Image';

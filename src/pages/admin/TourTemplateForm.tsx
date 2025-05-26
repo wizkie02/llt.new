@@ -9,6 +9,7 @@ import { Checkbox } from '../../components/ui/checkbox';
 import { Card } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
+import { ImageUpload } from '../../components/ui/ImageUpload';
 import { Plus, Trash2 } from 'lucide-react';
 
 interface TourTemplateFormProps {
@@ -227,20 +228,12 @@ const TourTemplateForm = ({
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="image" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Image URL
-              </Label>
-              <Input
-                type="url"
-                id="image"
-                name="image"
-                value={formData.image}
-                onChange={handleInputChange}
-                className="w-full"
-                placeholder="https://example.com/image.jpg"
-              />
-            </div>
+            <ImageUpload
+              value={formData.image}
+              onChange={(value) => setFormData(prev => ({ ...prev, image: value }))}
+              label="Tour Image"
+              className="w-full"
+            />
 
             <div className="space-y-2">
               <Label htmlFor="description" className="text-sm font-semibold text-gray-700 dark:text-gray-300">

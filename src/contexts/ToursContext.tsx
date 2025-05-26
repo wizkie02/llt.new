@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { cleanupLocalImage } from '../lib/imageUtils';
 
 // Define types for tour data
 export interface TourOption {
@@ -335,9 +336,12 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
       )
     );
   };
-
   // Remove a tour
   const removeTour = (id: string) => {
+    const tourToRemove = tours.find(tour => tour.id === id);
+    if (tourToRemove) {
+      cleanupLocalImage(tourToRemove.image);
+    }
     setTours(tours.filter((tour) => tour.id !== id));
   };
 
