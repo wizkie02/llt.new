@@ -7,7 +7,7 @@ import Counter from '../components/ui/Counter';
 const HomePage = () => {
   const { theme } = useTheme();
   const [visibleDestination, setVisibleDestination] = useState<number | null>(null);
-  
+
   const testimonials = [
     {
       id: 1,
@@ -176,38 +176,38 @@ const HomePage = () => {
     <div className={`${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
-        <img 
-          src={wallpaper} 
+        <img
+          src={wallpaper}
           alt="Vietnam scenic landscape"
           className="absolute inset-0 w-full h-full object-cover object-center animate-slow-zoom"
         />
         <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-black/60 to-black/30 z-10"></div>
-        
+
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
-          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 animate-fade-in-up shadow-lg transform transition-all duration-300 hover:scale-105 hover:bg-white/30" style={{animationDelay: '0.3s'}}>
+          <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 animate-fade-in-up shadow-lg transform transition-all duration-300 hover:scale-105 hover:bg-white/30" style={{ animationDelay: '0.3s' }}>
             Welcome to Vietnam
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl animate-fade-in-up" style={{animationDelay: '0.5s'}}>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
             Experience <span className="text-[#0093DE]">Vietnam's</span> Hidden <span className="text-[#0093DE]">Treasures</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl opacity-90 animate-fade-in-up" style={{animationDelay: '0.7s'}}>
+          <p className="text-xl md:text-2xl mb-10 max-w-3xl opacity-90 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
             Dive into authentic experiences from misty mountain villages to ancient coastal towns
           </p>
-          <div className="flex flex-col sm:flex-row gap-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
-            <Link 
-              to="/contact" 
+          <div className="flex flex-col sm:flex-row gap-5 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+            <Link
+              to="/contact"
               className="bg-[#0093DE] hover:bg-[#007ab8] text-white py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
             >
               Plan My Journey
             </Link>
-            <Link 
-              to="/package-tours" 
+            <Link
+              to="/package-tours"
               className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-xl border border-white/30 transition-all duration-300 hover:border-white/80 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
             >
               Explore Vietnam Tours
             </Link>
           </div>
-          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 md:gap-12 bg-black/20 backdrop-blur-sm py-4 px-8 rounded-xl animate-fade-in-up shadow-xl transition-all duration-500 hover:bg-black/30" style={{animationDelay: '1.1s'}}>
+          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 md:gap-12 bg-black/20 backdrop-blur-sm py-4 px-8 rounded-xl animate-fade-in-up shadow-xl transition-all duration-500 hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-[#0093DE]">
                 <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
@@ -228,12 +228,12 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-8 w-8 text-white animate-bounce cursor-pointer hover:text-[#0093DE] transition-colors duration-300" 
-            viewBox="0 0 20 20" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 w-8 text-white animate-bounce cursor-pointer hover:text-[#0093DE] transition-colors duration-300"
+            viewBox="0 0 20 20"
             fill="currentColor"
             onClick={() => {
               document.getElementById('popular-destinations')?.scrollIntoView({ behavior: 'smooth' });
@@ -243,7 +243,7 @@ const HomePage = () => {
           </svg>
         </div>
       </section>
-      
+
       {/* About Us Area start */}
       <section className={`about-us-area py-20 rel z-1 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
         <div className="container mx-auto px-4 md:px-12 lg:px-24 max-w-7xl">
@@ -261,7 +261,7 @@ const HomePage = () => {
                   </h2>
                 </div>
                 <p className={`text-lg ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>
-                  We go above and beyond to create authentic Vietnamese experiences, 
+                  We go above and beyond to create authentic Vietnamese experiences,
                   revealing hidden gems and must-see attractions with local expertise and passion.
                 </p>
                 <div className="divider my-10">
@@ -298,8 +298,8 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-                <Link 
-                  to="/package-tours" 
+                <Link
+                  to="/package-tours"
                   className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white mt-6 py-3 px-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                   Explore Vietnam
@@ -319,25 +319,25 @@ const HomePage = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-4">
                     <div className="rounded-2xl overflow-hidden shadow-lg h-48 md:h-64">
-                      <img 
-                        src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                        alt="Vietnam landscape" 
+                      <img
+                        src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Vietnam landscape"
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="rounded-2xl overflow-hidden shadow-lg h-48 md:h-64">
-                      <img 
-                        src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                        alt="Vietnamese food" 
+                      <img
+                        src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Vietnamese food"
                         className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
                   <div className="mt-8">
                     <div className="rounded-2xl overflow-hidden shadow-lg h-72 md:h-[420px]">
-                      <img 
-                        src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                        alt="Halong Bay" 
+                      <img
+                        src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Halong Bay"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -351,7 +351,7 @@ const HomePage = () => {
         </div>
       </section>
       {/* About Us Area end */}
-      
+
       {/* Services Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-[#F7F9FC]' : 'bg-gray-900'}`}>
         <div className="container mx-auto px-8 md:px-12">
@@ -364,17 +364,16 @@ const HomePage = () => {
               Discover our range of thoughtfully designed travel experiences that showcase the best of Vietnam
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {services.map((service) => (
-              <Link 
+              <Link
                 key={service.id}
                 to={service.link}
-                className={`p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl h-full flex flex-col ${
-                  theme === 'light' 
-                    ? 'bg-white hover:shadow-blue-100' 
+                className={`p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl h-full flex flex-col ${theme === 'light'
+                    ? 'bg-white hover:shadow-blue-100'
                     : 'bg-gray-800 hover:shadow-blue-900/20'
-                }`}
+                  }`}
               >
                 <div className="text-[#0093DE] mb-4 transform transition-all duration-300 group-hover:scale-110">
                   {service.icon}
@@ -394,61 +393,67 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      
-      {/* Popular Destinations */}
-      <section id="popular-destinations" className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
-        <div className="container mx-auto px-4">
+
+      {/* Featured Destinations */}
+      <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
+        <div className="container mx-auto px-8 md:px-12">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-              Popular Destinations
+            <span className="inline-block px-3 py-1 rounded-md bg-teal-100 text-teal-600 text-sm font-medium mb-4">
+              Top Destinations
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Vietnam's Most Breathtaking Places</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Vietnam's Treasured Places</h2>
             <p className="text-lg max-w-2xl mx-auto opacity-80">
-              From emerald bays to ancient towns, discover the diverse landscapes and cultural treasures of Vietnam
+              Discover breathtaking landscapes, ancient culture, and unforgettable adventures
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {popularDestinations.map((destination) => (
-              <div 
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {popularDestinations.slice(0, 8).map((destination) => (
+              <div
                 key={destination.id}
-                className="group relative rounded-2xl overflow-hidden shadow-lg h-[320px] cursor-pointer"
+                className="relative overflow-hidden rounded-2xl h-80 group destination-card shadow-lg transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
                 onMouseEnter={() => setVisibleDestination(destination.id)}
                 onMouseLeave={() => setVisibleDestination(null)}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
-                <img 
-                  src={destination.fallbackImage} 
+                <img
+                  src={destination.image}
                   alt={destination.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   onError={(e) => handleImageError(e, destination.fallbackImage)}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 transform transition-transform duration-500">
-                  <h3 className="text-xl font-bold text-white mb-2">{destination.name}</h3>
-                  <p className={`text-white/80 text-sm transition-all duration-500 ${
-                    visibleDestination === destination.id ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0'
-                  } overflow-hidden`}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-xl font-bold mb-2 text-white">{destination.name}</h3>
+                  <p className={`text-sm text-white/80 transition-all duration-500 ease-in-out transform ${visibleDestination === destination.id ? 'opacity-100 max-h-20 translate-y-0' : 'opacity-0 max-h-0 translate-y-4'}`}>
                     {destination.description}
                   </p>
+                  <div className={`mt-4 transition-all duration-500 ease-in-out transform ${visibleDestination === destination.id ? 'opacity-100 max-h-10 translate-y-0' : 'opacity-0 max-h-0 translate-y-4'}`}>                    <Link
+                    to="/package-tours"
+                    className="inline-flex items-center text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    Explore tours
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          
-          <div className="text-center mt-12">
-            <Link 
-              to="/package-tours" 
-              className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white py-3 px-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              View All Destinations
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </Link>
+
+          <div className="text-center mt-10">            <Link
+            to="/package-tours"
+            className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+          >
+            View All Vietnam Destinations
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </Link>
           </div>
         </div>
       </section>
-      
+
       {/* Testimonials Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-[#F7F9FC]' : 'bg-gray-900'}`}>
         <div className="container mx-auto px-4">
@@ -461,18 +466,17 @@ const HomePage = () => {
               Authentic experiences shared by travelers who explored Vietnam with us
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {testimonials.map((testimonial) => (
-              <div 
+              <div
                 key={testimonial.id}
-                className={`rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${
-                  theme === 'light' ? 'bg-white' : 'bg-gray-800'
-                }`}
+                className={`rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'
+                  }`}
               >
                 <div className="flex items-center mb-4">
-                  <img 
-                    src={testimonial.image} 
+                  <img
+                    src={testimonial.image}
                     alt={testimonial.name}
                     className="w-12 h-12 rounded-full object-cover mr-4"
                   />
@@ -483,15 +487,15 @@ const HomePage = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="mb-4">
                   <div className="flex items-center mb-1">
                     {[...Array(5)].map((_, i) => (
-                      <svg 
-                        key={i} 
-                        xmlns="http://www.w3.org/2000/svg" 
+                      <svg
+                        key={i}
+                        xmlns="http://www.w3.org/2000/svg"
                         className={`h-5 w-5 ${i < testimonial.rating ? 'text-[#FFCB3C]' : 'text-gray-300'}`}
-                        viewBox="0 0 20 20" 
+                        viewBox="0 0 20 20"
                         fill="currentColor"
                       >
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -500,17 +504,17 @@ const HomePage = () => {
                     <span className="ml-2 text-sm font-medium text-[#E4784D]">{testimonial.experience}</span>
                   </div>
                 </div>
-                
+
                 <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>
                   "{testimonial.text}"
                 </p>
               </div>
             ))}
           </div>
-          
+
           <div className="text-center mt-12">
-            <Link 
-              to="/about" 
+            <Link
+              to="/about"
               className="inline-flex items-center bg-transparent border border-[#0093DE] text-[#0093DE] hover:bg-[#0093DE]/10 py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
             >
               Read More Reviews
