@@ -277,7 +277,7 @@ const HomePage = () => {
       }`}
     >
       {/* Hero Section */}
-      <section className="relative w-full h-screen overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden">
         <img
           src={wallpaper}
           alt="Vietnam scenic landscape"
