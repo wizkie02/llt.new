@@ -181,7 +181,7 @@ const AdminTourManagement = () => {
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 pt-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-8">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 max-w-6xl py-12">
         {/* Enhanced Header Section */}
         <div className="relative bg-gradient-to-r from-[#0093DE] to-[#0077b3] rounded-2xl p-8 mb-8 overflow-hidden shadow-xl">
           <div className="absolute inset-0 bg-black/5"></div>
