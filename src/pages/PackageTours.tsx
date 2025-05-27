@@ -1023,7 +1023,7 @@ const PackageTours = () => {
                     disabled={currentPage === 1}
                     className={`flex items-center justify-center h-10 w-10 rounded-lg ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
-                    } shadow-md shadow-gray-500 disabled:opacity-50 disabled:cursor-not-allowed`}
+                    } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -1045,7 +1045,7 @@ const PackageTours = () => {
                     <button
                       key={pageNumber}
                       onClick={() => handlePageChange(pageNumber)}
-                      className={`flex items-center justify-center h-10 w-10 rounded-lg shadow-md shadow-gray-500 ${
+                      className={`flex items-center justify-center h-10 w-10 rounded-lg shadow-md shadow-gray-400 ${
                         currentPage === pageNumber
                           ? "bg-[#0093DE] text-white"
                           : theme === "light"
@@ -1061,7 +1061,7 @@ const PackageTours = () => {
                     disabled={currentPage === totalPages}
                     className={`flex items-center justify-center h-10 w-10 rounded-lg ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
-                    } shadow-md shadow-gray-500 disabled:opacity-50 disabled:cursor-not-allowed`}
+                    } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
