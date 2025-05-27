@@ -1,23 +1,22 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
-import { MapPin, Search, Plus, Minus, Layers, Map as MapIcon, List, Filter, Star, Heart, Share2, Info } from 'lucide-react';
+import { MapPin, Search, Plus, Minus, Layers, Map as MapIcon, List, Star, Heart, Info } from 'lucide-react';
 import { useTours } from '../contexts/ToursContext';
 
 const InteractiveMap = () => {
   const { theme } = useTheme();
-  const { tours } = useTours();
+  const {  } = useTours();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [mapView, setMapView] = useState('map'); // 'map' or 'list'
-  const [selectedTour, setSelectedTour] = useState(null);
+  const [selectedTour, setSelectedTour] = useState<string | null>(null);
   
   // Sample regions
   const regions = [

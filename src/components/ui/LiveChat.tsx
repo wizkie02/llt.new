@@ -1,139 +1,119 @@
-import { useState } from 'react';
-import { useTheme } from '../../contexts/ThemeContext';
+import { useEffect } from 'react';
 
-const LiveChat = () => {
-  const { theme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState([
-    {
-      sender: 'agent',
-      message: 'Xin chào! Welcome to Vietnam Adventure Tours. How can we help you discover the beauty of Vietnam today?',
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-  ]);
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (message.trim() === '') return;
-    
-    // Add user message to chat
-    const userMessage = {
-      sender: 'user',
-      message: message,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-    
-    setChatHistory([...chatHistory, userMessage]);
-    setMessage('');
-    
-    // Simulate agent response after a short delay
-    setTimeout(() => {
-      const agentMessage = {
-        sender: 'agent',
-        message: 'Thank you for your message! One of our travel experts will get back to you shortly. In the meantime, feel free to explore our tour packages or ask any other questions.',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+// Declare the custom chat-bot element to avoid TypeScript errors
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'chat-bot': {
+        platform_id: string;
+        user_id: string;
+        chatbot_id: string;
+        children?: React.ReactNode;
       };
-      
-      setChatHistory(prevHistory => [...prevHistory, agentMessage]);
-    }, 1000);
-  };
+    }
+  }
+}
 
-  return (
+const LiveChat = () => {  useEffect(() => {
+    // Load the ChatSimple script
+    const script = document.createElement('script');
+    script.src = 'https://cdn.chatsimple.ai/chat-bot-loader.js';
+    script.defer = true;
+    document.body.appendChild(script);
+
+    // Function to force positioning
+    const enforcePosition = () => {
+      const chatElements = document.querySelectorAll('chat-bot, [id*="chatsimple"], [class*="chatsimple"], [data-chat-simple]');
+      chatElements.forEach((element) => {
+        if (element instanceof HTMLElement) {
+          element.style.position = 'fixed';
+          element.style.bottom = '24px';
+          element.style.right = '100px';
+          element.style.zIndex = '9999';
+          element.style.transform = 'none';
+          element.style.margin = '0';
+          element.style.left = 'auto';
+          element.style.top = 'auto';
+        }
+      });
+    };
+
+    // Set up MutationObserver to watch for ChatSimple elements
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const element = node as Element;
+              if (element.tagName === 'CHAT-BOT' || 
+                  element.id?.includes('chatsimple') ||
+                  element.className?.includes('chatsimple')) {
+                setTimeout(enforcePosition, 100);
+              }
+            }
+          });
+        }
+      });
+    });
+
+    // Start observing
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    // Also enforce position periodically for the first few seconds
+    const intervals = [500, 1000, 2000, 3000, 5000].map(delay => 
+      setTimeout(enforcePosition, delay)
+    );
+
+    return () => {
+      // Cleanup
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+      observer.disconnect();
+      intervals.forEach(clearTimeout);
+    };
+  }, []);return (
     <>
-      {/* Chat Button */}
-      <button 
-        onClick={toggleChat}
-        className="fixed bottom-6 right-20 z-50 w-11 h-11 rounded-full bg-[var(--primary-color)] text-white shadow-lg flex items-center justify-center hover:bg-[#0077b3] transition-colors duration-300"
-        aria-label="Live Chat"
-      >
-        {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
-        )}
-      </button>
-      
-      {/* Chat Window */}
-      {isOpen && (
-        <div 
-          className={`fixed bottom-24 right-6 z-50 w-80 md:w-96 rounded-lg shadow-xl overflow-hidden ${
-            theme === 'light' ? 'bg-white' : 'bg-gray-800'
-          }`}
+      <style>{`
+        chat-bot, 
+        chat-bot *,
+        [id*="chatsimple"],
+        [class*="chatsimple"],
+        [class*="chat-simple"] {
+          position: fixed !important;
+          bottom: 24px !important;
+          right: 100px !important;
+          z-index: 9999 !important;
+          transform: none !important;
+          margin: 0 !important;
+          left: auto !important;
+          top: auto !important;
+        }
+        
+        /* More specific targeting for ChatSimple elements */
+        div[data-chat-simple],
+        div[id*="chat"],
+        iframe[src*="chatsimple"] {
+          position: fixed !important;
+          bottom: 24px !important;
+          right: 100px !important;
+          z-index: 9999 !important;
+        }
+      `}</style>
+      <div className="fixed bottom-6 right-24 z-[9999]" style={{position: 'fixed', bottom: '24px', right: '100px', zIndex: 9999}}>
+        <chat-bot 
+          platform_id="53c92204-1f5b-4e3b-ae80-40d592380c26" 
+          user_id="346f8b04-a535-48cd-a7a1-ee058996478d" 
+          chatbot_id="563c7ab8-4f75-4a72-9b20-f5c7a0f263b9"
         >
-          {/* Chat Header */}
-          <div className="bg-[var(--primary-color)] text-white p-4">
-            <div className="flex items-center">
-              <div className="flex items-center justify-center w-10 h-10 mr-3 rounded-full bg-white/20">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <div>
-                <h4 className="font-bold text-white">Leo Loves Travel Support</h4>
-                <p className="text-sm opacity-80">Typically replies within minutes</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Chat Messages */}
-          <div className="p-4 overflow-y-auto h-80">
-            <div className="space-y-4">
-              {chatHistory.map((chat, index) => (
-                <div 
-                  key={index}
-                  className={`flex ${chat.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div 
-                    className={`max-w-[80%] rounded-lg p-3 ${
-                      chat.sender === 'user' 
-                        ? 'bg-[var(--primary-color)] text-white' 
-                        : theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'
-                    }`}
-                  >
-                    <p className="text-sm">{chat.message}</p>
-                    <p className={`text-xs mt-1 ${chat.sender === 'user' ? 'text-white/70' : 'opacity-60'}`}>{chat.time}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Chat Input */}
-          <form onSubmit={handleSendMessage} className="p-4 border-t border-gray-200">
-            <div className="flex">
-              <input 
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className={`flex-grow p-2 rounded-l-lg border ${
-                  theme === 'light' 
-                    ? 'border-gray-300 focus:border-[var(--primary-color)]' 
-                    : 'border-gray-600 bg-gray-700 focus:border-[var(--primary-color)]'
-                } focus:outline-none`}
-                placeholder="Type your message..."
-              />
-              <button 
-                type="submit"
-                className="bg-[var(--primary-color)] text-white p-2 rounded-r-lg hover:bg-[#0077b3] transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+          <a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">
+            chatsimple
+          </a>
+        </chat-bot>
+      </div>
     </>
   );
 };

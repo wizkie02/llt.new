@@ -16,7 +16,6 @@ const PackageTours = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 9; // Or any number you prefer
 
    // Function to determine items per page based on window width
    const getItemsPerPageForWidth = (width: number): number => {

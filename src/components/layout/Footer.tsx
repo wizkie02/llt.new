@@ -188,33 +188,6 @@ const Hover3DCard = ({ children, className = "" }: Hover3DCardProps) => {
   );
 };
 
-interface PaymentCardProps {
-  imageSrc: string;
-  name: string;
-  delay?: number;
-}
-
-const PaymentCard = ({ imageSrc, name, delay = 0 }: PaymentCardProps) => {
-  return (
-    <div
-      className="transition-transform duration-300 hover:scale-110 group"
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <div className="relative overflow-hidden transition-all duration-300 bg-white rounded-md shadow-sm group-hover:shadow-md">
-        <div className="absolute inset-0 bg-[#0093DE]/0 group-hover:bg-[#0093DE]/5 transition-colors duration-300"></div>
-        <img
-          src={imageSrc}
-          alt={name}
-          className="relative z-10 h-8 px-3 py-1"
-        />
-      </div>
-      <div className="mt-1 text-xs text-center text-gray-500 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-        {name}
-      </div>
-    </div>
-  );
-};
-
 const Footer = () => {
   const { theme } = useTheme();
   const [email, setEmail] = useState("");
@@ -254,48 +227,6 @@ const Footer = () => {
   };
 
   const currentYear = new Date().getFullYear();
-
-  const paymentMethods = [
-    {
-      name: "Visa",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png",
-    },
-    {
-      name: "MasterCard",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png",
-    },
-    {
-      name: "JCB",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/JCB_logo.svg/2560px-JCB_logo.svg.png",
-    },
-    {
-      name: "MoMo",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MoMo_Logo.png/800px-MoMo_Logo.png",
-    },
-    {
-      name: "VNPay",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png",
-    },
-  ];
-
-  const partners = [
-    {
-      name: "Vietnam Airlines",
-      img: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Vietnam_Airlines_logo.svg/1200px-Vietnam_Airlines_logo.svg.png",
-    },
-    {
-      name: "Bamboo Airways",
-      img: "https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Bamboo_Airways_logo.svg/1200px-Bamboo_Airways_logo.svg.png",
-    },
-    {
-      name: "VietJet Air",
-      img: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Vietjet_Air_logo.svg/1200px-Vietjet_Air_logo.svg.png",
-    },
-    {
-      name: "Vietnam Tourist",
-      img: "https://dtinews.vn/upload/news/old/tintuc/2016/08/13/VN-guide.jpg",
-    },
-  ];
 
   const destinations = [
     { name: "Halong Bay", path: "/destination/halong-bay" },

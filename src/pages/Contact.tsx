@@ -1,6 +1,5 @@
 import { useTheme } from '../contexts/ThemeContext';
 import ScrollReveal from '../components/ui/ScrollReveal';
-import { FadeUp, FadeLeft, FadeRight } from '../components/ui/RevealPresets';
 import bg2 from '../assets/images/backgrounds/bg4.jpg';
 
 const Contact = () => {

@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
-import { User, Settings, Heart, Clock, MapPin, CreditCard, LogOut, Bell, Edit, ChevronRight, Star } from 'lucide-react';
+import { User, Settings, Heart, Clock, MapPin, CreditCard, LogOut, Edit, ChevronRight } from 'lucide-react';
 
 const UserProfile = () => {
   const { theme } = useTheme();

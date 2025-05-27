@@ -11,7 +11,7 @@ import { Separator } from '../components/ui/separator';
 import { Calendar } from '../components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
 import { Badge } from '../components/ui/badge';
-import { CalendarIcon, Users, MapPin, Clock, Plus, Trash2, Check, AlertCircle } from 'lucide-react';
+import { CalendarIcon, Users, MapPin, Clock, Check, AlertCircle } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface Traveler {

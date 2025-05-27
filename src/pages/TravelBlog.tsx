@@ -4,10 +4,8 @@ import { useTheme } from '../contexts/ThemeContext';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Badge } from '../components/ui/badge';
-import { Separator } from '../components/ui/separator';
-import { Calendar, MapPin, Clock, ArrowRight, ChevronRight, Heart, Share2, User, Star } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, ChevronRight, User } from 'lucide-react';
 
 const TravelBlog = () => {
   const { theme } = useTheme();
