@@ -76,10 +76,8 @@ const ValueCard: React.FC<ValueCardProps> = ({
         }}
       >
         {title}
-      </h3>
-      
-      <p 
-        className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}
+      </h3>      <p 
+        className={`text-center ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}
         style={{
           transform: showDescription ? 'translateY(0)' : 'translateY(20px)',
           opacity: showDescription ? 1 : 0,

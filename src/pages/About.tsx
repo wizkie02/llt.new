@@ -128,7 +128,7 @@ const About = () => {
           </ScrollReveal>
           
           <ScrollReveal delay={600} direction="up">
-            <p className="text-xl max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto text-center">
               Discover how our passion for Vietnam's beauty and culture inspired us to create unforgettable travel experiences
             </p>
           </ScrollReveal>
@@ -147,10 +147,10 @@ const About = () => {
                     <div className="h-1 w-24 bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] rounded-full"></div>
                   </div>
                   <div className="space-y-4">
-                    <p className="text-lg leading-relaxed">
+                    <p className="text-lg leading-relaxed text-center">
                       Founded in 2025, our journey began with a simple vision: to share the authentic beauty and soul of Vietnam with travelers from around the world. What started as a small operation in Hanoi has grown into a full-service travel company specializing in genuine Vietnamese experiences.
                     </p>
-                    <p className="text-lg leading-relaxed">
+                    <p className="text-lg leading-relaxed text-center">
                       Our founder, Du Hien, was born in the northern mountains of Vietnam and raised in Hanoi. After years working for international travel companies, she noticed that many travelers only experienced the surface of Vietnam. She dreamed of creating journeys that would connect visitors with the country's true essence.
                     </p>
                   </div>
@@ -215,7 +215,7 @@ const About = () => {
                 "Our Vietnam Values"
               )}
             </h2>
-            <p className="text-lg opacity-80 max-w-2xl mx-auto">
+            <p className="text-lg opacity-80 max-w-2xl mx-auto text-center">
               "Vietnamese Heart, Global Vision" — We blend authentic local experiences with international service excellence
             </p>
           </div>
@@ -246,7 +246,7 @@ const About = () => {
                 Meet Our Team
               </span>
               <h2 className="text-3xl font-bold mb-4">The Vietnam Experts</h2>
-              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+              <p className="text-lg opacity-80 max-w-2xl mx-auto text-center">
                 Our passionate team of local Vietnamese travel specialists brings authentic insights and exceptional service to every journey
               </p>
             </div>
@@ -274,7 +274,7 @@ const About = () => {
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                     <p className="text-[#0093DE] font-medium text-sm mb-3">{member.role}</p>
-                    <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{member.bio}</p>
+                    <p className={`text-sm text-center ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{member.bio}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -350,7 +350,7 @@ const About = () => {
                       <TypeWriter 
                         text='"Our team is united by a deep love for Vietnam and a commitment to sharing its wonders with the world. We believe that travel should transform, connect, and inspire."' 
                         speed={50} 
-                        className="text-xl md:text-2xl italic"
+                        className="text-xl md:text-2xl italic text-center"
                       />
                     ) : (
                       <span className="text-xl md:text-2xl italic opacity-0">
