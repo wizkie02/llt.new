@@ -49,7 +49,7 @@ const LiveChat = () => {
       {/* Chat Button */}
       <button 
         onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-[var(--primary-color)] text-white shadow-lg flex items-center justify-center hover:bg-[#0077b3] transition-colors duration-300"
+        className="fixed bottom-6 right-20 z-50 w-11 h-11 rounded-full bg-[var(--primary-color)] text-white shadow-lg flex items-center justify-center hover:bg-[#0077b3] transition-colors duration-300"
         aria-label="Live Chat"
       >
         {isOpen ? (
