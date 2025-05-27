@@ -694,7 +694,7 @@ const Footer = () => {
       {/* Scroll to top button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`fixed bottom-6 right-6 p-3 rounded-full bg-[#0093DE] text-white shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl z-50 ${
+        className={`fixed bottom-24 right-4 p-3.5 rounded-full bg-[#0093DE] text-white shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl z-50 ${
           scrollVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none"
@@ -703,7 +703,7 @@ const Footer = () => {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-5 h-5"
+          className="w-8 h-8"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
