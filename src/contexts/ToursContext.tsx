@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { cleanupLocalImage } from '../lib/imageUtils';
+import { cleanupLocalImage, migrateToAssetsImages } from '../lib/imageUtils';
 
 // Define types for tour data
 export interface TourOption {
@@ -43,7 +43,7 @@ const initialTours: TourOption[] = [
     price: 299,
     duration: '3 days, 2 nights',
     location: 'Halong Bay',
-    image: 'https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?q=80&w=800',
+    image: 'destination:halong-bay',
     featured: true,
     category: 'luxury',
     rating: 4.9,
@@ -307,11 +307,15 @@ const initialTours: TourOption[] = [
   }
 ];
 
-export const ToursProvider = ({ children }: { children: ReactNode }) => {
-  // Initialize state with tours from localStorage or default to initialTours
+export const ToursProvider = ({ children }: { children: ReactNode }) => {  // Initialize state with tours from localStorage or default to initialTours
   const [tours, setTours] = useState<TourOption[]>(() => {
     const savedTours = localStorage.getItem('tours');
-    return savedTours ? JSON.parse(savedTours) : initialTours;
+    // If we have saved tours, migrate them to use assets when possible
+    if (savedTours) {
+      const parsedTours = JSON.parse(savedTours);
+      return migrateToAssetsImages(parsedTours);
+    }
+    return initialTours;
   });
 
   // Save tours to localStorage whenever they change
