@@ -53,11 +53,11 @@ const LiveChat = () => {
         aria-label="Live Chat"
       >
         {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         )}
@@ -73,20 +73,20 @@ const LiveChat = () => {
           {/* Chat Header */}
           <div className="bg-[var(--primary-color)] text-white p-4">
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex items-center justify-center w-10 h-10 mr-3 rounded-full bg-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
               <div>
-                <h3 className="font-bold">Leo Loves Travel Support</h3>
+                <h3 className="font-bold text-white">Leo Loves Travel Support</h3>
                 <p className="text-sm opacity-80">Typically replies within minutes</p>
               </div>
             </div>
           </div>
           
           {/* Chat Messages */}
-          <div className="h-80 overflow-y-auto p-4">
+          <div className="p-4 overflow-y-auto h-80">
             <div className="space-y-4">
               {chatHistory.map((chat, index) => (
                 <div 
@@ -109,7 +109,7 @@ const LiveChat = () => {
           </div>
           
           {/* Chat Input */}
-          <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-4">
+          <form onSubmit={handleSendMessage} className="p-4 border-t border-gray-200">
             <div className="flex">
               <input 
                 type="text"
@@ -126,7 +126,7 @@ const LiveChat = () => {
                 type="submit"
                 className="bg-[var(--primary-color)] text-white p-2 rounded-r-lg hover:bg-[#0077b3] transition-colors"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
               </button>
