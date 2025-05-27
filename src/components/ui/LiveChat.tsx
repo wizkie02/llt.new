@@ -79,7 +79,7 @@ const LiveChat = () => {
                 </svg>
               </div>
               <div>
-                <h3 className="font-bold text-white">Leo Loves Travel Support</h3>
+                <h4 className="font-bold text-white">Leo Loves Travel Support</h4>
                 <p className="text-sm opacity-80">Typically replies within minutes</p>
               </div>
             </div>
