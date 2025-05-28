@@ -403,7 +403,7 @@ const HomePage = () => {
         }`}
       >
         <div className="container px-4 mx-auto md:px-12 lg:px-24 max-w-7xl">
-          <div className="flex flex-wrap items-center lg:flex-nowrap">
+          <div className="flex flex-wrap items-center justify-center lg:flex-nowrap">
             <div className="w-full mb-12 lg:w-5/12 lg:mb-0">
               <div
                 className="about-us-content"
