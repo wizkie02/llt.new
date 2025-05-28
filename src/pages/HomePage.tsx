@@ -208,16 +208,16 @@ const HomePage = () => {
       name: "Sapa Rice Terraces",
       description:
         "Trek among cascading emerald-green rice paddies carved into mountainsides by ethnic minority villages",
-      image: "/src/assets/images/destinations/sapa.jpg",
+      image: "https://images2.thanhnien.vn/528068263637045248/2023/8/4/ban-sao-cua-dji0901-1691132710706875636958.jpg",
       fallbackImage:
-        "https://images.unsplash.com/photo-1555921015-5ab9a0a99d08?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "https://images2.thanhnien.vn/528068263637045248/2023/8/4/ban-sao-cua-dji0901-1691132710706875636958.jpg",
     },
     {
       id: 4,
       name: "Mekong Delta",
       description:
         "Navigate through a maze of rivers, swamps and islands where floating markets and villages reveal daily river life",
-      image: "/src/assets/images/destinations/mekong.jpg",
+      image: "https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785c012199e24a1e2f16b5c726715921224d46983d045f3cad3032301278569e047ed3748b3ee1b7b513b2c32acfe7db64a/mekongriverfishing.jpg.webp",
       fallbackImage:
         "https://images.unsplash.com/photo-1533614121634-c535232f1b65?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },
@@ -235,7 +235,7 @@ const HomePage = () => {
       name: "Phong Nha Caves",
       description:
         "Discover the world's largest caves with underground rivers, unique ecosystems and prehistoric limestone formations",
-      image: "/src/assets/images/destinations/phong-nha.jpg",
+      image: "https://phuongbacluxuryhotel.com/uploads/dong-2.jpg",
       fallbackImage:
         "https://images.unsplash.com/photo-1528372164741-89c6078a3cf5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },
@@ -244,7 +244,7 @@ const HomePage = () => {
       name: "Phu Quoc Island",
       description:
         "Relax on pristine white-sand beaches with crystal clear waters or explore the lush national park interior",
-      image: "/src/assets/images/destinations/phu-quoc.jpg",
+      image: "https://ik.imagekit.io/tvlk/blog/2025/02/YxzFGZxQ-kinh-nghiem-du-lich-phu-quoc-6.jpg",
       fallbackImage:
         "https://images.unsplash.com/photo-1551251880-3ca5cd41549a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },
@@ -253,7 +253,7 @@ const HomePage = () => {
       name: "Hanoi Old Quarter",
       description:
         "Get lost in ancient narrow streets filled with vendors, colonial architecture, and bustling street food scenes",
-      image: "/src/assets/images/destinations/hanoi.jpg",
+      image: "https://thegioidisan.vn/assets/media/pho1.JPG",
       fallbackImage:
         "https://images.unsplash.com/photo-1594285676267-c63e84e58e0e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },

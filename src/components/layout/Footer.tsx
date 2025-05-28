@@ -238,12 +238,12 @@ const Footer = () => {
   ];
 
   const services = [
-    { name: 'Cultural Tours', path: '/travel-services' },
-    { name: 'Adventure Tours', path: '/team-building' },
-    { name: 'Food & Culinary', path: '/events' },
-    { name: 'Romantic Getaways', path: '/romantic-travel' },
-    { name: 'Wellness Retreats', path: '/medical-travel' },
-    { name: 'Package Tours', path: '/package-tours' }
+    { name: "Cultural Tours", path: "/travel-services" },
+    { name: "Adventure Tours", path: "/team-building" },
+    { name: "Food & Culinary", path: "/events" },
+    { name: "Romantic Getaways", path: "/romantic-travel" },
+    { name: "Wellness Retreats", path: "/medical-travel" },
+    { name: "Package Tours", path: "/package-tours" },
   ];
 
   return (
@@ -574,7 +574,8 @@ const Footer = () => {
                     />
                   </svg>
                   <span>
-                    123 Nguyen Hue Street, District 1, Ho Chi Minh City, Vietnam
+                    2 Ng. 337 P. Định Công, Định Công, Hoàng Mai, Hà Nội,
+                    Vietnam
                   </span>
                 </li>
                 <li
