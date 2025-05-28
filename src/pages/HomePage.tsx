@@ -373,9 +373,7 @@ const HomePage = () => {
               <span>100% Local Vietnamese Guides</span>
             </div>
           </div>
-        </div>
-
-        <div className="absolute left-0 right-0 z-20 flex justify-center bottom-10">
+        </div>        <div className="absolute left-0 right-0 z-20 flex justify-center bottom-16">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8 text-white animate-bounce cursor-pointer hover:text-[#0093DE] transition-colors duration-300"
