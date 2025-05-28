@@ -109,11 +109,10 @@ const Contact = () => {
                         theme === "light" ? "text-gray-600" : "text-gray-300"
                       } pl-1`}
                     >
-                      88 Ly Nam De Street
+                      2 Ng. 337 P. Định Công, Định Công,
                       <br />
-                      Hoan Kiem District
-                      <br />
-                      Hanoi, Vietnam
+                      Hoàng Mai,
+                      <br /> Hà Nội, Vietnam
                     </p>
                   </div>
 
@@ -249,10 +248,15 @@ const Contact = () => {
                   <h2 className="mb-4 text-2xl font-bold">Find Us in Hanoi</h2>
                 </div>
 
-                <div className="h-[400px] rounded-xl overflow-hidden relative shadow-md">
+                <div className="relative w-full h-[400px] overflow-hidden shadow-md rounded-xl">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0274261237364!2d105.84167327637721!3d21.031588587679213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abbd86f3a785%3A0x746575687a5645a!2zODggUC4gTMO9IE5hbSDEkOG6vywgxJBp4buHbiBCacOqbiwgSG_DoG4gS2nhur9tLCBIw6AgTuG7mWksIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1748341142934!5m2!1sen!2s"
-                    style={{ border: 0, width: "100%", height: "100%" }}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.2810726963826!2d105.82795993399861!3d20.981367329551393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135adccb75bdbb3%3A0x54b14af746c78953!2zMiBOZy4gMzM3IFAuIMSQ4buLbmggQ8O0bmcsIMSQ4buLbmggQ8O0bmcsIEhvw6BuZyBNYWksIEjDoCBO4buZaSwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1748418597634!5m2!1sen!2s"
+                    style={{
+                      border: 0,
+                      width: "100%",
+                      height: "100%",
+                      padding: 0,
+                    }}
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
