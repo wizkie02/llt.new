@@ -209,7 +209,8 @@ const HomePage = () => {
       name: "Sapa Rice Terraces",
       description:
         "Trek among cascading emerald-green rice paddies carved into mountainsides by ethnic minority villages",
-      image: "https://images2.thanhnien.vn/528068263637045248/2023/8/4/ban-sao-cua-dji0901-1691132710706875636958.jpg",
+      image:
+        "https://images2.thanhnien.vn/528068263637045248/2023/8/4/ban-sao-cua-dji0901-1691132710706875636958.jpg",
       fallbackImage:
         "https://images2.thanhnien.vn/528068263637045248/2023/8/4/ban-sao-cua-dji0901-1691132710706875636958.jpg",
       tourId: 3,
@@ -219,7 +220,8 @@ const HomePage = () => {
       name: "Mekong Delta",
       description:
         "Navigate through a maze of rivers, swamps and islands where floating markets and villages reveal daily river life",
-      image: "https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785c012199e24a1e2f16b5c726715921224d46983d045f3cad3032301278569e047ed3748b3ee1b7b513b2c32acfe7db64a/mekongriverfishing.jpg.webp",
+      image:
+        "https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785c012199e24a1e2f16b5c726715921224d46983d045f3cad3032301278569e047ed3748b3ee1b7b513b2c32acfe7db64a/mekongriverfishing.jpg.webp",
       fallbackImage:
         "https://images.unsplash.com/photo-1533614121634-c535232f1b65?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
       tourId: 5,
@@ -249,7 +251,8 @@ const HomePage = () => {
       name: "Phu Quoc Island",
       description:
         "Relax on pristine white-sand beaches with crystal clear waters or explore the lush national park interior",
-      image: "https://ik.imagekit.io/tvlk/blog/2025/02/YxzFGZxQ-kinh-nghiem-du-lich-phu-quoc-6.jpg",
+      image:
+        "https://ik.imagekit.io/tvlk/blog/2025/02/YxzFGZxQ-kinh-nghiem-du-lich-phu-quoc-6.jpg",
       fallbackImage:
         "https://images.unsplash.com/photo-1551251880-3ca5cd41549a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
       tourId: 6,
@@ -282,15 +285,16 @@ const HomePage = () => {
           ? "bg-[#F7F9FC] text-[#292F36]"
           : "bg-[#1A202C] text-[#F7F9FC]"
       }`}
-    >      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden pt-20">
+    >
+      {" "}
+      {/* Hero Section */}
+      <section className="relative flex flex-col items-center justify-center w-full h-screen pt-20 overflow-hidden">
         <img
           src={wallpaper}
           alt="Vietnam scenic landscape"
           className="absolute inset-0 object-cover object-center w-full h-full animate-slow-zoom"
         />
         <div className="absolute inset-0 z-10 w-full h-full bg-gradient-to-b from-black/60 to-black/30"></div>
-
         <div className="container relative z-20 flex flex-col items-center justify-center h-full px-4 mx-auto text-center text-white">
           <span
             className="inline-block px-4 py-1 mb-6 text-sm font-medium text-white transition-all duration-300 transform rounded-full shadow-lg bg-white/20 backdrop-blur-sm animate-fade-in-up hover:scale-105 hover:bg-white/30"
@@ -379,7 +383,8 @@ const HomePage = () => {
               <span>100% Local Vietnamese Guides</span>
             </div>
           </div>
-        </div>        <div className="absolute left-0 right-0 z-20 flex justify-center bottom-16">
+        </div>{" "}
+        <div className="absolute left-0 right-0 z-20 flex justify-center bottom-16">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8 text-white animate-bounce cursor-pointer hover:text-[#0093DE] transition-colors duration-300"
@@ -398,15 +403,18 @@ const HomePage = () => {
             />
           </svg>
         </div>
-      </section>      {/* About Us Area start */}
+      </section>{" "}
+      {/* About Us Area start */}
       <section
         className={`about-us-area py-20 rel z-1 ${
           theme === "light" ? "bg-white" : "bg-gray-800"
         }`}
-      >        <div className="container px-6 mx-auto md:px-12 lg:px-16 xl:px-20 max-w-6xl">          <div className="flex flex-wrap items-center justify-center gap-2 lg:flex-nowrap">
-            <div className="w-full mb-8 lg:w-2/5 xl:w-1/2 lg:mb-0 px-4 pl-20 lg:pl-60 xl:pl-60 2xl:pl-60 text-center lg:text-left">
+      >
+        <div className="container max-w-6xl px-6 mx-auto md:px-12 lg:px-40 xl:px-40">
+          <div className="flex flex-wrap items-center justify-center gap-4 lg:flex-nowrap">
+            <div className="w-full px-4 pl-20 mb-8 text-center lg:w-1/2 max-w-[768px] lg:mb-0 lg:text-left">
               <div
-                className="about-us-content"
+                className="mr-0 about-us-content w-fit"
                 data-aos="fade-left"
                 data-aos-duration={1500}
                 data-aos-offset={50}
@@ -483,19 +491,24 @@ const HomePage = () => {
                     />
                   </svg>
                 </Link>
-              </div>            </div>            <div
-              className="w-full pl-0 lg:w-2/3 lg:pl-2"
+              </div>
+            </div>
+            <div
+              className="w-full pl-0 lg:w-1/2 max-w-[768px]"
               data-aos="fade-right"
               data-aos-duration={1500}
               data-aos-offset={50}
-            ><div className="relative about-us-image">                <div className="max-w-3xl">
+            >
+              <div className="relative about-us-image">
+                <div className="max-w-3xl">
                   <div className="h-64 overflow-hidden shadow-lg rounded-xl md:h-96 lg:h-[400px] xl:h-[500px]">
                     <img
                       src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                       alt="Vietnam landscape"
                       className="object-cover w-full h-full"
                     />
-                  </div>                </div>
+                  </div>{" "}
+                </div>
                 <div className="absolute -bottom-3 -left-3 w-16 h-16 rounded-full bg-[#0093DE]/10 z-[-1]"></div>
                 <div className="absolute -top-3 -right-3 w-20 h-20 rounded-full bg-[#0093DE]/20 z-[-1]"></div>
               </div>
@@ -504,7 +517,6 @@ const HomePage = () => {
         </div>
       </section>
       {/* About Us Area end */}
-
       {/* Services Section */}
       <section
         className={`py-20 ${
@@ -569,7 +581,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
       {/* Featured Destinations */}
       <section
         id="popular-destinations"
@@ -626,7 +637,8 @@ const HomePage = () => {
                         : "opacity-0 max-h-0 translate-y-4"
                     }`}
                   >
-                    {" "}                    <Link
+                    {" "}
+                    <Link
                       to={`/tour/${destination.tourId}`}
                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-all duration-300 transform bg-blue-500 rounded-full hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg"
                     >
@@ -673,7 +685,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
       {/* Testimonials Section */}
       <section
         className={`py-20 ${
