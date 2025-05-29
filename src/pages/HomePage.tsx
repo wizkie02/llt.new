@@ -412,7 +412,7 @@ const HomePage = () => {
       >
         <div className="container max-w-6xl px-6 mx-auto md:px-12 lg:px-40 xl:px-40">
           <div className="flex flex-wrap items-center justify-center gap-4 lg:flex-nowrap">
-            <div className="w-full px-4 pl-20 mb-8 text-center lg:w-1/2 max-w-[768px] lg:mb-0 lg:text-left">
+            <div className="w-full pr-4 mb-8 text-center lg:w-1/2 max-w-[768px] lg:mb-0 lg:text-left">
               <div
                 className="mr-0 about-us-content w-fit"
                 data-aos="fade-left"
