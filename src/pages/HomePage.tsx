@@ -286,9 +286,8 @@ const HomePage = () => {
           : "bg-[#1A202C] text-[#F7F9FC]"
       }`}
     >
-      {" "}
-      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center w-full h-screen pt-20 overflow-hidden">
+      {" "}      {/* Hero Section */}
+      <section className="relative flex flex-col items-center justify-center w-full h-screen pt-32 overflow-hidden">
         <img
           src={wallpaper}
           alt="Vietnam scenic landscape"
