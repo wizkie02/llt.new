@@ -418,7 +418,7 @@ const Footer = () => {
                   alt="Leo Loves Travel"
                   className="w-auto h-8 mr-3"
                 />
-                <h4 className="text-lg font-bold text-[#0093DE]">About Us</h4>
+                {/* <h4 className="text-lg font-bold text-[#0093DE]">About Us</h4> */}
               </div>
               <p
                 className={`text-sm ${
@@ -633,11 +633,11 @@ const Footer = () => {
           >
             <div className="flex flex-col items-center space-y-3">
               <div className="flex items-center">
-                <img
+                {/* <img
                   src={logo}
                   alt="Leo Loves Travel"
                   className="w-auto h-6 mr-2"
-                />
+                /> */}
                 <span
                   className={`text-sm font-medium ${
                     theme === "light" ? "text-gray-600" : "text-gray-400"
