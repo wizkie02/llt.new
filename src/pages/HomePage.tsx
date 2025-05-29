@@ -183,7 +183,6 @@ const HomePage = () => {
       link: "/events",
     },
   ];
-
   const popularDestinations = [
     {
       id: 1,
@@ -193,6 +192,7 @@ const HomePage = () => {
       image: "/src/assets/images/destinations/halong-bay.jpg",
       fallbackImage:
         "https://content.r9cdn.net/rimg/dimg/cb/cf/2f1a018b-city-58327-1598a2b47df.jpg",
+      tourId: 2,
     },
     {
       id: 2,
@@ -202,6 +202,7 @@ const HomePage = () => {
       image: "/src/assets/images/destinations/hoi-an.jpg",
       fallbackImage:
         "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      tourId: 4,
     },
     {
       id: 3,
@@ -211,6 +212,7 @@ const HomePage = () => {
       image: "https://images2.thanhnien.vn/528068263637045248/2023/8/4/ban-sao-cua-dji0901-1691132710706875636958.jpg",
       fallbackImage:
         "https://images2.thanhnien.vn/528068263637045248/2023/8/4/ban-sao-cua-dji0901-1691132710706875636958.jpg",
+      tourId: 3,
     },
     {
       id: 4,
@@ -220,6 +222,7 @@ const HomePage = () => {
       image: "https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785c012199e24a1e2f16b5c726715921224d46983d045f3cad3032301278569e047ed3748b3ee1b7b513b2c32acfe7db64a/mekongriverfishing.jpg.webp",
       fallbackImage:
         "https://images.unsplash.com/photo-1533614121634-c535232f1b65?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      tourId: 5,
     },
     {
       id: 5,
@@ -229,6 +232,7 @@ const HomePage = () => {
       image: "/src/assets/images/destinations/hue.jpg",
       fallbackImage:
         "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      tourId: 8,
     },
     {
       id: 6,
@@ -238,6 +242,7 @@ const HomePage = () => {
       image: "https://phuongbacluxuryhotel.com/uploads/dong-2.jpg",
       fallbackImage:
         "https://images.unsplash.com/photo-1528372164741-89c6078a3cf5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      tourId: 9,
     },
     {
       id: 7,
@@ -247,6 +252,7 @@ const HomePage = () => {
       image: "https://ik.imagekit.io/tvlk/blog/2025/02/YxzFGZxQ-kinh-nghiem-du-lich-phu-quoc-6.jpg",
       fallbackImage:
         "https://images.unsplash.com/photo-1551251880-3ca5cd41549a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      tourId: 6,
     },
     {
       id: 8,
@@ -256,6 +262,7 @@ const HomePage = () => {
       image: "https://thegioidisan.vn/assets/media/pho1.JPG",
       fallbackImage:
         "https://images.unsplash.com/photo-1594285676267-c63e84e58e0e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      tourId: 7,
     },
   ];
 
@@ -275,9 +282,8 @@ const HomePage = () => {
           ? "bg-[#F7F9FC] text-[#292F36]"
           : "bg-[#1A202C] text-[#F7F9FC]"
       }`}
-    >
-      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden">
+    >      {/* Hero Section */}
+      <section className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden pt-20">
         <img
           src={wallpaper}
           alt="Vietnam scenic landscape"
@@ -355,7 +361,7 @@ const HomePage = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <span>4.9/5 rating (1200+ reviews)</span>
+              <span>4.9/5 rating (4800+ reviews)</span>
             </div>
             <div className="flex items-center">
               <svg
@@ -392,17 +398,13 @@ const HomePage = () => {
             />
           </svg>
         </div>
-      </section>
-
-      {/* About Us Area start */}
+      </section>      {/* About Us Area start */}
       <section
         className={`about-us-area py-20 rel z-1 ${
           theme === "light" ? "bg-white" : "bg-gray-800"
         }`}
-      >
-        <div className="container px-4 mx-auto md:px-12 lg:px-24 max-w-7xl">
-          <div className="flex flex-wrap items-center justify-center lg:flex-nowrap">
-            <div className="w-full mb-12 lg:w-5/12 lg:mb-0">
+      >        <div className="container px-6 mx-auto md:px-12 lg:px-16 xl:px-20 max-w-6xl">          <div className="flex flex-wrap items-center justify-center gap-2 lg:flex-nowrap">
+            <div className="w-full mb-8 lg:w-2/5 xl:w-1/2 lg:mb-0 px-4 pl-20 lg:pl-60 xl:pl-60 2xl:pl-60 text-center lg:text-left">
               <div
                 className="about-us-content"
                 data-aos="fade-left"
@@ -452,7 +454,7 @@ const HomePage = () => {
                   <div className="w-1/2 mb-4">
                     <div className="counter-item">
                       <span className="text-3xl font-bold text-[#0093DE] flex items-center">
-                        <Counter end={5} />
+                        <Counter end={9} />
                         <span className="ml-1">K+</span>
                       </span>
                       <span className="block mt-1 text-sm counter-title">
@@ -481,44 +483,21 @@ const HomePage = () => {
                     />
                   </svg>
                 </Link>
-              </div>
-            </div>
-            <div
-              className="w-full pl-0 lg:w-7/12 lg:pl-12"
+              </div>            </div>            <div
+              className="w-full pl-0 lg:w-2/3 lg:pl-2"
               data-aos="fade-right"
               data-aos-duration={1500}
               data-aos-offset={50}
-            >
-              <div className="relative about-us-image">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-4">
-                    <div className="h-48 overflow-hidden shadow-lg rounded-2xl md:h-64">
-                      <img
-                        src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Vietnam landscape"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <div className="h-48 overflow-hidden shadow-lg rounded-2xl md:h-64">
-                      <img
-                        src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Vietnamese food"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="mt-8">
-                    <div className="rounded-2xl overflow-hidden shadow-lg h-72 md:h-[420px]">
-                      <img
-                        src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Halong Bay"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-[#0093DE]/10 z-[-1]"></div>
-                <div className="absolute -top-4 -right-4 w-32 h-32 rounded-full bg-[#0093DE]/20 z-[-1]"></div>
+            ><div className="relative about-us-image">                <div className="max-w-3xl">
+                  <div className="h-64 overflow-hidden shadow-lg rounded-xl md:h-96 lg:h-[400px] xl:h-[500px]">
+                    <img
+                      src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                      alt="Vietnam landscape"
+                      className="object-cover w-full h-full"
+                    />
+                  </div>                </div>
+                <div className="absolute -bottom-3 -left-3 w-16 h-16 rounded-full bg-[#0093DE]/10 z-[-1]"></div>
+                <div className="absolute -top-3 -right-3 w-20 h-20 rounded-full bg-[#0093DE]/20 z-[-1]"></div>
               </div>
             </div>
           </div>
@@ -647,9 +626,8 @@ const HomePage = () => {
                         : "opacity-0 max-h-0 translate-y-4"
                     }`}
                   >
-                    {" "}
-                    <Link
-                      to="/package-tours"
+                    {" "}                    <Link
+                      to={`/tour/${destination.tourId}`}
                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-all duration-300 transform bg-blue-500 rounded-full hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg"
                     >
                       Explore tours

@@ -38,7 +38,7 @@ const SocialIcon = ({ href, children, delay = 0 }: SocialIconProps) => {
   return (
     <a
       href={href}
-      className="bg-white shadow-md hover:shadow-lg hover:bg-[#0093DE]/10 p-2 rounded-full text-gray-700 hover:text-[#0093DE] transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
+      className="bg-white shadow-md hover:shadow-lg hover:bg-[#0093DE]/10 p-2 rounded-full text-gray-700 hover:text-[#0093DE] transition-all duration-300"
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -136,63 +136,13 @@ const DecorativeDots = () => {
   );
 };
 
-interface Hover3DCardProps {
-  children: ReactNode;
-  className?: string;
-}
-
-// Custom hover card component with 3D effect
-const Hover3DCard = ({ children, className = "" }: Hover3DCardProps) => {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const posX = e.clientX - centerX;
-    const posY = e.clientY - centerY;
-
-    // Calculate rotation based on mouse position
-    // Limit the rotation to a small amount
-    const rotateX = (posY / rect.height) * -8;
-    const rotateY = (posX / rect.width) * 8;
-
-    setRotation({ x: rotateX, y: rotateY });
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      className={`transition-all duration-200 ${
-        isHovering ? "z-10" : ""
-      } ${className}`}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => {
-        setIsHovering(false);
-        setRotation({ x: 0, y: 0 });
-      }}
-      style={{
-        transform: isHovering
-          ? `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(1.02)`
-          : "perspective(1000px) rotateX(0) rotateY(0)",
-      }}
-    >
-      {children}
-    </div>
-  );
-};
+// Removed Hover3DCard component - replaced with simple div wrapper
 
 const Footer = () => {
-  const { theme } = useTheme();
-  const [email, setEmail] = useState("");
+  const { theme } = useTheme();  const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [scrollVisible, setScrollVisible] = useState(false);
 
   // Show scroll-to-top button only when scrolled down
@@ -207,43 +157,61 @@ const Footer = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  }, []);  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
+    setShowErrorMessage(false);
 
-    // Simulate processing
+    try {
+      // Send email to webhook
+      const response = await fetch('https://hook.eu2.make.com/ll3ihyl5e5nmz378seyguhai60o54ghw', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'website_footer',
+          timestamp: new Date().toISOString(),
+          message: `New newsletter subscription from ${email}`
+        }),
+      });
+
+      if (response.ok) {
+        setShowSuccessMessage(true);
+        setEmail("");
+      } else {
+        throw new Error('Failed to subscribe');
+      }
+    } catch (error) {
+      console.error('Error subscribing to newsletter:', error);
+      setShowErrorMessage(true);
+    }
+
+    setIsSubmitted(false);
+
+    // Hide messages after 5 seconds
     setTimeout(() => {
-      setShowSuccessMessage(true);
-      setEmail("");
-
-      // Hide success message after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setShowSuccessMessage(false);
-      }, 3000);
-    }, 600);
+      setShowSuccessMessage(false);
+      setShowErrorMessage(false);
+    }, 5000);
   };
 
   const currentYear = new Date().getFullYear();
-
   const destinations = [
-    { name: "Halong Bay", path: "/destination/halong-bay" },
-    { name: "Hoi An Ancient Town", path: "/destination/hoi-an" },
-    { name: "Sapa Rice Terraces", path: "/destination/sapa" },
-    { name: "Mekong Delta", path: "/destination/mekong" },
-    { name: "Hanoi Old Quarter", path: "/destination/hanoi" },
-    { name: "Hue Imperial City", path: "/destination/hue" },
+    { name: "Halong Bay", path: "/tour/2" },
+    { name: "Hoi An Ancient Town", path: "/tour/4" },
+    { name: "Sapa Rice Terraces", path: "/tour/3" },
+    { name: "Mekong Delta", path: "/tour/5" },
+    { name: "Hanoi Old Quarter", path: "/tour/7" },
+    { name: "Hue Imperial City", path: "/tour/8" },
   ];
-
   const services = [
-    { name: "Cultural Tours", path: "/travel-services" },
-    { name: "Adventure Tours", path: "/team-building" },
-    { name: "Food & Culinary", path: "/events" },
-    { name: "Romantic Getaways", path: "/romantic-travel" },
-    { name: "Wellness Retreats", path: "/medical-travel" },
-    { name: "Package Tours", path: "/package-tours" },
+    { name: "Travel Services", path: "/travel-services" },
+    { name: "Team Building", path: "/team-building" },
+    { name: "Events & Conferences", path: "/events" },
+    { name: "Romantic Travel", path: "/romantic-travel" },
+    { name: "Medical Travel", path: "/medical-travel" },
   ];
 
   return (
@@ -294,10 +262,9 @@ const Footer = () => {
       <DecorativeDots />
 
       {/* Newsletter Section - Before the main footer */}
-      <div className="relative z-10 pt-12">
-        <div className="container px-4 mx-auto">
+      <div className="relative z-10 pt-12">        <div className="container px-4 mx-auto">
           <AnimatedCard delay={100} direction="up">
-            <Hover3DCard
+            <div
               className={`${
                 theme === "light"
                   ? "bg-gradient-to-r from-[#0093DE]/10 to-[#6dc0eb]/10"
@@ -329,28 +296,62 @@ const Footer = () => {
                       <div
                         className="absolute inset-0 rounded-full animate-[pulse-ring_3s_ease-out_infinite]"
                         style={{ border: "1px solid rgba(0, 147, 222, 0.3)" }}
-                      ></div>
-                    </div>
-                    Subscribe to our newsletter
+                      ></div>                    </div>
+                    Stay Updated with Us
                   </h3>
                   <p
                     className={`${
                       theme === "light" ? "text-gray-700" : "text-gray-300"
                     } text-sm mb-0 lg:pr-8`}
-                  >
-                    Get exclusive deals and travel insights for your Vietnam
-                    adventure
+                  >                    Get exclusive deals and travel insights for your Vietnam adventure
                   </p>
-                </div>
-                <div className="flex justify-center lg:w-1/2 lg:justify-end">
-                  {!showSuccessMessage ? (
+                </div>                <div className="flex justify-center lg:w-1/2 lg:justify-end">
+                  {showSuccessMessage ? (
+                    <div className="flex items-center px-4 py-3 text-green-700 border border-green-200 rounded-lg shadow-md bg-green-50 animate-fade-in">
+                      <svg
+                        className="w-5 h-5 mr-3 text-green-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>
+                        Thank you for subscribing! You'll receive the latest deals soon.
+                      </span>
+                    </div>
+                  ) : showErrorMessage ? (
+                    <div className="flex items-center px-4 py-3 text-red-700 border border-red-200 rounded-lg shadow-md bg-red-50 animate-fade-in">
+                      <svg
+                        className="w-5 h-5 mr-3 text-red-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>
+                        An error occurred. Please try again later.
+                      </span>
+                    </div>
+                  ) : (
                     <form
                       className="flex flex-col w-full gap-2 sm:flex-row lg:max-w-md"
                       onSubmit={handleSubmit}
                     >
                       <input
                         type="email"
-                        placeholder="Your email address"
+                        placeholder="Enter your email address"
                         className={`flex-grow px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0093DE] ${
                           theme === "light"
                             ? "bg-white/80 text-gray-700"
@@ -400,30 +401,9 @@ const Footer = () => {
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_infinite] bg-[length:200%_100%] opacity-0 hover:opacity-100 transition-opacity"></div>
                       </button>
                     </form>
-                  ) : (
-                    <div className="flex items-center px-4 py-3 text-green-700 border border-green-200 rounded-lg shadow-md bg-green-50 animate-fade-in">
-                      <svg
-                        className="w-5 h-5 mr-3 text-green-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <span>
-                        Thank you for subscribing! You'll receive our latest
-                        deals soon.
-                      </span>
-                    </div>
-                  )}
-                </div>
+                  )}</div>
               </div>
-            </Hover3DCard>
+            </div>
           </AnimatedCard>
         </div>
       </div>
@@ -523,12 +503,10 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-          </AnimatedCard>
-
-          <AnimatedCard delay={400} direction="up">
+          </AnimatedCard>          <AnimatedCard delay={400} direction="up">
             <div>
               <h4 className="text-lg font-bold mb-4 text-[#0093DE]">
-                Services
+                Experiences
               </h4>
               <ul className="space-y-2 text-sm">
                 {services.map((service, index) => (

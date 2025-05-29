@@ -445,7 +445,7 @@ const MedicalTravel = () => {
         <div className="container px-4 mx-auto">
           <ScrollReveal direction="up" delay={200}>
             <div className="max-w-3xl mx-auto mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold">Get a Consultation</h2>
+                <h2 className="mb-4 text-3xl font-bold text-white">Get a Consultation</h2>
               <p className="max-w-2xl mx-auto text-xl">
                 Fill out the form below to receive a confidential consultation
                 about our medical travel services.

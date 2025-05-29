@@ -6,7 +6,6 @@ import { useIntersectionObserver } from '../hooks/use-intersection-observer';
 import TypeWriter from '../components/ui/TypeWriter';
 import ValueCard from '../components/ui/ValueCard';
 import halongBay from '../assets/images/destinations/halong-bay.jpg';
-import hanoi from '../assets/images/destinations/hanoi.jpg';
 import hoiAn from '../assets/images/destinations/hoi-an.jpg';
 import mekong from '../assets/images/destinations/mekong.jpg';
 import sapa from '../assets/images/destinations/sapa.jpg';
