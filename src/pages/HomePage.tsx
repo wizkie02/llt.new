@@ -433,7 +433,7 @@ const HomePage = () => {
                   with local expertise and passion.
                 </p>
                 <div className="my-10 divider">
-                  <span className="flex items-center">
+                  <span className="flex items-center justify-center lg:justify-start">
                     <span className="text-lg font-medium">
                       We have{" "}
                       <span className="text-[#0093DE] font-bold">
@@ -448,7 +448,7 @@ const HomePage = () => {
                 </div>
                 <div className="flex flex-wrap">
                   <div className="w-1/2 mb-4">
-                    <div className="counter-item">
+                    <div className="flex flex-col lg:flex=row items-center lg:items-start justify-center counter-item lg:justify-start">
                       <span className="text-3xl font-bold text-[#0093DE] flex items-center">
                         <Counter end={30} />
                         <span className="ml-1">+</span>
@@ -459,10 +459,10 @@ const HomePage = () => {
                     </div>
                   </div>
                   <div className="w-1/2 mb-4">
-                    <div className="counter-item">
-                      <span className="text-3xl font-bold text-[#0093DE] flex items-center">
+                  <div className="flex flex-col lg:flex=row items-center lg:items-start justify-center counter-item lg:justify-start">
+                  <span className="text-3xl font-bold text-[#0093DE] flex items-center">
                         <Counter end={9} />
-                        <span className="ml-1">K+</span>
+                        <span className="ml-0">K+</span>
                       </span>
                       <span className="block mt-1 text-sm counter-title">
                         Satisfied Travelers
