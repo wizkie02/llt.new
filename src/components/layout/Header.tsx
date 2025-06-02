@@ -658,7 +658,7 @@ const Header = () => {
         ></div> */}
 
         <div
-          className={`absolute top-0 right-0 w-3/4 max-w-sm h-[100vh] flex flex-col justify-between items-end ${
+          className={`absolute top-0 right-0 w-3/4 max-w-sm h-[100vh] flex flex-col justify-start items-end ${
             isScrolled ? "bg-white" : "bg-white"
           } transform transition-transform duration-500 ease-in-out ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -689,7 +689,7 @@ const Header = () => {
             </svg>
           </button>
 
-          <div className="w-full p-6">
+          <div className="w-full p-6 pt-0">
             {/* Mobile Search */}
             <div className="mb-6">
               <form onSubmit={handleSearch} className="relative">
