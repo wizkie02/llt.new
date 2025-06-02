@@ -201,7 +201,7 @@ const MedicalTravel = () => {
           <div className="max-w-5xl mx-auto">
             <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
               <ScrollReveal direction="left" delay={200}>
-                <div>
+                <div className="px-4 lg:px-0">
                   <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
                     Why Choose Us
                   </span>

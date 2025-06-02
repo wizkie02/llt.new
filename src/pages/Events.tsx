@@ -209,10 +209,10 @@ const Events = () => {
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               {/* Timeline Line */}
-              <div className="absolute left-0 md:left-1/2 transform md:translate-x-[-50%] top-0 bottom-0 w-1 bg-gradient-to-b from-[#58b7e8] to-[#6dc0eb] z-0"></div>
+              <div className="absolute hidden md:block left-0 md:left-1/2 transform md:translate-x-[-50%] top-0 bottom-0 w-1 bg-gradient-to-b from-[#58b7e8] to-[#6dc0eb] z-0"></div>
 
               {/* Timeline Items */}
-              <div className="relative z-10">
+              <div className="relative z-10 px-4 md:px-0">
                 {/* Step 1 */}
                 <div className="flex flex-col items-start mb-12 md:flex-row">
                   <div className="flex-1 order-2 md:text-right md:pr-8 md:order-1">

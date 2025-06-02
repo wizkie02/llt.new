@@ -836,7 +836,7 @@ const Header = () => {
             </nav>
 
             {/* Mobile CTA Button */}
-            <div className="pt-12 pb-6 mt-6 border-t border-gray-200">
+            <div className="pt-6 mt-1 border-t border-gray-200">
               <Link
                 to="/booking"
                 className="flex items-center justify-center w-full bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"

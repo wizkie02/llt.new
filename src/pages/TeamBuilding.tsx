@@ -192,10 +192,10 @@ const TeamBuilding = () => {
             </div>
           </ScrollReveal>
 
-          <div className="grid max-w-5xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
+          <div className="relative grid max-w-5xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
             <ScrollReveal direction="left" delay={300} distance={40}>
               <div
-                className={`p-6 rounded-2xl transition-all duration-300 h-full hover:-translate-y-2 hover:shadow-xl ${
+                className={`p-6 pb-12 rounded-2xl transition-all duration-300 h-full hover:-translate-y-2 hover:shadow-xl ${
                   theme === "light" ? "bg-[#F2F7FC]" : "bg-gray-700"
                 }`}
               >
@@ -318,13 +318,15 @@ const TeamBuilding = () => {
                   Perfect for local teams looking for a productive day away from
                   the office.
                 </p>
-                <p className="font-bold text-[#0093DE]">From $150 per person</p>
+                <p className="absolute bottom-6 right-6 font-bold text-[#0093DE] w-full text-right">
+                  From $150 per person
+                </p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={400} distance={40}>
               <div
-                className={`p-6 rounded-2xl h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                className={`relative p-6 pb-12 rounded-2xl h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
                   theme === "light" ? "bg-[#F2F7FC]" : "bg-gray-700"
                 }`}
               >
@@ -470,13 +472,15 @@ const TeamBuilding = () => {
                   Ideal for teams seeking deeper connections and strategic
                   alignment.
                 </p>
-                <p className="font-bold text-[#0093DE]">From $599 per person</p>
+                <p className="absolute bottom-6 right-6 font-bold text-[#0093DE] w-full text-right">
+                  From $599 per person
+                </p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={500} distance={40}>
               <div
-                className={`p-6 rounded-2xl h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                className={`relative p-6 pb-12 rounded-2xl h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
                   theme === "light" ? "bg-[#F2F7FC]" : "bg-gray-700"
                 }`}
               >
@@ -624,7 +628,7 @@ const TeamBuilding = () => {
                   Designed for leadership teams seeking transformative
                   experiences.
                 </p>
-                <p className="font-bold text-[#0093DE]">
+                <p className="absolute bottom-6 right-6 font-bold text-[#0093DE] w-full text-right">
                   From $1,299 per person
                 </p>
               </div>
@@ -761,7 +765,7 @@ const TeamBuilding = () => {
           <div className="max-w-5xl mx-auto">
             <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
               <div>
-                <ScrollReveal direction="left" delay={200} distance={30}>
+                <ScrollReveal direction="left" delay={200} distance={30} className="text-center lg:text-left">
                   <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
                     Why Choose Us
                   </span>
@@ -770,7 +774,7 @@ const TeamBuilding = () => {
                   </h2>
                 </ScrollReveal>
 
-                <div className="space-y-6">
+                <div className="px-4 space-y-6 lg:px-0">
                   <ScrollReveal direction="left" delay={300} distance={30}>
                     <div className="flex items-start">
                       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
