@@ -17,17 +17,21 @@ const PackageTours = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-   // Function to determine items per page based on window width
-   const getItemsPerPageForWidth = (width: number): number => {
-    if (width >= 1024) { // lg and up
+  // Function to determine items per page based on window width
+  const getItemsPerPageForWidth = (width: number): number => {
+    if (width >= 1024) {
+      // lg and up
       return 9;
     }
-    if (width >= 768) { // md and up
+    if (width >= 768) {
+      // md and up
       return 6;
     }
     return 3; // default (sm)
   };
-  const [itemsPerPage, setItemsPerPage] = useState(() => getItemsPerPageForWidth(window.innerWidth));
+  const [itemsPerPage, setItemsPerPage] = useState(() =>
+    getItemsPerPageForWidth(window.innerWidth)
+  );
 
   // Get min and max prices from tours
   const minPrice = Math.min(...tours.map((tour) => tour.price));
@@ -46,13 +50,12 @@ const PackageTours = () => {
       setItemsPerPage(getItemsPerPageForWidth(window.innerWidth));
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     // Call handler right away so state is updated with initial window size
-    handleResize(); 
+    handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []); // Empty array ensures this effect runs only on mount and unmount
-
 
   // Filter and sort tours based on all criteria
   useEffect(() => {

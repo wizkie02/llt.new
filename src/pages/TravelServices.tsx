@@ -21,7 +21,7 @@ const TravelServices = () => {
       title: 'Airport Transfers',
       description: 'Comfortable and reliable transportation from any airport in Vietnam to your accommodation.',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
         </svg>
       )
@@ -31,7 +31,7 @@ const TravelServices = () => {
       title: 'Hotel Bookings',
       description: 'Access to exclusive rates at Vietnam\'s best hotels, from budget-friendly to luxury accommodations.',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
         </svg>
       )
@@ -41,7 +41,7 @@ const TravelServices = () => {
       title: 'Visa Assistance',
       description: 'Expert guidance and support for obtaining your Vietnam visa with minimal hassle.',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
       )
@@ -51,7 +51,7 @@ const TravelServices = () => {
       title: 'SIM Card & Local Concierge',
       description: 'Stay connected with local SIM cards and access to 24/7 local concierge services.',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
         </svg>
       )
@@ -61,20 +61,20 @@ const TravelServices = () => {
   return (
     <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
       {/* Hero Section */}
-      <section className="relative mt-20 py-32 rounded-b-3xl overflow-hidden mb-8">
+      <section className="relative py-32 mt-20 mb-8 overflow-hidden rounded-b-3xl">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          className="absolute inset-0 bg-fixed bg-center bg-cover"
           style={{ 
             backgroundImage: `url(${bg8})`, 
             backgroundPosition: '50% 50%'
           }}
         ></div>
-        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-0"></div>
+        <div className="absolute inset-0 z-0 bg-white/10 backdrop-blur-sm"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
         
-        <div className="relative z-10 container mx-auto px-4 text-center text-white">
+        <div className="container relative z-10 px-4 mx-auto text-center text-white">
           <ScrollReveal direction="down" delay={100} distance={30}>
-            <span className="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-6 shadow-xl">
+            <span className="inline-block px-4 py-1 mb-6 text-sm font-medium text-white rounded-full shadow-xl bg-white/20 backdrop-blur-sm">
               Supporting Your Journey
             </span>
           </ScrollReveal>
@@ -95,20 +95,20 @@ const TravelServices = () => {
       
       {/* Services Section */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="container px-4 mx-auto">
           <ScrollReveal direction="up" delay={200} distance={30}>
-            <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="max-w-3xl mx-auto mb-16 text-center">
               <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
                 Travel Essentials
               </span>
-              <h2 className="text-3xl font-bold mb-4">Support Services</h2>
-              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+              <h2 className="mb-4 text-3xl font-bold">Support Services</h2>
+              <p className="max-w-2xl mx-auto text-lg opacity-80">
                 We handle all the details so you can focus on enjoying your journey through Vietnam
               </p>
             </div>
           </ScrollReveal>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid max-w-5xl grid-cols-1 gap-8 mx-auto md:grid-cols-2">
             {services.map((service, index) => (
               <ScrollReveal 
                 key={service.id} 
@@ -126,7 +126,7 @@ const TravelServices = () => {
                   <div className={`${service.id % 2 === 0 ? 'text-[#0093DE]' : 'text-[#64A86B]'} mb-4`}>
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <h3 className="mb-2 text-xl font-bold">{service.title}</h3>
                   <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>{service.description}</p>
                 </div>
               </ScrollReveal>
@@ -137,21 +137,21 @@ const TravelServices = () => {
       
       {/* Customize Trip Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
-        <div className="container mx-auto px-4">
+        <div className="container px-4 mx-auto">
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
               <ScrollReveal direction="left" delay={300} distance={50}>
-                <div>
+                <div className='px-4 md:px-0'>
                   <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
                     Personalized Service
                   </span>
-                  <h2 className="text-3xl font-bold mb-4">Customize My Trip</h2>
-                  <p className="text-lg mb-6 opacity-80">
+                  <h2 className="mb-4 text-3xl font-bold">Customize My Trip</h2>
+                  <p className="mb-6 text-lg opacity-80">
                     Tell us about your dream Vietnam experience, and our travel experts will craft a personalized itinerary just for you.
                   </p>
                   
                   <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-3">Why Customize Your Trip?</h3>
+                    <h3 className="mb-3 text-xl font-semibold">Why Customize Your Trip?</h3>
                     <ul className="space-y-3">
                       <li className="flex items-start">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 mt-0.5 text-[#64A86B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -180,14 +180,14 @@ const TravelServices = () => {
                     </ul>
                   </div>
                   
-                  <div className="flex flex-wrap items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-4 justify-evenly lg:justify-start">
                     <a 
                       href="https://wa.me/84123456789" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors shadow-md hover:shadow-lg"
+                      className="flex items-center px-4 py-2 text-white transition-colors bg-green-500 shadow-md rounded-xl hover:bg-green-600 hover:shadow-lg"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
                       </svg>
                       WhatsApp
@@ -197,9 +197,9 @@ const TravelServices = () => {
                       href="https://m.me/leolovestravel" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg"
+                      className="flex items-center px-4 py-2 text-white transition-colors bg-blue-500 shadow-md rounded-xl hover:bg-blue-600 hover:shadow-lg"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 0c-6.627 0-12 4.975-12 11.111 0 3.497 1.745 6.616 4.472 8.652v4.237l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.974 12-11.111 0-6.136-5.373-11.111-12-11.111zm1.193 14.963l-3.056-3.259-5.963 3.259 6.559-6.963 3.13 3.259 5.889-3.259-6.559 6.963z" />
                       </svg>
                       Messenger
@@ -210,11 +210,11 @@ const TravelServices = () => {
               
               <ScrollReveal direction="right" delay={500} distance={50}>
                 <div className={`p-8 rounded-2xl shadow-lg ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'}`}>
-                  <h3 className="text-xl font-semibold mb-6">Request a Custom Itinerary</h3>
+                  <h3 className="mb-6 text-xl font-semibold">Request a Custom Itinerary</h3>
                   
                   <form className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium mb-1" htmlFor="name">Full Name</label>
+                      <label className="block mb-1 text-sm font-medium" htmlFor="name">Full Name</label>
                       <input 
                         type="text" 
                         id="name" 
@@ -228,7 +228,7 @@ const TravelServices = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium mb-1" htmlFor="email">Email Address</label>
+                      <label className="block mb-1 text-sm font-medium" htmlFor="email">Email Address</label>
                       <input 
                         type="email" 
                         id="email" 
@@ -241,9 +241,9 @@ const TravelServices = () => {
                       />
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div>
-                        <label className="block text-sm font-medium mb-1" htmlFor="travel-dates">Travel Dates</label>
+                        <label className="block mb-1 text-sm font-medium" htmlFor="travel-dates">Travel Dates</label>
                         <input 
                           type="text" 
                           id="travel-dates" 
@@ -257,7 +257,7 @@ const TravelServices = () => {
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium mb-1" htmlFor="travelers">Number of Travelers</label>
+                        <label className="block mb-1 text-sm font-medium" htmlFor="travelers">Number of Travelers</label>
                         <input 
                           type="number" 
                           id="travelers" 
@@ -273,7 +273,7 @@ const TravelServices = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium mb-1" htmlFor="interests">Travel Interests</label>
+                      <label className="block mb-1 text-sm font-medium" htmlFor="interests">Travel Interests</label>
                       <select 
                         id="interests" 
                         className={`w-full p-3 rounded-xl border ${
@@ -293,7 +293,7 @@ const TravelServices = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium mb-1" htmlFor="message">Your Dream Trip</label>
+                      <label className="block mb-1 text-sm font-medium" htmlFor="message">Your Dream Trip</label>
                       <textarea 
                         id="message" 
                         rows={4}
@@ -322,15 +322,15 @@ const TravelServices = () => {
       
       {/* FAQ Section */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="container px-4 mx-auto">
           <div className="max-w-3xl mx-auto">
             <ScrollReveal direction="up" delay={200} distance={30}>
-              <div className="text-center mb-16">
+              <div className="mb-16 text-center">
                 <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
                   Common Questions
                 </span>
-                <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-                <p className="text-lg opacity-80 max-w-2xl mx-auto">
+                <h2 className="mb-4 text-3xl font-bold">Frequently Asked Questions</h2>
+                <p className="max-w-2xl mx-auto text-lg opacity-80">
                   Find answers to common questions about our travel services in Vietnam
                 </p>
               </div>
@@ -341,11 +341,11 @@ const TravelServices = () => {
                 {/* FAQ Item 1 */}
                 <div className={`rounded-2xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md overflow-hidden mb-4`}>
                   <button 
-                    className="flex justify-between items-center w-full p-6 text-left focus:outline-none"
+                    className="flex items-center justify-between w-full p-6 text-left focus:outline-none"
                     onClick={() => toggleFAQ(0)}
                   >
-                    <h3 className="text-xl font-bold">Do I need a visa to visit Vietnam?</h3>
-                    <span className="ml-4 flex-shrink-0">
+                    <h3 className="m-0 text-xl font-bold">Do I need a visa to visit Vietnam?</h3>
+                    <span className="flex-shrink-0 ml-4">
                       <svg 
                         className={`w-6 h-6 transition-transform transform ${openFAQs.includes(0) ? 'rotate-180' : ''}`} 
                         fill="none" 
@@ -371,11 +371,11 @@ const TravelServices = () => {
                 {/* FAQ Item 2 */}
                 <div className={`rounded-2xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md overflow-hidden mb-4`}>
                   <button 
-                    className="flex justify-between items-center w-full p-6 text-left focus:outline-none"
+                    className="flex items-center justify-between w-full p-6 text-left focus:outline-none"
                     onClick={() => toggleFAQ(1)}
                   >
-                    <h3 className="text-xl font-bold">How far in advance should I book airport transfers?</h3>
-                    <span className="ml-4 flex-shrink-0">
+                    <h3 className="m-0 text-xl font-bold">How far in advance should I book airport transfers?</h3>
+                    <span className="flex-shrink-0 ml-4">
                       <svg 
                         className={`w-6 h-6 transition-transform transform ${openFAQs.includes(1) ? 'rotate-180' : ''}`} 
                         fill="none" 
@@ -401,11 +401,11 @@ const TravelServices = () => {
                 {/* FAQ Item 3 */}
                 <div className={`rounded-2xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md overflow-hidden mb-4`}>
                   <button 
-                    className="flex justify-between items-center w-full p-6 text-left focus:outline-none"
+                    className="flex items-center justify-between w-full p-6 text-left focus:outline-none"
                     onClick={() => toggleFAQ(2)}
                   >
-                    <h3 className="text-xl font-bold">What types of accommodation can you book?</h3>
-                    <span className="ml-4 flex-shrink-0">
+                    <h3 className="m-0 text-xl font-bold">What types of accommodation can you book?</h3>
+                    <span className="flex-shrink-0 ml-4">
                       <svg 
                         className={`w-6 h-6 transition-transform transform ${openFAQs.includes(2) ? 'rotate-180' : ''}`} 
                         fill="none" 
@@ -431,11 +431,11 @@ const TravelServices = () => {
                 {/* FAQ Item 4 */}
                 <div className={`rounded-2xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md overflow-hidden mb-4`}>
                   <button 
-                    className="flex justify-between items-center w-full p-6 text-left focus:outline-none"
+                    className="flex items-center justify-between w-full p-6 text-left focus:outline-none"
                     onClick={() => toggleFAQ(3)}
                   >
-                    <h3 className="text-xl font-bold">How do I stay connected while traveling in Vietnam?</h3>
-                    <span className="ml-4 flex-shrink-0">
+                    <h3 className="m-0 text-xl font-bold">How do I stay connected while traveling in Vietnam?</h3>
+                    <span className="flex-shrink-0 ml-4">
                       <svg 
                         className={`w-6 h-6 transition-transform transform ${openFAQs.includes(3) ? 'rotate-180' : ''}`} 
                         fill="none" 
@@ -461,11 +461,11 @@ const TravelServices = () => {
                 {/* FAQ Item 5 */}
                 <div className={`rounded-2xl ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md overflow-hidden`}>
                   <button 
-                    className="flex justify-between items-center w-full p-6 text-left focus:outline-none"
+                    className="flex items-center justify-between w-full p-6 text-left focus:outline-none"
                     onClick={() => toggleFAQ(4)}
                   >
-                    <h3 className="text-xl font-bold">What payment methods do you accept?</h3>
-                    <span className="ml-4 flex-shrink-0">
+                    <h3 className="m-0 text-xl font-bold">What payment methods do you accept?</h3>
+                    <span className="flex-shrink-0 ml-4">
                       <svg 
                         className={`w-6 h-6 transition-transform transform ${openFAQs.includes(4) ? 'rotate-180' : ''}`} 
                         fill="none" 

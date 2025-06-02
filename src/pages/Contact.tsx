@@ -282,7 +282,7 @@ const Contact = () => {
                   <div className="h-1 w-20 bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] mx-auto"></div>
                 </div>
 
-                <form className="flex flex-col flex-1 max-w-xl mx-auto space-y-6">
+                <form className="flex flex-col flex-1 w-full mx-auto space-y-6">
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div>
                       <label
