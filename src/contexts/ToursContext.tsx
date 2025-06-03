@@ -22,6 +22,11 @@ export interface TourOption {
   languages?: string;
 }
 
+interface Category {
+  id: string;
+  name: string;
+}
+
 interface ToursContextType {
   tours: TourOption[];
   addTour: (tour: Omit<TourOption, 'id'>) => Promise<void>;
@@ -36,7 +41,7 @@ const ToursContext = createContext<ToursContextType | undefined>(undefined);
 
 export const ToursProvider = ({ children }: { children: ReactNode }) => {
   const [tours, setTours] = useState<TourOption[]>([]);
-
+  const [categories, setCategories] = useState<Category[]>([]);
   const fetchTours = async () => {
     try {
       const res = await fetch('https://leolovestravel.com/api/get-tours.php');
@@ -47,10 +52,32 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch('https://leolovestravel.com/api/get-categories.php');
+      const data = await res.json();
+      
+      // Handle different response formats
+      if (Array.isArray(data)) {
+        setCategories(data);
+      } else if (data.categories && Array.isArray(data.categories)) {
+        setCategories(data.categories);
+      } else if (data.data && Array.isArray(data.data)) {
+        setCategories(data.data);
+      } else {
+        console.error('Invalid categories response format:', data);
+        setCategories([]);
+      }
+    } catch (err) {
+      console.error('Failed to fetch categories:', err);
+      setCategories([]);
+    }
+  };
+
   useEffect(() => {
     fetchTours();
+    fetchCategories();
   }, []);
-
   const addTour = async (tour: Omit<TourOption, 'id'>) => {
     try {
       await fetch('https://leolovestravel.com/api/add-tour.php', {
@@ -59,6 +86,7 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
         body: JSON.stringify(tour),
       });
       await fetchTours();
+      await fetchCategories(); // Refresh categories in case new category was added
     } catch (err) {
       console.error('Add tour error:', err);
     }
@@ -72,6 +100,7 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
         body: JSON.stringify(updatedTour),
       });
       await fetchTours();
+      await fetchCategories(); // Refresh categories in case category was changed
     } catch (err) {
       console.error('Update tour error:', err);
     }
@@ -87,10 +116,62 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
       console.error('Delete tour error:', err);
     }
   };
-
   const getTourById = (id: string) => tours.find((tour) => tour.id === id);
-  const getToursByCategory = (category: string) => tours.filter((tour) => tour.category === category);
-  const getFeaturedTours = () => tours.filter((tour) => tour.featured);
+    const getToursByCategory = (categoryName: string) => {
+    console.log(`getToursByCategory called with: "${categoryName}"`);
+    console.log('Available categories:', categories);
+    console.log('All tours:', tours.map(t => ({ id: t.id, name: t.name, category: t.category })));
+    
+    // Create a mapping from category name to category ID
+    const categoryNameToId = new Map<string, string>();
+    const categoryIdToName = new Map<string, string>();
+    
+    categories.forEach(cat => {
+      categoryNameToId.set(cat.name, cat.id);
+      categoryIdToName.set(cat.id, cat.name);
+    });
+    
+    console.log('Category Name to ID mapping:', Object.fromEntries(categoryNameToId));
+    console.log('Category ID to Name mapping:', Object.fromEntries(categoryIdToName));
+    
+    const filtered = tours.filter((tour) => {
+      // Handle both scenarios:
+      // 1. Tour has category ID and we're filtering by category name
+      // 2. Tour has category name and we're filtering by category name
+      
+      let match = false;
+      
+      // Direct name match (for tours that already use category names)
+      if (tour.category === categoryName) {
+        match = true;
+      }
+      
+      // ID to name mapping (for tours that use category IDs)
+      const tourCategoryName = categoryIdToName.get(tour.category);
+      if (tourCategoryName === categoryName) {
+        match = true;
+      }
+      
+      // Name to ID mapping (fallback case)
+      const categoryId = categoryNameToId.get(categoryName);
+      if (tour.category === categoryId) {
+        match = true;
+      }
+      
+      console.log(`Tour "${tour.name}" category: "${tour.category}" (resolved to: "${tourCategoryName || tour.category}") - matches "${categoryName}": ${match}`);
+      return match;
+    });
+    
+    console.log(`getToursByCategory result: ${filtered.length} tours found for category "${categoryName}"`);
+    return filtered;
+  };
+  
+  const getFeaturedTours = () => {
+    console.log("getFeaturedTours called");
+    const featured = tours.filter((tour) => tour.featured);
+    console.log(`getFeaturedTours result: ${featured.length} tours found`);
+    return featured;
+  };
 
   return (
     <ToursContext.Provider
