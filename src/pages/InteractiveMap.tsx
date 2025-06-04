@@ -7,9 +7,11 @@ import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
 import { MapPin, Search, Plus, Minus, Layers, Map as MapIcon, List, Star, Heart, Info } from 'lucide-react';
+import { useTours } from '../contexts/ToursContext';
 
 const InteractiveMap = () => {
   const { theme } = useTheme();
+  const {  } = useTours();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');

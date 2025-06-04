@@ -1,12 +1,11 @@
 import { useTours } from '../../contexts/ToursContext';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/table';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
-import { Settings, BarChart3, List, Users, DollarSign, MapPin, Clock, Star, Eye, Edit, Trash2, Upload, Download, AlertTriangle } from 'lucide-react';
+import { Settings, BarChart3, List, Users, DollarSign, MapPin, Clock, Star, Eye, Edit, Trash2, Upload, Download, AlertTriangle, Folder } from 'lucide-react';
 
 const AdminDashboard = () => {
   const { tours } = useTours();
@@ -125,31 +124,22 @@ const AdminDashboard = () => {
                   </div>
                   Monthly Bookings
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={monthlyBookingsData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" />
-                    <YAxis stroke="#666" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: '#fff', 
-                        border: '1px solid #e5e7eb', 
-                        borderRadius: '12px',
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
-                      }} 
-                    />
-                    <Legend />
-                    <Line 
-                      type="monotone" 
-                      dataKey="bookings" 
-                      stroke="#0093DE" 
-                      strokeWidth={3}
-                      activeDot={{ r: 8, fill: '#0093DE' }} 
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
+              </CardHeader>              <CardContent className="p-6">
+                <div className="flex items-center justify-center h-[300px] bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div className="text-center">
+                    <BarChart3 className="h-12 w-12 text-[#0093DE] mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-600 dark:text-gray-300 mb-2">Monthly Bookings Chart</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Chart will be displayed here</p>
+                    <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+                      {monthlyBookingsData.map((data, idx) => (
+                        <div key={idx} className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
+                          <div className="text-xs text-gray-500 dark:text-gray-400">{data.month}</div>
+                          <div className="text-lg font-bold text-[#0093DE]">{data.bookings}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
             <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 rounded-xl bg-white dark:bg-gray-800 shadow-lg">
@@ -160,25 +150,22 @@ const AdminDashboard = () => {
                   </div>
                   Tours by Category
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={tourCategoryData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="name" stroke="#666" />
-                    <YAxis stroke="#666" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: '#fff', 
-                        border: '1px solid #e5e7eb', 
-                        borderRadius: '12px',
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
-                      }} 
-                    />
-                    <Legend />
-                    <Bar dataKey="count" fill="#0093DE" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+              </CardHeader>              <CardContent className="p-6">
+                <div className="flex items-center justify-center h-[300px] bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div className="text-center">
+                    <BarChart3 className="h-12 w-12 text-green-500 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-600 dark:text-gray-300 mb-2">Tours by Category Chart</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Chart will be displayed here</p>
+                    <div className="mt-4 grid grid-cols-2 gap-4 text-center">
+                      {tourCategoryData.map((data, idx) => (
+                        <div key={idx} className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
+                          <div className="text-xs text-gray-500 dark:text-gray-400">{data.name}</div>
+                          <div className="text-lg font-bold text-green-500">{data.count}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -209,19 +196,16 @@ const AdminDashboard = () => {
                       <TableCell className="font-medium text-gray-900 dark:text-white py-4">{tour.name}</TableCell>
                       <TableCell className="text-gray-600 dark:text-gray-400">{tour.location}</TableCell>
                       <TableCell className="font-bold text-[#0093DE]">${tour.price}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="bg-[#0093DE]/10 text-[#0093DE] border-[#0093DE]/30 font-medium">
+                      <TableCell>                        <Badge className="bg-[#0093DE]/10 text-[#0093DE] border border-[#0093DE]/30 font-medium">
                           {tour.category || 'Uncategorized'}
                         </Badge>
                       </TableCell>
                       <TableCell className="text-right">
-                        <div className="flex justify-end space-x-2">
-                          <Button variant="ghost" size="sm" asChild className="hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 rounded-lg">
+                        <div className="flex justify-end space-x-2">                          <Button className="h-9 px-4 text-xs bg-transparent hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 rounded-lg" asChild>
                             <Link to={`/tour/${tour.id}`} target="_blank">
                               <Eye className="h-4 w-4" />
                             </Link>
-                          </Button>
-                          <Button variant="ghost" size="sm" asChild className="hover:bg-green-50 hover:text-green-600 transition-all duration-200 rounded-lg">
+                          </Button>                          <Button className="h-9 px-4 text-xs bg-transparent hover:bg-green-50 hover:text-green-600 transition-all duration-200 rounded-lg" asChild>
                              <Link to={`/admin/tour-management?edit=${tour.id}`}>
                               <Edit className="h-4 w-4" />
                             </Link>
@@ -234,25 +218,30 @@ const AdminDashboard = () => {
               </Table>
             </CardContent>
           </Card>
-        </TabsContent>
-
-        <TabsContent value="tours">
+        </TabsContent>        <TabsContent value="tours">
            <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 rounded-xl bg-white dark:bg-gray-800 shadow-lg">
             <CardHeader className="bg-gradient-to-r from-[#0093DE]/5 to-transparent p-6 border-b border-gray-100 dark:border-gray-700">
               <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
                 <div className="p-2 bg-[#0093DE]/10 rounded-lg mr-3">
                   <List className="h-6 w-6 text-[#0093DE]" />
                 </div>
-                Tour Management
+                Management Center
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6">
-              <p className="mb-6 text-gray-600 dark:text-gray-400 text-lg">Manage all aspects of your tours from the dedicated Tour Management page.</p>
-              <Button asChild className="bg-[#0093DE] hover:bg-[#0077b3] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-6 py-3 rounded-xl">
-                <Link to="/admin/tour-management">
-                  <List className="mr-2 h-5 w-5" /> Open Tour Management
-                </Link>
-              </Button>
+              <p className="mb-6 text-gray-600 dark:text-gray-400 text-lg">Manage all aspects of your tours and categories from the dedicated management pages.</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button asChild className="bg-[#0093DE] hover:bg-[#0077b3] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-6 py-3 rounded-xl">
+                  <Link to="/admin/tour-management">
+                    <List className="mr-2 h-5 w-5" /> Open Tour Management
+                  </Link>
+                </Button>
+                <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-6 py-3 rounded-xl">
+                  <Link to="/admin/category-management">
+                    <Folder className="mr-2 h-5 w-5" /> Open Category Management
+                  </Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
@@ -306,8 +295,7 @@ const AdminDashboard = () => {
                     <Download className="h-5 w-5 text-yellow-500" />
                   </div>
                   Export Data
-                </h3>
-                <Button variant="outline" className="border-[#0093DE] text-[#0093DE] hover:bg-[#0093DE] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl">
+                </h3>                <Button className="border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl">
                   <Download className="mr-2 h-4 w-4" /> Export Tours as CSV
                 </Button>
               </div>
@@ -318,8 +306,7 @@ const AdminDashboard = () => {
                     <AlertTriangle className="h-5 w-5 text-red-500" />
                   </div>
                   Danger Zone
-                </h3>
-                <Button variant="destructive" className="shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl">
+                </h3>                <Button className="bg-red-500 hover:bg-red-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl">
                   <Trash2 className="mr-2 h-4 w-4" /> Reset to Default Tours
                 </Button>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">This action cannot be undone and will remove all custom tours.</p>

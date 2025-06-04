@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTours, TourOption } from '../../contexts/ToursContext';
-import TourTemplateForm from './TourTemplateForm';
 import { Link } from 'react-router-dom';
+import TourTemplateForm from './TourTemplateForm';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/table';
 import { Badge } from '../../components/ui/badge';
@@ -271,15 +271,15 @@ const AdminTourManagement = () => {
         </div>
       
         {/* Enhanced Add/Edit Form */}
+        {/* Enhanced Add/Edit Form */}
         {isAdding && (
-          <Card className="mb-8 animate-in fade-in-50 duration-500 shadow-xl rounded-2xl border-0 overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
+          <Card className="mb-8 animate-in fade-in-50 duration-500 shadow-xl rounded-2xl border-0 overflow-hidden">            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
               <CardTitle className="text-[#0093DE] text-xl font-semibold flex items-center">
                 <PlusCircle className="mr-3 h-6 w-6" />
                 Add New Tour
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-8 bg-white dark:bg-gray-800">
+            <CardContent className="p-0 bg-white dark:bg-gray-800">
               <TourTemplateForm
                 onSubmit={handleAddSubmit}
                 onCancel={handleCancel}
@@ -290,14 +290,13 @@ const AdminTourManagement = () => {
         )}
         
         {isEditing && currentTour && (
-          <Card className="mb-8 animate-in fade-in-50 duration-500 shadow-xl rounded-2xl border-0 overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
+          <Card className="mb-8 animate-in fade-in-50 duration-500 shadow-xl rounded-2xl border-0 overflow-hidden">            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
               <CardTitle className="text-[#0093DE] text-xl font-semibold flex items-center">
                 <Edit className="mr-3 h-6 w-6" />
                 Edit Tour: <span className="text-gray-700 dark:text-gray-300 ml-2">{currentTour.name}</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-8 bg-white dark:bg-gray-800">
+            <CardContent className="p-0 bg-white dark:bg-gray-800">
               <TourTemplateForm
                 initialData={currentTour}
                 onSubmit={handleEditSubmit}
@@ -307,7 +306,6 @@ const AdminTourManagement = () => {
             </CardContent>
           </Card>
         )}
-        
         {/* Enhanced Tours List */}
         {!isAdding && !isEditing && (
           <Card className="shadow-xl rounded-2xl overflow-hidden border-0 bg-white dark:bg-gray-800">
@@ -323,17 +321,15 @@ const AdminTourManagement = () => {
                   <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 ml-14">
                     Manage and organize your tour packages
                   </p>
-                </div>
-                
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                </div>                  <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="relative flex items-center">
+                    <Search className="absolute left-3 h-4 w-4 text-gray-400 z-10 pointer-events-none" />
                     <Input
                       type="text"
                       placeholder="Search tours..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 h-12 w-full sm:w-52 border-gray-300 focus:border-[#0093DE] focus:ring-[#0093DE] rounded-xl"
+                      className="pl-10 w-full sm:w-64 h-10 border-gray-300 focus:border-[#0093DE] focus:ring-[#0093DE] rounded-xl"
                     />
                   </div>
                   
@@ -350,15 +346,13 @@ const AdminTourManagement = () => {
                       ))}
                     </SelectContent>
                   </Select>
-                  
-                  {(searchQuery || categoryFilter !== 'all') && (
-                    <Button variant="outline" onClick={resetFilters} className="hover:bg-[#0093DE] hover:text-white transition-colors rounded-xl">
+                    {(searchQuery || categoryFilter !== 'all') && (
+                    <Button onClick={resetFilters} className="border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white transition-colors rounded-xl">
                       Clear Filters
                     </Button>
                   )}
-                  
-                  {selectedTours.length > 0 && (
-                    <Button variant="destructive" onClick={handleBulkDelete} className="shadow-lg hover:shadow-xl transition-all rounded-xl">
+                    {selectedTours.length > 0 && (
+                    <Button onClick={handleBulkDelete} className="bg-red-500 hover:bg-red-600 text-white shadow-lg hover:shadow-xl transition-all rounded-xl">
                       Delete Selected ({selectedTours.length})
                     </Button>
                   )}
@@ -458,23 +452,18 @@ const AdminTourManagement = () => {
                           </div>
                         </TableCell>
                         <TableCell className="font-medium text-gray-700 dark:text-gray-300">{tour.location}</TableCell>
-                        <TableCell className="font-bold text-[#0093DE] text-lg">${tour.price}</TableCell>
-                        <TableCell>
-                          <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800 font-medium rounded-xl px-3 py-1">
+                        <TableCell className="font-bold text-[#0093DE] text-lg">${tour.price}</TableCell>                        <TableCell>
+                          <Badge className="bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800 font-medium rounded-xl px-3 py-1">
                             {tour.duration}
                           </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline" className="bg-[#0093DE]/10 text-[#0093DE] border-[#0093DE]/30 font-medium rounded-xl px-3 py-1">
+                        </TableCell>                        <TableCell>
+                          <Badge className="bg-[#0093DE]/10 text-[#0093DE] border border-[#0093DE]/30 font-medium rounded-xl px-3 py-1">
                             {tour.category || 'Uncategorized'}
                           </Badge>
-                        </TableCell>
-                        <TableCell>
+                        </TableCell>                        <TableCell>
                           <Button 
-                            variant="ghost" 
-                            size="sm"
                             onClick={() => toggleFeatured(tour)}
-                            className={`${tour.featured ? 'text-yellow-500 hover:text-yellow-600 hover:bg-yellow-50' : 'text-gray-400 hover:text-yellow-500 hover:bg-yellow-50'} transition-all duration-200 rounded-xl`}
+                            className={`h-9 px-4 text-xs bg-white border border-gray-200 hover:bg-opacity-20 ${tour.featured ? 'text-yellow-500 hover:text-yellow-600 hover:bg-yellow-50' : 'text-black hover:text-yellow-500 hover:bg-yellow-50'} transition-all duration-200 rounded-xl shadow-sm`}
                           >
                             {tour.featured ? 
                               <Star className="h-5 w-5 fill-current" /> : 
@@ -484,15 +473,15 @@ const AdminTourManagement = () => {
                         </TableCell>
                         <TableCell className="text-right pr-6">
                           <div className="flex justify-end space-x-2">
-                            <Button variant="ghost" size="sm" asChild className="hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 rounded-xl">
+                            <Button asChild className="h-9 px-4 text-xs bg-white border border-gray-200 text-black hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 rounded-xl shadow-sm">
                               <Link to={`/tour/${tour.id}`} target="_blank">
                                 <Eye className="h-4 w-4" />
                               </Link>
                             </Button>
-                            <Button variant="ghost" size="sm" onClick={() => handleStartEdit(tour)} className="hover:bg-green-50 hover:text-green-600 transition-all duration-200 rounded-xl">
+                            <Button onClick={() => handleStartEdit(tour)} className="h-9 px-4 text-xs bg-white border border-gray-200 text-black hover:bg-green-50 hover:text-green-600 transition-all duration-200 rounded-xl shadow-sm">
                               <Edit className="h-4 w-4" />
                             </Button>
-                            <Button variant="ghost" size="sm" onClick={() => handleConfirmDelete(tour.id)} className="hover:bg-red-50 hover:text-red-600 transition-all duration-200 rounded-xl">
+                            <Button onClick={() => handleConfirmDelete(tour.id)} className="h-9 px-4 text-xs bg-white border border-gray-200 text-black hover:bg-red-50 hover:text-red-600 transition-all duration-200 rounded-xl shadow-sm">
                               <Trash2 className="h-4 w-4" />
                             </Button>
                           </div>
@@ -530,12 +519,11 @@ const AdminTourManagement = () => {
                 <Trash2 className="h-8 w-8 text-red-600" />
               </div>
               <p className="text-gray-900 dark:text-white mb-2 text-lg font-medium">Are you sure you want to delete this tour?</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">This action cannot be undone and will permanently remove the tour from your system.</p>
-              <div className="flex justify-center gap-4">
-                <Button variant="outline" onClick={() => setShowDeleteConfirm(false)} className="px-6 hover:bg-gray-50 transition-colors rounded-xl">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">This action cannot be undone and will permanently remove the tour from your system.</p>              <div className="flex justify-center gap-4">
+                <Button onClick={() => setShowDeleteConfirm(false)} className="px-6 border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-gray-50 transition-colors rounded-xl">
                   <XCircle className="mr-2 h-4 w-4" /> Cancel
                 </Button>
-                <Button variant="destructive" onClick={handleDelete} className="px-6 shadow-lg hover:shadow-xl transition-all rounded-xl">
+                <Button onClick={handleDelete} className="px-6 bg-red-500 hover:bg-red-600 text-white shadow-lg hover:shadow-xl transition-all rounded-xl">
                   <Trash2 className="mr-2 h-4 w-4" /> Delete Tour
                 </Button>
               </div>

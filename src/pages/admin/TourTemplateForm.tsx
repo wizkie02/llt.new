@@ -1,16 +1,20 @@
-import { useState } from 'react';
-import { TourOption } from '../../contexts/ToursContext';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
-import { Textarea } from '../../components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
-import { Checkbox } from '../../components/ui/checkbox';
-import { Card } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
-import { ImageUpload } from '../../components/ui/ImageUpload';
-import { Plus, Trash2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { TourOption } from '@/contexts/ToursContext';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Plus, Trash2, Loader2 } from 'lucide-react';
+
+interface Category {
+  id: string;
+  name: string;
+}
 
 interface TourTemplateFormProps {
   initialData?: Partial<TourOption>;
@@ -24,7 +28,16 @@ const TourTemplateForm = ({
   onSubmit, 
   onCancel,
   submitLabel
-}: TourTemplateFormProps) => {
+}: TourTemplateFormProps) => {  // Categories state
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [categoriesError, setCategoriesError] = useState<string | null>(null);
+    // Add new category state
+  const [showAddCategory, setShowAddCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
+  const [addingCategory, setAddingCategory] = useState(false);
+  const [pendingCategorySelection, setPendingCategorySelection] = useState<string | null>(null);
+
   // Form state
   const [formData, setFormData] = useState({
     name: initialData.name || '',
@@ -33,8 +46,7 @@ const TourTemplateForm = ({
     duration: initialData.duration || '',
     location: initialData.location || '',
     image: initialData.image || '',
-    featured: initialData.featured || false,
-    category: initialData.category || 'luxury',
+    featured: initialData.featured || false,    category: initialData.category || '',
     rating: initialData.rating || 4.5,
     reviewCount: initialData.reviewCount || 0,
     // Extended fields for detailed tour information
@@ -43,9 +55,159 @@ const TourTemplateForm = ({
     itinerary: initialData.itinerary || [{ day: '1', activities: '' }],
     // Additional fields
     maxGroupSize: 12,
-    languages: 'English, Vietnamese',
-    whatToBring: ['']
-  });
+    languages: 'English, Vietnamese',    whatToBring: ['']
+  });  // Load categories from API
+  const loadCategories = async () => {
+    setLoadingCategories(true);
+    setCategoriesError(null);
+    
+    try {
+      const response = await fetch('https://leolovestravel.com/api/get-categories.php');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const rawText = await response.text();
+      console.log('Raw API Response:', rawText);
+      console.log('Response Type:', typeof rawText);
+      console.log('Response Length:', rawText.length);
+      
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (parseError) {
+        throw new Error(`JSON parse error: ${parseError}. Raw response: ${rawText}`);
+      }
+      
+      console.log('Parsed Categories API Response:', data);
+      console.log('Data type:', typeof data);      console.log('Data keys:', Object.keys(data || {}));
+      
+      let categoriesData: Category[] = [];
+      
+      // Handle multiple response formats
+      if (Array.isArray(data)) {
+        // Direct array response format: [{"id": "1", "name": "Adventure"}, ...]
+        console.log('Using direct array format');
+        categoriesData = data;
+        setCategories(data);
+      } else if (data && typeof data === 'object') {
+        // Check for various object formats
+        if (data.success && data.categories && Array.isArray(data.categories)) {
+          // Wrapped response format: {"success": true, "categories": [...]}
+          console.log('Using wrapped success format');
+          categoriesData = data.categories;
+          setCategories(data.categories);
+        } else if (data.data && Array.isArray(data.data)) {
+          // Alternative format: {"data": [...]}
+          console.log('Using data wrapper format');
+          categoriesData = data.data;
+          setCategories(data.data);
+        } else if (data.categories && Array.isArray(data.categories)) {
+          // Categories only format: {"categories": [...]}
+          console.log('Using categories only format');
+          categoriesData = data.categories;
+          setCategories(data.categories);
+        } else {
+          console.error('Invalid categories API response format:', data);
+          setCategoriesError(`Invalid API response format. Expected array or object with categories but got: ${JSON.stringify(data)}`);
+          setCategories([]);
+        }
+      } else {
+        console.error('Invalid categories API response format:', data);
+        setCategoriesError(`Invalid API response format. Expected array or object but got: ${typeof data}`);
+        setCategories([]);
+      }
+      
+      // Handle pending category selection after loading
+      if (pendingCategorySelection && categoriesData.length > 0) {
+        const categoryToSelect = categoriesData.find((cat: Category) => cat.name === pendingCategorySelection);
+        if (categoryToSelect) {
+          setFormData(prev => ({ ...prev, category: categoryToSelect.id }));
+          setPendingCategorySelection(null);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading categories:', error);
+      setCategoriesError(`Failed to load categories: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      setCategories([]);
+    } finally {
+      setLoadingCategories(false);
+    }  };
+
+  // Add new category function
+  const handleAddNewCategory = async () => {
+    if (!newCategoryName.trim() || addingCategory) return;
+    
+    setAddingCategory(true);
+    setCategoriesError(null);
+    
+    try {      const response = await fetch('https://leolovestravel.com/api/add-categories.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: newCategoryName.trim()
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const rawText = await response.text();
+      console.log('Add Category Raw Response:', rawText);
+      
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (parseError) {
+        throw new Error(`JSON parse error: ${parseError}. Raw response: ${rawText}`);
+      }
+      
+      console.log('Add Category Response:', data);
+      
+      // Handle various success response formats
+      const isSuccess = data.success === true || data.status === 'success' || data.result === 'success';
+      
+      if (isSuccess) {
+        console.log('Category added successfully:', data);
+        
+        // Get the new category ID from response or reload categories to get updated list
+        let newCategoryId = data.id || data.category_id || data.categoryId;
+        
+        if (newCategoryId) {
+          // Add the new category to the local state
+          const newCategory = { id: String(newCategoryId), name: newCategoryName.trim() };
+          setCategories(prev => [...prev, newCategory]);
+          
+          // Select the newly created category
+          setFormData(prev => ({ ...prev, category: String(newCategoryId) }));        } else {
+          // If no ID returned, reload categories and set pending selection
+          setPendingCategorySelection(newCategoryName.trim());
+          await loadCategories();
+        }
+        
+        // Reset form state
+        setNewCategoryName('');
+        setShowAddCategory(false);
+      } else {
+        console.error('Failed to add category:', data);
+        setCategoriesError(data.message || data.error || 'Failed to add category');
+      }
+    } catch (error) {
+      console.error('Error adding category:', error);
+      setCategoriesError(`Failed to add category: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      setAddingCategory(false);
+    }
+  };
+
+  // Load categories on component mount
+  useEffect(() => {
+    loadCategories();
+  }, []);
   
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -250,26 +412,131 @@ const TourTemplateForm = ({
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">              <div className="space-y-2">
                 <Label htmlFor="category" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                   Category*
                 </Label>
-                <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="luxury">Luxury</SelectItem>
-                    <SelectItem value="adventure">Adventure</SelectItem>
-                    <SelectItem value="cultural">Cultural</SelectItem>
-                    <SelectItem value="nature">Nature</SelectItem>
-                    <SelectItem value="city">City Tours</SelectItem>
-                    <SelectItem value="beach">Beach & Islands</SelectItem>
-                    <SelectItem value="culinary">Culinary</SelectItem>
-                    <SelectItem value="wellness">Wellness</SelectItem>
-                  </SelectContent>
-                </Select>
+                
+                {showAddCategory ? (
+                  // Add new category input
+                  <div className="space-y-3">
+                    <div className="flex gap-2">
+                      <Input
+                        value={newCategoryName}
+                        onChange={(e) => setNewCategoryName(e.target.value)}
+                        placeholder="Enter new category name"
+                        className="flex-1"
+                        disabled={addingCategory}
+                        onKeyPress={(e) => e.key === 'Enter' && handleAddNewCategory()}
+                      />                      <Button
+                        type="button"
+                        onClick={handleAddNewCategory}
+                        disabled={!newCategoryName.trim() || addingCategory}
+                        className="h-9 px-4 text-xs bg-green-600 hover:bg-green-700"
+                      >
+                        {addingCategory ? (
+                          <Loader2 className="animate-spin h-4 w-4" />
+                        ) : (
+                          <Plus className="h-4 w-4" />
+                        )}
+                      </Button>                      <Button
+                        type="button"
+                        onClick={() => {
+                          setShowAddCategory(false);
+                          setNewCategoryName('');
+                        }}
+                        disabled={addingCategory}
+                        className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      Press Enter or click + to add the category
+                    </div>
+                  </div>
+                ) : (
+                  // Regular category select
+                  <Select 
+                    value={formData.category}                    onValueChange={(value: string) => {
+                      if (value === '__add_new__') {
+                        setShowAddCategory(true);
+                      } else {
+                        setFormData({...formData, category: value});
+                      }
+                    }}
+                    disabled={loadingCategories}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={loadingCategories ? "Loading categories..." : "Select category"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {loadingCategories ? (
+                        <SelectItem value="loading" disabled>
+                          <div className="flex items-center">
+                            <Loader2 className="animate-spin h-4 w-4 mr-2" />
+                            Loading...
+                          </div>
+                        </SelectItem>
+                      ) : categoriesError ? (
+                        <SelectItem value="error" disabled>
+                          <div className="text-red-500">Error loading categories</div>
+                        </SelectItem>
+                      ) : (
+                        <>
+                          {categories.length === 0 ? (
+                            <SelectItem value="empty" disabled>
+                              No categories available
+                            </SelectItem>
+                          ) : (
+                            categories.map((category) => (
+                              <SelectItem key={category.id} value={category.id}>
+                                {category.name}
+                              </SelectItem>
+                            ))
+                          )}
+                          {/* Add new category option */}
+                          <SelectItem value="__add_new__" className="text-green-600 font-medium">
+                            <div className="flex items-center">
+                              <Plus className="h-4 w-4 mr-2" />
+                              Add New Category
+                            </div>
+                          </SelectItem>
+                        </>
+                      )}
+                    </SelectContent>
+                  </Select>
+                )}
+                
+                {categoriesError && (
+                  <div className="text-sm text-red-500 mt-1 space-y-2">
+                    <div>{categoriesError}</div>
+                    <div className="flex gap-2">                      <Button 
+                        type="button" 
+                        onClick={loadCategories} 
+                        className="h-9 px-4 text-xs h-auto p-0 text-red-500 hover:text-red-700"
+                      >
+                        Retry
+                      </Button>                      <Button 
+                        type="button" 
+                        onClick={async () => {
+                          try {
+                            const response = await fetch('https://leolovestravel.com/api/get-categories.php');
+                            const data = await response.text();
+                            console.log('Raw API Response:', data);
+                            alert(`Raw API Response: ${data.substring(0, 500)}`);
+                          } catch (error) {
+                            console.error('Debug error:', error);
+                            alert(`Debug error: ${error}`);
+                          }
+                        }}
+                        className="h-9 px-4 text-xs h-auto p-0 text-blue-500 hover:text-blue-700"
+                      >
+                        Debug API
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
               
               <div className="space-y-2">
@@ -315,7 +582,7 @@ const TourTemplateForm = ({
                 <Checkbox
                   id="featured"
                   checked={formData.featured}
-                  onCheckedChange={(checked) => setFormData({...formData, featured: !!checked})}
+                  onCheckedChange={(checked: boolean) => setFormData({...formData, featured: !!checked})}
                 />
                 <Label htmlFor="featured" className="text-sm text-gray-700 dark:text-gray-300">
                   Feature this tour on homepage
@@ -329,7 +596,7 @@ const TourTemplateForm = ({
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Tour Highlights</h3>
-                <Button type="button" onClick={() => addArrayItem('highlights')} variant="outline" size="sm">
+                <Button type="button" onClick={() => addArrayItem('highlights')} className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white">
                   <Plus className="h-4 w-4 mr-2" />
                   Add Highlight
                 </Button>
@@ -342,12 +609,10 @@ const TourTemplateForm = ({
                     placeholder="e.g. Professional local guides"
                     className="flex-1"
                   />
-                  {formData.highlights.length > 1 && (
-                    <Button 
+                  {formData.highlights.length > 1 && (                    <Button 
                       type="button" 
                       onClick={() => removeArrayItem('highlights', index)} 
-                      variant="outline" 
-                      size="sm"
+                      className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -359,7 +624,7 @@ const TourTemplateForm = ({
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">What's Included</h3>
-                <Button type="button" onClick={() => addArrayItem('included')} variant="outline" size="sm">
+                <Button type="button" onClick={() => addArrayItem('included')} className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white">
                   <Plus className="h-4 w-4 mr-2" />
                   Add Item
                 </Button>
@@ -372,12 +637,10 @@ const TourTemplateForm = ({
                     placeholder="e.g. Hotel accommodation"
                     className="flex-1"
                   />
-                  {formData.included.length > 1 && (
-                    <Button 
+                  {formData.included.length > 1 && (                    <Button 
                       type="button" 
                       onClick={() => removeArrayItem('included', index)} 
-                      variant="outline" 
-                      size="sm"
+                      className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -389,7 +652,7 @@ const TourTemplateForm = ({
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">What to Bring</h3>
-                <Button type="button" onClick={() => addArrayItem('whatToBring')} variant="outline" size="sm">
+                <Button type="button" onClick={() => addArrayItem('whatToBring')} className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white">
                   <Plus className="h-4 w-4 mr-2" />
                   Add Item
                 </Button>
@@ -402,12 +665,10 @@ const TourTemplateForm = ({
                     placeholder="e.g. Valid passport"
                     className="flex-1"
                   />
-                  {formData.whatToBring.length > 1 && (
-                    <Button 
+                  {formData.whatToBring.length > 1 && (                    <Button 
                       type="button" 
                       onClick={() => removeArrayItem('whatToBring', index)} 
-                      variant="outline" 
-                      size="sm"
+                      className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -422,7 +683,7 @@ const TourTemplateForm = ({
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Day-by-Day Itinerary</h3>
-                <Button type="button" onClick={addItineraryDay} variant="outline" size="sm">
+                <Button type="button" onClick={addItineraryDay} className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white">
                   <Plus className="h-4 w-4 mr-2" />
                   Add Day
                 </Button>
@@ -430,15 +691,13 @@ const TourTemplateForm = ({
               {formData.itinerary.map((day, index) => (
                 <Card key={index} className="p-4">
                   <div className="flex justify-between items-center mb-4">
-                    <Badge variant="outline" className="bg-[#0093DE]/10 text-[#0093DE]">
+                    <Badge className="bg-[#0093DE]/10 text-[#0093DE] border border-[#0093DE]/30">
                       Day {day.day}
                     </Badge>
-                    {formData.itinerary.length > 1 && (
-                      <Button 
+                    {formData.itinerary.length > 1 && (                      <Button 
                         type="button" 
                         onClick={() => removeItineraryDay(index)} 
-                        variant="outline" 
-                        size="sm"
+                        className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -501,11 +760,10 @@ const TourTemplateForm = ({
           </TabsContent>
         </Tabs>
 
-        <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-600 mt-8">
-          <Button
+        <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-600 mt-8">          <Button
             type="button"
             onClick={onCancel}
-            variant="outline"
+            className="border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"
           >
             Cancel
           </Button>

@@ -38,7 +38,7 @@ const SocialIcon = ({ href, children, delay = 0 }: SocialIconProps) => {
   return (
     <a
       href={href}
-      className="bg-white shadow-md hover:shadow-lg hover:bg-[#0093DE]/10 p-2 rounded-full text-gray-700 hover:text-[#0093DE] transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
+      className="bg-white shadow-md hover:shadow-lg hover:bg-[#0093DE]/10 p-2 rounded-full text-gray-700 hover:text-[#0093DE] transition-all duration-300"
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -136,93 +136,13 @@ const DecorativeDots = () => {
   );
 };
 
-interface Hover3DCardProps {
-  children: ReactNode;
-  className?: string;
-}
-
-// Custom hover card component with 3D effect
-const Hover3DCard = ({ children, className = "" }: Hover3DCardProps) => {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const posX = e.clientX - centerX;
-    const posY = e.clientY - centerY;
-
-    // Calculate rotation based on mouse position
-    // Limit the rotation to a small amount
-    const rotateX = (posY / rect.height) * -8;
-    const rotateY = (posX / rect.width) * 8;
-
-    setRotation({ x: rotateX, y: rotateY });
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      className={`transition-all duration-200 ${
-        isHovering ? "z-10" : ""
-      } ${className}`}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => {
-        setIsHovering(false);
-        setRotation({ x: 0, y: 0 });
-      }}
-      style={{
-        transform: isHovering
-          ? `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(1.02)`
-          : "perspective(1000px) rotateX(0) rotateY(0)",
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-// Commented out unused PaymentCard component
-/*
-interface PaymentCardProps {
-  imageSrc: string;
-  name: string;
-  delay?: number;
-}
-
-const PaymentCard = ({ imageSrc, name, delay = 0 }: PaymentCardProps) => {
-  return (
-    <div
-      className="transition-transform duration-300 hover:scale-110 group"
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <div className="relative overflow-hidden transition-all duration-300 bg-white rounded-md shadow-sm group-hover:shadow-md">
-        <div className="absolute inset-0 bg-[#0093DE]/0 group-hover:bg-[#0093DE]/5 transition-colors duration-300"></div>
-        <img
-          src={imageSrc}
-          alt={name}
-          className="relative z-10 h-8 px-3 py-1"
-        />
-      </div>
-      <div className="mt-1 text-xs text-center text-gray-500 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-        {name}
-      </div>
-    </div>
-  );
-};
-*/
+// Removed Hover3DCard component - replaced with simple div wrapper
 
 const Footer = () => {
-  const { theme } = useTheme();
-  const [email, setEmail] = useState("");
+  const { theme } = useTheme();  const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [scrollVisible, setScrollVisible] = useState(false);
 
   // Show scroll-to-top button only when scrolled down
@@ -237,89 +157,62 @@ const Footer = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  }, []);  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
+    setShowErrorMessage(false);
 
-    // Simulate processing
+    try {
+      // Send email to webhook
+      const response = await fetch('https://hook.eu2.make.com/ll3ihyl5e5nmz378seyguhai60o54ghw', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'website_footer',
+          timestamp: new Date().toISOString(),
+          message: `New newsletter subscription from ${email}`
+        }),
+      });
+
+      if (response.ok) {
+        setShowSuccessMessage(true);
+        setEmail("");
+      } else {
+        throw new Error('Failed to subscribe');
+      }
+    } catch (error) {
+      console.error('Error subscribing to newsletter:', error);
+      setShowErrorMessage(true);
+    }
+
+    setIsSubmitted(false);
+
+    // Hide messages after 5 seconds
     setTimeout(() => {
-      setShowSuccessMessage(true);
-      setEmail("");
+      setShowSuccessMessage(false);
+      setShowErrorMessage(false);
+    }, 5000);
+  };
 
-      // Hide success message after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setShowSuccessMessage(false);
-      }, 3000);
-    }, 600);
-  };  const currentYear = new Date().getFullYear();
-
-  // Arrays used in the component
+  const currentYear = new Date().getFullYear();
   const destinations = [
-    { name: "Halong Bay", path: "/destination/halong-bay" },
-    { name: "Hoi An Ancient Town", path: "/destination/hoi-an" },
-    { name: "Sapa Rice Terraces", path: "/destination/sapa" },
-    { name: "Mekong Delta", path: "/destination/mekong" },
-    { name: "Hanoi Old Quarter", path: "/destination/hanoi" },
-    { name: "Hue Imperial City", path: "/destination/hue" },
+    { name: "Halong Bay", path: "/tour/2" },
+    { name: "Hoi An Ancient Town", path: "/tour/4" },
+    { name: "Sapa Rice Terraces", path: "/tour/3" },
+    { name: "Mekong Delta", path: "/tour/5" },
+    { name: "Hanoi Old Quarter", path: "/tour/7" },
+    { name: "Hue Imperial City", path: "/tour/8" },
   ];
-
   const services = [
-    { name: 'Cultural Tours', path: '/travel-services' },
-    { name: 'Adventure Tours', path: '/team-building' },
-    { name: 'Food & Culinary', path: '/events' },
-    { name: 'Romantic Getaways', path: '/romantic-travel' },
-    { name: 'Wellness Retreats', path: '/medical-travel' },
-    { name: 'Package Tours', path: '/package-tours' }
+    { name: "Travel Services", path: "/travel-services" },
+    { name: "Team Building", path: "/team-building" },
+    { name: "Events & Conferences", path: "/events" },
+    { name: "Romantic Travel", path: "/romantic-travel" },
+    { name: "Medical Travel", path: "/medical-travel" },
   ];
-
-  // TODO: Use these arrays for future payment methods and partners sections
-  // Commented out unused arrays to fix TypeScript errors
-  /*
-  const paymentMethods = [
-    {
-      name: "Visa",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png",
-    },
-    {
-      name: "MasterCard",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png",
-    },
-    {
-      name: "JCB",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/JCB_logo.svg/2560px-JCB_logo.svg.png",
-    },
-    {
-      name: "MoMo",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MoMo_Logo.png/800px-MoMo_Logo.png",
-    },
-    {
-      name: "VNPay",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png",
-    },
-  ];
-
-  const partners = [
-    {
-      name: "Vietnam Airlines",
-      img: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Vietnam_Airlines_logo.svg/1200px-Vietnam_Airlines_logo.svg.png",
-    },
-    {
-      name: "Bamboo Airways",
-      img: "https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Bamboo_Airways_logo.svg/1200px-Bamboo_Airways_logo.svg.png",
-    },
-    {
-      name: "VietJet Air",
-      img: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Vietjet_Air_logo.svg/1200px-Vietjet_Air_logo.svg.png",
-    },
-    {
-      name: "Vietnam Tourist",
-      img: "https://dtinews.vn/upload/news/old/tintuc/2016/08/13/VN-guide.jpg",
-    },
-  ];
-  */
 
   return (
     <footer
@@ -369,10 +262,9 @@ const Footer = () => {
       <DecorativeDots />
 
       {/* Newsletter Section - Before the main footer */}
-      <div className="relative z-10 pt-12">
-        <div className="container px-4 mx-auto">
+      <div className="relative z-10 pt-12">        <div className="container px-4 mx-auto">
           <AnimatedCard delay={100} direction="up">
-            <Hover3DCard
+            <div
               className={`${
                 theme === "light"
                   ? "bg-gradient-to-r from-[#0093DE]/10 to-[#6dc0eb]/10"
@@ -404,28 +296,62 @@ const Footer = () => {
                       <div
                         className="absolute inset-0 rounded-full animate-[pulse-ring_3s_ease-out_infinite]"
                         style={{ border: "1px solid rgba(0, 147, 222, 0.3)" }}
-                      ></div>
-                    </div>
-                    Subscribe to our newsletter
+                      ></div>                    </div>
+                    Stay Updated with Us
                   </h3>
                   <p
                     className={`${
                       theme === "light" ? "text-gray-700" : "text-gray-300"
                     } text-sm mb-0 lg:pr-8`}
-                  >
-                    Get exclusive deals and travel insights for your Vietnam
-                    adventure
+                  >                    Get exclusive deals and travel insights for your Vietnam adventure
                   </p>
-                </div>
-                <div className="flex justify-center lg:w-1/2 lg:justify-end">
-                  {!showSuccessMessage ? (
+                </div>                <div className="flex justify-center lg:w-1/2 lg:justify-end">
+                  {showSuccessMessage ? (
+                    <div className="flex items-center px-4 py-3 text-green-700 border border-green-200 rounded-lg shadow-md bg-green-50 animate-fade-in">
+                      <svg
+                        className="w-5 h-5 mr-3 text-green-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>
+                        Thank you for subscribing! You'll receive the latest deals soon.
+                      </span>
+                    </div>
+                  ) : showErrorMessage ? (
+                    <div className="flex items-center px-4 py-3 text-red-700 border border-red-200 rounded-lg shadow-md bg-red-50 animate-fade-in">
+                      <svg
+                        className="w-5 h-5 mr-3 text-red-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>
+                        An error occurred. Please try again later.
+                      </span>
+                    </div>
+                  ) : (
                     <form
                       className="flex flex-col w-full gap-2 sm:flex-row lg:max-w-md"
                       onSubmit={handleSubmit}
                     >
                       <input
                         type="email"
-                        placeholder="Your email address"
+                        placeholder="Enter your email address"
                         className={`flex-grow px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0093DE] ${
                           theme === "light"
                             ? "bg-white/80 text-gray-700"
@@ -475,30 +401,9 @@ const Footer = () => {
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_infinite] bg-[length:200%_100%] opacity-0 hover:opacity-100 transition-opacity"></div>
                       </button>
                     </form>
-                  ) : (
-                    <div className="flex items-center px-4 py-3 text-green-700 border border-green-200 rounded-lg shadow-md bg-green-50 animate-fade-in">
-                      <svg
-                        className="w-5 h-5 mr-3 text-green-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <span>
-                        Thank you for subscribing! You'll receive our latest
-                        deals soon.
-                      </span>
-                    </div>
-                  )}
-                </div>
+                  )}</div>
               </div>
-            </Hover3DCard>
+            </div>
           </AnimatedCard>
         </div>
       </div>
@@ -513,7 +418,7 @@ const Footer = () => {
                   alt="Leo Loves Travel"
                   className="w-auto h-8 mr-3"
                 />
-                <h4 className="text-lg font-bold text-[#0093DE]">About Us</h4>
+                {/* <h4 className="text-lg font-bold text-[#0093DE]">About Us</h4> */}
               </div>
               <p
                 className={`text-sm ${
@@ -598,12 +503,10 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-          </AnimatedCard>
-
-          <AnimatedCard delay={400} direction="up">
+          </AnimatedCard>          <AnimatedCard delay={400} direction="up">
             <div>
               <h4 className="text-lg font-bold mb-4 text-[#0093DE]">
-                Services
+                Experiences
               </h4>
               <ul className="space-y-2 text-sm">
                 {services.map((service, index) => (
@@ -649,7 +552,8 @@ const Footer = () => {
                     />
                   </svg>
                   <span>
-                    123 Nguyen Hue Street, District 1, Ho Chi Minh City, Vietnam
+                    2 Ng. 337 P. Định Công, Định Công, Hoàng Mai, Hà Nội,
+                    Vietnam
                   </span>
                 </li>
                 <li
@@ -692,7 +596,7 @@ const Footer = () => {
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  <span>+84 (0) 123 456 789</span>
+                  <span>+84 (0) 865 843 276</span>
                 </li>
                 <li
                   className={`flex items-center ${
@@ -729,11 +633,11 @@ const Footer = () => {
           >
             <div className="flex flex-col items-center space-y-3">
               <div className="flex items-center">
-                <img
+                {/* <img
                   src={logo}
                   alt="Leo Loves Travel"
                   className="w-auto h-6 mr-2"
-                />
+                /> */}
                 <span
                   className={`text-sm font-medium ${
                     theme === "light" ? "text-gray-600" : "text-gray-400"
@@ -769,7 +673,7 @@ const Footer = () => {
       {/* Scroll to top button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`fixed bottom-6 right-6 p-3 rounded-full bg-[#0093DE] text-white shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl z-50 ${
+        className={`fixed bottom-24 right-4 p-3.5 rounded-full bg-[#0093DE] text-white shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl z-50 ${
           scrollVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none"
@@ -778,7 +682,7 @@ const Footer = () => {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-5 h-5"
+          className="w-8 h-8"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

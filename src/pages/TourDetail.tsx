@@ -21,6 +21,7 @@ const TourDetail = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [] = useState('overview');
   const [showFullItinerary, setShowFullItinerary] = useState(false);
   const [date, setDate] = useState<Date>();
   const [guests, setGuests] = useState(2);

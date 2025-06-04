@@ -186,7 +186,6 @@ const Booking = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -197,8 +196,63 @@ const Booking = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Prepare data to send to webhook
+      const webhookData = {
+        timestamp: new Date().toISOString(),
+        source: 'booking_form',
+        tour: selectedTour ? {
+          id: selectedTour.id,
+          name: selectedTour.name,
+          price: selectedTour.price,
+          location: selectedTour.location,
+          duration: selectedTour.duration
+        } : null,
+        contactInformation: {
+          firstName: formData.contactFirstName,
+          lastName: formData.contactLastName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          emergencyContact: formData.emergencyContact,
+          emergencyPhone: formData.emergencyPhone
+        },
+        tourDetails: {
+          tourId: formData.tourId,
+          departureDate: formData.departureDate?.toISOString(),
+          returnDate: formData.returnDate?.toISOString(),
+          numberOfTravelers: formData.numberOfTravelers
+        },
+        travelers: formData.travelers.map((traveler, index) => ({
+          travelerNumber: index + 1,
+          firstName: traveler.firstName,
+          lastName: traveler.lastName,
+          passportNumber: traveler.passportNumber,
+          passportExpiry: traveler.passportExpiry?.toISOString(),
+          dateOfBirth: traveler.dateOfBirth?.toISOString(),
+          nationality: traveler.nationality
+        })),
+        additionalInformation: {
+          specialRequests: formData.specialRequests,
+          dietaryRestrictions: formData.dietaryRestrictions,
+          medicalConditions: formData.medicalConditions
+        },
+        bookingTotal: selectedTour ? selectedTour.price * formData.numberOfTravelers : 0
+      };
+
+      // Send data to webhook
+      const response = await fetch('https://hook.eu2.make.com/0132fcrjrwvpgea89pekppaew7c5m99z', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(webhookData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook failed with status: ${response.status}`);
+      }
+
+      console.log('Booking data sent to webhook successfully');
       
       // Navigate to booking confirmation with form data
       navigate('/booking-confirmation', { 
@@ -209,6 +263,8 @@ const Booking = () => {
       });
     } catch (error) {
       console.error('Booking submission failed:', error);
+      // You might want to show an error message to the user here
+      alert('There was an error processing your booking. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
