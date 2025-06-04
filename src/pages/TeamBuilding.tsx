@@ -1,9 +1,14 @@
 import { useTheme } from "../contexts/ThemeContext";
+import LazyImage from "../components/ui/LazyImage";
+import { useImagePreload } from "../hooks/useImageOptimization";
 import ScrollReveal from "../components/ui/ScrollReveal";
 import bg9 from "../assets/images/backgrounds/bg9.jpg";
 
 const TeamBuilding = () => {
   const { theme } = useTheme();
+  
+  // Preload critical hero background image
+  useImagePreload(bg9, true);
 
   const services = [
     {
@@ -151,7 +156,7 @@ const TeamBuilding = () => {
                   }`}
                 >
                   <div className="h-48 overflow-hidden">
-                    <img
+                    <LazyImage
                       src={service.image}
                       alt={service.title}
                       className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
@@ -669,7 +674,7 @@ const TeamBuilding = () => {
                   }`}
                 >
                   <div className="h-56 overflow-hidden">
-                    <img
+                    <LazyImage
                       src={study.image}
                       alt={study.company}
                       className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
@@ -891,7 +896,7 @@ const TeamBuilding = () => {
               <div className="grid grid-cols-2 gap-4">
                 <ScrollReveal direction="right" delay={300} distance={30}>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Team collaboration"
                       className="object-cover w-full h-full"
@@ -901,7 +906,7 @@ const TeamBuilding = () => {
 
                 <ScrollReveal direction="right" delay={400} distance={30}>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Office team"
                       className="object-cover w-full h-full"
@@ -911,7 +916,7 @@ const TeamBuilding = () => {
 
                 <ScrollReveal direction="right" delay={500} distance={30}>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Team activity"
                       className="object-cover w-full h-full"
@@ -921,7 +926,7 @@ const TeamBuilding = () => {
 
                 <ScrollReveal direction="right" delay={600} distance={30}>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Team meeting"
                       className="object-cover w-full h-full"

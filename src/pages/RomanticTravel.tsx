@@ -1,11 +1,16 @@
 import { useTheme } from "../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
+import LazyImage from "../components/ui/LazyImage";
+import { useImagePreload } from "../hooks/useImageOptimization";
 import ScrollReveal from "../components/ui/ScrollReveal";
 import bg10 from "../assets/images/backgrounds/bg10.jpg";
 
 const RomanticTravel = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  
+  // Preload critical hero background image
+  useImagePreload(bg10, true);
 
   const services = [
     {
@@ -153,11 +158,11 @@ const RomanticTravel = () => {
                       ? "bg-white shadow-md"
                       : "bg-gray-800 shadow-md"
                   }`}
-                >
-                  <div className="h-48 overflow-hidden">
-                    <img
+                >                  <div className="h-48 overflow-hidden">
+                    <LazyImage
                       src={service.image}
                       alt={service.title}
+                      preset="card"
                       className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
                     />
                   </div>
@@ -197,11 +202,11 @@ const RomanticTravel = () => {
           </ScrollReveal>
 
           <div className="grid max-w-6xl grid-cols-2 gap-4 mx-auto md:grid-cols-4">
-            <ScrollReveal direction="left" delay={300} distance={30}>
-              <div className="relative h-40 overflow-hidden transition-transform duration-300 shadow-md md:h-64 rounded-2xl hover:shadow-xl hover:-translate-y-1">
-                <img
+            <ScrollReveal direction="left" delay={300} distance={30}>              <div className="relative h-40 overflow-hidden transition-transform duration-300 shadow-md md:h-64 rounded-2xl hover:shadow-xl hover:-translate-y-1">
+                <LazyImage
                   src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                   alt="Couple in Hoi An"
+                  preset="gallery"
                   className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
                 />
               </div>
@@ -309,11 +314,11 @@ const RomanticTravel = () => {
                       ? "bg-white shadow-lg"
                       : "bg-gray-800 shadow-lg"
                   }`}
-                >
-                  <div className="flex items-center mb-4">
-                    <img
+                >                  <div className="flex items-center mb-4">
+                    <LazyImage
                       src={testimonial.image}
                       alt={testimonial.name}
+                      preset="thumbnail"
                       className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-[#0093DE]"
                     />
                     <div>

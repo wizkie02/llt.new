@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
+import LazyImage from '../components/ui/LazyImage';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -153,7 +154,7 @@ const TravelBlog = () => {
             {featuredPosts.map((post) => (
               <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="h-48 overflow-hidden">
-                  <img 
+                  <LazyImage 
                     src={post.image} 
                     alt={post.title} 
                     className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
@@ -199,7 +200,7 @@ const TravelBlog = () => {
                 <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="flex flex-col md:flex-row">
                     <div className="md:w-1/3 h-48 md:h-auto overflow-hidden">
-                      <img 
+                      <LazyImage 
                         src={post.image} 
                         alt={post.title} 
                         className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
@@ -277,7 +278,7 @@ const TravelBlog = () => {
                     {featuredPosts.map((post) => (
                       <div key={post.id} className="flex gap-3">
                         <div className="w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
-                          <img 
+                          <LazyImage 
                             src={post.image} 
                             alt={post.title} 
                             className="w-full h-full object-cover"

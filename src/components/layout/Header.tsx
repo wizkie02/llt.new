@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import LazyImage from "../ui/LazyImage";
+import { useImagePreload } from "../../hooks/useImageOptimization";
 import logoWhite from "../../assets/white-horizontal.png";
 import logoRegular from "../../assets/horizontal_1.png";
 
@@ -13,6 +15,10 @@ const Header = () => {
   const headerRef = useRef<HTMLElement>(null);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
   const isHome = location.pathname === "/";
+  
+  // Preload logo images for better performance
+  useImagePreload(logoWhite, true);
+  useImagePreload(logoRegular, true);
 
   // Enhanced scroll handler with simplified transition - only active on homepage
   useEffect(() => {
@@ -100,13 +106,10 @@ const Header = () => {
           paddingBottom: `${Math.max(24 - scrollProgress * 8, 16)}px`,
         }}
       >
-        <div className="flex items-center justify-between w-full">
-          {/* Logo with conditional white/regular version */}
+        <div className="flex items-center justify-between w-full">          {/* Logo with conditional white/regular version */}
           <Link to="/" className="relative flex items-center">
             {/* White logo - visible when at top of homepage */}
-            <img
-              src={logoWhite}
-              alt="Explore Vietnam"
+            <div
               className={`transition-all duration-500 absolute ${
                 isHome && !isScrolled ? "opacity-100" : "opacity-0"
               }`}
@@ -115,16 +118,18 @@ const Header = () => {
                 filter: "drop-shadow(0 0 0 transparent)",
                 transform: `scale(${1 - scrollProgress * 0.05})`,
               }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src =
-                  "https://placehold.co/200x80/0093DE/FFFFFF/png?text=Vietnam+Travel";
-              }}
-            />
+            >
+              <LazyImage
+                src={logoWhite}
+                alt="Explore Vietnam"
+                className="w-full h-full object-contain"
+                fallbackSrc="https://placehold.co/200x80/0093DE/FFFFFF/png?text=Vietnam+Travel"
+                preset="thumbnail"
+                priority
+              />
+            </div>
             {/* Regular logo - visible when scrolled or not on homepage */}
-            <img
-              src={logoRegular}
-              alt="Explore Vietnam"
+            <div
               className={`transition-all duration-500 ${
                 isHome && !isScrolled ? "opacity-0" : "opacity-100"
               }`}
@@ -133,12 +138,16 @@ const Header = () => {
                 filter: "drop-shadow(0 0 0 transparent)",
                 transform: `scale(${1 - scrollProgress * 0.05})`,
               }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src =
-                  "https://placehold.co/200x80/0093DE/FFFFFF/png?text=Vietnam+Travel";
-              }}
-            />
+            >
+              <LazyImage
+                src={logoRegular}
+                alt="Explore Vietnam"
+                className="w-full h-full object-contain"
+                fallbackSrc="https://placehold.co/200x80/0093DE/FFFFFF/png?text=Vietnam+Travel"
+                preset="thumbnail"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Search bar - New Addition (appears on scroll or mobile) */}

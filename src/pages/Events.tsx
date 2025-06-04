@@ -1,8 +1,13 @@
 import { useTheme } from "../contexts/ThemeContext";
+import LazyImage from "../components/ui/LazyImage";
+import { useImagePreload } from "../hooks/useImageOptimization";
 import bg5 from "../assets/images/backgrounds/bg5.jpg";
 
 const Events = () => {
   const { theme } = useTheme();
+  
+  // Preload critical hero background image
+  useImagePreload(bg5, true);
 
   const services = [
     {
@@ -353,7 +358,7 @@ const Events = () => {
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <div className="relative overflow-hidden shadow-md group h-72 rounded-2xl">
-              <img
+              <LazyImage
                 src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                 alt="Corporate conference"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
@@ -366,7 +371,7 @@ const Events = () => {
             </div>
 
             <div className="relative overflow-hidden shadow-md group h-72 rounded-2xl">
-              <img
+              <LazyImage
                 src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                 alt="Gala dinner"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
@@ -379,7 +384,7 @@ const Events = () => {
             </div>
 
             <div className="relative overflow-hidden shadow-md group h-72 rounded-2xl">
-              <img
+              <LazyImage
                 src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                 alt="Beach wedding"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
@@ -392,7 +397,7 @@ const Events = () => {
             </div>
 
             <div className="relative overflow-hidden shadow-md group h-72 rounded-2xl">
-              <img
+              <LazyImage
                 src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                 alt="Team building"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
@@ -405,7 +410,7 @@ const Events = () => {
             </div>
 
             <div className="relative overflow-hidden shadow-md group h-72 rounded-2xl">
-              <img
+              <LazyImage
                 src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                 alt="Product launch"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
@@ -418,7 +423,7 @@ const Events = () => {
             </div>
 
             <div className="relative overflow-hidden shadow-md group h-72 rounded-2xl">
-              <img
+              <LazyImage
                 src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                 alt="Award ceremony"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"

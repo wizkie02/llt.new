@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
+import LazyImage from '../components/ui/LazyImage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -206,7 +207,7 @@ const InteractiveMap = () => {
                 <CardContent className="p-0 h-full relative">
                   {/* This would be replaced with an actual map component like Google Maps or Leaflet */}
                   <div className="w-full h-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center relative">
-                    <img 
+                    <LazyImage 
                       src="https://images.unsplash.com/photo-1555921015-5532091f6026?q=80&w=1000" 
                       alt="Vietnam Map" 
                       className="w-full h-full object-cover opacity-50"
@@ -264,7 +265,7 @@ const InteractiveMap = () => {
                           {location.tours.map(tour => (
                             <div key={tour.id} className="flex gap-3">
                               <div className="w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
-                                <img 
+                                <LazyImage 
                                   src={tour.image} 
                                   alt={tour.name} 
                                   className="w-full h-full object-cover"
@@ -338,7 +339,7 @@ const InteractiveMap = () => {
               {filteredTours.map(tour => (
                 <Card key={tour.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="h-48 overflow-hidden relative">
-                    <img 
+                    <LazyImage 
                       src={tour.image} 
                       alt={tour.name} 
                       className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"

@@ -5,6 +5,8 @@ import Counter from '../components/ui/Counter';
 import { useIntersectionObserver } from '../hooks/use-intersection-observer';
 import TypeWriter from '../components/ui/TypeWriter';
 import ValueCard from '../components/ui/ValueCard';
+import LazyImage from '../components/ui/LazyImage';
+import { useImagePreload } from '../hooks/useImageOptimization';
 import halongBay from '../assets/images/destinations/halong-bay.jpg';
 import hoiAn from '../assets/images/destinations/hoi-an.jpg';
 import mekong from '../assets/images/destinations/mekong.jpg';
@@ -26,6 +28,10 @@ const About = () => {
     rootMargin: "0px 0px -50px 0px",
     triggerOnce: false
   });
+
+  // Preload critical images
+  useImagePreload(bg);
+  useImagePreload(ceo);
   
   const teamMembers = [
     {
@@ -134,35 +140,38 @@ const About = () => {
                   </div>
                 </div>
               </FadeLeft>
-              
-              <FadeRight delay={400}>
+                <FadeRight delay={400}>
                 <div className="relative grid grid-cols-2 gap-4">
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img 
+                    <LazyImage 
                       src={halongBay}
                       alt="Halong Bay, Vietnam" 
                       className="object-cover w-full h-full"
+                      preset="card"
                     />
                   </div>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img 
+                    <LazyImage 
                       src={sapa}
                       alt="Sapa rice terraces, Vietnam" 
                       className="object-cover w-full h-full"
+                      preset="card"
                     />
                   </div>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img 
+                    <LazyImage 
                       src={mekong}
                       alt="Mekong Delta, Vietnam" 
                       className="object-cover w-full h-full"
+                      preset="card"
                     />
                   </div>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img 
+                    <LazyImage 
                       src={hoiAn}
                       alt="Hoi An, Vietnam" 
                       className="object-cover w-full h-full"
+                      preset="card"
                     />
                   </div>
                 </div>
@@ -241,12 +250,12 @@ const About = () => {
                   className={`rounded-2xl max-w-96 overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl ${
                     theme === 'light' ? 'bg-white' : 'bg-gray-800'
                   }`}
-                >
-                  <div className="h-64 overflow-hidden">
-                    <img 
+                >                  <div className="h-64 overflow-hidden">
+                    <LazyImage 
                       src={member.image} 
                       alt={member.name}
                       className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
+                      preset="card"
                     />
                   </div>
                   <div className="p-6">
@@ -335,12 +344,12 @@ const About = () => {
                         Placeholder for testimonial text
                       </span>
                     )}
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <img 
+                  </div>                  <div className="flex items-center justify-center">
+                    <LazyImage 
                       src={ceo} 
                       alt="Du Hien" 
                       className="object-cover w-16 h-16 mr-4 border-4 border-white rounded-full shadow-md"
+                      preset="thumbnail"
                     />
                     <div className="text-left">
                       <div className="font-bold">Du Hien</div>

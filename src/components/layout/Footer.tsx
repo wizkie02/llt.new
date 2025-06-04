@@ -1,6 +1,8 @@
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
+import LazyImage from "../ui/LazyImage";
+import { useImagePreload } from "../../hooks/useImageOptimization";
 import logo from "../../assets/horizontal_1.png";
 
 interface FooterLinkProps {
@@ -144,6 +146,9 @@ const Footer = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [scrollVisible, setScrollVisible] = useState(false);
+  
+  // Preload logo image
+  useImagePreload(logo, true);
 
   // Show scroll-to-top button only when scrolled down
   useEffect(() => {
@@ -410,13 +415,13 @@ const Footer = () => {
 
       <div className="container relative z-10 px-4 pt-10 pb-6 mx-auto">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-8">
-          <AnimatedCard delay={200} direction="up">
-            <div>
+          <AnimatedCard delay={200} direction="up">            <div>
               <div className="flex items-center mb-4">
-                <img
+                <LazyImage
                   src={logo}
                   alt="Leo Loves Travel"
                   className="w-auto h-8 mr-3"
+                  preset="thumbnail"
                 />
                 {/* <h4 className="text-lg font-bold text-[#0093DE]">About Us</h4> */}
               </div>

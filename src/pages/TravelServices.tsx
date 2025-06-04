@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useImagePreload } from '../hooks/useImageOptimization';
 import bg8 from '../assets/images/backgrounds/bg8.jpg';
 import ScrollReveal from '../components/ui/ScrollReveal';
 
 const TravelServices = () => {
   const { theme } = useTheme();
+  
+  // Preload critical hero background image
+  useImagePreload(bg8, true);
+  
   const [openFAQs, setOpenFAQs] = useState<number[]>([]);
   
   const toggleFAQ = (index: number) => {

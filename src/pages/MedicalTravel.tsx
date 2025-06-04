@@ -1,9 +1,14 @@
 import { useTheme } from "../contexts/ThemeContext";
+import LazyImage from "../components/ui/LazyImage";
+import { useImagePreload } from "../hooks/useImageOptimization";
 import bg12 from "../assets/images/backgrounds/bg12.jpg";
 import ScrollReveal from "../components/ui/ScrollReveal";
 
 const MedicalTravel = () => {
   const { theme } = useTheme();
+  
+  // Preload critical hero background image
+  useImagePreload(bg12, true);
 
   const services = [
     {
@@ -317,33 +322,35 @@ const MedicalTravel = () => {
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal direction="right" delay={400}>
-                <div className="grid grid-cols-2 gap-4">
+              <ScrollReveal direction="right" delay={400}>                <div className="grid grid-cols-2 gap-4">
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Medical facility"
+                      preset="gallery"
                       className="object-cover w-full h-full"
                     />
                   </div>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Medical consultation"
+                      preset="gallery"
                       className="object-cover w-full h-full"
                     />
                   </div>
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Recovery spa"
+                      preset="gallery"
                       className="object-cover w-full h-full"
                     />
-                  </div>
-                  <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
-                    <img
+                  </div>                  <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
+                    <LazyImage
                       src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
                       alt="Wellness retreat"
+                      preset="gallery"
                       className="object-cover w-full h-full"
                     />
                   </div>
@@ -383,11 +390,11 @@ const MedicalTravel = () => {
                       ? "bg-white shadow-lg"
                       : "bg-gray-800 shadow-lg"
                   }`}
-                >
-                  <div className="h-48 overflow-hidden">
-                    <img
+                >                  <div className="h-48 overflow-hidden">
+                    <LazyImage
                       src={hospital.image}
                       alt={hospital.name}
+                      preset="card"
                       className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
                     />
                   </div>

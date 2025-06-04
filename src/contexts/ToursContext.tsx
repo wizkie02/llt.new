@@ -1,7 +1,6 @@
 // ✅ Goal: Replace local state (sessionStorage) with real-time data from your PHP API on CPanel
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { cleanupLocalImage, migrateToAssetsImages } from '../lib/imageUtils';
 
 export interface TourOption {
   id: string;

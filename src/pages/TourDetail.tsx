@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTours } from '../contexts/ToursContext';
 import { useTheme } from '../contexts/ThemeContext';
+import LazyImage from '../components/ui/LazyImage';
 import { getImageUrl } from '../lib/imageUtils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
@@ -428,7 +429,7 @@ const TourDetail = () => {
                       {reviews.map((review) => (
                         <div key={review.id} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                           <div className="flex items-start">
-                            <img 
+                            <LazyImage 
                               src={review.avatar} 
                               alt={review.name} 
                               className="w-12 h-12 rounded-full mr-4"

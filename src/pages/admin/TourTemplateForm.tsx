@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { TourOption } from '@/contexts/ToursContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { TourOption } from '../../contexts/ToursContext';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
+import { Label } from '../../components/ui/label';
+import { Textarea } from '../../components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
+import { Checkbox } from '../../components/ui/checkbox';
+import { Card } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { Plus, Trash2, Loader2 } from 'lucide-react';
+import ImageUpload from '../../components/ui/ImageUpload';
 
 interface Category {
   id: string;
@@ -388,11 +389,9 @@ const TourTemplateForm = ({
                   placeholder="e.g. 3 days 2 nights"
                 />
               </div>
-            </div>
-
-            <ImageUpload
+            </div>            <ImageUpload
               value={formData.image}
-              onChange={(value) => setFormData(prev => ({ ...prev, image: value }))}
+              onChange={(value: string) => setFormData(prev => ({ ...prev, image: value }))}
               label="Tour Image"
               className="w-full"
             />
@@ -608,8 +607,8 @@ const TourTemplateForm = ({
                     onChange={(e) => handleArrayFieldChange('highlights', index, e.target.value)}
                     placeholder="e.g. Professional local guides"
                     className="flex-1"
-                  />
-                  {formData.highlights.length > 1 && (                    <Button 
+                  />                  {formData.highlights.length > 1 && (
+                    <Button 
                       type="button" 
                       onClick={() => removeArrayItem('highlights', index)} 
                       className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"
@@ -664,8 +663,8 @@ const TourTemplateForm = ({
                     onChange={(e) => handleArrayFieldChange('whatToBring', index, e.target.value)}
                     placeholder="e.g. Valid passport"
                     className="flex-1"
-                  />
-                  {formData.whatToBring.length > 1 && (                    <Button 
+                  />                  {formData.whatToBring.length > 1 && (
+                    <Button 
                       type="button" 
                       onClick={() => removeArrayItem('whatToBring', index)} 
                       className="h-9 px-4 text-xs border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white"

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTours, TourOption } from "../contexts/ToursContext";
 import { useTheme } from "../contexts/ThemeContext";
+import LazyImage from "../components/ui/LazyImage";
+import { useImagePreload } from "../hooks/useImageOptimization";
 import bg7 from "../assets/images/backgrounds/bg7.jpg";
 
 // Loading skeleton components
@@ -99,7 +101,12 @@ const TourListSkeleton = ({ theme }: { theme: string }) => (
 const PackageTours = () => {
   const { tours, getToursByCategory, getFeaturedTours } = useTours();
   const { theme } = useTheme();
-  const navigate = useNavigate();  const [filteredTours, setFilteredTours] = useState<TourOption[]>([]);
+  const navigate = useNavigate();
+  
+  // Preload critical hero background image
+  useImagePreload(bg7, true);
+
+  const [filteredTours, setFilteredTours] = useState<TourOption[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
   const [toursLoading, setToursLoading] = useState(true);
@@ -403,13 +410,6 @@ const PackageTours = () => {
     
     return <div className="flex">{stars}</div>;
   };
-
-  // Function to handle image error
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    target.src = bg7;
-  };
-
   // Calculate pagination variables
   const totalPages = Math.ceil(filteredTours.length / itemsPerPage);
   const indexOfLastTour = currentPage * itemsPerPage;
@@ -432,6 +432,23 @@ const PackageTours = () => {
     }
     return pageNumbers;
   };
+  // Handle page change for pagination
+  const handlePageChange = (page: number): void => {
+    // Ensure the page number is within valid range
+    if (page < 1 || page > totalPages) {
+      return;
+    }
+    
+    // Update current page state
+    setCurrentPage(page);
+    
+    // Scroll to top of results for better UX
+    window.scrollTo({
+      top: document.getElementById('root')?.offsetTop || 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div
       className={`min-h-screen ${theme === "light"
@@ -911,13 +928,13 @@ const PackageTours = () => {
                     key={tour.id}
                     className={`rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${theme === "light" ? "bg-white" : "bg-gray-800"
                       }`}
-                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <img
+                  >                    <div className="relative h-48 overflow-hidden">
+                      <LazyImage
                         src={tour.image}
                         alt={tour.name}
-                        onError={handleImageError}
+                        preset="card"
                         className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
+                        priority={false}
                       />
                       {tour.featured && (
                         <div className="absolute top-3 left-3 bg-[#0093DE] text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -1004,13 +1021,13 @@ const PackageTours = () => {
                     key={tour.id}
                     className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${theme === "light" ? "bg-white" : "bg-gray-800"
                       }`}
-                  >
-                    <div className="relative h-48 overflow-hidden md:w-1/3 md:h-auto">
-                      <img
+                  >                    <div className="relative h-48 overflow-hidden md:w-1/3 md:h-auto">
+                      <LazyImage
                         src={tour.image}
                         alt={tour.name}
-                        onError={handleImageError}
+                        preset="card"
                         className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
+                        priority={false}
                       />
                       {tour.featured && (
                         <div className="absolute top-3 left-3 bg-[#0093DE] text-white text-xs font-bold px-3 py-1 rounded-full">
