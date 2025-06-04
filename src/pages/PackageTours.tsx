@@ -629,7 +629,7 @@ const PackageTours = () => {
           <div className={`${isFilterOpen || "hidden md:block"} md:w-64 lg:w-1/4 space-y-6`}>
             {/* Category Filters */}
             <div className={`p-6 rounded-2xl shadow-md ${theme === "light" ? "bg-white" : "bg-gray-800"}`}>
-              <h3 className="mb-4 text-lg font-bold">Tour Categories</h3>
+              <h3 className="mb-4 text-lg font-bold">Tour Filters</h3>
               {categoriesLoading ? (
                 <CategorySkeleton theme={theme} />
               ) : (

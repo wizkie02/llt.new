@@ -46,9 +46,9 @@ const HomePage = () => {
   const services = [
     {
       id: 1,
-      title: "Cultural Journeys",
+      title: "Package Tours",
       description:
-        "Immerse yourself in Vietnam's ancient traditions, temple visits, and local village experiences",
+        "Carefully designed travel packages showcasing Vietnam's highlights with expert guides and seamless logistics",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,9 +69,9 @@ const HomePage = () => {
     },
     {
       id: 2,
-      title: "Culinary Experiences",
+      title: "Medical Travel",
       description:
-        "Savor phở in hidden Hanoi alleyways, learn to cook with local chefs, and explore vibrant street food markets",
+        "Combine world-class healthcare services with relaxing recovery in Vietnam's most rejuvenating destinations",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const HomePage = () => {
       id: 3,
       title: "Team Building",
       description:
-        "Trek through misty Sapa rice terraces, cruise emerald waters of Halong Bay, and explore lush national parks",
+        "Foster collaboration through exciting team activities in Vietnam's inspiring landscapes and cultural settings",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ const HomePage = () => {
       id: 4,
       title: "Romantic Travel",
       description:
-        "Private beach dinners under Hoi An lantern light, sunrise over limestone karsts, and mountain spa retreats",
+        "Create unforgettable moments with your special someone through intimate experiences in Vietnam's most romantic settings",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ const HomePage = () => {
       id: 5,
       title: "Travel Services",
       description:
-        "Connect with hill tribe families, learn traditional crafts, and participate in authentic Vietnamese customs",
+        "Comprehensive assistance with transportation, accommodations, guides, and all the essentials for a smooth Vietnam journey",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +163,7 @@ const HomePage = () => {
       id: 6,
       title: "Events & Conferences",
       description:
-        "Professional MICE services and personalized event planning for conferences and celebrations",
+        "Expert planning and execution of business meetings, conferences, and special events in Vietnam's premier venues",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -408,7 +408,7 @@ const HomePage = () => {
           theme === "light" ? "bg-white" : "bg-gray-800"
         }`}
       >
-        <div className="container max-w-4xl px-4 mx-auto md:px-6 lg:px-8 xl:px-12">
+        <div className="container max-w-6xl px-6 mx-auto md:px-12 lg:px-40 xl:px-40">
           <div className="flex flex-wrap items-center justify-center gap-4 lg:flex-nowrap">
             <div className="w-full pr-4 mb-8 text-center lg:w-1/2 max-w-[768px] lg:mb-0 lg:text-left transform transition-all duration-700 hover:scale-[1.02]">
               <div className="about-us-content">
@@ -505,43 +505,42 @@ const HomePage = () => {
                     />
                   </svg>
                 </Link></div>
-            </div>            <div className="w-full pl-0 lg:w-1/2 max-w-[768px]">
-              <div className="relative about-us-image">
-                <div className="max-w-3xl">                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-64 md:h-80 lg:h-[400px] xl:h-[500px]">
-                    <img
-                      src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                      alt="Vietnam landscape with traditional boats"
-                      className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                  </div>
+            </div>            <div className="w-full lg:w-1/2">
+              <div className="relative">
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Vietnam landscape with traditional boats"
+                    className="object-cover w-full h-64 md:h-80 lg:h-96 transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
                 
-                  {/* Decorative elements */}
-                  <div className="absolute -bottom-4 -left-4 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#0093DE]/10 -z-10"></div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#0093DE]/20 -z-10"></div>
+                {/* Decorative elements */}
+                <div className="absolute -bottom-4 -left-4 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#0093DE]/10 -z-10"></div>
+                <div className="absolute -top-4 -right-4 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#0093DE]/20 -z-10"></div>
                 
-                  {/* Floating stats card */}
-                  <div className={`absolute bottom-6 left-6 right-6 backdrop-blur-sm rounded-xl p-4 shadow-lg ${
-                    theme === "light" ? "bg-white/95" : "bg-gray-800/95"
-                  }`}>
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                      <div>
-                        <div className="text-lg font-bold text-[#0093DE]">4.9★</div>
-                        <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Rating</div>
-                      </div>
-                      <div>
-                        <div className="text-lg font-bold text-[#0093DE]">10K+</div>
-                        <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Travelers</div>
-                      </div>
-                      <div>
-                        <div className="text-lg font-bold text-[#0093DE]">100%</div>
-                        <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Local</div>
-                      </div>
+                {/* Floating stats card */}
+                <div className={`absolute bottom-6 left-6 right-6 backdrop-blur-sm rounded-xl p-4 shadow-lg ${
+                  theme === "light" ? "bg-white/95" : "bg-gray-800/95"
+                }`}>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <div className="text-lg font-bold text-[#0093DE]">4.9★</div>
+                      <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Rating</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-[#0093DE]">10K+</div>
+                      <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Travelers</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-[#0093DE]">100%</div>
+                      <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Local</div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div></div>
+            </div>          </div>
         </div>
       </section>
       {/* About Us Area end */}

@@ -120,8 +120,7 @@ const Contact = () => {
                     className={`p-6 rounded-2xl ${
                       theme === "light" ? "bg-white" : "bg-gray-700"
                     } shadow-sm border border-gray-100 dark:border-gray-700 hover:border-[#0093DE] transition-all duration-300 hover:-translate-y-1 hover:shadow-md`}
-                  >
-                    <div className="flex items-center mb-3">
+                  >                    <div className="flex items-center mb-3">
                       <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0093DE] flex items-center justify-center text-white">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -142,17 +141,20 @@ const Contact = () => {
                         Phone Numbers
                       </h3>
                     </div>
-                    <p
-                      className={`text-sm ${
-                        theme === "light" ? "text-gray-600" : "text-gray-300"
-                      } pl-1`}
-                    >
-                      +84 24 7109 2468
-                      <br />
-                      1800 1789 (VN)
-                      <br />
-                      +84 923 456 789
-                    </p>
+                    <div className={`text-sm ${theme === "light" ? "text-gray-600" : "text-gray-300"} pl-1 space-y-2`}>
+                      <div>
+                        <p className="font-medium text-[#0093DE]">Customer Support 24/7</p>
+                        <p>+84 865 843 276</p>
+                      </div>
+                      <div>
+                        <p className="font-medium text-green-600">WhatsApp</p>
+                        <p>+84 865 843 276</p>
+                      </div>
+                      <div>
+                        <p className="font-medium text-blue-600">Zalo</p>
+                        <p>+84 865 843 276</p>
+                      </div>
+                    </div>
                   </div>
 
                   <div
@@ -403,10 +405,9 @@ const Contact = () => {
           </h2>
           <p className="max-w-3xl mx-auto mb-8 text-xl text-white/90">
             Our team is ready to help you plan your perfect Vietnamese adventure
-          </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+          </p>          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <a
-              href="tel:+84247109246"
+              href="tel:+84865843276"
               className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold inline-flex items-center justify-center"
             >
               <svg
@@ -423,7 +424,7 @@ const Contact = () => {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              Call Us Now
+              Call Us Now (24/7)
             </a>
             <a
               href="mailto:vietnam@leolovestravel.com"
