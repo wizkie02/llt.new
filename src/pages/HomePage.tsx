@@ -46,9 +46,9 @@ const HomePage = () => {
   const services = [
     {
       id: 1,
-      title: "Cultural Journeys",
+      title: "Package Tours",
       description:
-        "Immerse yourself in Vietnam's ancient traditions, temple visits, and local village experiences",
+        "Carefully designed travel packages showcasing Vietnam's highlights with expert guides and seamless logistics",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,9 +69,9 @@ const HomePage = () => {
     },
     {
       id: 2,
-      title: "Culinary Experiences",
+      title: "Medical Travel",
       description:
-        "Savor phở in hidden Hanoi alleyways, learn to cook with local chefs, and explore vibrant street food markets",
+        "Combine world-class healthcare services with relaxing recovery in Vietnam's most rejuvenating destinations",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const HomePage = () => {
       id: 3,
       title: "Team Building",
       description:
-        "Trek through misty Sapa rice terraces, cruise emerald waters of Halong Bay, and explore lush national parks",
+        "Foster collaboration through exciting team activities in Vietnam's inspiring landscapes and cultural settings",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ const HomePage = () => {
       id: 4,
       title: "Romantic Travel",
       description:
-        "Private beach dinners under Hoi An lantern light, sunrise over limestone karsts, and mountain spa retreats",
+        "Create unforgettable moments with your special someone through intimate experiences in Vietnam's most romantic settings",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ const HomePage = () => {
       id: 5,
       title: "Travel Services",
       description:
-        "Connect with hill tribe families, learn traditional crafts, and participate in authentic Vietnamese customs",
+        "Comprehensive assistance with transportation, accommodations, guides, and all the essentials for a smooth Vietnam journey",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +163,7 @@ const HomePage = () => {
       id: 6,
       title: "Events & Conferences",
       description:
-        "Professional MICE services and personalized event planning for conferences and celebrations",
+        "Expert planning and execution of business meetings, conferences, and special events in Vietnam's premier venues",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -402,8 +402,7 @@ const HomePage = () => {
             />
           </svg>
         </div>
-      </section>{" "}
-      {/* About Us Area start */}
+      </section>{" "}      {/* About Us Area start */}
       <section
         className={`about-us-area py-20 rel z-1 ${
           theme === "light" ? "bg-white" : "bg-gray-800"
@@ -411,20 +410,22 @@ const HomePage = () => {
       >
         <div className="container max-w-6xl px-6 mx-auto md:px-12 lg:px-40 xl:px-40">
           <div className="flex flex-wrap items-center justify-center gap-4 lg:flex-nowrap">
-            <div className="w-full pr-4 mb-8 text-center lg:w-1/2 max-w-[768px] lg:mb-0 lg:text-left">
-              <div
-                className="mr-0 about-us-content w-fit"
-                data-aos="fade-left"
-                data-aos-duration={1500}
-                data-aos-offset={50}
-              >
+            <div className="w-full pr-4 mb-8 text-center lg:w-1/2 max-w-[768px] lg:mb-0 lg:text-left transform transition-all duration-700 hover:scale-[1.02]">
+              <div className="about-us-content">
                 <div className="mb-6">
-                  <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                    Travel Vietnam with Confidence: Why Choose Leo Loves Travel
+                  <span className="inline-block px-4 py-2 mb-4 text-sm font-medium text-[#0093DE] bg-[#0093DE]/10 rounded-full">
+                    Why Choose Us
+                  </span>
+                  <h2 className="mb-6 text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
+                    Travel Vietnam with{" "}
+                    <span className="text-[#0093DE]">Confidence</span>
+                    <br />
+                    Why Choose{" "}
+                    <span className="text-[#0093DE]">Leo Loves Travel</span>
                   </h2>
                 </div>
                 <p
-                  className={`text-lg ${
+                  className={`text-lg lg:text-xl leading-relaxed mb-8 ${
                     theme === "light" ? "text-gray-600" : "text-gray-300"
                   }`}
                 >
@@ -432,47 +433,61 @@ const HomePage = () => {
                   experiences, revealing hidden gems and must-see attractions
                   with local expertise and passion.
                 </p>
-                <div className="my-10 divider">
-                  <span className="flex items-center justify-center lg:justify-start">
-                    <span className="text-lg font-medium">
-                      We have{" "}
-                      <span className="text-[#0093DE] font-bold">
-                        <span className="text-xl">
-                          <Counter end={10} />
+                
+                <div className="flex items-center justify-center lg:justify-start mb-8">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-12 h-12 bg-[#0093DE]/10 rounded-full flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-6 h-6 text-[#0093DE]"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <span className="text-lg lg:text-xl font-medium">
+                        We have{" "}
+                        <span className="text-[#0093DE] font-bold">
+                          <Counter end={10} /> Years
                         </span>{" "}
-                        Years
-                      </span>{" "}
-                      of experience
-                    </span>
-                  </span>
-                </div>
-                <div className="flex flex-wrap">
-                  <div className="w-1/2 mb-4">
-                    <div className="flex flex-col lg:flex=row items-center lg:items-start justify-center counter-item lg:justify-start">
-                      <span className="text-3xl font-bold text-[#0093DE] flex items-center">
+                        of experience
+                      </span>
+                    </div>
+                  </div>
+                </div><div className="grid grid-cols-2 gap-6 lg:gap-8">
+                  <div className="text-center lg:text-left">
+                    <div className="flex flex-col items-center lg:items-start">
+                      <span className="text-3xl lg:text-4xl font-bold text-[#0093DE] flex items-center">
                         <Counter end={30} />
                         <span className="ml-1">+</span>
                       </span>
-                      <span className="block mt-1 text-sm counter-title">
+                      <span className="block mt-2 text-sm lg:text-base font-medium">
                         Vietnam Destinations
                       </span>
                     </div>
                   </div>
-                  <div className="w-1/2 mb-4">
-                  <div className="flex flex-col lg:flex=row items-center lg:items-start justify-center counter-item lg:justify-start">
-                  <span className="text-3xl font-bold text-[#0093DE] flex items-center">
+                  <div className="text-center lg:text-left">
+                    <div className="flex flex-col items-center lg:items-start">
+                      <span className="text-3xl lg:text-4xl font-bold text-[#0093DE] flex items-center">
                         <Counter end={9} />
-                        <span className="ml-0">K+</span>
+                        <span className="ml-1">K+</span>
                       </span>
-                      <span className="block mt-1 text-sm counter-title">
+                      <span className="block mt-2 text-sm lg:text-base font-medium">
                         Satisfied Travelers
                       </span>
                     </div>
                   </div>
-                </div>
-                <Link
+                </div>                <Link
                   to="/package-tours"
-                  className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white mt-6 py-3 px-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                  className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white mt-8 py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                   Explore Vietnam
                   <svg
@@ -489,30 +504,43 @@ const HomePage = () => {
                       d="M14 5l7 7m0 0l-7 7m7-7H3"
                     />
                   </svg>
-                </Link>
-              </div>
-            </div>
-            <div
-              className="w-full pl-0 lg:w-1/2 max-w-[768px]"
-              data-aos="fade-right"
-              data-aos-duration={1500}
-              data-aos-offset={50}
-            >
-              <div className="relative about-us-image">
-                <div className="max-w-3xl">
-                  <div className="h-64 overflow-hidden shadow-lg rounded-xl md:h-96 lg:h-[400px] xl:h-[500px]">
-                    <img
-                      src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                      alt="Vietnam landscape"
-                      className="object-cover w-full h-full"
-                    />
-                  </div>{" "}
+                </Link></div>
+            </div>            <div className="w-full lg:w-1/2">
+              <div className="relative">
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Vietnam landscape with traditional boats"
+                    className="object-cover w-full h-64 md:h-80 lg:h-96 transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-                <div className="absolute -bottom-3 -left-3 w-16 h-16 rounded-full bg-[#0093DE]/10 z-[-1]"></div>
-                <div className="absolute -top-3 -right-3 w-20 h-20 rounded-full bg-[#0093DE]/20 z-[-1]"></div>
+                
+                {/* Decorative elements */}
+                <div className="absolute -bottom-4 -left-4 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#0093DE]/10 -z-10"></div>
+                <div className="absolute -top-4 -right-4 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#0093DE]/20 -z-10"></div>
+                
+                {/* Floating stats card */}
+                <div className={`absolute bottom-6 left-6 right-6 backdrop-blur-sm rounded-xl p-4 shadow-lg ${
+                  theme === "light" ? "bg-white/95" : "bg-gray-800/95"
+                }`}>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <div className="text-lg font-bold text-[#0093DE]">4.9★</div>
+                      <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Rating</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-[#0093DE]">10K+</div>
+                      <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Travelers</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-[#0093DE]">100%</div>
+                      <div className={`text-xs ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>Local</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </div>          </div>
         </div>
       </section>
       {/* About Us Area end */}

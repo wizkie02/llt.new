@@ -1,30 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { ToursProvider } from "./contexts/ToursContext";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import Layout from "./components/layout/Layout";
-import LiveChat from "./components/ui/LiveChat";
-import HomePage from "./pages/HomePage";
-import PackageTours from "./pages/PackageTours";
-import TravelServices from "./pages/TravelServices";
-import TeamBuilding from "./pages/TeamBuilding";
-import Events from "./pages/Events";
-import RomanticTravel from "./pages/RomanticTravel";
-import MedicalTravel from "./pages/MedicalTravel";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminTourManagement from "./pages/admin/AdminTourManagement";
-import TourDetail from "./pages/TourDetail";
-import Booking from "./pages/Booking";
-import BookingConfirmation from "./pages/BookingConfirmation";
-import UserProfile from "./pages/UserProfile";
-import HelpCenter from "./pages/HelpCenter";
-import TravelBlog from "./pages/TravelBlog";
-import InteractiveMap from "./pages/InteractiveMap";
-import NotFound from "./pages/NotFound";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { ToursProvider } from './contexts/ToursContext';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import Layout from './components/layout/Layout';
+import LiveChat from './components/ui/LiveChat';
+import HomePage from './pages/HomePage';
+import PackageTours from './pages/PackageTours';
+import TravelServices from './pages/TravelServices';
+import TeamBuilding from './pages/TeamBuilding';
+import Events from './pages/Events';
+import RomanticTravel from './pages/RomanticTravel';
+import MedicalTravel from './pages/MedicalTravel';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminTourManagement from './pages/admin/AdminTourManagement';
+import AdminCategoryManagement from './pages/admin/AdminCategoryManagement';
+import TourDetail from './pages/TourDetail';
+import Booking from './pages/Booking';
+import BookingConfirmation from './pages/BookingConfirmation';
+import UserProfile from './pages/UserProfile';
+import HelpCenter from './pages/HelpCenter';
+import TravelBlog from './pages/TravelBlog';
+import InteractiveMap from './pages/InteractiveMap';
+import NotFound from './pages/NotFound';
+import './App.css';
 
 function App() {
   return (
@@ -42,12 +43,9 @@ function App() {
               <Route path="/romantic-travel" element={<RomanticTravel />} />
               <Route path="/medical-travel" element={<MedicalTravel />} />
               <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route
-                path="/admin/tour-management"
-                element={<AdminTourManagement />}
-              />
+              <Route path="/contact" element={<Contact />} />              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/tour-management" element={<AdminTourManagement />} />
+              <Route path="/admin/category-management" element={<AdminCategoryManagement />} />
               <Route path="/tour/:id" element={<TourDetail />} />
               <Route path="/booking" element={<Booking />} />
               <Route
