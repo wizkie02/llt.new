@@ -45,7 +45,7 @@ const HomePage = () => {
       description:
         "Carefully designed travel packages showcasing Vietnam's highlights with expert guides and seamless logistics",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
         </svg>
       ),
@@ -57,7 +57,7 @@ const HomePage = () => {
       description:
         "Combine world-class healthcare services with relaxing recovery in Vietnam's most rejuvenating destinations",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
         </svg>
       ),
@@ -69,7 +69,7 @@ const HomePage = () => {
       description:
         "Foster collaboration through exciting team activities in Vietnam's inspiring landscapes and cultural settings",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
         </svg>
       ),
@@ -81,7 +81,7 @@ const HomePage = () => {
       description:
         "Create unforgettable moments with your special someone through intimate experiences in Vietnam's most romantic settings",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
         </svg>
       ),
@@ -93,7 +93,7 @@ const HomePage = () => {
       description:
         "Comprehensive assistance with transportation, accommodations, guides, and all the essentials for a smooth Vietnam journey",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
         </svg>
       ),
@@ -105,7 +105,7 @@ const HomePage = () => {
       description:
         "Expert planning and execution of business meetings, conferences, and special events in Vietnam's premier venues",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       ),
@@ -217,7 +217,7 @@ const HomePage = () => {
         <img
           src={wallpaper}
           alt="Vietnam scenic landscape"
-          className="absolute inset-0 w-full h-full object-cover object-center animate-slow-zoom"
+          className="absolute inset-0 object-cover object-center w-full h-full animate-slow-zoom"
         />
         <div className="absolute inset-0 z-10 w-full h-full bg-gradient-to-b from-black/60 to-black/30"></div>
         <div className="container relative z-20 flex flex-col items-center justify-center h-full px-4 mx-auto text-center text-white">
@@ -230,10 +230,10 @@ const HomePage = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl animate-fade-in-up drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ animationDelay: '0.5s' }}>
             Experience <span className="text-[#0093DE]">Vietnam's</span> Hidden <span className="text-[#0093DE]">Treasures</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl opacity-90 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+          <p className="max-w-3xl mb-10 text-xl md:text-2xl opacity-90 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
             Dive into authentic experiences from misty mountain villages to ancient coastal towns
           </p>
-          <div className="flex flex-col sm:flex-row gap-5 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+          <div className="flex flex-col gap-5 sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
             <Link
               to="/contact"
               className="bg-[#0093DE] hover:bg-[#007ab8] text-white py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
@@ -242,12 +242,12 @@ const HomePage = () => {
             </Link>
             <Link
               to="/package-tours"
-              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-xl border border-white/30 transition-all duration-300 hover:border-white/80 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
+              className="px-8 py-3 font-semibold text-white transition-all duration-300 transform border bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl border-white/30 hover:border-white/80 hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
             >
               Explore Vietnam Tours
             </Link>
           </div>
-          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 md:gap-12 bg-black/20 backdrop-blur-sm py-4 px-8 rounded-xl animate-fade-in-up shadow-xl transition-all duration-500 hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
+          <div className="flex flex-wrap items-center justify-center gap-6 px-8 py-4 mt-20 transition-all duration-500 shadow-xl md:gap-12 bg-black/20 backdrop-blur-sm rounded-xl animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-[#0093DE]">
                 <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
@@ -295,7 +295,7 @@ const HomePage = () => {
                   <span className="inline-block px-4 py-2 mb-4 text-sm font-medium text-[#0093DE] bg-[#0093DE]/10 rounded-full">
                     Why Choose Us
                   </span>
-                  <h2 className="mb-6 text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
+                  <h2 className="mb-6 text-3xl font-bold leading-tight lg:text-4xl xl:text-5xl">
                     Travel Vietnam with{" "}
                     <span className="text-[#0093DE]">Confidence</span>
                     <br />
@@ -313,9 +313,9 @@ const HomePage = () => {
                   with local expertise and passion.
                 </p>
                 
-                <div className="flex items-center justify-center lg:justify-start mb-8">
+                <div className="flex items-center justify-center mb-8 lg:justify-start">
                   <div className="flex items-center space-x-2">
-                    <div className="w-12 h-12 bg-[#0093DE]/10 rounded-full flex items-center justify-center">
+                    <div className="w-9 h-9 bg-[#0093DE]/10 rounded-full flex items-center justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-6 h-6 text-[#0093DE]"
@@ -332,7 +332,7 @@ const HomePage = () => {
                       </svg>
                     </div>
                     <div>
-                      <span className="text-lg lg:text-xl font-medium">
+                      <span className="text-lg font-medium lg:text-xl">
                         We have{" "}
                         <span className="text-[#0093DE] font-bold">
                           <Counter end={10} /> Years
@@ -348,7 +348,7 @@ const HomePage = () => {
                         <Counter end={30} />
                         <span className="ml-1">+</span>
                       </span>
-                      <span className="block mt-2 text-sm lg:text-base font-medium">
+                      <span className="block mt-2 text-sm font-medium lg:text-base">
                         Vietnam Destinations
                       </span>
                     </div>
@@ -359,7 +359,7 @@ const HomePage = () => {
                         <Counter end={9} />
                         <span className="ml-1">K+</span>
                       </span>
-                      <span className="block mt-2 text-sm lg:text-base font-medium">
+                      <span className="block mt-2 text-sm font-medium lg:text-base">
                         Satisfied Travelers
                       </span>
                     </div>
@@ -369,17 +369,17 @@ const HomePage = () => {
                   className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white mt-8 py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                   Explore Vietnam
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </Link></div>
             </div>            <div className="w-full lg:w-1/2">
               <div className="relative">
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <div className="relative overflow-hidden shadow-2xl rounded-2xl">
                   <img
                     src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                     alt="Vietnam landscape with traditional boats"
-                    className="object-cover w-full h-64 md:h-80 lg:h-96 transition-transform duration-700 hover:scale-105"
+                    className="object-cover w-full h-64 transition-transform duration-700 md:h-80 lg:h-96 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
@@ -414,18 +414,18 @@ const HomePage = () => {
       {/* About Us Area end */}
       {/* Services Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-[#F7F9FC]' : 'bg-gray-900'}`}>
-        <div className="container mx-auto px-8 md:px-12">
-          <div className="text-center mb-16">
+        <div className="container px-8 mx-auto md:px-12">
+          <div className="mb-16 text-center">
             <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
               Our Services
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Unforgettable Vietnamese Experiences</h2>
-            <p className="text-lg max-w-2xl mx-auto opacity-80">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">Unforgettable Vietnamese Experiences</h2>
+            <p className="max-w-2xl mx-auto text-lg opacity-80">
               Discover our range of thoughtfully designed travel experiences that showcase the best of Vietnam
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 gap-8 mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
             {services.map((service) => (
               <Link
                 key={service.id}
@@ -438,13 +438,13 @@ const HomePage = () => {
                 <div className="text-[#0093DE] mb-4 transform transition-all duration-300 group-hover:scale-110">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <h3 className="mb-2 text-xl font-bold">{service.title}</h3>
                 <p className={`mb-4 flex-grow ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>
                   {service.description}
                 </p>
                 <div className="mt-auto flex items-center text-[#0093DE] font-medium">
                   <span>Learn more</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-1 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </div>
@@ -455,22 +455,22 @@ const HomePage = () => {
       </section>
       {/* Featured Destinations */}
       <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
-        <div className="container mx-auto px-8 md:px-12">
-          <div className="text-center mb-16">
-            <span className="inline-block px-3 py-1 rounded-md bg-teal-100 text-teal-600 text-sm font-medium mb-4">
+        <div className="container px-8 mx-auto md:px-12">
+          <div className="mb-16 text-center">
+            <span className="inline-block px-3 py-1 mb-4 text-sm font-medium text-teal-600 bg-teal-100 rounded-md">
               Top Destinations
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Vietnam's Treasured Places</h2>
-            <p className="text-lg max-w-2xl mx-auto opacity-80">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">Vietnam's Treasured Places</h2>
+            <p className="max-w-2xl mx-auto text-lg opacity-80">
               Discover breathtaking landscapes, ancient culture, and unforgettable adventures
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 gap-6 mx-auto md:grid-cols-2 lg:grid-cols-4 max-w-7xl">
             {popularDestinations.slice(0, 8).map((destination) => (
               <div
                 key={destination.id}
-                className="relative overflow-hidden rounded-2xl h-80 group destination-card shadow-lg transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+                className="relative overflow-hidden transition-all duration-500 transform shadow-lg rounded-2xl h-80 group destination-card hover:-translate-y-2 hover:shadow-xl"
                 onMouseEnter={() => setVisibleDestination(destination.id)}
                 onMouseLeave={() => setVisibleDestination(null)}
               >
@@ -478,10 +478,10 @@ const HomePage = () => {
                   src={destination.image}
                   alt={destination.name}
                   onError={(e) => handleImageError(e, destination.fallbackImage)}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl font-bold mb-2 text-white">{destination.name}</h3>
+                <div className="absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80"></div>                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="mb-2 text-xl font-bold text-white">{destination.name}</h3>
                   <p className={`text-sm text-white/80 transition-all duration-500 ease-in-out transform ${visibleDestination === destination.id ? 'opacity-100 max-h-20 translate-y-0' : 'opacity-0 max-h-0 translate-y-4'}`}>
                     {destination.description}
                   </p>
@@ -517,12 +517,12 @@ const HomePage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-10">            <Link
+          <div className="mt-10 text-center">            <Link
             to="/package-tours"
-            className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+            className="inline-flex items-center justify-center px-8 py-3 font-medium text-white transition-all duration-300 transform bg-blue-500 rounded-full shadow-md hover:bg-blue-600 hover:shadow-xl hover:-translate-y-1 hover:scale-105"
           >
             View All Vietnam Destinations
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </Link>
@@ -531,18 +531,18 @@ const HomePage = () => {
       </section>
       {/* Testimonials Section */}
       <section className={`py-20 ${theme === 'light' ? 'bg-[#F7F9FC]' : 'bg-gray-900'}`}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+        <div className="container px-4 mx-auto">
+          <div className="mb-16 text-center">
             <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
               Traveler Stories
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Guests Say</h2>
-            <p className="text-lg max-w-2xl mx-auto opacity-80">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">What Our Guests Say</h2>
+            <p className="max-w-2xl mx-auto text-lg opacity-80">
               Authentic experiences shared by travelers who explored Vietnam with us
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
@@ -553,7 +553,7 @@ const HomePage = () => {
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
+                    className="object-cover w-12 h-12 mr-4 rounded-full"
                   />
                   <div>
                     <h4 className="font-bold">{testimonial.name}</h4>
@@ -587,13 +587,13 @@ const HomePage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Link
               to="/about"
               className="inline-flex items-center bg-transparent border border-[#0093DE] text-[#0093DE] hover:bg-[#0093DE]/10 py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
             >
               Read More Reviews
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
