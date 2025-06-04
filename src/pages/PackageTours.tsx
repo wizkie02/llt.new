@@ -182,7 +182,7 @@ const PackageTours = () => {
   const { tours, getToursByCategory, getFeaturedTours } = useTours();
   const { theme } = useTheme();
   const navigate = useNavigate();
-  
+
   // Preload critical hero background image
   useImagePreload(bg7, true);
 
@@ -257,8 +257,10 @@ const PackageTours = () => {
   );
 
   // Get min and max prices from tours
-  const minPrice = Math.min(...tours.map((tour) => tour.price));
-  const maxPrice = Math.max(...tours.map((tour) => tour.price));
+  const minPrice =
+    tours.length > 0 ? Math.min(...tours.map((tour) => tour.price)) : 0;
+  const maxPrice =
+    tours.length > 0 ? Math.max(...tours.map((tour) => tour.price)) : 1000;
 
   // Dynamic slider range that adjusts based on user input
   const [sliderRange, setSliderRange] = useState<[number, number]>([0, 1000]); // Update slider range when needed
@@ -425,6 +427,13 @@ const PackageTours = () => {
       }
     }
 
+    if (newRange[0] < 0) {
+      newRange[0] = 0;
+    }
+    if (newRange[1] > maxPrice) {
+      newRange[1] = maxPrice;
+    }
+
     setPriceRange(newRange);
   };
 
@@ -468,8 +477,17 @@ const PackageTours = () => {
       }
     }
 
+    if (newRange[0] < 0) {
+      newRange[0] = 0;
+    }
+    if (newRange[1] > maxPrice) {
+      newRange[1] = maxPrice;
+    }
+
     // Update slider range to accommodate new values (expand if necessary)
-    updateSliderRange(newRange);
+
+    // Uncomment this one in case of necessity
+    // updateSliderRange(newRange);
 
     setPriceRange(newRange);
   };
@@ -566,14 +584,14 @@ const PackageTours = () => {
     if (page < 1 || page > totalPages) {
       return;
     }
-    
+
     // Update current page state
     setCurrentPage(page);
-    
+
     // Scroll to top of results for better UX
     window.scrollTo({
-      top: document.getElementById('root')?.offsetTop || 0,
-      behavior: 'smooth'
+      top: document.getElementById("root")?.offsetTop || 0,
+      behavior: "smooth",
     });
   };
 
@@ -1201,9 +1219,12 @@ const PackageTours = () => {
                 {filteredTours.map((tour) => (
                   <div
                     key={tour.id}
-                    className={`rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${theme === "light" ? "bg-white" : "bg-gray-800"
-                      }`}
-                  >                    <div className="relative h-48 overflow-hidden">
+                    className={`rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                      theme === "light" ? "bg-white" : "bg-gray-800"
+                    }`}
+                  >
+                    {" "}
+                    <div className="relative h-48 overflow-hidden">
                       <LazyImage
                         src={tour.image}
                         alt={tour.name}
@@ -1220,7 +1241,6 @@ const PackageTours = () => {
                         ${tour.price}
                       </div>
                     </div>
-
                     <div className="p-6">
                       <div className="flex items-start justify-between mb-2">
                         <h3 className="text-lg font-bold">{tour.name}</h3>
@@ -1328,9 +1348,12 @@ const PackageTours = () => {
                 {filteredTours.map((tour) => (
                   <div
                     key={tour.id}
-                    className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${theme === "light" ? "bg-white" : "bg-gray-800"
-                      }`}
-                  >                    <div className="relative h-48 overflow-hidden md:w-1/3 md:h-auto">
+                    className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                      theme === "light" ? "bg-white" : "bg-gray-800"
+                    }`}
+                  >
+                    {" "}
+                    <div className="relative h-48 overflow-hidden md:w-1/3 md:h-auto">
                       <LazyImage
                         src={tour.image}
                         alt={tour.name}
@@ -1344,7 +1367,6 @@ const PackageTours = () => {
                         </div>
                       )}
                     </div>
-
                     <div className="flex flex-col p-6 md:w-2/3">
                       <div className="flex items-start justify-between mb-2">
                         <h3 className="text-xl font-bold">{tour.name}</h3>
