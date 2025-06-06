@@ -272,13 +272,13 @@ const PackageTours = () => {
     let newSliderMin = currentSliderMin;
     let newSliderMax = currentSliderMax;
 
-    // Always expand slider range if price goes below or above current range
-    if (min < currentSliderMin) {
-      newSliderMin = Math.max(0, min - 50); // Add some padding
-    }
-    if (max > currentSliderMax) {
-      newSliderMax = max + 100; // Add some padding
-    }
+    // // Always expand slider range if price goes below or above current range
+    // if (min < currentSliderMin) {
+    //   newSliderMin = Math.max(0, min - 50); // Add some padding
+    // }
+    // if (max > currentSliderMax) {
+    //   newSliderMax = max + 100; // Add some padding
+    // }
 
     // More aggressive range adjustment for manual input
     // If the new range is significantly different, adjust accordingly
