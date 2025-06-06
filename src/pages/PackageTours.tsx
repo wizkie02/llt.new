@@ -272,13 +272,13 @@ const PackageTours = () => {
     let newSliderMin = currentSliderMin;
     let newSliderMax = currentSliderMax;
 
-    // // Always expand slider range if price goes below or above current range
-    // if (min < currentSliderMin) {
-    //   newSliderMin = Math.max(0, min - 50); // Add some padding
-    // }
-    // if (max > currentSliderMax) {
-    //   newSliderMax = max + 100; // Add some padding
-    // }
+    // Always expand slider range if price goes below or above current range
+    if (min < currentSliderMin) {
+      newSliderMin = Math.max(0, min - 50); // Add some padding
+    }
+    if (max > currentSliderMax) {
+      newSliderMax = max + 100; // Add some padding
+    }
 
     // More aggressive range adjustment for manual input
     // If the new range is significantly different, adjust accordingly
@@ -309,7 +309,7 @@ const PackageTours = () => {
   useEffect(() => {
     if (tours.length > 0) {
       setPriceRange([minPrice, maxPrice]);
-      setSliderRange([Math.max(0, minPrice - 50), maxPrice + 100]);
+      setSliderRange([Math.max(0, minPrice), maxPrice]);
     }
   }, [tours, minPrice, maxPrice]);
 
@@ -1242,9 +1242,9 @@ const PackageTours = () => {
                       <div className="absolute bottom-3 right-3 bg-white/90 text-[#0093DE] text-sm font-bold px-3 py-1 rounded-full">
                         ${tour.price}
                       </div>                    </div>
-                    <div className="p-6 flex flex-col flex-1">
+                    <div className="flex flex-col flex-1 p-6">
                       <div className="flex items-start justify-between mb-2">
-                        <h3 className="text-lg font-bold line-clamp-2 flex-1 mr-2">{tour.name}</h3>
+                        <h3 className="flex-1 mr-2 text-lg font-bold line-clamp-2">{tour.name}</h3>
                         <div className="flex items-center flex-shrink-0">
                           <span className="mr-1 text-sm font-medium">
                             {tour.rating}
