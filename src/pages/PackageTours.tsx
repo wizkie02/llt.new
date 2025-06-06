@@ -786,7 +786,7 @@ const PackageTours = () => {
             >
               <h3 className="mb-4 text-lg font-bold">Price Range</h3>
               {/* Price Display */}
-              <div className="flex items-center justify-between mb-6">
+              <div className="relative flex items-center justify-between mb-6">
                 <div
                   className={`px-3 py-2 rounded-lg ${
                     theme === "light" ? "bg-gray-100" : "bg-gray-700"
@@ -794,7 +794,7 @@ const PackageTours = () => {
                 >
                   <span className="text-sm font-medium">${priceRange[0]}</span>
                 </div>
-                <span className="mx-2 text-sm text-gray-400">to</span>
+                <span className="absolute mx-2 text-sm text-gray-400 translate-x-1/2 -translate-y-1/2 top-1/2 right-1/2">to</span>
                 <div
                   className={`px-3 py-2 rounded-lg ${
                     theme === "light" ? "bg-gray-100" : "bg-gray-700"
@@ -802,7 +802,7 @@ const PackageTours = () => {
                 >
                   <span className="text-sm font-medium">${priceRange[1]}</span>
                 </div>
-              </div>{" "}
+              </div>
               {/* Fixed Dual Range Slider */}
               <div className="relative mb-8">
                 {/* Background track */}
