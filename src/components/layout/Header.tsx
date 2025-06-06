@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import LazyImage from "../ui/LazyImage";
 import { useImagePreload } from "../../hooks/useImageOptimization";
 import logoWhite from "../../assets/white-horizontal.png";
@@ -11,14 +12,29 @@ const Header = () => {
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
+  const { user, logout, isAuthenticated } = useAuth();
   const headerRef = useRef<HTMLElement>(null);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
   const isHome = location.pathname === "/";
-  
-  // Preload logo images for better performance
+  const isAdminPage = location.pathname.startsWith('/admin') && location.pathname !== '/admin/login';
+    // Preload logo images for better performance
   useImagePreload(logoWhite, true);
   useImagePreload(logoRegular, true);
+
+  // Track screen size for responsive logo
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set initial value
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Enhanced scroll handler with simplified transition - only active on homepage
   useEffect(() => {
@@ -107,14 +123,16 @@ const Header = () => {
         }}
       >
         <div className="flex items-center justify-between w-full">          {/* Logo with conditional white/regular version */}
-          <Link to="/" className="relative flex items-center">
-            {/* White logo - visible when at top of homepage */}
+          <Link to="/" className="relative flex items-center">            {/* White logo - visible when at top of homepage */}
             <div
               className={`transition-all duration-500 absolute ${
                 isHome && !isScrolled ? "opacity-100" : "opacity-0"
               }`}
               style={{
-                height: `${Math.max(60 - scrollProgress * 15, 45)}px`,
+                // Mobile: smaller height, Desktop: larger height
+                height: isMobile 
+                  ? `${Math.max(30 - scrollProgress * 8, 22)}px`
+                  : `${Math.max(60 - scrollProgress * 15, 45)}px`,
                 filter: "drop-shadow(0 0 0 transparent)",
                 transform: `scale(${1 - scrollProgress * 0.05})`,
               }}
@@ -127,14 +145,16 @@ const Header = () => {
                 preset="thumbnail"
                 priority
               />
-            </div>
-            {/* Regular logo - visible when scrolled or not on homepage */}
+            </div>            {/* Regular logo - visible when scrolled or not on homepage */}
             <div
               className={`transition-all duration-500 ${
                 isHome && !isScrolled ? "opacity-0" : "opacity-100"
               }`}
               style={{
-                height: `${Math.max(60 - scrollProgress * 15, 45)}px`,
+                // Mobile: smaller height, Desktop: larger height
+                height: isMobile 
+                  ? `${Math.max(30 - scrollProgress * 8, 22)}px`
+                  : `${Math.max(60 - scrollProgress * 15, 45)}px`,
                 filter: "drop-shadow(0 0 0 transparent)",
                 transform: `scale(${1 - scrollProgress * 0.05})`,
               }}
@@ -562,42 +582,69 @@ const Header = () => {
             >
               Contact
             </Link>
-          </nav>
-
-          <div className="flex items-center space-x-2">
-            {/* Contact Button (Desktop) */}
-            <Link
-              to="/booking"
-              className="hidden md:flex items-center bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-500 transform hover:-translate-y-1 hover:shadow-lg"
-              style={{
-                boxShadow: `0 ${Math.min(4 * scrollProgress, 4)}px ${Math.min(
-                  6 * scrollProgress,
-                  6
-                )}px -1px rgba(0, 0, 0, ${0.1 * scrollProgress}), 0 ${Math.min(
-                  2 * scrollProgress,
-                  2
-                )}px ${Math.min(4 * scrollProgress, 4)}px -1px rgba(0, 0, 0, ${
-                  0.06 * scrollProgress
-                })`,
-                transform: `translateY(${isScrolled ? "0" : "0"})`,
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+          </nav>          <div className="flex items-center space-x-2">            {/* Admin User Info or Book Now Button */}
+            {isAdminPage && isAuthenticated ? (
+              /* User Info and Logout for Admin Pages */
+              <div className="hidden md:flex items-center space-x-3 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 border border-gray-200">
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>                  <div className="text-left">
+                    <p className="text-sm font-medium text-black">
+                      {user?.email}
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      {user?.role}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => logout()}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-all duration-200 text-gray-600 hover:text-black"
+                  title="Đăng xuất"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              /* Regular Book Now Button for Non-Admin Pages */
+              <Link
+                to="/booking"
+                className="hidden md:flex items-center bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-500 transform hover:-translate-y-1 hover:shadow-lg"
+                style={{
+                  boxShadow: `0 ${Math.min(4 * scrollProgress, 4)}px ${Math.min(
+                    6 * scrollProgress,
+                    6
+                  )}px -1px rgba(0, 0, 0, ${0.1 * scrollProgress}), 0 ${Math.min(
+                    2 * scrollProgress,
+                    2
+                  )}px ${Math.min(4 * scrollProgress, 4)}px -1px rgba(0, 0, 0, ${
+                    0.06 * scrollProgress
+                  })`,
+                  transform: `translateY(${isScrolled ? "0" : "0"})`,
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              Book Now
-            </Link>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                Book Now
+              </Link>
+            )}
 
             {/* Mobile Menu Button */}
             <button
@@ -841,32 +888,64 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </Link>
-            </nav>
+              </Link>            </nav>
 
-            {/* Mobile CTA Button */}
+            {/* Mobile CTA Button or Admin Info */}
             <div className="pt-6 mt-1 border-t border-gray-200">
-              <Link
-                to="/booking"
-                className="flex items-center justify-center w-full bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              {isAdminPage && isAuthenticated ? (
+                /* Mobile Admin User Info */
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3 bg-blue-50 rounded-xl px-4 py-3">
+                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">
+                        {user?.email}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {user?.role}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center justify-center w-full bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-xl text-base font-medium transition-all duration-300"
+                  >
+                    <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Đăng xuất
+                  </button>
+                </div>
+              ) : (
+                /* Regular Mobile Book Now Button */
+                <Link
+                  to="/booking"
+                  className="flex items-center justify-center w-full bg-[#0093DE] hover:bg-[#0078b3] text-white px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                Book Now
-              </Link>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Book Now
+                </Link>
+              )}
             </div>
           </div>
         </div>
