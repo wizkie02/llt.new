@@ -380,9 +380,7 @@ const PackageTours = () => {
           if (!a.featured && b.featured) return 1;
           return (b.rating || 0) - (a.rating || 0);
         });
-    }
-
-    setFilteredTours(result);
+    }    setFilteredTours(result);
   }, [
     tours,
     activeFilter,
@@ -392,6 +390,11 @@ const PackageTours = () => {
     getFeaturedTours,
     getToursByCategory,
   ]);
+
+  // Reset current page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter, searchQuery, priceRange, sortBy]);
 
   // Handle category filter change
   const handleFilterChange = (filter: string) => {
@@ -1145,9 +1148,7 @@ const PackageTours = () => {
                   </button>
                 </div>
               </div>
-            </div>
-
-            {/* Results Count */}
+            </div>            {/* Results Count */}
             <div className="mb-6">
               <p
                 className={`text-sm ${
@@ -1155,8 +1156,10 @@ const PackageTours = () => {
                 }`}
               >
                 Showing{" "}
-                <span className="font-semibold">{currentTours.length}</span>{" "}
-                tours
+                <span className="font-semibold">
+                  {filteredTours.length > 0 ? indexOfFirstTour + 1 : 0}-{Math.min(indexOfLastTour, filteredTours.length)}
+                </span>{" "}
+                of <span className="font-semibold">{filteredTours.length}</span> tours
               </p>
             </div>
 
@@ -1213,13 +1216,12 @@ const PackageTours = () => {
                     <TourListSkeleton key={i} theme={theme} />
                   ))}
                 </div>
-              )
-            ) : viewMode === "grid" ? (
+              )            ) : viewMode === "grid" ? (
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {filteredTours.map((tour) => (
+                {currentTours.map((tour) => (
                   <div
                     key={tour.id}
-                    className={`rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                    className={`rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-full ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
                     }`}
                   >
@@ -1239,12 +1241,11 @@ const PackageTours = () => {
                       )}
                       <div className="absolute bottom-3 right-3 bg-white/90 text-[#0093DE] text-sm font-bold px-3 py-1 rounded-full">
                         ${tour.price}
-                      </div>
-                    </div>
-                    <div className="p-6">
+                      </div>                    </div>
+                    <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-start justify-between mb-2">
-                        <h3 className="text-lg font-bold">{tour.name}</h3>
-                        <div className="flex items-center">
+                        <h3 className="text-lg font-bold line-clamp-2 flex-1 mr-2">{tour.name}</h3>
+                        <div className="flex items-center flex-shrink-0">
                           <span className="mr-1 text-sm font-medium">
                             {tour.rating}
                           </span>
@@ -1308,17 +1309,15 @@ const PackageTours = () => {
                         >
                           {tour.duration}
                         </span>
-                      </div>
-
-                      <p
+                      </div>                      <p
                         className={`text-sm ${
                           theme === "light" ? "text-gray-600" : "text-gray-400"
-                        } mb-4 line-clamp-2`}
+                        } mb-4 line-clamp-3 flex-1`}
                       >
                         {tour.description}
                       </p>
 
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 mt-auto">
                         <Link
                           to={`/tour/${tour.id}`}
                           className="flex-1 px-4 py-2 font-medium text-center text-gray-800 transition-colors bg-gray-100 hover:bg-gray-200 rounded-xl"
@@ -1342,10 +1341,9 @@ const PackageTours = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-            ) : (
+              </div>            ) : (
               <div className="space-y-6">
-                {filteredTours.map((tour) => (
+                {currentTours.map((tour) => (
                   <div
                     key={tour.id}
                     className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
