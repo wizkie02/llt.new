@@ -511,7 +511,7 @@ const Footer = () => {
           </AnimatedCard>          <AnimatedCard delay={400} direction="up">
             <div>
               <h4 className="text-lg font-bold mb-4 text-[#0093DE]">
-                Experiences
+                Categories
               </h4>
               <ul className="space-y-2 text-sm">
                 {services.map((service, index) => (

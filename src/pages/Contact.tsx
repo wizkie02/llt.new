@@ -258,6 +258,7 @@ const Contact = () => {
                       width: "100%",
                       height: "100%",
                       padding: 0,
+                      transform: "translateY(-180px)"
                     }}
                     allowFullScreen={true}
                     loading="lazy"

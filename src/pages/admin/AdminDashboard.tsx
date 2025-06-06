@@ -31,11 +31,9 @@ const AdminDashboard = () => {
   const tourCategoryData = categories.map(category => ({
     name: category,
     count: tours.filter(tour => tour.category === category).length
-  }));
-
-  return (
+  }));  return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 pt-16">
-      {/* Simple Header */}
+      {/* Enhanced Header with User Info */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3">
@@ -200,12 +198,11 @@ const AdminDashboard = () => {
                           {tour.category || 'Uncategorized'}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end space-x-2">                          <Button className="h-9 px-4 text-xs bg-transparent hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 rounded-lg" asChild>
+                      <TableCell className="text-right">                        <div className="flex justify-end space-x-2">                          <Button className="h-9 px-4 text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-all duration-200 rounded-lg" asChild>
                             <Link to={`/tour/${tour.id}`} target="_blank">
                               <Eye className="h-4 w-4" />
                             </Link>
-                          </Button>                          <Button className="h-9 px-4 text-xs bg-transparent hover:bg-green-50 hover:text-green-600 transition-all duration-200 rounded-lg" asChild>
+                          </Button>                          <Button className="h-9 px-4 text-xs bg-green-50 text-green-600 hover:bg-green-100 hover:text-green-700 transition-all duration-200 rounded-lg" asChild>
                              <Link to={`/admin/tour-management?edit=${tour.id}`}>
                               <Edit className="h-4 w-4" />
                             </Link>
@@ -255,12 +252,28 @@ const AdminDashboard = () => {
                 </div>
                 Admin Settings
               </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-8 p-6">
+            </CardHeader>            <CardContent className="space-y-8 p-6">
               <div className="bg-gradient-to-r from-blue-50 to-transparent dark:from-blue-900/20 dark:to-transparent p-6 rounded-xl">
                 <h3 className="text-lg font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
                   <div className="p-2 bg-blue-500/10 rounded-xl mr-3">
                     <Users className="h-5 w-5 text-blue-500" />
+                  </div>
+                  Account Management
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  Manage admin accounts, permissions, and security settings
+                </p>
+                <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-4 py-2 rounded-xl">
+                  <Link to="/admin/account-management">
+                    <Users className="mr-2 h-4 w-4" /> Manage Admin Accounts
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="bg-gradient-to-r from-purple-50 to-transparent dark:from-purple-900/20 dark:to-transparent p-6 rounded-xl">
+                <h3 className="text-lg font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
+                  <div className="p-2 bg-purple-500/10 rounded-xl mr-3">
+                    <Settings className="h-5 w-5 text-purple-500" />
                   </div>
                   Access Control
                 </h3>
@@ -287,9 +300,7 @@ const AdminDashboard = () => {
                     <label htmlFor="confirm-delete" className="text-sm font-medium text-gray-700 dark:text-gray-300">Require confirmation before deleting tours</label>
                   </div>
                 </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-yellow-50 to-transparent dark:from-yellow-900/20 dark:to-transparent p-6 rounded-xl">
+              </div>              <div className="bg-gradient-to-r from-yellow-50 to-transparent dark:from-yellow-900/20 dark:to-transparent p-6 rounded-xl">
                 <h3 className="text-lg font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
                   <div className="p-2 bg-yellow-500/10 rounded-xl mr-3">
                     <Download className="h-5 w-5 text-yellow-500" />
@@ -297,6 +308,23 @@ const AdminDashboard = () => {
                   Export Data
                 </h3>                <Button className="border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl">
                   <Download className="mr-2 h-4 w-4" /> Export Tours as CSV
+                </Button>
+              </div>
+
+              <div className="bg-gradient-to-r from-indigo-50 to-transparent dark:from-indigo-900/20 dark:to-transparent p-6 rounded-xl">
+                <h3 className="text-lg font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
+                  <div className="p-2 bg-indigo-500/10 rounded-xl mr-3">
+                    <Settings className="h-5 w-5 text-indigo-500" />
+                  </div>
+                  Development Tools
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  Test admin system APIs and functionality
+                </p>
+                <Button asChild className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-4 py-2 rounded-xl">
+                  <Link to="/admin/system-test">
+                    <Settings className="mr-2 h-4 w-4" /> System Test
+                  </Link>
                 </Button>
               </div>
 

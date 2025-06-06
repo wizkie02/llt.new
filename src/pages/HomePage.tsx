@@ -452,12 +452,10 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-      </section>
-      {/* Featured Destinations */}
-      <section className={`py-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
-        <div className="container px-8 mx-auto md:px-12">
-          <div className="mb-16 text-center">
-            <span className="inline-block px-3 py-1 mb-4 text-sm font-medium text-teal-600 bg-teal-100 rounded-md">
+      </section>      {/* Featured Destinations */}
+      <section id="popular-destinations" className={`py-20 rounded-3xl ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
+        <div className="container px-8 mx-auto md:px-12">          <div className="mb-16 text-center">
+            <span className="inline-block px-3 py-1 mb-4 text-sm font-medium text-teal-600 bg-teal-100 rounded-full">
               Top Destinations
             </span>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">Vietnam's Treasured Places</h2>

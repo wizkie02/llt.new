@@ -129,12 +129,11 @@ const About = () => {
                   <div className="relative inline-block mb-4">
                     <h2 className="relative mb-2 text-3xl font-bold">Our Vietnam Story</h2>
                     <div className="h-1 w-24 bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] rounded-full"></div>
-                  </div>
-                  <div className="space-y-4">
-                    <p className="text-lg leading-relaxed text-center">
+                  </div>                  <div className="space-y-4">
+                    <p className="text-lg leading-relaxed text-justify">
                       Founded in 2025, our journey began with a simple vision: to share the authentic beauty and soul of Vietnam with travelers from around the world. What started as a small operation in Hanoi has grown into a full-service travel company specializing in genuine Vietnamese experiences.
                     </p>
-                    <p className="text-lg leading-relaxed text-center">
+                    <p className="text-lg leading-relaxed text-justify">
                       Our founder, Du Hien, was born in the northern mountains of Vietnam and raised in Hanoi. After years working for international travel companies, she noticed that many travelers only experienced the surface of Vietnam. She dreamed of creating journeys that would connect visitors with the country's true essence.
                     </p>
                   </div>
@@ -345,12 +344,14 @@ const About = () => {
                       </span>
                     )}
                   </div>                  <div className="flex items-center justify-center">
-                    <LazyImage 
-                      src={ceo} 
-                      alt="Du Hien" 
-                      className="object-cover w-16 h-16 mr-4 border-4 border-white rounded-full shadow-md"
-                      preset="thumbnail"
-                    />
+                    <div className="w-16 h-16 mr-4 border-4 border-white rounded-full shadow-md overflow-hidden">
+                      <LazyImage 
+                        src={ceo} 
+                        alt="Du Hien" 
+                        className="object-cover w-full h-full"
+                        preset="thumbnail"
+                      />
+                    </div>
                     <div className="text-left">
                       <div className="font-bold">Du Hien</div>
                       <div className="text-sm text-[#0093DE]">Founder & CEO</div>
