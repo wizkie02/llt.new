@@ -487,7 +487,7 @@ const PackageTours = () => {
     // Update slider range to accommodate new values (expand if necessary)
 
     // Uncomment this one in case of necessity
-    // updateSliderRange(newRange);
+    updateSliderRange(newRange);
 
     setPriceRange(newRange);
   };
@@ -846,10 +846,10 @@ const PackageTours = () => {
                 </div>
               </div>
               {/* Fixed Dual Range Slider */}
-              <div className="relative mb-8">
+              <div className="relative mb-8 focus:none">
                 {/* Background track */}
                 <div
-                  className={`h-1 rounded-full ${
+                  className={`h-1 rounded-full focus:none ${
                     theme === "light" ? "bg-gray-200" : "bg-gray-600"
                   } relative top-3`}
                 >
@@ -872,7 +872,7 @@ const PackageTours = () => {
                 </div>
 
                 {/* Dual range slider container */}
-                <div className="dual-range-container">
+                <div className="dual-range-container focus:none">
                   {/* Minimum value slider */}
                   <input
                     type="range"
@@ -880,7 +880,7 @@ const PackageTours = () => {
                     max={sliderRange[1]}
                     value={priceRange[0]}
                     onChange={(e) => handleSliderChange(e, 0)}
-                    className={`dual-range-slider dual-range-min ${
+                    className={`dual-range-slider dual-range-min focus:none ${
                       Math.abs(priceRange[1] - priceRange[0]) <
                         (sliderRange[1] - sliderRange[0]) * 0.1 &&
                       priceRange[0] > sliderRange[1] / 2
@@ -895,7 +895,7 @@ const PackageTours = () => {
                     max={sliderRange[1]}
                     value={priceRange[1]}
                     onChange={(e) => handleSliderChange(e, 1)}
-                    className={`dual-range-slider dual-range-max ${
+                    className={`dual-range-slider dual-range-max focus:none ${
                       Math.abs(priceRange[1] - priceRange[0]) <
                         (sliderRange[1] - sliderRange[0]) * 0.1 &&
                       priceRange[1] <= sliderRange[1] / 2
