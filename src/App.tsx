@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToursProvider } from './contexts/ToursContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -35,87 +36,89 @@ import './App.css';
 
 function App() {
   return (
-    <ThemeProvider>
-      <ToursProvider>
-        <AuthProvider>
-          <Router>
-            <Header />
-            <Layout>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/package-tours" element={<PackageTours />} />
-                <Route path="/travel-services" element={<TravelServices />} />
-                <Route path="/team-building" element={<TeamBuilding />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/romantic-travel" element={<RomanticTravel />} />
-                <Route path="/medical-travel" element={<MedicalTravel />} />
-                <Route path="/about" element={<About />} />                <Route path="/contact" element={<Contact />} />
-                
-                {/* Admin login route - not protected */}
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/reset-password" element={<AdminPasswordReset />} />
-                
-                {/* Protected admin routes */}
-                <Route 
-                  path="/admin" 
-                  element={
-                    <ProtectedAdminRoute>
-                      <AdminDashboard />
-                    </ProtectedAdminRoute>
-                  } 
-                />
-                <Route 
-                  path="/admin/tour-management" 
-                  element={
-                    <ProtectedAdminRoute>
-                      <AdminTourManagement />
-                    </ProtectedAdminRoute>
-                  } 
-                />                <Route 
-                  path="/admin/category-management" 
-                  element={
-                    <ProtectedAdminRoute>
-                      <AdminCategoryManagement />
-                    </ProtectedAdminRoute>
-                  } 
-                />                <Route 
-                  path="/admin/account-management" 
-                  element={
-                    <ProtectedAdminRoute>
-                      <AdminAccountManagement />
-                    </ProtectedAdminRoute>
-                  } 
-                />
-                <Route 
-                  path="/admin/system-test" 
-                  element={
-                    <ProtectedAdminRoute>
-                      <AdminSystemTest />
-                    </ProtectedAdminRoute>
-                  } 
-                />
-                
-                <Route path="/tour/:id" element={<TourDetail />} />
-                <Route path="/booking" element={<Booking />} />
-                <Route
-                  path="/booking-confirmation"
-                  element={<BookingConfirmation />}
-                />
-                <Route path="/profile" element={<UserProfile />} />
-                <Route path="/help-center" element={<HelpCenter />} />
-                <Route path="/blog" element={<TravelBlog />} />
-                <Route path="/blog/post/:id" element={<TravelBlog />} />
-                <Route path="/blog/category/:category" element={<TravelBlog />} />
-                <Route path="/explore-map" element={<InteractiveMap />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Layout>
-            <Footer />
-            <LiveChat />
-          </Router>
-        </AuthProvider>
-      </ToursProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <ToursProvider>
+          <AuthProvider>
+            <Router>
+              <Header />
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/package-tours" element={<PackageTours />} />
+                  <Route path="/travel-services" element={<TravelServices />} />
+                  <Route path="/team-building" element={<TeamBuilding />} />
+                  <Route path="/events" element={<Events />} />
+                  <Route path="/romantic-travel" element={<RomanticTravel />} />
+                  <Route path="/medical-travel" element={<MedicalTravel />} />
+                  <Route path="/about" element={<About />} />                <Route path="/contact" element={<Contact />} />
+                  
+                  {/* Admin login route - not protected */}
+                  <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route path="/admin/reset-password" element={<AdminPasswordReset />} />
+                  
+                  {/* Protected admin routes */}
+                  <Route 
+                    path="/admin" 
+                    element={
+                      <ProtectedAdminRoute>
+                        <AdminDashboard />
+                      </ProtectedAdminRoute>
+                    } 
+                  />
+                  <Route 
+                    path="/admin/tour-management" 
+                    element={
+                      <ProtectedAdminRoute>
+                        <AdminTourManagement />
+                      </ProtectedAdminRoute>
+                    } 
+                  />                <Route 
+                    path="/admin/category-management" 
+                    element={
+                      <ProtectedAdminRoute>
+                        <AdminCategoryManagement />
+                      </ProtectedAdminRoute>
+                    } 
+                  />                <Route 
+                    path="/admin/account-management" 
+                    element={
+                      <ProtectedAdminRoute>
+                        <AdminAccountManagement />
+                      </ProtectedAdminRoute>
+                    } 
+                  />
+                  <Route 
+                    path="/admin/system-test" 
+                    element={
+                      <ProtectedAdminRoute>
+                        <AdminSystemTest />
+                      </ProtectedAdminRoute>
+                    } 
+                  />
+                  
+                  <Route path="/tour/:id" element={<TourDetail />} />
+                  <Route path="/booking" element={<Booking />} />
+                  <Route
+                    path="/booking-confirmation"
+                    element={<BookingConfirmation />}
+                  />
+                  <Route path="/profile" element={<UserProfile />} />
+                  <Route path="/help-center" element={<HelpCenter />} />
+                  <Route path="/blog" element={<TravelBlog />} />
+                  <Route path="/blog/post/:id" element={<TravelBlog />} />
+                  <Route path="/blog/category/:category" element={<TravelBlog />} />
+                  <Route path="/explore-map" element={<InteractiveMap />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Layout>
+              <Footer />
+              <LiveChat />
+            </Router>
+          </AuthProvider>
+        </ToursProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
