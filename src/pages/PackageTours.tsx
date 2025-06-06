@@ -261,8 +261,50 @@ const PackageTours = () => {
     tours.length > 0 ? Math.min(...tours.map((tour) => tour.price)) : 0;
   const maxPrice =
     tours.length > 0 ? Math.max(...tours.map((tour) => tour.price)) : 1000;
+
   // Dynamic slider range that adjusts based on user input
-  const [sliderRange, setSliderRange] = useState<[number, number]>([0, 1000]);
+  const [sliderRange, setSliderRange] = useState<[number, number]>([0, 1000]); // Update slider range when needed
+  const updateSliderRange = (newPriceRange: [number, number]) => {
+    const [min, max] = newPriceRange;
+    const currentSliderMin = sliderRange[0];
+    const currentSliderMax = sliderRange[1];
+
+    let newSliderMin = currentSliderMin;
+    let newSliderMax = currentSliderMax;
+
+    // Always expand slider range if price goes below or above current range
+    if (min < currentSliderMin) {
+      newSliderMin = Math.max(0, min - 50); // Add some padding
+    }
+    if (max > currentSliderMax) {
+      newSliderMax = max + 100; // Add some padding
+    }
+
+    // More aggressive range adjustment for manual input
+    // If the new range is significantly different, adjust accordingly
+    const rangeDifference = max - min;
+    const currentRangeDifference = currentSliderMax - currentSliderMin;
+
+    // If user input creates a much larger range, expand the slider
+    if (rangeDifference > currentRangeDifference * 0.8) {
+      newSliderMin = Math.max(0, min - 100);
+      newSliderMax = max + 200;
+    }
+
+    // Contract slider range if the new values are much smaller than current range
+    // Only contract if both values are significantly smaller
+    if (max < currentSliderMax * 0.5 && min > currentSliderMin) {
+      newSliderMax = Math.max(max + 100, currentSliderMax * 0.7);
+    }
+
+    // Always update if range actually changed
+    if (
+      newSliderMin !== currentSliderMin ||
+      newSliderMax !== currentSliderMax
+    ) {
+      setSliderRange([newSliderMin, newSliderMax]);
+    }
+  };
   // Initialize price range and slider range based on actual tour prices
   useEffect(() => {
     if (tours.length > 0) {
@@ -1472,10 +1514,11 @@ const PackageTours = () => {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex justify-center mt-12">
-                <nav className="flex items-center space-x-2">                  <button
+                <nav className="flex items-center space-x-2">
+                  <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className={`flex items-center justify-center h-10 w-10 rounded-xl ${
+                    className={`flex items-center justify-center h-10 w-10 rounded-lg ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
                     } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
@@ -1495,10 +1538,11 @@ const PackageTours = () => {
                     </svg>
                   </button>
 
-                  {getPageNumbers().map((pageNumber) => (                    <button
+                  {getPageNumbers().map((pageNumber) => (
+                    <button
                       key={pageNumber}
                       onClick={() => handlePageChange(pageNumber)}
-                      className={`flex items-center justify-center h-10 w-10 rounded-xl shadow-md shadow-gray-400 ${
+                      className={`flex items-center justify-center h-10 w-10 rounded-lg shadow-md shadow-gray-400 ${
                         currentPage === pageNumber
                           ? "bg-[#0093DE] text-white"
                           : theme === "light"
@@ -1508,10 +1552,11 @@ const PackageTours = () => {
                     >
                       {pageNumber}
                     </button>
-                  ))}                  <button
+                  ))}
+                  <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className={`flex items-center justify-center h-10 w-10 rounded-xl ${
+                    className={`flex items-center justify-center h-10 w-10 rounded-lg ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
                     } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
