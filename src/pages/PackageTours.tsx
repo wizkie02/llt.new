@@ -1341,17 +1341,16 @@ const PackageTours = () => {
                     </div>
                   </div>
                 ))}
-              </div>            ) : (
-              <div className="space-y-6">
+              </div>            ) : (              <div className="space-y-6">
                 {currentTours.map((tour) => (
                   <div
                     key={tour.id}
-                    className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                    className={`flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:h-64 ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
                     }`}
                   >
                     {" "}
-                    <div className="relative h-48 overflow-hidden md:w-1/3 md:h-auto">
+                    <div className="relative h-48 md:h-full overflow-hidden md:w-1/3">
                       <LazyImage
                         src={tour.image}
                         alt={tour.name}
@@ -1365,7 +1364,7 @@ const PackageTours = () => {
                         </div>
                       )}
                     </div>
-                    <div className="flex flex-col p-6 md:w-2/3">
+                    <div className="flex flex-col p-6 md:w-2/3 flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <h3 className="text-xl font-bold">{tour.name}</h3>
                         <div className="flex items-center">
@@ -1454,12 +1453,10 @@ const PackageTours = () => {
                             ${tour.price}
                           </span>
                         </div>
-                      </div>
-
-                      <p
+                      </div>                      <p
                         className={`text-sm ${
                           theme === "light" ? "text-gray-600" : "text-gray-400"
-                        } mb-4 flex-grow`}
+                        } mb-4 flex-1 line-clamp-3`}
                       >
                         {tour.description}
                       </p>
@@ -1512,13 +1509,12 @@ const PackageTours = () => {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex justify-center mt-12">
-                <nav className="flex items-center space-x-2">
-                  <button
+                <nav className="flex items-center space-x-2">                  <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className={`flex items-center justify-center h-10 w-10 rounded-lg ${
+                    className={`flex items-center justify-center h-10 w-10 rounded-xl ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
-                    } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed`}
+                    } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:scale-105`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -1534,13 +1530,11 @@ const PackageTours = () => {
                         d="M15 19l-7-7 7-7"
                       />
                     </svg>
-                  </button>
-
-                  {getPageNumbers().map((pageNumber) => (
+                  </button>                  {getPageNumbers().map((pageNumber) => (
                     <button
                       key={pageNumber}
                       onClick={() => handlePageChange(pageNumber)}
-                      className={`flex items-center justify-center h-10 w-10 rounded-lg shadow-md shadow-gray-400 ${
+                      className={`flex items-center justify-center h-10 w-10 rounded-xl shadow-md shadow-gray-400 transition-all hover:scale-105 ${
                         currentPage === pageNumber
                           ? "bg-[#0093DE] text-white"
                           : theme === "light"
@@ -1550,13 +1544,12 @@ const PackageTours = () => {
                     >
                       {pageNumber}
                     </button>
-                  ))}
-                  <button
+                  ))}                  <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className={`flex items-center justify-center h-10 w-10 rounded-lg ${
+                    className={`flex items-center justify-center h-10 w-10 rounded-xl ${
                       theme === "light" ? "bg-white" : "bg-gray-800"
-                    } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed`}
+                    } shadow-md shadow-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:scale-105`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

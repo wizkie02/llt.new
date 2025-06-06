@@ -42,7 +42,6 @@ const TourDetail = () => {
       return () => clearTimeout(timer);
     }
   }, [tour]);
-
   const handleBookNow = () => {
     // Navigate to booking page with tour information
     navigate(`/booking?tourId=${id}`, { 
@@ -52,6 +51,34 @@ const TourDetail = () => {
         prefilledGuests: guests
       } 
     });
+  };
+
+  const handleShare = () => {
+    if (navigator.share && tour) {
+      navigator.share({
+        title: tour.name,
+        text: `Check out this amazing tour: ${tour.name} in ${tour.location}, Vietnam`,
+        url: window.location.href,
+      }).catch(console.error);
+    } else {
+      // Fallback: copy URL to clipboard
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('Tour link copied to clipboard!');
+      }).catch(() => {
+        // If clipboard API fails, create a temporary input to copy
+        const textArea = document.createElement('textarea');
+        textArea.value = window.location.href;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert('Tour link copied to clipboard!');
+      });
+    }
+  };
+
+  const handleContactSupport = () => {
+    navigate('/contact');
   };
   
   // Prepare itinerary data from tour or use sample data
@@ -204,11 +231,20 @@ const TourDetail = () => {
           {/* Main Content */}
           <div className="lg:col-span-8">
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-8">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
-                <TabsTrigger value="reviews">Reviews</TabsTrigger>
-              </TabsList>
+                <TabsList className="grid w-full grid-cols-3 mb-8 rounded-xl">
+                <TabsTrigger value="overview" className="flex items-center gap-1.5">
+                  <Info className="h-4 w-4" />
+                  Overview
+                </TabsTrigger>
+                <TabsTrigger value="itinerary" className="flex items-center gap-1.5">
+                  <MapPin className="h-4 w-4" />
+                  Itinerary
+                </TabsTrigger>
+                <TabsTrigger value="reviews" className="flex items-center gap-1.5">
+                  <Star className="h-4 w-4" />
+                  Reviews
+                </TabsTrigger>
+                </TabsList>
               
               <TabsContent value="overview">
                 <Card>
@@ -556,8 +592,7 @@ const TourDetail = () => {
                     >
                       <Heart className={`mr-2 h-4 w-4 ${isWishlisted ? 'fill-pink-600' : ''}`} />
                       {isWishlisted ? 'Saved' : 'Save'}
-                    </Button>
-                    <Button variant="outline" className="flex-1">
+                    </Button>                    <Button variant="outline" className="flex-1" onClick={handleShare}>
                       <Share2 className="mr-2 h-4 w-4" />
                       Share
                     </Button>
@@ -570,8 +605,7 @@ const TourDetail = () => {
                   <CardTitle className="text-base">Need Help?</CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm">
-                  <p className="mb-2">Have questions about this tour? Our travel experts are ready to assist you.</p>
-                  <Button variant="link" className="p-0 h-auto text-[#0093DE]">
+                  <p className="mb-2">Have questions about this tour? Our travel experts are ready to assist you.</p>                  <Button variant="link" className="p-0 h-auto text-[#0093DE]" onClick={handleContactSupport}>
                     Contact Support
                   </Button>
                 </CardContent>

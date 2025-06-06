@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Separator } from '../components/ui/separator';
 import { Calendar } from '../components/ui/calendar';
+import { BirthDateCalendar } from '../components/ui/birth-date-calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
 import { Badge } from '../components/ui/badge';
 import { CalendarIcon, Users, MapPin, Clock, Check, AlertCircle } from 'lucide-react';
@@ -133,9 +134,18 @@ const Booking = () => {
       }));
     }
   }, [formData.numberOfTravelers]);
-
   const handleInputChange = (field: keyof BookingFormData, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => {
+      const newData = { ...prev, [field]: value };
+      
+      // Auto-adjust return date if departure date is set after current return date
+      if (field === 'departureDate' && value && newData.returnDate && value > newData.returnDate) {
+        newData.returnDate = undefined; // Clear return date when departure is after it
+      }
+      
+      return newData;
+    });
+    
     // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
@@ -453,7 +463,7 @@ const Booking = () => {
                         value={formData.address}
                         onChange={(e) => handleInputChange('address', e.target.value)}
                         placeholder="Your full address"
-                        className="min-h-[60px] resize-none"
+                        className="min-h-[60px] resize-none rounded-lg"
                         rows={2}
                       />
                     </div>
@@ -547,8 +557,7 @@ const Booking = () => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">                        <div>
                           <Label>Date of Birth</Label>
                           <Popover>
                             <PopoverTrigger asChild>
@@ -563,7 +572,7 @@ const Booking = () => {
                               </Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-auto p-0">
-                              <Calendar
+                              <BirthDateCalendar
                                 mode="single"
                                 selected={traveler.dateOfBirth}
                                 onSelect={(date) => handleTravelerChange(traveler.id, 'dateOfBirth', date)}
@@ -611,15 +620,15 @@ const Booking = () => {
               <Card>
                 <CardHeader>
                   <CardTitle>Additional Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">                  <div>
+                </CardHeader>                <CardContent className="space-y-4">
+                  <div>
                     <Label htmlFor="specialRequests">Special Requests</Label>
                     <Textarea
                       id="specialRequests"
                       value={formData.specialRequests}
                       onChange={(e) => handleInputChange('specialRequests', e.target.value)}
                       placeholder="Any special requests..."
-                      className="min-h-[70px] resize-none"
+                      className="min-h-[70px] resize-none rounded-lg"
                       rows={3}
                     />
                   </div>
@@ -631,7 +640,7 @@ const Booking = () => {
                       value={formData.dietaryRestrictions}
                       onChange={(e) => handleInputChange('dietaryRestrictions', e.target.value)}
                       placeholder="List any dietary restrictions..."
-                      className="min-h-[60px] resize-none"
+                      className="min-h-[60px] resize-none rounded-lg"
                       rows={2}
                     />
                   </div>
@@ -643,7 +652,7 @@ const Booking = () => {
                       value={formData.medicalConditions}
                       onChange={(e) => handleInputChange('medicalConditions', e.target.value)}
                       placeholder="Any medical conditions..."
-                      className="min-h-[60px] resize-none"
+                      className="min-h-[60px] resize-none rounded-lg"
                       rows={2}
                     />
                   </div>
