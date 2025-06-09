@@ -68,7 +68,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         body: JSON.stringify({ username, password }),
       });if (response.ok) {
         const data = await response.json();
-        console.log('Login successful:', data.message);
+        // console.log('Login successful:', data.message);
           // Extract user data from API response
         const userData: User = {
           id: data.admin?.id || 1,

@@ -24,19 +24,19 @@ const AdminCategoryManagement = () => {
     
     fetch('https://leolovestravel.com/api/get-categories.php')
       .then(res => {
-        console.log('Refresh - Response status:', res.status);
+        // console.log('Refresh - Response status:', res.status);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.text();
       })
       .then(responseText => {
-        console.log('Refresh - Raw API response:', responseText);
+        // console.log('Refresh - Raw API response:', responseText);
         setApiResponse(responseText);
         
         try {
           const data = JSON.parse(responseText);
-          console.log('Refresh - Parsed API response:', data);
+          // console.log('Refresh - Parsed API response:', data);
           
           let categoriesArray = [];
           
@@ -62,7 +62,7 @@ const AdminCategoryManagement = () => {
             }
           }
           
-          console.log('Refresh - Final categories array:', categoriesArray);
+          // console.log('Refresh - Final categories array:', categoriesArray);
           setCategories(categoriesArray);
           setLoading(false);
           
@@ -86,22 +86,22 @@ const AdminCategoryManagement = () => {
     
     fetch('https://leolovestravel.com/api/get-categories.php')
       .then(res => {
-        console.log('Response status:', res.status);
-        console.log('Response headers:', res.headers);
+        // console.log('Response status:', res.status);
+        // console.log('Response headers:', res.headers);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.text(); // Get as text first to see raw response
       })
       .then(responseText => {
-        console.log('Raw API response:', responseText);
+        // console.log('Raw API response:', responseText);
         setApiResponse(responseText); // Store for debugging
         
         try {
           const data = JSON.parse(responseText);
-          console.log('Parsed API response:', data);
-          console.log('Type of data:', typeof data);
-          console.log('Data keys:', Object.keys(data));
+          // console.log('Parsed API response:', data);
+          // console.log('Type of data:', typeof data);
+          // console.log('Data keys:', Object.keys(data));
 
           // Handle different possible response formats
           let categoriesArray = [];
@@ -110,14 +110,14 @@ const AdminCategoryManagement = () => {
             // Check if it's array of objects with 'name' property (like PackageTours expects)
             if (data.length > 0 && typeof data[0] === 'object' && data[0].name) {
               categoriesArray = data.map((c: { name: string }) => c.name);
-              console.log('Response is array of objects with name property:', categoriesArray);
+              // console.log('Response is array of objects with name property:', categoriesArray);
             } else if (data.length > 0 && typeof data[0] === 'string') {
               // If response is directly an array of strings
               categoriesArray = data;
-              console.log('Response is array of strings:', data);
+              // console.log('Response is array of strings:', data);
             } else {
               categoriesArray = data;
-              console.log('Response is array (other format):', data);
+              // console.log('Response is array (other format):', data);
             }
           } else if (data.categories && Array.isArray(data.categories)) {
             // If response is object with categories property
@@ -126,7 +126,7 @@ const AdminCategoryManagement = () => {
             } else {
               categoriesArray = data.categories;
             }
-            console.log('Response has categories property:', categoriesArray);
+            // console.log('Response has categories property:', categoriesArray);
           } else if (data.data && Array.isArray(data.data)) {
             // If response is object with data property
             if (data.data.length > 0 && typeof data.data[0] === 'object' && data.data[0].name) {
@@ -134,7 +134,7 @@ const AdminCategoryManagement = () => {
             } else {
               categoriesArray = data.data;
             }
-            console.log('Response has data property:', categoriesArray);
+            // console.log('Response has data property:', categoriesArray);
           } else if (data.success && data.categories) {
             // If response has success flag and categories
             if (Array.isArray(data.categories) && data.categories.length > 0 && typeof data.categories[0] === 'object' && data.categories[0].name) {
@@ -142,7 +142,7 @@ const AdminCategoryManagement = () => {
             } else {
               categoriesArray = data.categories;
             }
-            console.log('Response has success flag and categories:', categoriesArray);
+            // console.log('Response has success flag and categories:', categoriesArray);
           } else {
             // Try to find any array in the response
             for (const key in data) {
@@ -152,19 +152,19 @@ const AdminCategoryManagement = () => {
                 } else {
                   categoriesArray = data[key];
                 }
-                console.log(`Found array in ${key}:`, categoriesArray);
+                // console.log(`Found array in ${key}:`, categoriesArray);
                 break;
               }
             }
           }
           
-          console.log('Final categories array:', categoriesArray);
+          // console.log('Final categories array:', categoriesArray);
           setCategories(categoriesArray);
           setLoading(false);
           
         } catch (parseError) {
           console.error('JSON parse error:', parseError);
-          console.log('Response is not valid JSON, treating as plain text');
+          // console.log('Response is not valid JSON, treating as plain text');
           setError('API response is not valid JSON. Using sample data.');
           setCategories(['Adventure Tours', 'Cultural Tours', 'Beach Tours', 'Mountain Tours', 'City Tours']);
           setLoading(false);
@@ -190,19 +190,19 @@ const AdminCategoryManagement = () => {
       method: 'GET',
     })
       .then(res => {
-        console.log('Add category response status:', res.status);
+        // console.log('Add category response status:', res.status);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.text();
       })
       .then(responseText => {
-        console.log('Add category response:', responseText);
+        // console.log('Add category response:', responseText);
         
         try {
           const data = JSON.parse(responseText);
           if (data.success) {
-            console.log('Category added successfully via API');
+            // console.log('Category added successfully via API');
             // Refresh categories from server to get latest data
             setTimeout(() => refreshCategories(), 500);
             setNewCategory('');
@@ -211,7 +211,7 @@ const AdminCategoryManagement = () => {
           }
         } catch (parseError) {
           // If response is not JSON, try alternative POST method
-          console.log('GET method failed, trying POST method...');
+          // console.log('GET method failed, trying POST method...');
           return fetch('https://leolovestravel.com/api/add-category.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

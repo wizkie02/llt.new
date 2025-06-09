@@ -81,13 +81,13 @@ const AdminAccountManagement: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('API Response:', data); // Debug log
+        // console.log('API Response:', data); // Debug log
         if (data.admins && Array.isArray(data.admins)) {
-          console.log('Admins found:', data.admins.length); // Debug log
+          // console.log('Admins found:', data.admins.length); // Debug log
           setAdmins(data.admins);
           setFilteredAdmins(data.admins);
         } else {
-          console.log('No admins array found in response'); // Debug log
+          // console.log('No admins array found in response'); // Debug log
           setError('Failed to load admin list. Please try again.');
         }
       } else {

@@ -12,7 +12,7 @@ const TestImage: React.FC<TestImageProps> = ({ src, alt, className = '' }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleLoad = () => {
-    console.log('✅ Image loaded successfully:', src);
+    // console.log('✅ Image loaded successfully:', src);
     setIsLoaded(true);
     setIsLoading(false);
     setIsError(false);
@@ -26,7 +26,7 @@ const TestImage: React.FC<TestImageProps> = ({ src, alt, className = '' }) => {
   };
 
   const handleLoadStart = () => {
-    console.log('⏳ Image load started:', src);
+    // console.log('⏳ Image load started:', src);
     setIsLoading(true);
   };
 

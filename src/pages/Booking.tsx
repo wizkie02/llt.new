@@ -262,7 +262,7 @@ const Booking = () => {
         throw new Error(`Webhook failed with status: ${response.status}`);
       }
 
-      console.log('Booking data sent to webhook successfully');
+      // console.log('Booking data sent to webhook successfully');
       
       // Navigate to booking confirmation with form data
       navigate('/booking-confirmation', { 

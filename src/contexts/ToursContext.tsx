@@ -118,9 +118,9 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
   };
   const getTourById = (id: string) => tours.find((tour) => tour.id === id);
     const getToursByCategory = (categoryName: string) => {
-    console.log(`getToursByCategory called with: "${categoryName}"`);
-    console.log('Available categories:', categories);
-    console.log('All tours:', tours.map(t => ({ id: t.id, name: t.name, category: t.category })));
+    // console.log(`getToursByCategory called with: "${categoryName}"`);
+    // console.log('Available categories:', categories);
+    // console.log('All tours:', tours.map(t => ({ id: t.id, name: t.name, category: t.category })));
     
     // Create a mapping from category name to category ID
     const categoryNameToId = new Map<string, string>();
@@ -131,8 +131,8 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
       categoryIdToName.set(cat.id, cat.name);
     });
     
-    console.log('Category Name to ID mapping:', Object.fromEntries(categoryNameToId));
-    console.log('Category ID to Name mapping:', Object.fromEntries(categoryIdToName));
+    // console.log('Category Name to ID mapping:', Object.fromEntries(categoryNameToId));
+    // console.log('Category ID to Name mapping:', Object.fromEntries(categoryIdToName));
     
     const filtered = tours.filter((tour) => {
       // Handle both scenarios:
@@ -158,18 +158,18 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
         match = true;
       }
       
-      console.log(`Tour "${tour.name}" category: "${tour.category}" (resolved to: "${tourCategoryName || tour.category}") - matches "${categoryName}": ${match}`);
+      // console.log(`Tour "${tour.name}" category: "${tour.category}" (resolved to: "${tourCategoryName || tour.category}") - matches "${categoryName}": ${match}`);
       return match;
     });
     
-    console.log(`getToursByCategory result: ${filtered.length} tours found for category "${categoryName}"`);
+    // console.log(`getToursByCategory result: ${filtered.length} tours found for category "${categoryName}"`);
     return filtered;
   };
   
   const getFeaturedTours = () => {
-    console.log("getFeaturedTours called");
+    // console.log("getFeaturedTours called");
     const featured = tours.filter((tour) => tour.featured);
-    console.log(`getFeaturedTours result: ${featured.length} tours found`);
+    // console.log(`getFeaturedTours result: ${featured.length} tours found`);
     return featured;
   };
 

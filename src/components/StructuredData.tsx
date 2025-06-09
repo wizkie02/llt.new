@@ -22,7 +22,6 @@ const StructuredData = ({ type, data }: StructuredDataProps) => {
           sameAs: [
             'https://www.facebook.com/leolovestravel',
             'https://www.instagram.com/leolovestravel',
-            'https://twitter.com/leolovestravel',
           ],
           ...data,
         };

@@ -19,7 +19,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
   alt,
   className,
 }) => {
-  console.log('🔍 LazyImage rendering with src:', src);
+  // console.log('🔍 LazyImage rendering with src:', src);
   
   return (
     <TestImage
