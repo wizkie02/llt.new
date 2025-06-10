@@ -2,6 +2,9 @@ import { useTheme } from "../contexts/ThemeContext";
 import LazyImage from "../components/ui/LazyImage";
 import { useImagePreload } from "../hooks/useImageOptimization";
 import bg5 from "../assets/images/backgrounds/bg5.jpg";
+import SEO from "../components/SEO";
+import StructuredData from "../components/StructuredData";
+import SEOBreadcrumb from "../components/SEOBreadcrumb";
 
 const Events = () => {
   const { theme } = useTheme();
@@ -112,15 +115,42 @@ const Events = () => {
       category: "Convention Center",
     },
   ];
-
   return (
-    <div
-      className={`min-h-screen relative ${
-        theme === "light"
-          ? "bg-[#F7F9FC] text-[#292F36]"
-          : "bg-[#1A202C] text-[#F7F9FC]"
-      }`}
-    >
+    <>
+      <SEO
+        title="Vietnam Events & Festivals | Business Events | Cultural Festivals | Leo Loves Travel"
+        description="Experience Vietnam's vibrant events and festivals. Professional event planning for business conferences, cultural festivals, and special celebrations. Authentic Vietnamese cultural experiences and modern event management."
+        keywords="vietnam events, vietnam festivals, business events vietnam, cultural festivals vietnam, tet festival, mid autumn festival, lantern festival, hoi an festival, vietnam conference planning, vietnam event management"
+        url="https://leolovestravel.com/events"
+        type="website"
+      />
+      <StructuredData
+        type="Organization"
+        data={{
+          "@type": "EventOrganizer",
+          name: "Leo Loves Travel - Events & Festivals",
+          description: "Professional event planning and cultural festival experiences in Vietnam",
+          url: "https://leolovestravel.com/events",
+          serviceType: [
+            "Business Events",
+            "Cultural Festivals", 
+            "Conference Planning",
+            "Festival Tours"
+          ],
+          areaServed: {
+            "@type": "Country",
+            name: "Vietnam"
+          }
+        }}
+      />
+      <div
+        className={`min-h-screen relative ${
+          theme === "light"
+            ? "bg-[#F7F9FC] text-[#292F36]"
+            : "bg-[#1A202C] text-[#F7F9FC]"
+        }`}
+      >
+        <SEOBreadcrumb />
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-40 right-10 w-80 h-80 rounded-full bg-[#FFCB3C]/5 blur-3xl opacity-60"></div>
@@ -498,9 +528,9 @@ const Events = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </div>      </section>
     </div>
+    </>
   );
 };
 

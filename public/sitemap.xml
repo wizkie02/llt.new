@@ -1,10 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://leolovestravel.com/</loc>
-    <lastmod>2024-03-19</lastmod>
+    <lastmod>2025-06-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://leolovestravel.com/" />
   </url>
-  <!-- Add more URLs as your site grows -->
-</urlset> 
+
+  <!-- Main Travel Pages -->
+  <url>
+    <loc>https://leolovestravel.com/package-tours</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/vietnam-tours.jpg</image:loc>
+      <image:caption>Vietnam Package Tours - Best Travel Deals</image:caption>
+      <image:title>Vietnam Tours and Travel Packages</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/travel-services</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/team-building</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/events</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/romantic-travel</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/vietnam-honeymoon.jpg</image:loc>
+      <image:caption>Vietnam Romantic Travel and Honeymoon Tours</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/medical-travel</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/about</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/contact</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/blog</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/explore-map</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Vietnam Top Destinations -->
+  <url>
+    <loc>https://leolovestravel.com/destinations/hanoi</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/hanoi-vietnam.jpg</image:loc>
+      <image:caption>Hanoi Vietnam Capital City Tours and Travel Guide</image:caption>
+      <image:title>Hanoi Vietnam Travel - Things to Do and See</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/ho-chi-minh-city</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/saigon-vietnam.jpg</image:loc>
+      <image:caption>Ho Chi Minh City Saigon Vietnam Travel Guide</image:caption>
+      <image:title>Saigon Vietnam Tours - Ho Chi Minh City Travel</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/halong-bay</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/halong-bay-vietnam.jpg</image:loc>
+      <image:caption>Halong Bay Vietnam UNESCO World Heritage Cruise Tours</image:caption>
+      <image:title>Halong Bay Cruise Tours Vietnam</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/hoi-an</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/hoi-an-vietnam.jpg</image:loc>
+      <image:caption>Hoi An Ancient Town Vietnam Travel Guide</image:caption>
+      <image:title>Hoi An Vietnam Tours - Ancient Town Experience</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/sapa</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/sapa-vietnam.jpg</image:loc>
+      <image:caption>Sapa Vietnam Mountain Trekking and Rice Terraces</image:caption>
+      <image:title>Sapa Trekking Tours Vietnam - Mountain Adventures</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/phu-quoc</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/phu-quoc-vietnam.jpg</image:loc>
+      <image:caption>Phu Quoc Island Vietnam Beach Holiday Paradise</image:caption>
+      <image:title>Phu Quoc Vietnam Beach Tours and Island Holidays</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/da-nang</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/nha-trang</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/destinations/mekong-delta</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://leolovestravel.com/images/mekong-delta-vietnam.jpg</image:loc>
+      <image:caption>Mekong Delta Vietnam River Tours and Cultural Experience</image:caption>
+      <image:title>Mekong Delta Tours Vietnam - River Cruise Adventures</image:title>
+    </image:image>
+  </url>
+
+  <!-- Vietnam Tour Categories -->
+  <url>
+    <loc>https://leolovestravel.com/tours/cultural-tours</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/tours/adventure-tours</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/tours/food-tours</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/tours/beach-holidays</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/tours/mountain-trekking</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vietnam Travel Guides -->
+  <url>
+    <loc>https://leolovestravel.com/travel-guide/best-time-visit-vietnam</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/travel-guide/vietnam-visa-requirements</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://leolovestravel.com/travel-guide/vietnam-travel-tips</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

@@ -12,7 +12,10 @@ import hoiAn from '../assets/images/destinations/hoi-an.jpg';
 import mekong from '../assets/images/destinations/mekong.jpg';
 import sapa from '../assets/images/destinations/sapa.jpg';
 import bg from '../assets/images/backgrounds/bg1.jpg';
-import ceo from '../assets/images/ceo.jpg'
+import ceo from '../assets/images/ceo.jpg';
+import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
+import SEOBreadcrumb from '../components/SEOBreadcrumb';
 
 
 const About = () => {
@@ -86,10 +89,38 @@ const About = () => {
       )
     }
   ];
-
   return (
-    <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
-      {/* Hero Section */}
+    <>
+      <SEO
+        title="About Leo Loves Travel | Leading Vietnam Travel Agency | Our Story"
+        description="Learn about Leo Loves Travel, Vietnam's premier travel agency. Founded by passionate travel experts, we specialize in authentic Vietnamese experiences for international travelers. Discover our mission, values, and commitment to sustainable tourism."
+        keywords="about leo loves travel, vietnam travel agency, vietnam tour company, travel company vietnam, authentic vietnam travel, sustainable tourism vietnam, vietnam travel experts, vietnamese culture tours"
+        url="https://leolovestravel.com/about"
+        type="website"
+      />
+      <StructuredData
+        type="Organization"
+        data={{
+          name: "Leo Loves Travel",
+          description: "Leading Vietnam travel agency specializing in authentic cultural experiences and sustainable tourism for international travelers",
+          url: "https://leolovestravel.com",
+          logo: "https://leolovestravel.com/src/assets/icon-circle.svg",
+          foundingDate: "2020",
+          founder: {
+            "@type": "Person",
+            name: "Leo",
+            jobTitle: "Founder & CEO"
+          },
+          areaServed: {
+            "@type": "Country",
+            name: "Vietnam"
+          },
+          knowsAbout: ["Vietnam Tourism", "Cultural Tours", "Adventure Travel", "Sustainable Tourism"],
+          slogan: "Authentic Vietnam Experiences"
+        }}      />
+      <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
+        <SEOBreadcrumb />
+        {/* Hero Section */}
       <section className="relative py-32 mt-20 mb-8 overflow-hidden rounded-b-3xl">
         <div 
           className="absolute inset-0 bg-fixed bg-center bg-cover"
@@ -360,10 +391,10 @@ const About = () => {
                 </div>
               </div>
             </ScrollReveal>
-          </div>
-        </div>
+          </div>        </div>
       </section>
     </div>
+    </>
   );
 };
 

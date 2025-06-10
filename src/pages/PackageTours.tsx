@@ -5,6 +5,9 @@ import { useTheme } from "../contexts/ThemeContext";
 import LazyImage from "../components/ui/LazyImage";
 import { useImagePreload } from "../hooks/useImageOptimization";
 import bg7 from "../assets/images/backgrounds/bg7.jpg";
+import SEO from "../components/SEO";
+import StructuredData from "../components/StructuredData";
+import SEOBreadcrumb from "../components/SEOBreadcrumb";
 
 // Loading skeleton components
 const CategorySkeleton = ({ theme }: { theme: string }) => (
@@ -597,15 +600,44 @@ const PackageTours = () => {
       behavior: "smooth",
     });
   };
-
   return (
-    <div
-      className={`min-h-screen ${
-        theme === "light"
-          ? "bg-[#F7F9FC] text-[#292F36]"
-          : "bg-[#1A202C] text-[#F7F9FC]"
-      }`}
-    >
+    <>
+      <SEO
+        title="Vietnam Package Tours 2025 | Best Vietnam Tour Packages | Leo Loves Travel"
+        description="Discover amazing Vietnam tour packages for every budget and interest. From luxury Halong Bay cruises to budget backpacking adventures. Authentic cultural experiences, expert local guides, and unforgettable memories await."
+        keywords="vietnam tour packages, vietnam tours, halong bay tours, hanoi tours, ho chi minh city tours, mekong delta tours, sapa trekking, hoi an tours, vietnam cultural tours, vietnam adventure tours, vietnam luxury tours, vietnam budget tours"
+        url="https://leolovestravel.com/package-tours"
+      />      <StructuredData
+        type="OfferCatalog"
+        data={{
+          name: "Vietnam Tour Packages",
+          description: "Comprehensive collection of Vietnam tour packages for international travelers",
+          itemListElement: tours.map((tour, index) => ({
+            "@type": "Offer",
+            position: index + 1,
+            itemOffered: {
+              "@type": "TouristTrip",
+              name: tour.name,
+              description: tour.description,
+              image: tour.image,
+              provider: {
+                "@type": "TravelAgency",
+                name: "Leo Loves Travel"
+              }
+            },
+            price: tour.price?.toString() || "Contact for pricing",
+            priceCurrency: "USD",
+            availability: "InStock"
+          }))        }}
+      />
+      <div
+        className={`min-h-screen ${
+          theme === "light"
+            ? "bg-[#F7F9FC] text-[#292F36]"
+            : "bg-[#1A202C] text-[#F7F9FC]"
+        }`}
+      >
+        <SEOBreadcrumb />
       {" "}
       {/* Working dual range slider styles */}
       <style>{`
@@ -1389,71 +1421,71 @@ const PackageTours = () => {
                               strokeLinejoin="round"
                               strokeWidth={2}
                               d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                          </svg>
-                          <span
-                            className={`${
-                              theme === "light"
-                                ? "text-gray-600"
-                                : "text-gray-400"
-                            }`}
-                          >
-                            {tour.location}
-                          </span>
-                        </div>
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        <span
+                          className={`${
+                            theme === "light"
+                              ? "text-gray-600"
+                              : "text-gray-400"
+                          }`}
+                        >
+                          {tour.location}
+                        </span>
+                      </div>
 
-                        <div className="flex items-center text-sm">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 text-[#0093DE] mr-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          <span
-                            className={`${
-                              theme === "light"
-                                ? "text-gray-600"
-                                : "text-gray-400"
-                            }`}
-                          >
-                            {tour.duration}
-                          </span>
-                        </div>
+                      <div className="flex items-center mb-4 text-sm">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 text-[#0093DE] mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span
+                          className={`${
+                            theme === "light"
+                              ? "text-gray-600"
+                              : "text-gray-400"
+                          }`}
+                        >
+                          {tour.duration}
+                        </span>
+                      </div>
 
-                        <div className="flex items-center text-sm">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 text-[#0093DE] mr-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                            />
-                          </svg>
-                          <span className="font-medium text-[#0093DE]">
-                            ${tour.price}
-                          </span>
-                        </div>
-                      </div>                      <p
+                      <div className="flex items-center mb-4 text-sm">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 text-[#0093DE] mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                          />
+                        </svg>
+                        <span className="font-medium text-[#0093DE]">
+                          ${tour.price}
+                        </span>
+                      </div>
+                    </div>                      <p
                         className={`text-sm ${
                           theme === "light" ? "text-gray-600" : "text-gray-400"
                         } mb-4 flex-1 line-clamp-3`}
@@ -1565,14 +1597,14 @@ const PackageTours = () => {
                         d="M9 5l7 7-7 7"
                       />
                     </svg>
-                  </button>
-                </nav>
+                  </button>                </nav>
               </div>
             )}
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

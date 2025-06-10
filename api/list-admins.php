@@ -7,8 +7,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 try {
-    // Validate admin session
-    validateSession();
+    // Try JWT authentication first, fall back to session
+    $jwtPayload = null;
+    try {
+        $jwtPayload = validateJWTAuth();
+    } catch (Exception $e) {
+        // If JWT fails, try session validation
+        validateSession();
+    }
     
     $pdo = getDBConnection();
     

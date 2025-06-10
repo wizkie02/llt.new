@@ -5,6 +5,10 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'llt_travel');
 
+// JWT Configuration
+define('JWT_SECRET', 'your-secret-key-change-this-in-production'); // Change this in production!
+define('JWT_ALGORITHM', 'HS256');
+
 // Database connection
 function getDBConnection() {
     try {
@@ -34,6 +38,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Start session
 session_start();
+
+// JWT Token Functions
+function generateJWT($payload) {
+    $header = json_encode(['typ' => 'JWT', 'alg' => JWT_ALGORITHM]);
+    $payload = json_encode($payload);
+    
+    $headerEncoded = base64url_encode($header);
+    $payloadEncoded = base64url_encode($payload);
+    
+    $signature = hash_hmac('sha256', $headerEncoded . "." . $payloadEncoded, JWT_SECRET, true);
+    $signatureEncoded = base64url_encode($signature);
+    
+    return $headerEncoded . "." . $payloadEncoded . "." . $signatureEncoded;
+}
+
+function validateJWT($token) {
+    $parts = explode('.', $token);
+    if (count($parts) !== 3) {
+        return false;
+    }
+    
+    list($headerEncoded, $payloadEncoded, $signatureEncoded) = $parts;
+    
+    $signature = base64url_decode($signatureEncoded);
+    $expectedSignature = hash_hmac('sha256', $headerEncoded . "." . $payloadEncoded, JWT_SECRET, true);
+    
+    if (!hash_equals($signature, $expectedSignature)) {
+        return false;
+    }
+    
+    $payload = json_decode(base64url_decode($payloadEncoded), true);
+    
+    // Check expiration
+    if (isset($payload['exp']) && $payload['exp'] < time()) {
+        return false;
+    }
+    
+    return $payload;
+}
+
+function base64url_encode($data) {
+    return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+}
+
+function base64url_decode($data) {
+    return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+}
+
+function validateJWTAuth() {
+    $headers = getallheaders();
+    $authHeader = null;
+    
+    // Check for Authorization header (case insensitive)
+    foreach ($headers as $name => $value) {
+        if (strtolower($name) === 'authorization') {
+            $authHeader = $value;
+            break;
+        }
+    }
+    
+    if (!$authHeader || !preg_match('/Bearer\s+(.*)$/i', $authHeader, $matches)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized - No valid token']);
+        exit;
+    }
+    
+    $token = $matches[1];
+    $payload = validateJWT($token);
+    
+    if (!$payload) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized - Invalid token']);
+        exit;
+    }
+    
+    return $payload;
+}
 
 // Utility functions
 function validateSession() {

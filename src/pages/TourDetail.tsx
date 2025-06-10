@@ -15,6 +15,9 @@ import { Calendar } from '../components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
 import { format } from 'date-fns';
 import { CalendarIcon, Clock, MapPin, Users, Calendar as CalendarIcon2, CheckCircle, Star, Heart, Share2, ChevronDown, ChevronRight, Info, AlertCircle, Loader2 } from 'lucide-react';
+import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
+import SEOBreadcrumb from '../components/SEOBreadcrumb';
 
 const TourDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -194,9 +197,65 @@ const TourDetail = () => {
       </div>
     );
   }
-  
-  return (
-    <div className={`w-full min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'} pt-20`}>
+    return (
+    <>
+      <SEO
+        title={`${tour.name} | Vietnam Tour Package | Leo Loves Travel`}
+        description={`${tour.description} Experience authentic Vietnam with expert local guides. Duration: ${tour.duration}. Starting from $${tour.price}. Book your unforgettable ${tour.name} adventure today!`}
+        keywords={`${tour.name}, vietnam tours, ${tour.location} tours, vietnam travel, ${tour.category}, vietnam ${tour.duration} tour, vietnam package tour`}
+        url={`https://leolovestravel.com/tour/${tour.id}`}
+        image={tour.image}
+        type="product"
+        location={{
+          country: "Vietnam",
+          region: "Southeast Asia",
+          city: tour.location
+        }}
+      />
+      <StructuredData
+        type="Tour"
+        data={{
+          name: tour.name,
+          description: tour.description,
+          image: tour.image,
+          provider: {
+            "@type": "TravelAgency",
+            name: "Leo Loves Travel",
+            url: "https://leolovestravel.com"
+          },
+          location: {
+            "@type": "Place",
+            name: tour.location,
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "VN",
+              addressRegion: tour.location
+            }
+          },
+          offers: {
+            "@type": "Offer",
+            price: tour.price.toString(),
+            priceCurrency: "USD",
+            availability: "InStock",
+            validFrom: new Date().toISOString(),
+            url: `https://leolovestravel.com/tour/${tour.id}`
+          },
+          duration: tour.duration,
+          category: tour.category,
+          aggregateRating: tour.rating ? {
+            "@type": "AggregateRating",
+            ratingValue: tour.rating,
+            reviewCount: tour.reviewCount || 1
+          } : undefined        }}
+      />
+      <div className={`w-full min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'} pt-20`}>
+        <SEOBreadcrumb 
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Vietnam Package Tours', path: '/package-tours' },
+            { name: tour.name, path: `/tour/${tour.id}` }
+          ]}
+        />
       {/* Hero Section */}
       <div 
         className="w-full h-[60vh] bg-cover bg-center relative mb-8"
@@ -605,8 +664,7 @@ const TourDetail = () => {
                   <CardTitle className="text-base">Need Help?</CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm">
-                  <p className="mb-2">Have questions about this tour? Our travel experts are ready to assist you.</p>                  <Button variant="link" className="p-0 h-auto text-[#0093DE]" onClick={handleContactSupport}>
-                    Contact Support
+                  <p className="mb-2">Have questions about this tour? Our travel experts are ready to assist you.</p>                  <Button variant="link" className="p-0 h-auto text-[#0093DE]" onClick={handleContactSupport}>                  Contact Support
                   </Button>
                 </CardContent>
               </Card>
@@ -615,6 +673,7 @@ const TourDetail = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,10 +1,60 @@
 User-agent: *
 Allow: /
 
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow important directories for SEO
+Allow: /src/assets/
+Allow: /images/
+Allow: /static/
+Allow: /destinations/
+Allow: /tours/
+Allow: /travel-guide/
+
 # Sitemap location
 Sitemap: https://leolovestravel.com/sitemap.xml
 
-# Disallow admin and private routes
-Disallow: /admin/
-Disallow: /private/
-Disallow: /api/ 
+# Crawl delay for server optimization
+Crawl-delay: 1
+
+# Special rules for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: InstagramBot
+Allow: /
+
+# Block spam and aggressive bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /

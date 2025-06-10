@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import LazyImage from "../components/ui/LazyImage";
 import { useImagePreload } from "../hooks/useImageOptimization";
@@ -9,6 +10,77 @@ const MedicalTravel = () => {
   
   // Preload critical hero background image
   useImagePreload(bg12, true);
+
+  // Form state management
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    country: "",
+    service: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      // Prepare data for webhook
+      const webhookData = {
+        timestamp: new Date().toISOString(),
+        source: "medical_travel_form",
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        country: formData.country,
+        service: formData.service,
+        message: formData.message
+      };
+
+      // Send to webhook
+      const response = await fetch("https://hook.eu2.make.com/7ofstgot4bdlhl8h2vdvlakk9xdcriiz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook failed with status: ${response.status}`);
+      }
+
+      // Show success message
+      setSubmitMessage("Thank you for your consultation request! We have received your information and our medical travel specialists will contact you within 24 hours.");
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        country: "",
+        service: "",
+        message: ""
+      });
+
+    } catch (error) {
+      console.error("Medical travel form submission failed:", error);
+      setSubmitMessage("Sorry, there was an error sending your consultation request. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const services = [
     {
@@ -466,6 +538,7 @@ const MedicalTravel = () => {
                 className={`p-8 rounded-2xl ${
                   theme === "light" ? "bg-white" : "bg-gray-800"
                 } text-${theme === "light" ? "gray-800" : "white"} shadow-xl`}
+                onSubmit={handleSubmit}
               >
                 <div className="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2">
                   <div>
@@ -484,6 +557,9 @@ const MedicalTravel = () => {
                           : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                       } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       placeholder="Your name"
+                      value={formData.name}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      required
                     />
                   </div>
 
@@ -503,6 +579,9 @@ const MedicalTravel = () => {
                           : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                       } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       placeholder="Your email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      required
                     />
                   </div>
 
@@ -522,6 +601,9 @@ const MedicalTravel = () => {
                           : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                       } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       placeholder="Your phone"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      required
                     />
                   </div>
 
@@ -541,6 +623,9 @@ const MedicalTravel = () => {
                           : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                       } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                       placeholder="Your country"
+                      value={formData.country}
+                      onChange={(e) => handleInputChange("country", e.target.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -559,6 +644,9 @@ const MedicalTravel = () => {
                         ? "border-gray-300 focus:border-[#0093DE]"
                         : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                     } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                    value={formData.service}
+                    onChange={(e) => handleInputChange("service", e.target.value)}
+                    required
                   >
                     <option value="">Select a service</option>
                     <option value="health-checkup">Health Check-up</option>
@@ -587,6 +675,8 @@ const MedicalTravel = () => {
                         : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                     } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                     placeholder="Please share any specific requirements or questions you have"
+                    value={formData.message}
+                    onChange={(e) => handleInputChange("message", e.target.value)}
                   ></textarea>
                 </div>
 
@@ -595,6 +685,7 @@ const MedicalTravel = () => {
                     <input
                       type="checkbox"
                       className="rounded text-[#0093DE] focus:ring-[#0093DE]"
+                      required
                     />
                     <span className="ml-2 text-sm">
                       I consent to the processing of my personal data for the
@@ -606,9 +697,24 @@ const MedicalTravel = () => {
                 <button
                   type="submit"
                   className="w-full bg-[#0093DE] hover:bg-[#007ab8] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                  disabled={isSubmitting}
                 >
-                  Request Consultation
+                  {isSubmitting ? "Sending..." : "Request Consultation"}
                 </button>
+
+                {submitMessage && (
+                  <div className="mt-4 text-center">
+                    <p
+                      className={`${
+                        submitMessage.includes("error")
+                          ? "text-red-500"
+                          : "text-green-500"
+                      } text-sm`}
+                    >
+                      {submitMessage}
+                    </p>
+                  </div>
+                )}
               </form>
             </div>
           </ScrollReveal>

@@ -1,6 +1,7 @@
 // ✅ Goal: Replace local state (sessionStorage) with real-time data from your PHP API on CPanel
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 
 export interface TourOption {
   id: string;
@@ -42,6 +43,8 @@ const ToursContext = createContext<ToursContextType | undefined>(undefined);
 export const ToursProvider = ({ children }: { children: ReactNode }) => {
   const [tours, setTours] = useState<TourOption[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const { getAuthHeaders } = useAuth();
+
   const fetchTours = async () => {
     try {
       const res = await fetch('https://leolovestravel.com/api/get-tours.php');
@@ -78,11 +81,12 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
     fetchTours();
     fetchCategories();
   }, []);
+
   const addTour = async (tour: Omit<TourOption, 'id'>) => {
     try {
       await fetch('https://leolovestravel.com/api/add-tour.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify(tour),
       });
       await fetchTours();
@@ -96,7 +100,7 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
     try {
       await fetch(`https://leolovestravel.com/api/update-tour.php?id=${id}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify(updatedTour),
       });
       await fetchTours();
@@ -110,14 +114,20 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
     try {
       await fetch(`https://leolovestravel.com/api/delete-tour.php?id=${id}`, {
         method: 'GET',
+        headers: getAuthHeaders(),
       });
       await fetchTours();
     } catch (err) {
       console.error('Delete tour error:', err);
     }
   };
-  const getTourById = (id: string) => tours.find((tour) => tour.id === id);
-    const getToursByCategory = (categoryName: string) => {
+
+  const getTourById = (id: string) => {
+    const found = tours.find((tour) => String(tour.id) === String(id));
+    return found;
+  };
+
+  const getToursByCategory = (categoryName: string) => {
     // console.log(`getToursByCategory called with: "${categoryName}"`);
     // console.log('Available categories:', categories);
     // console.log('All tours:', tours.map(t => ({ id: t.id, name: t.name, category: t.category })));

@@ -28,13 +28,13 @@ interface Admin {
 }
 
 const AdminAccountManagement: React.FC = () => {
-  const { user } = useAuth();
+  const { user, token, getAuthHeaders } = useAuth();
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [filteredAdmins, setFilteredAdmins] = useState<Admin[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');  // Create Admin Modal State
+  const [searchQuery, setSearchQuery] = useState('');// Create Admin Modal State
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newAdminUsername, setNewAdminUsername] = useState('');
   const [newAdminEmail, setNewAdminEmail] = useState('');
@@ -68,174 +68,168 @@ const AdminAccountManagement: React.FC = () => {
         admin.role.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredAdmins(filtered);
-    }
-  }, [admins, searchQuery]);
-  // Fetch admins list from API
-  const fetchAdmins = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('https://leolovestravel.com/api/list-admins.php', {
-        method: 'GET',
-        credentials: 'include',
-      });
+    }  }, [admins, searchQuery]);
 
-      if (response.ok) {
-        const data = await response.json();
-        // console.log('API Response:', data); // Debug log
-        if (data.admins && Array.isArray(data.admins)) {
-          // console.log('Admins found:', data.admins.length); // Debug log
-          setAdmins(data.admins);
-          setFilteredAdmins(data.admins);
-        } else {
-          // console.log('No admins array found in response'); // Debug log
-          setError('Failed to load admin list. Please try again.');
-        }
-      } else {
-        const errorData = await response.json();
-        console.error('Response not OK:', errorData); // Debug log
-        setError(errorData.error || 'Unable to load admin list');
-      }
-    } catch (err) {
-      console.error('Error fetching admins:', err);
-      setError('An error occurred while loading admin list');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
+// Fetch admins với token từ AuthContext
+useEffect(() => {
+  if (token) {
     fetchAdmins();
-  }, []);
+  }
+}, [token]);
 
-  // Create new admin
-  const handleCreateAdmin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setCreateLoading(true);
-    setError('');
-    setSuccess('');
+// Fetch admins
+const fetchAdmins = async () => {
+  try {
+    setLoading(true);
+    const response = await fetch('https://leolovestravel.com/api/list-admins.php', {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
 
-    try {
-      const response = await fetch('https://leolovestravel.com/api/create-admin.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',        body: JSON.stringify({
-          username: newAdminUsername,
-          email: newAdminEmail,
-          password: newAdminPassword,
-          role: newAdminRole
-        }),
-      });
-
-      const data = await response.json(); if (response.ok) {
-        setSuccess(data.message || 'Admin created successfully');
-        setShowCreateModal(false);
-        setNewAdminUsername('');
-        setNewAdminEmail('');
-        setNewAdminPassword('');
-        setNewAdminRole('editor');
-        // Refresh admin list
-        await fetchAdmins();
+    if (response.ok) {
+      const data = await response.json();
+      if (data.admins && Array.isArray(data.admins)) {
+        setAdmins(data.admins);
+        setFilteredAdmins(data.admins);
       } else {
-        setError(data.message || 'Unable to create admin');
+        setError('Failed to load admin list. Please try again.');
       }
-    } catch (err) {
-      setError('An error occurred while creating admin');
-    } finally {
-      setCreateLoading(false);
+    } else {
+      const errorData = await response.json();
+      setError(errorData.error || 'Unable to load admin list');
     }
-  };
-  // Delete admin
-  const handleDeleteAdmin = async (adminId: string | number) => {
-    if (!confirm('Are you sure you want to delete this admin?')) return;
+  } catch (err) {
+    console.error('Error fetching admins:', err);
+    setError('An error occurred while loading admin list');
+  } finally {
+    setLoading(false);
+  }
+};
 
-    try {
-      const response = await fetch('https://leolovestravel.com/api/delete-admin.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ id: adminId }),
-      });
+// Create new admin
+const handleCreateAdmin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setCreateLoading(true);
+  setError('');
+  setSuccess('');
 
-      const data = await response.json(); if (response.ok) {
-        setSuccess(data.message || 'Admin deleted successfully');
-        await fetchAdmins(); // Refresh the list instead of manual state update
-      } else {
-        setError(data.message || 'Unable to delete admin');
-      }
-    } catch (err) {
-      setError('An error occurred while deleting admin');
+  try {
+    const response = await fetch('https://leolovestravel.com/api/create-admin.php', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        username: newAdminUsername,
+        email: newAdminEmail,
+        password: newAdminPassword,
+        role: newAdminRole
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setSuccess(data.message || 'Admin created successfully');
+      setShowCreateModal(false);
+      setNewAdminUsername('');
+      setNewAdminEmail('');
+      setNewAdminPassword('');
+      setNewAdminRole('editor');
+      await fetchAdmins();
+    } else {
+      setError(data.message || 'Unable to create admin');
     }
-  };
-  // Update admin role
-  const handleUpdateRole = async (adminId: string | number, newRole: 'editor' | 'superadmin') => {
-    try {
-      const response = await fetch('https://leolovestravel.com/api/grant-role.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          id: adminId,
-          role: newRole
-        }),
-      });
+  } catch (err) {
+    setError('An error occurred while creating admin');
+  } finally {
+    setCreateLoading(false);
+  }
+};
 
-      const data = await response.json(); if (response.ok) {
-        setSuccess(data.message || 'Role updated successfully');
-        await fetchAdmins(); // Refresh the list instead of manual state update
-      } else {
-        setError(data.message || 'Unable to update role');
-      }
-    } catch (err) {
-      setError('An error occurred while updating role');
+// Delete admin
+const handleDeleteAdmin = async (adminId: string | number) => {
+  if (!confirm('Are you sure you want to delete this admin?')) return;
+
+  try {
+    const response = await fetch('https://leolovestravel.com/api/delete-admin.php', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ id: adminId }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setSuccess(data.message || 'Admin deleted successfully');
+      await fetchAdmins();
+    } else {
+      setError(data.message || 'Unable to delete admin');
     }
-  };
+  } catch (err) {
+    setError('An error occurred while deleting admin');
+  }
+};
 
-  // Change password
-  const handleChangePassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      setError('Password confirmation does not match');
-      return;
+// Update admin role
+const handleUpdateRole = async (adminId: string | number, newRole: 'editor' | 'superadmin') => {
+  try {
+    const response = await fetch('https://leolovestravel.com/api/grant-role.php', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        id: adminId,
+        role: newRole
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setSuccess(data.message || 'Role updated successfully');
+      await fetchAdmins();
+    } else {
+      setError(data.message || 'Unable to update role');
     }
+  } catch (err) {
+    setError('An error occurred while updating role');
+  }
+};
 
-    setPasswordLoading(true);
-    setError('');
-    setSuccess('');
+// Change password
+const handleChangePassword = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (newPassword !== confirmPassword) {
+    setError('Password confirmation does not match');
+    return;
+  }
 
-    try {
-      const response = await fetch('https://leolovestravel.com/api/change-password.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          old_password: oldPassword,
-          new_password: newPassword
-        }),
-      });
+  setPasswordLoading(true);
+  setError('');
+  setSuccess('');
 
-      const data = await response.json(); if (response.ok) {
-        setSuccess(data.message || 'Password changed successfully');
-        setShowPasswordModal(false);
-        setOldPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
-      } else {
-        setError(data.message || 'Unable to change password');
-      }
-    } catch (err) {
-      setError('An error occurred while changing password');
-    } finally {
-      setPasswordLoading(false);
+  try {
+    const response = await fetch('https://leolovestravel.com/api/change-password.php', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        old_password: oldPassword,
+        new_password: newPassword
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setSuccess(data.message || 'Password changed successfully');
+      setShowPasswordModal(false);
+      setOldPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    } else {
+      setError(data.message || 'Unable to change password');
     }
-  };
+  } catch (err) {
+    setError('An error occurred while changing password');
+  } finally {
+    setPasswordLoading(false);
+  }
+};
+
 
   const isSuperAdmin = user?.role === 'superadmin';
   return (

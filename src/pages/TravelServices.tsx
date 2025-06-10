@@ -3,6 +3,9 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useImagePreload } from '../hooks/useImageOptimization';
 import bg8 from '../assets/images/backgrounds/bg8.jpg';
 import ScrollReveal from '../components/ui/ScrollReveal';
+import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
+import SEOBreadcrumb from '../components/SEOBreadcrumb';
 
 const TravelServices = () => {
   const { theme } = useTheme();
@@ -12,12 +15,83 @@ const TravelServices = () => {
   
   const [openFAQs, setOpenFAQs] = useState<number[]>([]);
   
+  // Form state management
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    travelDates: "",
+    travelers: "",
+    interests: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+  
   const toggleFAQ = (index: number) => {
     setOpenFAQs(prev => 
       prev.includes(index) 
         ? prev.filter(i => i !== index) 
         : [...prev, index]
     );
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      // Prepare data for webhook
+      const webhookData = {
+        timestamp: new Date().toISOString(),
+        source: "travel_services_form",
+        name: formData.name,
+        email: formData.email,
+        travelDates: formData.travelDates,
+        travelers: formData.travelers,
+        interests: formData.interests,
+        message: formData.message
+      };
+
+      // Send to webhook
+      const response = await fetch("https://hook.eu2.make.com/wzjbmk51on9sh5dwsnntewa1k66u7sao", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook failed with status: ${response.status}`);
+      }
+
+      // Show success message
+      setSubmitMessage("Thank you for your request! We have received your information and will respond to you as soon as possible with a customized itinerary.");
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        travelDates: "",
+        travelers: "",
+        interests: "",
+        message: ""
+      });
+
+    } catch (error) {
+      console.error("Travel services form submission failed:", error);
+      setSubmitMessage("Sorry, there was an error sending your request. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   const services = [
@@ -62,10 +136,55 @@ const TravelServices = () => {
       )
     }
   ];
-
   return (
-    <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
-      {/* Hero Section */}
+    <>
+      <SEO
+        title="Vietnam Travel Services | Complete Travel Support | Leo Loves Travel"
+        description="Comprehensive Vietnam travel services including visa assistance, transportation, accommodation booking, travel insurance, and 24/7 support. Professional travel planning services for your perfect Vietnam adventure."
+        keywords="vietnam travel services, vietnam visa assistance, vietnam transportation, vietnam accommodation, vietnam travel insurance, vietnam travel support, vietnam travel planning, vietnam travel consultation"
+        url="https://leolovestravel.com/travel-services"
+        type="website"
+      />
+      <StructuredData
+        type="TravelAgency"
+        data={{
+          name: "Leo Loves Travel - Travel Services",
+          description: "Comprehensive travel services for Vietnam including visa assistance, transportation, accommodation, and travel support",
+          url: "https://leolovestravel.com/travel-services",
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Vietnam Travel Services",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Visa Assistance",
+                  description: "Professional Vietnam visa application support"
+                }
+              },
+              {
+                "@type": "Offer", 
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Transportation Services",
+                  description: "Reliable transportation throughout Vietnam"
+                }
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service", 
+                  name: "Accommodation Booking",
+                  description: "Handpicked accommodations across Vietnam"
+                }
+              }
+            ]
+          }        }}
+      />
+      <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
+        <SEOBreadcrumb />
+        {/* Hero Section */}
       <section className="relative py-32 mt-20 mb-8 overflow-hidden rounded-b-3xl">
         <div 
           className="absolute inset-0 bg-fixed bg-center bg-cover"
@@ -187,7 +306,7 @@ const TravelServices = () => {
                   
                   <div className="flex flex-wrap items-center gap-4 justify-evenly lg:justify-start">
                     <a 
-                      href="https://wa.me/84123456789" 
+                      href="https://wa.me/84865843276" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="flex items-center px-4 py-2 text-white transition-colors bg-green-500 shadow-md rounded-xl hover:bg-green-600 hover:shadow-lg"
@@ -217,55 +336,62 @@ const TravelServices = () => {
                 <div className={`p-8 rounded-2xl shadow-lg ${theme === 'light' ? 'bg-[#F2F7FC]' : 'bg-gray-700'}`}>
                   <h3 className="mb-6 text-xl font-semibold">Request a Custom Itinerary</h3>
                   
-                  <form className="space-y-4">
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
-                      <label className="block mb-1 text-sm font-medium" htmlFor="name">Full Name</label>
-                      <input 
+                      <label className="block mb-1 text-sm font-medium" htmlFor="name">Full Name</label>                      <input 
                         type="text" 
                         id="name" 
+                        value={formData.name}
+                        onChange={(e) => handleInputChange("name", e.target.value)}
                         className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
                         } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                         placeholder="Your name"
+                        required
                       />
                     </div>
                     
                     <div>
-                      <label className="block mb-1 text-sm font-medium" htmlFor="email">Email Address</label>
-                      <input 
+                      <label className="block mb-1 text-sm font-medium" htmlFor="email">Email Address</label>                      <input 
                         type="email" 
                         id="email" 
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
                         className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
                         } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                         placeholder="Your email"
+                        required
                       />
                     </div>
                     
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div>
-                        <label className="block mb-1 text-sm font-medium" htmlFor="travel-dates">Travel Dates</label>
-                        <input 
+                        <label className="block mb-1 text-sm font-medium" htmlFor="travel-dates">Travel Dates</label>                        <input 
                           type="text" 
                           id="travel-dates" 
+                          value={formData.travelDates}
+                          onChange={(e) => handleInputChange("travelDates", e.target.value)}
                           className={`w-full p-3 rounded-xl border ${
                             theme === 'light' 
                               ? 'border-gray-300 focus:border-[#0093DE]' 
                               : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
                           } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                           placeholder="When do you plan to travel?"
+                          required
                         />
                       </div>
                       
                       <div>
-                        <label className="block mb-1 text-sm font-medium" htmlFor="travelers">Number of Travelers</label>
-                        <input 
+                        <label className="block mb-1 text-sm font-medium" htmlFor="travelers">Number of Travelers</label>                        <input 
                           type="number" 
                           id="travelers" 
+                          value={formData.travelers}
+                          onChange={(e) => handleInputChange("travelers", e.target.value)}
                           className={`w-full p-3 rounded-xl border ${
                             theme === 'light' 
                               ? 'border-gray-300 focus:border-[#0093DE]' 
@@ -273,19 +399,22 @@ const TravelServices = () => {
                           } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                           placeholder="How many people?"
                           min="1"
+                          required
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block mb-1 text-sm font-medium" htmlFor="interests">Travel Interests</label>
-                      <select 
+                      <label className="block mb-1 text-sm font-medium" htmlFor="interests">Travel Interests</label>                      <select 
                         id="interests" 
+                        value={formData.interests}
+                        onChange={(e) => handleInputChange("interests", e.target.value)}
                         className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
                         } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                        required
                       >
                         <option value="">Select your primary interest</option>
                         <option value="culture">Culture & Heritage</option>
@@ -298,25 +427,37 @@ const TravelServices = () => {
                     </div>
                     
                     <div>
-                      <label className="block mb-1 text-sm font-medium" htmlFor="message">Your Dream Trip</label>
-                      <textarea 
+                      <label className="block mb-1 text-sm font-medium" htmlFor="message">Your Dream Trip</label>                      <textarea 
                         id="message" 
                         rows={4}
+                        value={formData.message}
+                        onChange={(e) => handleInputChange("message", e.target.value)}
                         className={`w-full p-3 rounded-xl border ${
                           theme === 'light' 
                             ? 'border-gray-300 focus:border-[#0093DE]' 
                             : 'border-gray-600 bg-gray-700 focus:border-[#0093DE]'
                         } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
                         placeholder="Tell us about your ideal Vietnam experience..."
+                        required
                       ></textarea>
                     </div>
-                    
-                    <button 
+                      <button 
                       type="submit"
-                      className="w-full bg-[#0093DE] hover:bg-[#007ab8] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                      disabled={isSubmitting}
+                      className="w-full bg-[#0093DE] hover:bg-[#007ab8] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg disabled:transform-none disabled:shadow-none"
                     >
-                      Submit Request
+                      {isSubmitting ? "Sending..." : "Submit Request"}
                     </button>
+
+                    {submitMessage && (
+                      <div className={`p-4 rounded-xl ${
+                        submitMessage.includes("Thank you") 
+                          ? "bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200"
+                          : "bg-red-50 border border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200"
+                      }`}>
+                        {submitMessage}
+                      </div>
+                    )}
                   </form>
                 </div>
               </ScrollReveal>
@@ -493,10 +634,10 @@ const TravelServices = () => {
               </ScrollReveal>
             </div>
           </div>
-        </div>
-      </section>
+        </div>      </section>
       
     </div>
+    </>
   );
 };
 

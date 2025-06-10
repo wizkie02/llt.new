@@ -35,21 +35,32 @@ try {
     if (!password_verify($password, $admin['password'])) {
         sendResponse(['error' => 'Mật khẩu không chính xác'], 401);
     }
-    
-    // Create session
+      // Create session
     session_regenerate_id(true);
     $_SESSION['admin_id'] = $admin['id'];
     $_SESSION['admin_email'] = $admin['email'];
     $_SESSION['admin_role'] = $admin['role'];
     $_SESSION['login_time'] = date('Y-m-d H:i:s');
     
+    // Generate JWT token
+    $jwtPayload = [
+        'admin_id' => $admin['id'],
+        'admin_email' => $admin['email'],
+        'admin_role' => $admin['role'],
+        'iat' => time(),
+        'exp' => time() + (8 * 60 * 60) // 8 hours expiration
+    ];
+    $token = generateJWT($jwtPayload);
+    
     sendResponse([
+        'success' => true,
         'message' => 'Đăng nhập thành công.',
+        'token' => $token,
         'admin' => [
             'id' => $admin['id'],
             'email' => $admin['email'],
             'role' => $admin['role'],
-            'login_time' => $_SESSION['login_time']
+            'created_at' => $admin['created_at']
         ]
     ]);
     

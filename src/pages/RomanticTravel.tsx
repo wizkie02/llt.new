@@ -1,16 +1,92 @@
+import { useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
-import { useNavigate } from "react-router-dom";
 import LazyImage from "../components/ui/LazyImage";
 import { useImagePreload } from "../hooks/useImageOptimization";
 import ScrollReveal from "../components/ui/ScrollReveal";
 import bg10 from "../assets/images/backgrounds/bg10.jpg";
+import SEO from "../components/SEO";
+import StructuredData from "../components/StructuredData";
+import SEOBreadcrumb from "../components/SEOBreadcrumb";
 
 const RomanticTravel = () => {
   const { theme } = useTheme();
-  const navigate = useNavigate();
   
   // Preload critical hero background image
   useImagePreload(bg10, true);
+
+  // Form state management
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    service: "",
+    startDate: "",
+    endDate: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      // Prepare data for webhook
+      const webhookData = {
+        timestamp: new Date().toISOString(),
+        source: "romantic_travel_form",
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        service: formData.service,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        message: formData.message
+      };
+
+      // Send to webhook
+      const response = await fetch("https://hook.eu2.make.com/yt4ms6qdyy132hpgw7j24hda97cwybua", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook failed with status: ${response.status}`);
+      }
+
+      // Show success message
+      setSubmitMessage("Thank you for your romantic travel request! We have received your information and our romance specialists will contact you within 24 hours to plan your perfect romantic experience.");
+      
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        service: "",
+        startDate: "",
+        endDate: "",
+        message: ""
+      });
+
+    } catch (error) {
+      console.error("Romantic travel form submission failed:", error);
+      setSubmitMessage("Sorry, there was an error sending your request. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const services = [
     {
@@ -88,15 +164,42 @@ const RomanticTravel = () => {
         "https://images.unsplash.com/photo-1545133875-55b651cbf4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80",
     },
   ];
-
   return (
-    <div
-      className={`min-h-screen ${
-        theme === "light"
-          ? "bg-[#F7F9FC] text-[#292F36]"
-          : "bg-[#1A202C] text-[#F7F9FC]"
-      }`}
-    >
+    <>
+      <SEO
+        title="Romantic Vietnam Travel | Honeymoon Tours | Couples Getaway | Leo Loves Travel"
+        description="Create unforgettable romantic memories in Vietnam. Luxury honeymoon packages, couples retreats, and romantic getaways. From Ha Long Bay sunset cruises to intimate Hoi An dining experiences."
+        keywords="romantic vietnam travel, vietnam honeymoon, couples travel vietnam, romantic getaway vietnam, vietnam romantic tours, halong bay romantic cruise, hoi an romantic dinner, vietnam luxury honeymoon, couples retreat vietnam"
+        url="https://leolovestravel.com/romantic-travel"
+        type="website"
+      />
+      <StructuredData
+        type="TravelAgency"
+        data={{
+          "@type": "TravelAgency",
+          name: "Leo Loves Travel - Romantic Travel",
+          description: "Romantic travel experiences and honeymoon packages in Vietnam",
+          url: "https://leolovestravel.com/romantic-travel",
+          serviceType: [
+            "Honeymoon Packages",
+            "Romantic Tours",
+            "Couples Retreats",
+            "Luxury Travel"
+          ],
+          areaServed: {
+            "@type": "Country", 
+            name: "Vietnam"
+          }
+        }}
+      />
+      <div
+        className={`min-h-screen ${
+          theme === "light"
+            ? "bg-[#F7F9FC] text-[#292F36]"
+            : "bg-[#1A202C] text-[#F7F9FC]"
+        }`}
+      >
+        <SEOBreadcrumb />
       {/* Hero Section */}
       <section className="relative py-32 mt-20 mb-8 overflow-hidden rounded-b-3xl">
         <div
@@ -418,9 +521,7 @@ const RomanticTravel = () => {
                     theme === "light" ? "bg-[#F2F7FC]" : "bg-gray-700"
                   }`}
                 >
-                  <h3 className="mb-6 text-xl font-semibold">Booking Form</h3>
-
-                  <form className="space-y-4">
+                  <h3 className="mb-6 text-xl font-semibold">Booking Form</h3>                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div>
                         <label
@@ -432,11 +533,15 @@ const RomanticTravel = () => {
                         <input
                           type="text"
                           id="first-name"
+                          value={formData.firstName}
+                          onChange={(e) => handleInputChange("firstName", e.target.value)}
                           className={`w-full p-3 rounded-xl border ${
                             theme === "light"
                               ? "border-gray-300 focus:border-[#0093DE]"
                               : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                           } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                          placeholder="Your first name"
+                          required
                         />
                       </div>
 
@@ -450,11 +555,15 @@ const RomanticTravel = () => {
                         <input
                           type="text"
                           id="last-name"
+                          value={formData.lastName}
+                          onChange={(e) => handleInputChange("lastName", e.target.value)}
                           className={`w-full p-3 rounded-xl border ${
                             theme === "light"
                               ? "border-gray-300 focus:border-[#0093DE]"
                               : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                           } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                          placeholder="Your last name"
+                          required
                         />
                       </div>
                     </div>
@@ -469,11 +578,15 @@ const RomanticTravel = () => {
                       <input
                         type="email"
                         id="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
                         className={`w-full p-3 rounded-xl border ${
                           theme === "light"
                             ? "border-gray-300 focus:border-[#0093DE]"
                             : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                         } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                        placeholder="Your email address"
+                        required
                       />
                     </div>
 
@@ -486,11 +599,14 @@ const RomanticTravel = () => {
                       </label>
                       <select
                         id="service"
+                        value={formData.service}
+                        onChange={(e) => handleInputChange("service", e.target.value)}
                         className={`w-full p-3 rounded-xl border ${
                           theme === "light"
                             ? "border-gray-300 focus:border-[#0093DE]"
                             : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                         } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                        required
                       >
                         <option value="">Select a service</option>
                         <option value="wedding-photoshoot">
@@ -515,11 +631,14 @@ const RomanticTravel = () => {
                         <input
                           type="date"
                           id="start-date"
+                          value={formData.startDate}
+                          onChange={(e) => handleInputChange("startDate", e.target.value)}
                           className={`w-full p-3 rounded-xl border ${
                             theme === "light"
                               ? "border-gray-300 focus:border-[#0093DE]"
                               : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
                           } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`}
+                          required
                         />
                       </div>
 
@@ -533,6 +652,8 @@ const RomanticTravel = () => {
                         <input
                           type="date"
                           id="end-date"
+                          value={formData.endDate}
+                          onChange={(e) => handleInputChange("endDate", e.target.value)}
                           className={`w-full p-3 rounded-xl border ${
                             theme === "light"
                               ? "border-gray-300 focus:border-[#0093DE]"
@@ -552,6 +673,8 @@ const RomanticTravel = () => {
                       <textarea
                         id="message"
                         rows={4}
+                        value={formData.message}
+                        onChange={(e) => handleInputChange("message", e.target.value)}
                         className={`w-full p-3 rounded-xl border ${
                           theme === "light"
                             ? "border-gray-300 focus:border-[#0093DE]"
@@ -562,30 +685,30 @@ const RomanticTravel = () => {
                     </div>
 
                     <button
-                      type="button"
-                      onClick={() =>
-                        navigate("/booking", {
-                          state: {
-                            serviceType: "romantic",
-                            prefilledServices: [
-                              "Wedding Photoshoot",
-                              "Couple Getaway",
-                            ],
-                          },
-                        })
-                      }
-                      className="w-full bg-[#0093DE] hover:bg-[#007ab8] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-[#0093DE] hover:bg-[#007ab8] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg disabled:transform-none disabled:shadow-none"
                     >
-                      Request Booking
+                      {isSubmitting ? "Sending..." : "Request Booking"}
                     </button>
+
+                    {submitMessage && (
+                      <div className={`mt-4 p-4 rounded-xl ${
+                        submitMessage.includes("Thank you") 
+                          ? "bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200"
+                          : "bg-red-50 border border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200"
+                      }`}>
+                        {submitMessage}
+                      </div>
+                    )}
                   </form>
                 </div>
               </ScrollReveal>
             </div>
           </div>
-        </div>
-      </section>
+        </div>      </section>
     </div>
+    </>
   );
 };
 

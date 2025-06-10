@@ -41,6 +41,8 @@ interface Traveler {
   id: string;
   firstName: string;
   lastName: string;
+  passportNumber: string;
+  passportExpiry: Date | undefined;
   dateOfBirth: Date | undefined;
   nationality: string;
 }
@@ -52,6 +54,8 @@ interface BookingFormData {
   email: string;
   phone: string;
   address: string;
+  emergencyContact: string;
+  emergencyPhone: string;
 
   // Tour Information
   tourId: string;
@@ -61,27 +65,20 @@ interface BookingFormData {
 
   // Travelers Information
   travelers: Traveler[];
+
   // Additional Information
   specialRequests: string;
   dietaryRestrictions: string;
   medicalConditions: string;
 }
 
-const Booking = () => {  const navigate = useNavigate();
+const Booking = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const { tours, getTourById } = useTours();
   const tourId = searchParams.get("tourId");
-  
-  // State for selected tour - this will be updated when user selects from dropdown
-  const [selectedTour, setSelectedTour] = useState<any>(null);
-
-  // Debug logging
-  console.log("Debug Booking Component:");
-  console.log("tourId from URL:", tourId);
-  console.log("tours loaded:", tours.length);
-  console.log("available tour IDs:", tours.map(t => ({ id: t.id, type: typeof t.id })));
-  console.log("selectedTour:", selectedTour);
+  const selectedTour = tourId ? getTourById(tourId) : null;
 
   // Get prefilled data from navigation state
   const navigationState = location.state as {
@@ -89,12 +86,15 @@ const Booking = () => {  const navigate = useNavigate();
     prefilledDate?: Date;
     prefilledGuests?: number;
   } | null;
+
   const [formData, setFormData] = useState<BookingFormData>({
     contactFirstName: "",
     contactLastName: "",
     email: "",
     phone: "",
     address: "",
+    emergencyContact: "",
+    emergencyPhone: "",
     tourId: tourId || "",
     departureDate: undefined,
     returnDate: undefined,
@@ -104,51 +104,19 @@ const Booking = () => {  const navigate = useNavigate();
         id: "1",
         firstName: "",
         lastName: "",
+        passportNumber: "",
+        passportExpiry: undefined,
         dateOfBirth: undefined,
         nationality: "",
       },
-    ],    specialRequests: "",
+    ],
+    specialRequests: "",
     dietaryRestrictions: "",
     medicalConditions: "",
   });
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  // Helper function to parse tour duration and extract number of days
-  const parseTourDuration = (duration: string): number => {
-    if (!duration) return 0;
-    
-    // Common patterns to match:
-    // "2 days 1 night" → 2
-    // "3 days 2 nights" → 3
-    // "1 Day Tours" → 1
-    // "2-3 Days" → 2 (take the first number)
-    
-    const patterns = [
-      /(\d+)\s*days?\s*\d*\s*nights?/i,  // "X days Y nights"
-      /(\d+)\s*days?/i,                   // "X days"
-      /(\d+)\s*day/i,                     // "X day"
-    ];
-    
-    for (const pattern of patterns) {
-      const match = duration.match(pattern);
-      if (match) {
-        return parseInt(match[1], 10);
-      }
-    }
-    
-    return 0; // Default if no pattern matches
-  };
-
-  // Helper function to calculate return date based on departure date and tour duration
-  const calculateReturnDate = (departureDate: Date, duration: string): Date => {
-    const days = parseTourDuration(duration);
-    if (days <= 0) return departureDate;
-    
-    const returnDate = new Date(departureDate);
-    returnDate.setDate(returnDate.getDate() + days - 1); // days-1 because departure day counts as day 1
-    return returnDate;
-  };
 
   // Handle prefilled data from navigation state
   useEffect(() => {
@@ -168,30 +136,6 @@ const Booking = () => {  const navigate = useNavigate();
     }
   }, [navigationState]);
 
-  // Set initial selectedTour from URL parameter when tours are loaded
-  useEffect(() => {
-    if (tourId && tours.length > 0) {
-      const foundTour = getTourById(tourId);
-      if (foundTour) {
-        setSelectedTour(foundTour);
-        console.log("Set selectedTour from URL:", foundTour);
-      }
-    }
-  }, [tourId, tours, getTourById]);
-
-  // Update selectedTour when formData.tourId changes (from dropdown selection)
-  useEffect(() => {
-    if (formData.tourId && tours.length > 0) {
-      const foundTour = getTourById(formData.tourId);
-      if (foundTour) {
-        setSelectedTour(foundTour);
-        console.log("Updated selectedTour from form:", foundTour);
-      }
-    } else {
-      setSelectedTour(null);
-    }
-  }, [formData.tourId, tours, getTourById]);
-
   // Update travelers array when numberOfTravelers changes
   useEffect(() => {
     const currentTravelers = formData.travelers.length;
@@ -200,10 +144,13 @@ const Booking = () => {  const navigate = useNavigate();
     if (newCount > currentTravelers) {
       // Add new travelers
       const newTravelers = [...formData.travelers];
-      for (let i = currentTravelers; i < newCount; i++) {        newTravelers.push({
+      for (let i = currentTravelers; i < newCount; i++) {
+        newTravelers.push({
           id: String(i + 1),
           firstName: "",
           lastName: "",
+          passportNumber: "",
+          passportExpiry: undefined,
           dateOfBirth: undefined,
           nationality: "",
         });
@@ -217,21 +164,6 @@ const Booking = () => {  const navigate = useNavigate();
       }));
     }
   }, [formData.numberOfTravelers]);
-
-  // Automatically calculate return date based on departure date and tour duration
-  useEffect(() => {
-    if (formData.departureDate && selectedTour && selectedTour.duration) {
-      const calculatedReturnDate = calculateReturnDate(formData.departureDate, selectedTour.duration);
-      
-      // Only update if the calculated date is different from current return date
-      if (!formData.returnDate || calculatedReturnDate.getTime() !== formData.returnDate.getTime()) {
-        setFormData((prev) => ({
-          ...prev,
-          returnDate: calculatedReturnDate,
-        }));
-      }
-    }
-  }, [formData.departureDate, selectedTour?.duration]);
 
   const handleInputChange = (field: keyof BookingFormData, value: any) => {
     setFormData((prev) => {
@@ -286,13 +218,23 @@ const Booking = () => {  const navigate = useNavigate();
     // Email validation
     if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
-    }    // Travelers validation
+    }
+
+    // Travelers validation
     formData.travelers.forEach((traveler, index) => {
       if (!traveler.firstName.trim()) {
         newErrors[`traveler_${index}_firstName`] = "First name is required";
       }
       if (!traveler.lastName.trim()) {
         newErrors[`traveler_${index}_lastName`] = "Last name is required";
+      }
+      if (!traveler.passportNumber.trim()) {
+        newErrors[`traveler_${index}_passportNumber`] =
+          "Passport number is required";
+      }
+      if (!traveler.passportExpiry) {
+        newErrors[`traveler_${index}_passportExpiry`] =
+          "Passport expiry date is required";
       }
     });
 
@@ -327,7 +269,10 @@ const Booking = () => {  const navigate = useNavigate();
           firstName: formData.contactFirstName,
           lastName: formData.contactLastName,
           email: formData.email,
-          phone: formData.phone,          address: formData.address,
+          phone: formData.phone,
+          address: formData.address,
+          emergencyContact: formData.emergencyContact,
+          emergencyPhone: formData.emergencyPhone,
         },
         tourDetails: {
           tourId: formData.tourId,
@@ -339,6 +284,8 @@ const Booking = () => {  const navigate = useNavigate();
           travelerNumber: index + 1,
           firstName: traveler.firstName,
           lastName: traveler.lastName,
+          passportNumber: traveler.passportNumber,
+          passportExpiry: traveler.passportExpiry?.toISOString(),
           dateOfBirth: traveler.dateOfBirth?.toISOString(),
           nationality: traveler.nationality,
         })),
@@ -634,7 +581,37 @@ const Booking = () => {  const navigate = useNavigate();
                       placeholder="Your full address"
                       className="min-h-[60px] resize-none rounded-lg"
                       rows={2}
-                    />                  </div>
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div>
+                      <Label htmlFor="emergencyContact">
+                        Emergency Contact Name
+                      </Label>
+                      <Input
+                        id="emergencyContact"
+                        value={formData.emergencyContact}
+                        onChange={(e) =>
+                          handleInputChange("emergencyContact", e.target.value)
+                        }
+                        placeholder="Emergency contact person"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="emergencyPhone">
+                        Emergency Contact Phone
+                      </Label>
+                      <Input
+                        id="emergencyPhone"
+                        value={formData.emergencyPhone}
+                        onChange={(e) =>
+                          handleInputChange("emergencyPhone", e.target.value)
+                        }
+                        placeholder="Emergency contact number"
+                      />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -675,7 +652,8 @@ const Booking = () => {  const navigate = useNavigate();
                                 : ""
                             }
                             placeholder="First name"
-                          />                          {errors[`traveler_${index}_firstName`] && (
+                          />
+                          {errors[`traveler_${index}_firstName`] && (
                             <p className="mt-1 text-sm text-red-500">
                               {errors[`traveler_${index}_firstName`]}
                             </p>
@@ -705,7 +683,50 @@ const Booking = () => {  const navigate = useNavigate();
                             </p>
                           )}
                         </div>
-                      </div>                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div>
+                          <Label>Passport Number *</Label>
+                          <Input
+                            value={traveler.passportNumber}
+                            onChange={(e) =>
+                              handleTravelerChange(
+                                traveler.id,
+                                "passportNumber",
+                                e.target.value
+                              )
+                            }
+                            className={
+                              errors[`traveler_${index}_passportNumber`]
+                                ? "border-red-500"
+                                : ""
+                            }
+                            placeholder="Passport number"
+                          />
+                          {errors[`traveler_${index}_passportNumber`] && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {errors[`traveler_${index}_passportNumber`]}
+                            </p>
+                          )}
+                        </div>
+                        <div>
+                          <Label>Nationality</Label>
+                          <Input
+                            value={traveler.nationality}
+                            onChange={(e) =>
+                              handleTravelerChange(
+                                traveler.id,
+                                "nationality",
+                                e.target.value
+                              )
+                            }
+                            placeholder="Nationality"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                           <Label>Date of Birth</Label>
                           <Popover>
@@ -742,18 +763,48 @@ const Booking = () => {  const navigate = useNavigate();
                           </Popover>
                         </div>
                         <div>
-                          <Label>Nationality</Label>
-                          <Input
-                            value={traveler.nationality}
-                            onChange={(e) =>
-                              handleTravelerChange(
-                                traveler.id,
-                                "nationality",
-                                e.target.value
-                              )
-                            }
-                            placeholder="Nationality"
-                          />
+                          <Label>Passport Expiry Date *</Label>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                className={`w-full justify-start text-left font-normal ${
+                                  !traveler.passportExpiry
+                                    ? "text-muted-foreground"
+                                    : ""
+                                } ${
+                                  errors[`traveler_${index}_passportExpiry`]
+                                    ? "border-red-500"
+                                    : ""
+                                }`}
+                              >
+                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                {traveler.passportExpiry
+                                  ? format(traveler.passportExpiry, "PPP")
+                                  : "Pick expiry date"}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                              <BirthDateCalendar
+                                mode="single"
+                                selected={traveler.passportExpiry}
+                                onSelect={(date) =>
+                                  handleTravelerChange(
+                                    traveler.id,
+                                    "passportExpiry",
+                                    date
+                                  )
+                                }
+                                disabled={(date) => date < new Date()}
+                                initialFocus
+                              />
+                            </PopoverContent>
+                          </Popover>
+                          {errors[`traveler_${index}_passportExpiry`] && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {errors[`traveler_${index}_passportExpiry`]}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -797,7 +848,19 @@ const Booking = () => {  const navigate = useNavigate();
                     />
                   </div>
 
-
+                  <div>
+                    <Label htmlFor="medicalConditions">Medical Conditions</Label>
+                    <Textarea
+                      id="medicalConditions"
+                      value={formData.medicalConditions}
+                      onChange={(e) =>
+                        handleInputChange("medicalConditions", e.target.value)
+                      }
+                      placeholder="Any medical conditions..."
+                      className="min-h-[60px] resize-none rounded-lg"
+                      rows={2}
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -812,10 +875,11 @@ const Booking = () => {  const navigate = useNavigate();
                   <CardContent className="space-y-4">
                     {selectedTour ? (
                       <>
-                        <div>                          <img
+                        <div>
+                          <img
                             src={selectedTour.image}
                             alt={selectedTour.name}
-                            className="object-cover w-full h-64 mb-3 rounded-xl"
+                            className="object-cover w-full h-32 mb-3 rounded-lg"
                           />
                           <h3 className="text-lg font-semibold">
                             {selectedTour.name}

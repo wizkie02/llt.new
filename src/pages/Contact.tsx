@@ -1,24 +1,138 @@
+import { useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import ScrollReveal from "../components/ui/ScrollReveal";
 import bg2 from "../assets/images/backgrounds/bg4.jpg";
+import SEO from "../components/SEO";
+import StructuredData from "../components/StructuredData";
+import SEOBreadcrumb from "../components/SEOBreadcrumb";
 
 const Contact = () => {
   const { theme } = useTheme();
-
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    interest: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
   const inputClasses = `w-full p-3 rounded-xl border ${
     theme === "light"
       ? "border-gray-300 focus:border-[#0093DE]"
       : "border-gray-600 bg-gray-700 focus:border-[#0093DE]"
   } focus:outline-none focus:ring-2 focus:ring-[#0093DE]`;
 
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      // Prepare data for webhook
+      const webhookData = {
+        timestamp: new Date().toISOString(),
+        source: "contact_form",
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        interest: formData.interest,
+        message: formData.message
+      };
+
+      // Send to webhook
+      const response = await fetch("https://hook.eu2.make.com/a8s35y487iwugai24eruoyg9hcojdy12", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook failed with status: ${response.status}`);
+      }
+
+      // Show success message
+      setSubmitMessage("Thank you for your message! We have received your information and will respond to you as soon as possible.");
+      
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        interest: "",
+        message: ""
+      });
+
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
+      setSubmitMessage("Sorry, there was an error sending your message. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
-    <div
-      className={`min-h-screen ${
-        theme === "light"
-          ? "bg-[#F7F9FC] text-[#2A3B4A]"
-          : "bg-[#1A202C] text-[#F7F8F9]"
-      }`}
-    >
+    <>
+      <SEO
+        title="Contact Leo Loves Travel | Vietnam Travel Agency | Get in Touch"
+        description="Contact Leo Loves Travel for personalized Vietnam tour planning. Expert travel consultants ready to help plan your perfect Vietnam adventure. Phone, email, and office visit options available in Ho Chi Minh City."
+        keywords="contact leo loves travel, vietnam travel agency contact, vietnam tour planning, travel consultation vietnam, ho chi minh city travel agent, vietnam travel advice, book vietnam tour"
+        url="https://leolovestravel.com/contact"
+        type="website"
+        location={{
+          country: "Vietnam",
+          region: "Southeast Asia",
+          city: "Ho Chi Minh City"
+        }}
+      />
+      <StructuredData
+        type="LocalBusiness"
+        data={{
+          "@type": ["TravelAgency", "LocalBusiness"],
+          name: "Leo Loves Travel",
+          description: "Professional Vietnam travel agency offering personalized tour planning and travel consultation services",
+          url: "https://leolovestravel.com",
+          telephone: "+84-123-456-789",
+          email: "info@leolovestravel.com",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "123 Travel Street",
+            addressLocality: "Ho Chi Minh City",
+            addressRegion: "Ho Chi Minh City",
+            postalCode: "700000",
+            addressCountry: "VN"
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: "10.8231",
+            longitude: "106.6297"
+          },
+          openingHours: "Mo-Fr 08:00-18:00, Sa 08:00-16:00",
+          priceRange: "$$",
+          serviceArea: {
+            "@type": "Country",
+            name: "Vietnam"
+          }        }}
+      />
+      <div
+        className={`min-h-screen ${
+          theme === "light"
+            ? "bg-[#F7F9FC] text-[#2A3B4A]"
+            : "bg-[#1A202C] text-[#F7F8F9]"
+        }`}
+      >
+        <SEOBreadcrumb />
       {/* Hero Section */}
       <section className="relative py-20 h-[70vh] flex items-center justify-center rounded-b-3xl overflow-hidden">
         <div
@@ -182,17 +296,12 @@ const Contact = () => {
                       <h3 className="ml-3 text-base font-semibold">
                         Email Contact
                       </h3>
-                    </div>
-                    <p
+                    </div>                    <p
                       className={`text-sm ${
                         theme === "light" ? "text-gray-600" : "text-gray-300"
                       } pl-1`}
                     >
-                      vietnam@leolovestravel.com
-                      <br />
-                      bookings@leolovestravel.com
-                      <br />
-                      custom@leolovestravel.com
+                      info@leolovestravel.com
                     </p>
                   </div>
 
@@ -283,9 +392,7 @@ const Contact = () => {
                     Get In Touch With Us
                   </h2>
                   <div className="h-1 w-20 bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] mx-auto"></div>
-                </div>
-
-                <form className="flex flex-col flex-1 w-full mx-auto space-y-6">
+                </div>                <form onSubmit={handleSubmit} className="flex flex-col flex-1 w-full mx-auto space-y-6">
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div>
                       <label
@@ -297,8 +404,11 @@ const Contact = () => {
                       <input
                         type="text"
                         id="first-name"
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange("firstName", e.target.value)}
                         className={inputClasses}
                         placeholder="Your first name"
+                        required
                       />
                     </div>
 
@@ -312,8 +422,11 @@ const Contact = () => {
                       <input
                         type="text"
                         id="last-name"
+                        value={formData.lastName}
+                        onChange={(e) => handleInputChange("lastName", e.target.value)}
                         className={inputClasses}
                         placeholder="Your last name"
+                        required
                       />
                     </div>
                   </div>
@@ -328,8 +441,11 @@ const Contact = () => {
                     <input
                       type="email"
                       id="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
                       className={inputClasses}
                       placeholder="Your email address"
+                      required
                     />
                   </div>
 
@@ -343,6 +459,8 @@ const Contact = () => {
                     <input
                       type="tel"
                       id="phone"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
                       className={inputClasses}
                       placeholder="Your phone number"
                     />
@@ -355,7 +473,12 @@ const Contact = () => {
                     >
                       Vietnam Travel Interest
                     </label>
-                    <select id="interest" className={inputClasses}>
+                    <select 
+                      id="interest" 
+                      value={formData.interest}
+                      onChange={(e) => handleInputChange("interest", e.target.value)}
+                      className={inputClasses}
+                    >
                       <option value="">Select your travel interest</option>
                       <option value="cultural">Cultural Journeys</option>
                       <option value="culinary">
@@ -380,16 +503,30 @@ const Contact = () => {
                     <textarea
                       id="message"
                       rows={5}
+                      value={formData.message}
+                      onChange={(e) => handleInputChange("message", e.target.value)}
                       className={inputClasses}
                       placeholder="Tell us about your dream Vietnam journey..."
+                      required
                     ></textarea>
                   </div>
 
+                  {submitMessage && (
+                    <div className={`p-4 rounded-xl ${
+                      submitMessage.includes("Thank you") 
+                        ? "bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200"
+                        : "bg-red-50 border border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200"
+                    }`}>
+                      {submitMessage}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full bg-[#0093DE] hover:bg-[#007ab8] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                    disabled={isSubmitting}
+                    className="w-full bg-[#0093DE] hover:bg-[#007ab8] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg disabled:transform-none disabled:shadow-none"
                   >
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               </div>
@@ -401,14 +538,16 @@ const Contact = () => {
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-[#58b7e8] to-[#6dc0eb] text-white py-16 mt-16">
         <div className="container px-4 mx-auto text-center">
-          <h2 className="mb-6 text-3xl font-bold">
+            <h2 className="mb-6 text-3xl font-bold text-white">
             Need Immediate Assistance?
-          </h2>
+            </h2>
           <p className="max-w-3xl mx-auto mb-8 text-xl text-white/90">
             Our team is ready to help you plan your perfect Vietnamese adventure
           </p>          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <a
-              href="tel:+84865843276"
+              href="https://api.whatsapp.com/send/?phone=84865843276&text&type=phone_number&app_absent=0"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-white text-[#0093DE] hover:bg-gray-100 py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 font-semibold inline-flex items-center justify-center"
             >
               <svg
@@ -426,9 +565,8 @@ const Contact = () => {
                 />
               </svg>
               Call Us Now (24/7)
-            </a>
-            <a
-              href="mailto:vietnam@leolovestravel.com"
+            </a><a
+              href="mailto:info@leolovestravel.com"
               className="inline-flex items-center justify-center px-8 py-3 text-white transition-all duration-300 transform bg-transparent border-2 border-white hover:bg-white/10 rounded-xl hover:-translate-y-1"
             >
               <svg
@@ -447,10 +585,10 @@ const Contact = () => {
               </svg>
               Email Us
             </a>
-          </div>
-        </div>
+          </div>        </div>
       </section>
     </div>
+    </>
   );
 };
 

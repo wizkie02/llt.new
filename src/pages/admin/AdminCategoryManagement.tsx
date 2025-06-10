@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '../../contexts/AuthContext';
 import { Input } from '@/components/ui/input';
 import { Edit, PlusCircle, Trash2, XCircle, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -11,6 +12,7 @@ interface Category {
 }
 
 const AdminCategoryManagement = () => {
+  const { getAuthHeaders } = useAuth();
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState('');
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -101,6 +103,7 @@ const AdminCategoryManagement = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...getAuthHeaders(),
         },
         body: JSON.stringify({
           name: newCategory.trim()
@@ -157,6 +160,7 @@ const AdminCategoryManagement = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...getAuthHeaders(),
         },
         body: JSON.stringify({
           name: editingValue.trim()
@@ -211,7 +215,10 @@ const AdminCategoryManagement = () => {
     
     try {
       const response = await fetch(`https://leolovestravel.com/api/delete-category.php?id=${categoryToDelete.id}`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+          ...getAuthHeaders(),
+        },
       });
 
       if (!response.ok) {

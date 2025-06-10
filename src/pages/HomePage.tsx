@@ -3,6 +3,8 @@ import { useTheme } from "../contexts/ThemeContext";
 import { Link } from "react-router-dom";
 import wallpaper from "../assets/images/wallpaper.png";
 import Counter from "../components/ui/Counter";
+import SEO from "../components/SEO";
+import StructuredData from "../components/StructuredData";
 
 const HomePage = () => {
   const { theme } = useTheme();
@@ -203,7 +205,6 @@ const HomePage = () => {
     const target = e.target as HTMLImageElement;
     target.src = fallbackSrc;
   };
-
   return (
     <div
       className={`${
@@ -212,6 +213,34 @@ const HomePage = () => {
           : "bg-[#1A202C] text-[#F7F9FC]"
       }`}
     >
+      <SEO 
+        title="Vietnam Travel Tours 2025 | Best Vietnam Travel Agency | Leo Loves Travel"
+        description="Discover authentic Vietnam with Leo Loves Travel. Expert Vietnam tours, Hanoi to Ho Chi Minh City, Halong Bay cruises, Hoi An ancient town, Sapa trekking. Your trusted Vietnam travel guide for unforgettable experiences."
+        keywords="vietnam travel, vietnam tours 2025, vietnam travel guide, halong bay cruise, hoi an tours, sapa trekking, vietnam cultural tours, vietnam adventure tours, vietnam holiday packages, best vietnam travel agency"
+        url="https://leolovestravel.com/"
+        image="https://leolovestravel.com/images/vietnam-travel-homepage.jpg"
+        location={{ country: 'Vietnam', region: 'Southeast Asia' }}
+      />
+      
+      <StructuredData 
+        type="Organization"
+        data={{
+          name: 'Leo Loves Travel',
+          description: 'Leading Vietnam travel agency specializing in authentic cultural experiences',
+          foundingDate: '2020',
+          serviceArea: 'Vietnam, Southeast Asia'
+        }}
+      />
+      
+      <StructuredData 
+        type="TravelAgency"
+        data={{
+          name: 'Leo Loves Travel Vietnam',
+          description: 'Premier Vietnam travel agency offering personalized tours and authentic experiences'
+        }}
+      />
+
+      {/* ...existing JSX content... */}
       {" "}      {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center w-full h-screen pt-32 overflow-hidden">
         <img
