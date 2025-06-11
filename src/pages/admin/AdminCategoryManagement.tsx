@@ -215,7 +215,7 @@ const AdminCategoryManagement = () => {
     
     try {
       const response = await fetch(`https://leolovestravel.com/api/delete-category.php?id=${categoryToDelete.id}`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           ...getAuthHeaders(),
         },

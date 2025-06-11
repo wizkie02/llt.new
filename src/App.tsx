@@ -38,8 +38,8 @@ function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
-        <ToursProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <ToursProvider>
             <Router>
               <Header />
               <Layout>
@@ -111,12 +111,11 @@ function App() {
                   <Route path="/explore-map" element={<InteractiveMap />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-              </Layout>
-              <Footer />
+              </Layout>              <Footer />
               <LiveChat />
             </Router>
-          </AuthProvider>
-        </ToursProvider>
+          </ToursProvider>
+        </AuthProvider>
       </ThemeProvider>
     </HelmetProvider>
   );

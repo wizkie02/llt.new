@@ -113,7 +113,7 @@ export const ToursProvider = ({ children }: { children: ReactNode }) => {
   const removeTour = async (id: string) => {
     try {
       await fetch(`https://leolovestravel.com/api/delete-tour.php?id=${id}`, {
-        method: 'GET',
+        method: 'POST',
         headers: getAuthHeaders(),
       });
       await fetchTours();
