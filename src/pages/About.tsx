@@ -121,7 +121,7 @@ const About = () => {
       <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
         <SEOBreadcrumb />
         {/* Hero Section */}
-      <section className="relative py-32 mt-20 mb-8 overflow-hidden rounded-b-3xl">
+      <section className="relative py-32 mb-8 overflow-hidden rounded-b-3xl">
         <div 
           className="absolute inset-0 bg-fixed bg-center bg-cover"
           style={{ backgroundImage: `url(${bg})` }}
@@ -375,7 +375,7 @@ const About = () => {
                       </span>
                     )}
                   </div>                  <div className="flex items-center justify-center">
-                    <div className="w-16 h-16 mr-4 border-4 border-white rounded-full shadow-md overflow-hidden">
+                    <div className="w-16 h-16 mr-4 overflow-hidden border-4 border-white rounded-full shadow-md">
                       <LazyImage 
                         src={ceo} 
                         alt="Du Hien" 

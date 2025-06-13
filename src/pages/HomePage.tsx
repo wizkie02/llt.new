@@ -275,7 +275,7 @@ const HomePage = () => {
               Explore Vietnam Tours
             </Link>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 px-8 py-4 mt-20 transition-all duration-500 shadow-xl md:gap-12 bg-black/20 backdrop-blur-sm rounded-xl animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
+          <div className="flex flex-wrap items-center justify-center gap-6 px-8 py-4 transition-all duration-500 shadow-xl mt-14 md:gap-12 bg-black/20 backdrop-blur-sm rounded-xl animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-[#0093DE]">
                 <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
