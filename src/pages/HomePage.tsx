@@ -501,7 +501,7 @@ const HomePage = () => {
                   src={destination.image}
                   alt={destination.name}
                   onError={(e) => handleImageError(e, destination.fallbackImage)}
-                  className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80"></div>                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <h3 className="mb-2 text-xl font-bold text-white">{destination.name}</h3>
