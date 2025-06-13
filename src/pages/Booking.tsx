@@ -350,9 +350,7 @@ const Booking = () => {  const navigate = useNavigate();
         bookingTotal: selectedTour
           ? selectedTour.price * formData.numberOfTravelers
           : 0,
-      };
-
-      // Send data to webhook
+      };      // Send data to webhook
       const response = await fetch(
         "https://hook.eu2.make.com/0132fcrjrwvpgea89pekppaew7c5m99z",
         {
@@ -368,11 +366,61 @@ const Booking = () => {  const navigate = useNavigate();
         throw new Error(`Webhook failed with status: ${response.status}`);
       }
 
+      // Also send to internal booking management system
+      const bookingData = {
+        source: "booking_form",
+        tourId: selectedTour?.id,
+        name: selectedTour?.name,
+        price: selectedTour?.price,
+        location: selectedTour?.location,
+        duration: selectedTour?.duration,
+        firstName: formData.contactFirstName,
+        lastName: formData.contactLastName,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        departureDate: formData.departureDate?.toISOString() || '',
+        returnDate: formData.returnDate?.toISOString() || '',
+        numberOfTravelers: formData.numberOfTravelers,
+        travelersArray: formData.travelers.map(traveler => ({
+          age: traveler.dateOfBirth ? new Date().getFullYear() - traveler.dateOfBirth.getFullYear() : 0,
+          gender: 'not-specified',
+          firstName: traveler.firstName,
+          lastName: traveler.lastName,
+          nationality: traveler.nationality
+        })),
+        specialRequests: formData.specialRequests,
+        dietaryRestrictions: formData.dietaryRestrictions,
+        medicalConditions: formData.medicalConditions,
+        status: 'pending'
+      };      // Send to internal booking system (don't block if this fails)
+      let bookingReference = null;
+      try {
+        const bookingResponse = await fetch('https://leolovestravel.com/api/add-booking.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bookingData),
+        });
+        
+        if (bookingResponse.ok) {
+          const bookingResult = await bookingResponse.json();
+          if (bookingResult.success && bookingResult.bookingReference) {
+            bookingReference = bookingResult.bookingReference;
+          }
+        }
+      } catch (bookingError) {
+        console.warn('Failed to save booking to internal system:', bookingError);
+        // Don't throw - we don't want to block the user flow if internal system fails
+      }
+
       // Navigate to booking confirmation with form data
       navigate("/booking-confirmation", {
         state: {
           bookingData: formData,
           tour: selectedTour,
+          bookingReference: bookingReference
         },
       });
     } catch (error) {

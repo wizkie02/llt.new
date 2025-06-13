@@ -1,0 +1,92 @@
+{
+  "organization": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Leo Loves Travel",
+    "alternateName": ["LeoLovesTravel", "Leo Loves Travel Vietnam", "LLT Vietnam Tours"],
+    "url": "https://leolovestravel.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://leolovestravel.com/src/assets/icon-circle.svg",
+      "width": 512,
+      "height": 512
+    },
+    "description": "Leo Loves Travel is Vietnam's premier travel agency offering authentic cultural experiences and expert-guided tours throughout Vietnam for international travelers.",
+    "foundingDate": "2019",
+    "slogan": "Your trusted Vietnam travel companion",
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "Vietnam"
+      },
+      {
+        "@type": "Place",
+        "name": "Southeast Asia"
+      }
+    ],
+    "knowsAbout": [
+      "Vietnam Travel",
+      "Vietnam Tours",
+      "Cultural Tours",
+      "Adventure Tours",
+      "Halong Bay Tours",
+      "Sapa Trekking",
+      "Mekong Delta Tours",
+      "Vietnam Travel Guide"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/leolovestravel",
+      "https://www.facebook.com/leolovestravel",
+      "https://www.youtube.com/@leolovestravel"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "areaServed": "VN",
+      "availableLanguage": ["en", "vi"]
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Vietnam Travel Tours",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "TouristTrip",
+            "name": "Vietnam Cultural Tours",
+            "description": "Authentic Vietnamese cultural experiences"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "TouristTrip",
+            "name": "Vietnam Adventure Tours", 
+            "description": "Exciting adventure activities across Vietnam"
+          }
+        }
+      ]
+    }
+  },
+  "website": {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Leo Loves Travel",
+    "alternateName": "Leo Loves Travel Vietnam Tours",
+    "url": "https://leolovestravel.com",
+    "description": "Official website of Leo Loves Travel - Vietnam's premier travel agency specializing in authentic cultural experiences and expert-guided tours throughout Vietnam.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Leo Loves Travel"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://leolovestravel.com/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": "en-US"
+  }
+}

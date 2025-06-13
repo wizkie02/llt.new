@@ -207,32 +207,31 @@ const HomePage = () => {
   };
   return (
     <div
-      className={`${
-        theme === "light"
+      className={`${theme === "light"
           ? "bg-[#F7F9FC] text-[#292F36]"
           : "bg-[#1A202C] text-[#F7F9FC]"
-      }`}
-    >
-      <SEO 
-        title="Vietnam Travel Tours 2025 | Best Vietnam Travel Agency | Leo Loves Travel"
-        description="Discover authentic Vietnam with Leo Loves Travel. Expert Vietnam tours, Hanoi to Ho Chi Minh City, Halong Bay cruises, Hoi An ancient town, Sapa trekking. Your trusted Vietnam travel guide for unforgettable experiences."
-        keywords="vietnam travel, vietnam tours 2025, vietnam travel guide, halong bay cruise, hoi an tours, sapa trekking, vietnam cultural tours, vietnam adventure tours, vietnam holiday packages, best vietnam travel agency"
+        }`}
+    >      <SEO
+        title="Leo Loves Travel | Vietnam Tours Loved by 10,000+ Global Travelers"
+        description="Leo Loves Travel is your trusted Vietnam travel agency for unforgettable experiences. Cruise Halong Bay, walk Hoi An, trek Sapa – all with local guides. See why travelers love us!"
+        keywords="Leo Loves Travel, leo love travel, leolovestravel, vietnam travel agency, halong bay tour, sapa trekking, vietnam tours, vietnam travel"
         url="https://leolovestravel.com/"
-        image="https://leolovestravel.com/images/vietnam-travel-homepage.jpg"
-        location={{ country: 'Vietnam', region: 'Southeast Asia' }}
+        image="https://leolovestravel.com/assets/og-cover.jpg"
+        location={{ country: 'Vietnam', region: 'Southeast Asia', city: 'Ho Chi Minh City' }}
       />
-      
-      <StructuredData 
+
+
+      <StructuredData
         type="Organization"
         data={{
           name: 'Leo Loves Travel',
           description: 'Leading Vietnam travel agency specializing in authentic cultural experiences',
-          foundingDate: '2020',
+          foundingDate: '2025',
           serviceArea: 'Vietnam, Southeast Asia'
         }}
       />
-      
-      <StructuredData 
+
+      <StructuredData
         type="TravelAgency"
         data={{
           name: 'Leo Loves Travel Vietnam',
@@ -312,9 +311,8 @@ const HomePage = () => {
         </div>
       </section>{" "}      {/* About Us Area start */}
       <section
-        className={`about-us-area py-20 rel z-1 ${
-          theme === "light" ? "bg-white" : "bg-gray-800"
-        }`}
+        className={`about-us-area py-20 rel z-1 ${theme === "light" ? "bg-white" : "bg-gray-800"
+          }`}
       >
         <div className="container max-w-6xl px-6 mx-auto md:px-12 lg:px-40 xl:px-40">
           <div className="flex flex-wrap items-center justify-center gap-4 lg:flex-nowrap">
@@ -333,15 +331,14 @@ const HomePage = () => {
                   </h2>
                 </div>
                 <p
-                  className={`text-lg lg:text-xl leading-relaxed mb-8 ${
-                    theme === "light" ? "text-gray-600" : "text-gray-300"
-                  }`}
+                  className={`text-lg lg:text-xl leading-relaxed mb-8 ${theme === "light" ? "text-gray-600" : "text-gray-300"
+                    }`}
                 >
                   We go above and beyond to create authentic Vietnamese
                   experiences, revealing hidden gems and must-see attractions
                   with local expertise and passion.
                 </p>
-                
+
                 <div className="flex items-center justify-center mb-8 lg:justify-start">
                   <div className="flex items-center space-x-2">
                     <div className="w-9 h-9 bg-[#0093DE]/10 rounded-full flex items-center justify-center">
@@ -412,15 +409,14 @@ const HomePage = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-                
+
                 {/* Decorative elements */}
                 <div className="absolute -bottom-4 -left-4 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#0093DE]/10 -z-10"></div>
                 <div className="absolute -top-4 -right-4 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-[#0093DE]/20 -z-10"></div>
-                
+
                 {/* Floating stats card */}
-                <div className={`absolute bottom-6 left-6 right-6 backdrop-blur-sm rounded-xl p-4 shadow-lg ${
-                  theme === "light" ? "bg-white/95" : "bg-gray-800/95"
-                }`}>
+                <div className={`absolute bottom-6 left-6 right-6 backdrop-blur-sm rounded-xl p-4 shadow-lg ${theme === "light" ? "bg-white/95" : "bg-gray-800/95"
+                  }`}>
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
                       <div className="text-lg font-bold text-[#0093DE]">4.9★</div>
@@ -460,8 +456,8 @@ const HomePage = () => {
                 key={service.id}
                 to={service.link}
                 className={`p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl h-full flex flex-col ${theme === 'light'
-                    ? 'bg-white hover:shadow-blue-100'
-                    : 'bg-gray-800 hover:shadow-blue-900/20'
+                  ? 'bg-white hover:shadow-blue-100'
+                  : 'bg-gray-800 hover:shadow-blue-900/20'
                   }`}
               >
                 <div className="text-[#0093DE] mb-4 transform transition-all duration-300 group-hover:scale-110">
@@ -484,14 +480,14 @@ const HomePage = () => {
       </section>      {/* Featured Destinations */}
       <section id="popular-destinations" className={`py-20 rounded-3xl ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
         <div className="container px-8 mx-auto md:px-12">          <div className="mb-16 text-center">
-            <span className="inline-block px-3 py-1 mb-4 text-sm font-medium text-teal-600 bg-teal-100 rounded-full">
-              Top Destinations
-            </span>
-            <h2 className="mb-4 text-3xl font-bold md:text-4xl">Vietnam's Treasured Places</h2>
-            <p className="max-w-2xl mx-auto text-lg opacity-80">
-              Discover breathtaking landscapes, ancient culture, and unforgettable adventures
-            </p>
-          </div>
+          <span className="inline-block px-3 py-1 mb-4 text-sm font-medium text-teal-600 bg-teal-100 rounded-full">
+            Top Destinations
+          </span>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Vietnam's Treasured Places</h2>
+          <p className="max-w-2xl mx-auto text-lg opacity-80">
+            Discover breathtaking landscapes, ancient culture, and unforgettable adventures
+          </p>
+        </div>
 
           <div className="grid grid-cols-1 gap-6 mx-auto md:grid-cols-2 lg:grid-cols-4 max-w-7xl">
             {popularDestinations.slice(0, 8).map((destination) => (
@@ -513,11 +509,10 @@ const HomePage = () => {
                     {destination.description}
                   </p>
                   <div
-                    className={`mt-4 transition-all duration-500 ease-in-out transform ${
-                      visibleDestination === destination.id
+                    className={`mt-4 transition-all duration-500 ease-in-out transform ${visibleDestination === destination.id
                         ? "opacity-100 max-h-10 translate-y-0"
                         : "opacity-0 max-h-0 translate-y-4"
-                    }`}
+                      }`}
                   >
                     {" "}
                     <Link

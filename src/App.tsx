@@ -3,6 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToursProvider } from './contexts/ToursContext';
 import { AuthProvider } from './contexts/AuthContext';
+import { BookingProvider } from './contexts/BookingContext';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Layout from './components/layout/Layout';
@@ -40,7 +41,8 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <ToursProvider>
-            <Router>
+            <BookingProvider>
+              <Router>
               <Header />
               <Layout>
                 <Routes>
@@ -114,6 +116,7 @@ function App() {
               </Layout>              <Footer />
               <LiveChat />
             </Router>
+            </BookingProvider>
           </ToursProvider>
         </AuthProvider>
       </ThemeProvider>

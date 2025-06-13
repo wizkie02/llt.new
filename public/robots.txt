@@ -1,12 +1,21 @@
 User-agent: *
 Allow: /
 
+# Leo Loves Travel - Official Vietnam Travel Agency
+# Website: https://leolovestravel.com
+# Brand: Leo Loves Travel Vietnam Tours
+
 # Disallow admin and private areas
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_/
 Disallow: /private/
 Disallow: /temp/
+
+# Encourage crawling of homepage & key pages
+Allow: /index.html
+Allow: /home
+Allow: /
 
 # Allow important directories for SEO
 Allow: /src/assets/
@@ -15,12 +24,23 @@ Allow: /static/
 Allow: /destinations/
 Allow: /tours/
 Allow: /travel-guide/
+Allow: /package-tours/
+Allow: /about/
+Allow: /contact/
+
+# Allow brand verification
+Allow: /verify.html
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://leolovestravel.com/sitemap.xml
 
-# Crawl delay for server optimization
-Crawl-delay: 1
+# Additional brand information
+# Company: Leo Loves Travel
+# Services: Vietnam Travel Tours, Cultural Experiences
+# Contact: info@leolovestravel.com
 
 # Special rules for search engines
 User-agent: Googlebot
