@@ -564,21 +564,21 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
+          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto lg:grid-cols-3">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
                 className={`rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'
                   }`}
               >
-                <div className="flex items-center mb-4">
+                <div className="flex items-center h-12 gap-2 mb-4">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
                     className="object-cover w-12 h-12 mr-4 rounded-full"
                   />
-                  <div>
-                    <h4 className="font-bold">{testimonial.name}</h4>
+                  <div className="flex flex-col justify-between h-12">
+                    <h4 className="m-0 font-bold">{testimonial.name}</h4>
                     <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
                       {testimonial.location}
                     </p>
@@ -614,7 +614,7 @@ const HomePage = () => {
               to="/about"
               className="inline-flex items-center bg-transparent border border-[#0093DE] text-[#0093DE] hover:bg-[#0093DE]/10 py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              Read More Reviews
+              Read More About Us
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
