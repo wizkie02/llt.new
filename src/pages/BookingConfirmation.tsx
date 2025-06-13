@@ -315,171 +315,248 @@ Phone: +84 123 456 789
       console.error('Print failed:', error);
       alert('Print failed. Please try again.');
     }
-  };return (    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-16 pb-6 relative overflow-hidden">
-      {/* Background decorative elements similar to Admin Dashboard */}
+  };  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-800 dark:to-indigo-900 pt-16 pb-12 relative overflow-hidden">
+      {/* Enhanced Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#0093DE]/5 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#64A86B]/5 rounded-full blur-3xl"></div>
-      </div>
-        <div className="flex justify-center px-4 relative z-10">        <div className="w-full max-w-3xl">{/* Changed from max-w-4xl to max-w-3xl for more compact layout */}          {/* Enhanced Main Receipt Card with Admin Dashboard styling */}          <Card className="mb-4 shadow-xl border-0 rounded-2xl bg-white dark:bg-gray-800 overflow-hidden hover:shadow-2xl transition-all duration-300">            <CardHeader className="bg-gradient-to-r from-[#0093DE] to-[#0077b3] text-white rounded-t-2xl py-4 px-6 relative overflow-hidden">
-              <div className="absolute inset-0 bg-black/10"></div>
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>              <div className="relative z-10 grid grid-cols-2 gap-4 items-center">                <div className="text-left">
-                  <CardTitle className="text-xl font-bold text-white tracking-wide">BOOKING RECEIPT</CardTitle>
-                  <p className="text-white/80 text-sm mt-1">Leo Loves Travel</p>
-                </div>
-                <div className="text-right">
-                  <CardDescription className="text-white/95 text-lg font-semibold bg-white/20 inline-block px-4 py-2 rounded-full">
-                    #{bookingReference}
-                  </CardDescription>
-                  <p className="text-white/80 text-sm mt-1">
-                    {new Date().toLocaleDateString('en-US', { 
-                      day: '2-digit',
-                      month: '2-digit', 
-                      year: 'numeric'
-                    })}
-                  </p>
-                </div>
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-indigo-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-emerald-400/10 to-teal-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-purple-400/5 to-pink-500/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-20 w-2 h-2 bg-blue-400/30 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-40 right-32 w-3 h-3 bg-emerald-400/30 rounded-full animate-bounce" style={{animationDelay: '3s'}}></div>
+        <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-purple-400/30 rounded-full animate-bounce" style={{animationDelay: '5s'}}></div>
+      </div>        <div className="flex justify-center px-6 relative z-10">
+          <div className="w-full max-w-4xl">
+            
+            {/* Success Header Animation */}
+            <div className="text-center mb-8 animate-fade-in">
+              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full shadow-2xl mb-6 animate-bounce">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                </svg>
               </div>
-            </CardHeader>              <CardContent className="p-5 space-y-5">              {/* Tour Information Section with Full Width Image */}              <div className="border-b border-gray-200 dark:border-gray-700 pb-4 mb-4 bg-gradient-to-r from-gray-50/50 to-blue-50/30 dark:from-gray-800/50 dark:to-blue-900/20 rounded-2xl p-4 shadow-sm">
-                {/* Tour Image - Full width */}
-                <div className="w-full h-64 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-700 shadow-xl border-2 border-gray-200 dark:border-gray-600 mb-4">
-                  {(tour || storedTour)?.image ? (
-                    <img 
-                      src={(tour || storedTour).image} 
-                      alt={bookingDetails.tourName}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGM0Y0RjYiLz48cGF0aCBkPSJNMTUwIDEwMEM1My43MjU4IDEwMCA3NSA2MCA3NSA2MEM3NSA2MCA5Ni4yNzQyIDEwMCAxNTAgMTAwWiIgZmlsbD0iI0Q1RDlERCIvPjwvc3ZnPg==';
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <MapPin className="h-12 w-12 text-gray-400" />
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 bg-clip-text text-transparent mb-4">
+                Booking Confirmed!
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                Thank you for choosing Leo Loves Travel. Your adventure awaits! 🌟
+              </p>
+            </div>
+
+            {/* Enhanced Main Receipt Card */}
+            <Card className="mb-8 shadow-2xl border-0 rounded-3xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl overflow-hidden hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1">
+              <CardHeader className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white rounded-t-3xl py-8 px-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/10"></div>
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                <div className="absolute -bottom-5 -left-5 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>
+                
+                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                  <div className="text-left">
+                    <CardTitle className="text-3xl font-bold text-white tracking-wide mb-2 drop-shadow-lg">
+                      BOOKING RECEIPT
+                    </CardTitle>
+                    <p className="text-white/90 text-lg font-medium">Leo Loves Travel</p>
+                    <div className="flex items-center mt-3">
+                      <div className="w-8 h-1 bg-white/60 rounded-full mr-2"></div>
+                      <div className="w-4 h-1 bg-white/40 rounded-full mr-2"></div>
+                      <div className="w-2 h-1 bg-white/30 rounded-full"></div>
                     </div>
-                  )}
-                </div>                {/* Tour Details below image */}
-                <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl p-4 shadow-sm border border-gray-200/50 dark:border-gray-600/50">
-                  <h2 className="text-gray-900 dark:text-white text-2xl mb-3 font-semibold tracking-tight text-center">{bookingDetails.tourName}</h2>
-                  <div className="flex flex-wrap gap-3 justify-center">                    {(tour || storedTour)?.duration && (
-                      <div className="inline-flex items-center space-x-2 px-4 py-2 bg-[#0093DE]/10 dark:bg-[#0093DE]/20 rounded-xl border border-[#0093DE]/20 shadow-sm hover:shadow-md transition-shadow">
-                        <Clock className="h-4 w-4 text-[#0093DE]" />
-                        <span className="text-base text-[#0093DE] dark:text-[#0093DE] font-medium">
-                          {(tour || storedTour).duration}
-                        </span>
-                      </div>
-                    )}
-                    {(tour || storedTour)?.location && (
-                      <div className="inline-flex items-center space-x-2 px-4 py-2 bg-[#64A86B]/10 dark:bg-[#64A86B]/20 rounded-xl border border-[#64A86B]/20 shadow-sm hover:shadow-md transition-shadow">
-                        <MapPin className="h-4 w-4 text-[#64A86B]" />
-                        <span className="text-base text-[#64A86B] dark:text-[#64A86B] font-medium">
-                          {(tour || storedTour).location}
-                        </span>
-                      </div>
-                    )}
-                    <div className="inline-flex items-center space-x-2 px-4 py-2 bg-orange-500/10 dark:bg-orange-500/20 rounded-xl border border-orange-500/20 shadow-sm hover:shadow-md transition-shadow">
-                      <span className="text-base text-orange-600 dark:text-orange-400 font-medium">
-                        📅 {bookingDetails.date instanceof Date 
-                          ? bookingDetails.date.toLocaleDateString('en-US', { 
-                              month: 'short', 
-                              day: 'numeric',
-                              year: 'numeric'
-                            }) 
-                          : 'To Be Determined'}
-                      </span>
-                    </div>
+                  </div>
+                  <div className="text-left md:text-right">
+                    <CardDescription className="text-white text-2xl font-bold bg-white/20 inline-block px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/20 shadow-lg">
+                      #{bookingReference}
+                    </CardDescription>
+                    <p className="text-white/80 text-base mt-3 flex items-center md:justify-end">
+                      <Clock className="w-4 h-4 mr-2" />
+                      {new Date().toLocaleDateString('en-US', { 
+                        day: '2-digit',
+                        month: 'long', 
+                        year: 'numeric'
+                      })}
+                    </p>
                   </div>
                 </div>
-              </div>{/* Customer Details with larger text and enhanced styling */}              <div className="bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 dark:from-gray-700/50 dark:via-blue-900/10 dark:to-gray-700/50 rounded-2xl p-4 border border-gray-200/50 dark:border-gray-600/50 shadow-lg">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="p-2 bg-[#0093DE]/10 rounded-2xl shadow-sm">
-                    <div className="w-5 h-5 bg-[#0093DE] rounded-full"></div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Customer Information</h3>
-                </div>                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-3 bg-white/70 dark:bg-gray-800/70 rounded-2xl p-4 border border-gray-200/30 dark:border-gray-600/30 shadow-sm">                    <div className="flex flex-col space-y-1">
-                      <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Full Name</span>
-                      <span className="text-gray-900 dark:text-white text-base font-medium">{bookingDetails.contactName}</span>
-                    </div>
-                    
-                    <div className="flex flex-col space-y-1">
-                      <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Email Address</span>
-                      <span className="text-gray-700 dark:text-gray-300 text-sm break-all">{bookingDetails.email}</span>
-                    </div>
-                      {(bookingData || storedBookingData)?.phone && (
-                      <div className="flex flex-col space-y-1">
-                        <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Phone Number</span>
-                        <span className="text-gray-900 dark:text-white text-base font-medium">{(bookingData || storedBookingData).phone}</span>
-                      </div>
-                    )}
-                    
-                    {(bookingData || storedBookingData)?.address && (
-                      <div className="flex flex-col space-y-1">
-                        <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Address</span>
-                        <span className="text-gray-700 dark:text-gray-300 text-sm">{(bookingData || storedBookingData).address}</span>
-                      </div>
-                    )}
-                  </div>
+              </CardHeader>              <CardContent className="p-8 space-y-8">
+                
+                {/* Tour Information Section with Enhanced Styling */}
+                <div className="border-b border-gray-200/60 dark:border-gray-700/60 pb-8 mb-8 bg-gradient-to-br from-slate-50/50 via-blue-50/30 to-indigo-50/20 dark:from-gray-800/50 dark:via-blue-900/20 dark:to-indigo-900/10 rounded-3xl p-8 shadow-inner">
                   
-                  <div className="space-y-3 bg-white/70 dark:bg-gray-800/70 rounded-2xl p-4 border border-gray-200/30 dark:border-gray-600/30 shadow-sm">                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400 text-xs">Departure Date:</span>
-                      <span className="text-sm">
-                        {bookingDetails.date instanceof Date
-                          ? bookingDetails.date.toLocaleDateString('en-US', { 
-                              weekday: 'short',
-                              month: 'short', 
-                              day: 'numeric',
-                              year: 'numeric'
-                            }) 
-                          : 'To Be Determined'}
-                      </span>
+                  {/* Tour Image - Full width with Enhanced Styling */}
+                  <div className="w-full h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 shadow-2xl border-4 border-white/60 dark:border-gray-600/60 mb-8 group">
+                    {(tour || storedTour)?.image ? (
+                      <img 
+                        src={(tour || storedTour).image} 
+                        alt={bookingDetails.tourName}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out filter brightness-105"
+                        onError={(e) => {
+                          e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGM0Y0RjYiLz48cGF0aCBkPSJNMTUwIDEwMEM1My43MjU4IDEwMCA3NSA2MCA3NSA2MEM3NSA2MCA5Ni4yNzQyIDEwMCAxNTAgMTAwWiIgZmlsbD0iI0Q1RDlERCIvPjwvc3ZnPg==';
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20">
+                        <div className="text-center">
+                          <MapPin className="h-16 w-16 text-blue-400 mx-auto mb-4" />
+                          <p className="text-blue-600 font-medium">Tour Image</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Tour Details with Enhanced Typography */}
+                  <div className="bg-white/90 dark:bg-gray-800/90 rounded-3xl p-8 shadow-xl border border-white/60 dark:border-gray-600/60 backdrop-blur-sm">
+                    <h2 className="text-gray-900 dark:text-white text-4xl mb-6 font-bold tracking-tight text-center bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-200 bg-clip-text">
+                      {bookingDetails.tourName}
+                    </h2>
+                    
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {(tour || storedTour)?.duration && (
+                        <div className="inline-flex items-center space-x-3 px-6 py-4 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 dark:from-blue-500/20 dark:to-indigo-500/20 rounded-2xl border-2 border-blue-200/60 dark:border-blue-400/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                          <div className="p-2 bg-blue-500 rounded-xl shadow-md">
+                            <Clock className="h-5 w-5 text-white" />
+                          </div>
+                          <span className="text-lg text-blue-700 dark:text-blue-300 font-bold">
+                            {(tour || storedTour).duration}
+                          </span>
+                        </div>
+                      )}
+                      
+                      {(tour || storedTour)?.location && (
+                        <div className="inline-flex items-center space-x-3 px-6 py-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 dark:from-emerald-500/20 dark:to-teal-500/20 rounded-2xl border-2 border-emerald-200/60 dark:border-emerald-400/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                          <div className="p-2 bg-emerald-500 rounded-xl shadow-md">
+                            <MapPin className="h-5 w-5 text-white" />
+                          </div>
+                          <span className="text-lg text-emerald-700 dark:text-emerald-300 font-bold">
+                            {(tour || storedTour).location}
+                          </span>
+                        </div>
+                      )}
+                      
+                      <div className="inline-flex items-center space-x-3 px-6 py-4 bg-gradient-to-r from-orange-500/10 to-red-500/10 dark:from-orange-500/20 dark:to-red-500/20 rounded-2xl border-2 border-orange-200/60 dark:border-orange-400/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        <div className="p-2 bg-orange-500 rounded-xl shadow-md">
+                          <svg className="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <span className="text-lg text-orange-700 dark:text-orange-300 font-bold">
+                          {bookingDetails.date instanceof Date 
+                            ? bookingDetails.date.toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric',
+                                year: 'numeric'
+                              }) 
+                            : 'To Be Determined'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>                {/* Customer Details with Enhanced Modern Design */}
+                <div className="bg-gradient-to-br from-slate-50/80 via-blue-50/50 to-indigo-50/30 dark:from-gray-700/50 dark:via-blue-900/20 dark:to-indigo-900/10 rounded-3xl p-8 border-2 border-white/60 dark:border-gray-600/40 shadow-2xl backdrop-blur-sm">
+                  
+                  <div className="flex items-center space-x-4 mb-8">
+                    <div className="p-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl shadow-xl">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Customer Information</h3>
+                      <p className="text-gray-600 dark:text-gray-400">Your booking details</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    {/* Left Column - Personal Info */}
+                    <div className="space-y-6 bg-white/80 dark:bg-gray-800/80 rounded-3xl p-8 border border-gray-200/50 dark:border-gray-600/50 shadow-xl backdrop-blur-sm">
+                      <div className="flex flex-col space-y-3">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wider">Full Name</span>
+                        <span className="text-gray-900 dark:text-white text-xl font-bold">{bookingDetails.contactName}</span>
+                      </div>
+                      
+                      <div className="flex flex-col space-y-3">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wider">Email Address</span>
+                        <span className="text-gray-700 dark:text-gray-300 text-lg font-medium break-all">{bookingDetails.email}</span>
+                      </div>
+                        
+                      {(bookingData || storedBookingData)?.phone && (
+                        <div className="flex flex-col space-y-3">
+                          <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wider">Phone Number</span>
+                          <span className="text-gray-900 dark:text-white text-xl font-bold">{(bookingData || storedBookingData).phone}</span>
+                        </div>
+                      )}
+                      
+                      {(bookingData || storedBookingData)?.address && (
+                        <div className="flex flex-col space-y-3">
+                          <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wider">Address</span>
+                          <span className="text-gray-700 dark:text-gray-300 text-lg font-medium">{(bookingData || storedBookingData).address}</span>
+                        </div>
+                      )}
                     </div>
                     
-                    {/* Add Return Date if available */}
-                    {(bookingData || storedBookingData)?.returnDate && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400 text-xs">Return Date:</span>
-                        <span className="text-sm">
-                          {(bookingData || storedBookingData).returnDate instanceof Date
-                            ? (bookingData || storedBookingData).returnDate.toLocaleDateString('en-US', { 
+                    {/* Right Column - Travel Info */}
+                    <div className="space-y-6 bg-white/80 dark:bg-gray-800/80 rounded-3xl p-8 border border-gray-200/50 dark:border-gray-600/50 shadow-xl backdrop-blur-sm">
+                      <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl border border-blue-200/50 dark:border-blue-400/30">
+                        <span className="text-gray-700 dark:text-gray-300 text-sm font-semibold">Departure Date:</span>
+                        <span className="text-lg font-bold text-blue-700 dark:text-blue-300">
+                          {bookingDetails.date instanceof Date
+                            ? bookingDetails.date.toLocaleDateString('en-US', { 
                                 weekday: 'short',
                                 month: 'short', 
                                 day: 'numeric',
                                 year: 'numeric'
                               }) 
-                            : new Date((bookingData || storedBookingData).returnDate).toLocaleDateString('en-US', { 
-                                weekday: 'short',
-                                month: 'short', 
-                                day: 'numeric',
-                                year: 'numeric'
-                              })}
+                            : 'To Be Determined'}
                         </span>
                       </div>
-                    )}
-                    
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400 text-xs">Number of Travelers:</span>
-                      <span className="text-sm">{bookingDetails.guests} {bookingDetails.guests === 1 ? 'Person' : 'People'}</span>
-                    </div>
-                    
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400 text-xs">Booking Date:</span>
-                      <span className="text-sm">
-                        {new Date().toLocaleDateString('en-US', { 
-                          month: 'short', 
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
-                      </span>
-                    </div>
-                    
-                    {(tour || storedTour)?.location && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400 text-xs">Location:</span>
-                        <span className="text-right text-sm">{(tour || storedTour).location}</span>
+                      
+                      {/* Return Date */}
+                      {(bookingData || storedBookingData)?.returnDate && (
+                        <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl border border-emerald-200/50 dark:border-emerald-400/30">
+                          <span className="text-gray-700 dark:text-gray-300 text-sm font-semibold">Return Date:</span>
+                          <span className="text-lg font-bold text-emerald-700 dark:text-emerald-300">
+                            {(bookingData || storedBookingData).returnDate instanceof Date
+                              ? (bookingData || storedBookingData).returnDate.toLocaleDateString('en-US', { 
+                                  weekday: 'short',
+                                  month: 'short', 
+                                  day: 'numeric',
+                                  year: 'numeric'
+                                }) 
+                              : new Date((bookingData || storedBookingData).returnDate).toLocaleDateString('en-US', { 
+                                  weekday: 'short',
+                                  month: 'short', 
+                                  day: 'numeric',
+                                  year: 'numeric'
+                                })}
+                          </span>
+                        </div>
+                      )}
+                      
+                      <div className="flex justify-between items-center p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl border border-purple-200/50 dark:border-purple-400/30">
+                        <span className="text-gray-700 dark:text-gray-300 text-sm font-semibold">Travelers:</span>
+                        <span className="text-lg font-bold text-purple-700 dark:text-purple-300">{bookingDetails.guests} {bookingDetails.guests === 1 ? 'Person' : 'People'}</span>
                       </div>
-                    )}
+                      
+                      <div className="flex justify-between items-center p-4 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border border-orange-200/50 dark:border-orange-400/30">
+                        <span className="text-gray-700 dark:text-gray-300 text-sm font-semibold">Booking Date:</span>
+                        <span className="text-lg font-bold text-orange-700 dark:text-orange-300">
+                          {new Date().toLocaleDateString('en-US', { 
+                            month: 'short', 
+                            day: 'numeric',
+                            year: 'numeric'
+                          })}
+                        </span>
+                      </div>
+                      
+                      {(tour || storedTour)?.location && (
+                        <div className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-900/20 dark:to-slate-900/20 rounded-2xl border border-gray-200/50 dark:border-gray-400/30">
+                          <span className="text-gray-700 dark:text-gray-300 text-sm font-semibold">Location:</span>
+                          <span className="text-lg font-bold text-gray-700 dark:text-gray-300 text-right">{(tour || storedTour).location}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
                 
                 {/* Add Traveler Information Section */}
                 {(bookingData || storedBookingData)?.travelers && (bookingData || storedBookingData).travelers.length > 0 && (

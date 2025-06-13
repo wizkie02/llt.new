@@ -104,7 +104,7 @@ const About = () => {
           name: "Leo Loves Travel",
           description: "Leading Vietnam travel agency specializing in authentic cultural experiences and sustainable tourism for international travelers",
           url: "https://leolovestravel.com",
-          logo: "https://leolovestravel.com/src/assets/icon-circle.svg",
+          logo: "https://leolovestravel.com/og-image.jpg",
           foundingDate: "2020",
           founder: {
             "@type": "Person",

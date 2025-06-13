@@ -25,7 +25,7 @@ const SEO = ({
   title = 'Leo Loves Travel - Premier Vietnam Travel Agency | Authentic Vietnam Tours & Experiences 2025',
   description = 'Leo Loves Travel - Your trusted Vietnam travel agency specializing in authentic Vietnamese experiences. Discover Vietnam through expertly crafted tours from Hanoi to Ho Chi Minh City, Halong Bay to Hoi An. Professional guides, cultural immersion, and unforgettable adventures await.',
   keywords = 'Leo Loves Travel, leolovestravel, leo love travel, leo loves travel website, leolovestravelvn, leo loves travel vietnam, LLT, leolovetravel, leo-loves-travel, leolovestravel.com, leolovesravel, leoloestravel, leo love travell, leo loves travell, leolovertravel, leo loves travels, vietnam travel, vietnam tours, vietnam travel agency, vietnam travel guide, vietnam vacation, vietnam holiday, hanoi tours, ho chi minh city tours, halong bay cruise, hoi an tours, sapa trekking, mekong delta tours, vietnam cultural tours, vietnam adventure tours, vietnam beach holidays, vietnam backpacking, vietnam luxury travel, vietnam budget travel, southeast asia travel, vietnam tourism, visit vietnam',
-  image = 'https://leolovestravel.com/src/assets/icon-circle.svg',
+  image = 'https://leolovestravel.com/og-image.jpg',
   url = 'https://leolovestravel.com',
   type = 'website',
   articleData,
@@ -227,11 +227,11 @@ const SEO = ({
           "url": "https://leolovestravel.com",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://leolovestravel.com/src/assets/icon-circle.svg",
+            "url": "https://leolovestravel.com/og-image.jpg",
             "width": 512,
             "height": 512
           },
-          "image": "https://leolovestravel.com/src/assets/icon-circle.svg",
+          "image": "https://leolovestravel.com/og-image.jpg",
           "description": "Leo Loves Travel is the premier Vietnam travel agency offering authentic cultural experiences and expert-guided tours throughout Vietnam for international travelers.",
           "foundingDate": "2025",
           "slogan": "Your trusted Vietnam travel companion",

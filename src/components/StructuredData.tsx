@@ -21,7 +21,7 @@ const StructuredData = ({ type, data }: StructuredDataProps) => {
           url: 'https://leolovestravel.com',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://leolovestravel.com/src/assets/icon-circle.svg',
+            url: 'https://leolovestravel.com/og-image.jpg',
             width: 512,
             height: 512
           },
@@ -242,7 +242,7 @@ const StructuredData = ({ type, data }: StructuredDataProps) => {
             name: 'Leo Loves Travel',
             logo: {
               '@type': 'ImageObject',
-              url: 'https://leolovestravel.com/src/assets/icon-circle.svg',
+              url: 'https://leolovestravel.com/og-image.jpg',
             },
           },
           datePublished: data.datePublished,
