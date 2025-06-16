@@ -6,6 +6,7 @@ import ScrollReveal from '../components/ui/ScrollReveal';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 import SEOBreadcrumb from '../components/SEOBreadcrumb';
+import { pageConfigs } from '../utils/seoOptimization';
 
 const TravelServices = () => {
   const { theme } = useTheme();
@@ -139,48 +140,15 @@ const TravelServices = () => {
   return (
     <>
       <SEO
-        title="Vietnam Travel Services | Complete Travel Support | Leo Loves Travel"
-        description="Comprehensive Vietnam travel services including visa assistance, transportation, accommodation booking, travel insurance, and 24/7 support. Professional travel planning services for your perfect Vietnam adventure."
-        keywords="vietnam travel services, vietnam visa assistance, vietnam transportation, vietnam accommodation, vietnam travel insurance, vietnam travel support, vietnam travel planning, vietnam travel consultation"
+        title={pageConfigs.travelServices.title}
+        description={pageConfigs.travelServices.description}
+        keywords={pageConfigs.travelServices.keywords}
         url="https://leolovestravel.com/travel-services"
         type="website"
       />
       <StructuredData
         type="TravelAgency"
-        data={{
-          name: "Leo Loves Travel - Travel Services",
-          description: "Comprehensive travel services for Vietnam including visa assistance, transportation, accommodation, and travel support",
-          url: "https://leolovestravel.com/travel-services",
-          hasOfferCatalog: {
-            "@type": "OfferCatalog",
-            name: "Vietnam Travel Services",
-            itemListElement: [
-              {
-                "@type": "Offer",
-                itemOffered: {
-                  "@type": "Service",
-                  name: "Visa Assistance",
-                  description: "Professional Vietnam visa application support"
-                }
-              },
-              {
-                "@type": "Offer", 
-                itemOffered: {
-                  "@type": "Service",
-                  name: "Transportation Services",
-                  description: "Reliable transportation throughout Vietnam"
-                }
-              },
-              {
-                "@type": "Offer",
-                itemOffered: {
-                  "@type": "Service", 
-                  name: "Accommodation Booking",
-                  description: "Handpicked accommodations across Vietnam"
-                }
-              }
-            ]
-          }        }}
+        data={pageConfigs.travelServices.structuredData}
       />
       <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
         <SEOBreadcrumb />

@@ -9,6 +9,8 @@ import { Badge } from '../components/ui/badge';
 import { Calendar, Clock, ArrowRight, ChevronRight, User } from 'lucide-react';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
+import SEOBreadcrumb from '../components/SEOBreadcrumb';
+import { pageConfigs } from '../utils/seoOptimization';
 
 const TravelBlog = () => {
   const { theme } = useTheme();
@@ -122,23 +124,20 @@ const TravelBlog = () => {
     return (
     <div className={`w-full min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'} pt-24 pb-16`}>
       <SEO 
-        title="Leo Loves Travel Blog - Vietnam Travel Guide & Stories | Official Leo Loves Travel Blog 2025"
-        description="Leo Loves Travel Blog - Khám phá Việt Nam qua những câu chuyện, hướng dẫn du lịch và kinh nghiệm từ đội ngũ chuyên gia của Leo Loves Travel. Cập nhật thông tin du lịch Việt Nam mới nhất 2025. Leo Loves Travel - thương hiệu du lịch Việt Nam được yêu thích."
-        keywords="Leo Loves Travel blog, Leo Loves Travel Vietnam, vietnam travel blog, vietnam travel guide, leo loves travel stories, vietnam travel tips, vietnam tourism blog, vietnam culture, vietnam food, vietnam destinations, Leo Loves Travel official blog"
+        title={pageConfigs.blog.title}
+        description={pageConfigs.blog.description}
+        keywords={pageConfigs.blog.keywords}
         url="https://leolovestravel.com/travel-blog"
         type="blog"
         image="https://leolovestravel.com/src/assets/images/wallpaper.png"
-      />      <StructuredData 
+      />
+      <StructuredData 
         type="Article"
-        data={{
-          name: 'Leo Loves Travel Blog',
-          description: 'Official blog của Leo Loves Travel Vietnam - Travel guides, stories và tips',
-          publisher: 'Leo Loves Travel',
-          url: 'https://leolovestravel.com/travel-blog'
-        }}
+        data={pageConfigs.blog.structuredData}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">        {/* Hero Section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <SEOBreadcrumb />        {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Leo Loves Travel Blog - Vietnam Travel Stories</h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">

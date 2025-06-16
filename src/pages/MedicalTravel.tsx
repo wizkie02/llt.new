@@ -4,6 +4,10 @@ import LazyImage from "../components/ui/LazyImage";
 import { useImagePreload } from "../hooks/useImageOptimization";
 import bg12 from "../assets/images/backgrounds/bg12.jpg";
 import ScrollReveal from "../components/ui/ScrollReveal";
+import SEO from "../components/SEO";
+import StructuredData from "../components/StructuredData";
+import SEOBreadcrumb from "../components/SEOBreadcrumb";
+import { pageConfigs } from '../utils/seoOptimization';
 
 const MedicalTravel = () => {
   const { theme } = useTheme();
@@ -183,218 +187,230 @@ const MedicalTravel = () => {
   ];
 
   return (
-    <div className="relative min-h-screen">
-      {/* Hero Section */}
-      <div className="relative h-[60vh] flex items-center justify-center">
-        <div
-          className="absolute inset-0 bg-fixed bg-center bg-cover"
-          style={{ backgroundImage: `url(${bg12})` }}
-        ></div>
-        <div className="absolute inset-0 z-0 bg-white/10 backdrop-blur-sm"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
-        <ScrollReveal
-          direction="up"
-          delay={200}
-          className="relative z-10 px-4 text-center text-white"
-        >
-          <span className="inline-block px-4 py-1 mb-6 text-sm font-medium text-white rounded-full shadow-xl bg-white/20 backdrop-blur-sm">
-            Healthcare Tourism
-          </span>
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-            style={{ color: "#e2f1f9" }}
+    <>
+      <SEO
+        title={pageConfigs.medicalTravel.title}
+        description={pageConfigs.medicalTravel.description}
+        keywords={pageConfigs.medicalTravel.keywords}
+        url="https://leolovestravel.com/medical-travel"
+        type="website"
+      />
+      <StructuredData
+        type="TravelAgency"
+        data={pageConfigs.medicalTravel.structuredData}      />
+      <div className="relative min-h-screen">
+        <SEOBreadcrumb />
+        {/* Hero Section */}
+        <div className="relative h-[60vh] flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-fixed bg-center bg-cover"
+            style={{ backgroundImage: `url(${bg12})` }}
+          ></div>
+          <div className="absolute inset-0 z-0 bg-white/10 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10 z-[1]"></div>
+          <ScrollReveal
+            direction="up"
+            delay={200}
+            className="relative z-10 px-4 text-center text-white"
           >
-            Medical Travel in Vietnam
-          </h1>
-          <p className="text-xl md:text-2xl">
-            World-class healthcare combined with luxurious recovery experiences
-          </p>
-        </ScrollReveal>
-      </div>
-
-      {/* Services Section */}
-      <section className="py-20">
-        <div className="container px-4 mx-auto">
-          <ScrollReveal direction="up" delay={200}>
-            <div className="max-w-3xl mx-auto mb-16 text-center">
-              <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-                Healthcare Solutions
-              </span>
-              <h2 className="mb-4 text-3xl font-bold">
-                Our Medical Travel Services
-              </h2>
-              <p className="max-w-2xl mx-auto text-lg opacity-80">
-                Access Vietnam's top healthcare facilities while enjoying the
-                comfort and relaxation of a well-planned vacation
-              </p>
-            </div>
+            <span className="inline-block px-4 py-1 mb-6 text-sm font-medium text-white rounded-full shadow-xl bg-white/20 backdrop-blur-sm">
+              Healthcare Tourism
+            </span>
+            <h1
+              className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+              style={{ color: "#e2f1f9" }}
+            >
+              Medical Travel in Vietnam
+            </h1>
+            <p className="text-xl md:text-2xl">
+              World-class healthcare combined with luxurious recovery experiences
+            </p>
           </ScrollReveal>
+        </div>
 
-          <div className="grid max-w-5xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
-            {services.map((service, index) => (
-              <ScrollReveal
-                key={service.id}
-                direction="up"
-                delay={300 + index * 100}
-              >
-                <div
-                  className={`p-6 h-72 rounded-2xl border-l-4 ${
-                    service.id % 2 === 0
-                      ? "border-[#0093DE]"
-                      : "border-[#64A86B]"
-                  } transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                    theme === "light"
-                      ? "bg-white shadow-md"
-                      : "bg-gray-800 shadow-md"
-                  }`}
+        {/* Services Section */}
+        <section className="py-20">
+          <div className="container px-4 mx-auto">
+            <ScrollReveal direction="up" delay={200}>
+              <div className="max-w-3xl mx-auto mb-16 text-center">
+                <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                  Healthcare Solutions
+                </span>
+                <h2 className="mb-4 text-3xl font-bold">
+                  Our Medical Travel Services
+                </h2>
+                <p className="max-w-2xl mx-auto text-lg opacity-80">
+                  Access Vietnam's top healthcare facilities while enjoying the
+                  comfort and relaxation of a well-planned vacation
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid max-w-5xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
+              {services.map((service, index) => (
+                <ScrollReveal
+                  key={service.id}
+                  direction="up"
+                  delay={300 + index * 100}
                 >
                   <div
-                    className={`${
-                      service.id % 2 === 0 ? "text-[#0093DE]" : "text-[#64A86B]"
-                    } mb-4`}
-                  >
-                    {service.icon}
-                  </div>
-                  <h3 className="mb-2 text-xl font-bold">{service.title}</h3>
-                  <p
-                    className={`${
-                      theme === "light" ? "text-gray-600" : "text-gray-300"
+                    className={`p-6 h-72 rounded-2xl border-l-4 ${
+                      service.id % 2 === 0
+                        ? "border-[#0093DE]"
+                        : "border-[#64A86B]"
+                    } transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                      theme === "light"
+                        ? "bg-white shadow-md"
+                        : "bg-gray-800 shadow-md"
                     }`}
                   >
-                    {service.description}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
+                    <div
+                      className={`${
+                        service.id % 2 === 0 ? "text-[#0093DE]" : "text-[#64A86B]"
+                      } mb-4`}
+                    >
+                      {service.icon}
+                    </div>
+                    <h3 className="mb-2 text-xl font-bold">{service.title}</h3>
+                    <p
+                      className={`${
+                        theme === "light" ? "text-gray-600" : "text-gray-300"
+                      }`}
+                    >
+                      {service.description}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Trust Building Section */}
-      <section
-        className={`py-20 ${theme === "light" ? "bg-white" : "bg-gray-800"}`}
-      >
-        <div className="container px-4 mx-auto">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
-              <ScrollReveal direction="left" delay={200}>
-                <div className="px-4 lg:px-0">
-                  <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
-                    Why Choose Us
-                  </span>
-                  <h2 className="mb-6 text-3xl font-bold">
-                    Why Choose Our Medical Travel Services?
-                  </h2>
+        {/* Trust Building Section */}
+        <section
+          className={`py-20 ${theme === "light" ? "bg-white" : "bg-gray-800"}`}
+        >
+          <div className="container px-4 mx-auto">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
+                <ScrollReveal direction="left" delay={200}>
+                  <div className="px-4 lg:px-0">
+                    <span className="inline-block px-4 py-1 rounded-full bg-[#0093DE]/10 text-[#0093DE] text-sm font-medium mb-4">
+                      Why Choose Us
+                    </span>
+                    <h2 className="mb-6 text-3xl font-bold">
+                      Why Choose Our Medical Travel Services?
+                    </h2>
 
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                          />
-                        </svg>
+                    <div className="space-y-6">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 className="mb-2 text-xl font-semibold">
+                            Internationally Accredited Facilities
+                          </h3>
+                          <p
+                            className={`${
+                              theme === "light"
+                                ? "text-gray-600"
+                                : "text-gray-300"
+                            }`}
+                          >
+                            We partner exclusively with JCI-accredited hospitals
+                            and clinics that meet international standards for
+                            quality and patient safety.
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="mb-2 text-xl font-semibold">
-                          Internationally Accredited Facilities
-                        </h3>
-                        <p
-                          className={`${
-                            theme === "light"
-                              ? "text-gray-600"
-                              : "text-gray-300"
-                          }`}
-                        >
-                          We partner exclusively with JCI-accredited hospitals
-                          and clinics that meet international standards for
-                          quality and patient safety.
-                        </p>
-                      </div>
-                    </div>
 
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                          />
-                        </svg>
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 className="mb-2 text-xl font-semibold">
+                            Multilingual Support
+                          </h3>
+                          <p
+                            className={`${
+                              theme === "light"
+                                ? "text-gray-600"
+                                : "text-gray-300"
+                            }`}
+                          >
+                            Our team provides translation and interpretation
+                            services to ensure clear communication between you and
+                            your healthcare providers.
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="mb-2 text-xl font-semibold">
-                          Multilingual Support
-                        </h3>
-                        <p
-                          className={`${
-                            theme === "light"
-                              ? "text-gray-600"
-                              : "text-gray-300"
-                          }`}
-                        >
-                          Our team provides translation and interpretation
-                          services to ensure clear communication between you and
-                          your healthcare providers.
-                        </p>
-                      </div>
-                    </div>
 
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="mb-2 text-xl font-semibold">
-                          Privacy & Confidentiality
-                        </h3>
-                        <p
-                          className={`${
-                            theme === "light"
-                              ? "text-gray-600"
-                              : "text-gray-300"
-                          }`}
-                        >
-                          We maintain the highest standards of privacy and
-                          confidentiality for all our medical travel clients.
-                        </p>
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0093DE] flex items-center justify-center text-white mr-4">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 className="mb-2 text-xl font-semibold">
+                            Privacy & Confidentiality
+                          </h3>
+                          <p
+                            className={`${
+                              theme === "light"
+                                ? "text-gray-600"
+                                : "text-gray-300"
+                            }`}
+                          >
+                            We maintain the highest standards of privacy and
+                            confidentiality for all our medical travel clients.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </ScrollReveal>
+                </ScrollReveal>
 
-              <ScrollReveal direction="right" delay={400}>                <div className="grid grid-cols-2 gap-4">
+                <ScrollReveal direction="right" delay={400}>                <div className="grid grid-cols-2 gap-4">
                   <div className="h-48 overflow-hidden transition-transform duration-300 transform shadow-xl rounded-2xl md:h-64 hover:scale-105">
                     <LazyImage
                       src="https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
@@ -721,6 +737,7 @@ const MedicalTravel = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

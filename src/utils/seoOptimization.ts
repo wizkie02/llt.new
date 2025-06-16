@@ -60,101 +60,292 @@ export const performSEOAudit = () => {
 
   return {
     issues: seoIssues,
-    score: Math.max(0, 100 - (seoIssues.length * 5))
+    passed: seoIssues.length === 0,
+    score: Math.max(0, 100 - (seoIssues.length * 10))
   };
 };
 
-// Vietnam travel-specific keywords for SEO
-export const vietnamTravelKeywords = {
-  primary: [
-    'vietnam travel',
-    'vietnam tours',
-    'vietnam vacation',
-    'vietnam holiday',
-    'visit vietnam'
-  ],
-  destinations: [
-    'hanoi tours',
-    'ho chi minh city tours',
-    'halong bay cruise',
-    'hoi an tours',
-    'sapa trekking',
-    'mekong delta tours',
-    'phu quoc island',
-    'da nang vietnam',
-    'nha trang beaches',
-    'dalat highlands'
-  ],
-  experiences: [
-    'vietnam cultural tours',
-    'vietnam food tours',
-    'vietnam adventure tours',
-    'vietnam luxury travel',
-    'vietnam budget travel',
-    'vietnam photography tours',
-    'vietnam eco tours',
-    'vietnam historical sites'
-  ],
-  practical: [
-    'vietnam travel guide',
-    'vietnam itinerary',
-    'vietnam travel tips',
-    'best time visit vietnam',
-    'vietnam visa',
-    'vietnam weather'
-  ]
+// Vietnam Travel Keywords for international tourists
+export const vietnamTravelKeywords = [
+  'Vietnam travel',
+  'Vietnam tours',
+  'Vietnam vacation',
+  'Vietnam holidays',
+  'Vietnam travel packages',
+  'Vietnam tour operator',
+  'Vietnam travel agency',
+  'Vietnam cultural tours',
+  'Vietnam adventure tours',
+  'Vietnam luxury travel',
+  'Vietnam budget travel',
+  'Vietnam group tours',
+  'Vietnam private tours',
+  'Vietnam family tours',
+  'Vietnam honeymoon packages',
+  'Southeast Asia travel',
+  'Indochina tours',
+  'Vietnam backpacking',
+  'Vietnam motorcycle tours',
+  'Vietnam food tours',
+  'Vietnam photography tours',
+  'Vietnam eco tours',
+  'Vietnam trekking',
+  'Vietnam beaches',
+  'Hanoi tours',
+  'Ho Chi Minh City tours',
+  'Halong Bay cruise',
+  'Hoi An ancient town',
+  'Sapa trekking',
+  'Mekong Delta tours',
+  'Vietnam War history tours',
+  'Hue imperial city',
+  'Da Nang tours',
+  'Phu Quoc island',
+  'Nha Trang beaches'
+];
+
+// Image SEO optimization
+export const optimizeImageSEO = (element: HTMLImageElement, altText: string, title?: string) => {
+  if (!element.alt) {
+    element.alt = altText;
+  }
+  if (title && !element.title) {
+    element.title = title;
+  }
+  // Add loading optimization
+  if (!element.loading) {
+    element.loading = 'lazy';
+  }
 };
 
-// Image SEO optimization utilities
-export const optimizeImageSEO = (context: string): string => {
-  const contextMap: Record<string, string> = {
-    'halong-bay': 'Ha Long Bay UNESCO World Heritage Site cruise boat limestone karsts Vietnam',
-    'hoi-an': 'Hoi An Ancient Town lanterns yellow buildings Vietnam UNESCO',
-    'hanoi': 'Hanoi Old Quarter Temple of Literature Vietnam capital city',
-    'ho-chi-minh': 'Ho Chi Minh City Saigon Vietnam largest city urban skyline',
-    'sapa': 'Sapa rice terraces mountains ethnic minorities northern Vietnam',
-    'mekong': 'Mekong Delta floating markets fruit gardens southern Vietnam',
-    'phu-quoc': 'Phu Quoc Island beaches white sand tropical paradise Vietnam',
-    'da-nang': 'Da Nang Dragon Bridge marble mountains central Vietnam',
-    'nha-trang': 'Nha Trang beaches coastal city diving snorkeling Vietnam',
-    'dalat': 'Da Lat flower city pine forests highland resort Vietnam'
-  };
-
-  return contextMap[context] || `Beautiful Vietnam travel destination - ${context}`;
-};
-
-// Page-specific SEO configurations
+// Enhanced Page Configurations with comprehensive SEO metadata
 export const pageConfigs = {
-  homepage: {
-    title: 'Vietnam Travel Tours 2025 | Best Vietnam Travel Agency | Leo Loves Travel',
-    description: 'Discover authentic Vietnam travel experiences with Leo Loves Travel. Expert Vietnam tours, travel guides, and local cultural immersion. From Hanoi to Ho Chi Minh City, Halong Bay to Hoi An - your trusted Vietnam travel companion.',
-    keywords: 'vietnam travel, vietnam tours, vietnam travel guide, vietnam vacation, vietnam holiday'
+  home: {
+    title: 'Leo Loves Travel - Premier Vietnam Travel Agency | Authentic Vietnam Tours & Experiences 2025',
+    description: 'Leo Loves Travel - Your trusted Vietnam travel agency specializing in authentic Vietnamese experiences. Discover Vietnam through expertly crafted tours from Hanoi to Ho Chi Minh City, Halong Bay to Hoi An. Professional guides, cultural immersion, and unforgettable adventures await.',
+    keywords: 'Leo Loves Travel, vietnam travel, vietnam tours, vietnam travel agency, hanoi tours, ho chi minh city tours, halong bay cruise, hoi an tours, sapa trekking, mekong delta tours, vietnam cultural tours, vietnam adventure tours, vietnam travel packages, authentic vietnam experiences',
+    structuredData: {
+      '@type': 'TravelAgency',
+      name: 'Leo Loves Travel',
+      description: 'Premier Vietnam travel agency offering authentic cultural experiences',
+      areaServed: 'Vietnam',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Vietnam Tours & Experiences',
+        itemListElement: [
+          { '@type': 'TouristTrip', name: 'Halong Bay Cruise', description: 'UNESCO World Heritage site cruise experience' },
+          { '@type': 'TouristTrip', name: 'Sapa Trekking', description: 'Mountain trekking and ethnic culture immersion' },
+          { '@type': 'TouristTrip', name: 'Hoi An Cultural Tour', description: 'Ancient town exploration and lantern festival' }
+        ]
+      }
+    }
   },
   packageTours: {
     title: 'Vietnam Package Tours 2025 | Best Vietnam Tour Packages | Leo Loves Travel',
-    description: 'Discover amazing Vietnam tour packages for every budget and interest. From luxury Halong Bay cruises to budget backpacking adventures. Authentic cultural experiences, expert local guides, and unforgettable memories await.',
-    keywords: 'vietnam tour packages, vietnam tours, halong bay tours, hanoi tours, ho chi minh city tours'
+    description: 'Discover the best Vietnam package tours for 2025. From Halong Bay cruises to Sapa trekking adventures, explore curated Vietnam tour packages with expert local guides and authentic experiences.',
+    keywords: 'vietnam package tours, vietnam tour packages, best vietnam tours, vietnam travel packages, halong bay tours, sapa tours, hoi an tours, mekong delta tours, vietnam group tours, vietnam private tours',
+    structuredData: {
+      '@type': 'TouristTrip',
+      name: 'Vietnam Package Tours',
+      description: 'Comprehensive Vietnam tour packages covering all major destinations',
+      itinerary: {
+        '@type': 'ItemList',
+        itemListElement: [
+          { '@type': 'TouristDestination', name: 'Hanoi', description: 'Capital city cultural exploration' },
+          { '@type': 'TouristDestination', name: 'Halong Bay', description: 'UNESCO World Heritage limestone karsts cruise' },
+          { '@type': 'TouristDestination', name: 'Hoi An', description: 'Ancient trading port and lantern town' },
+          { '@type': 'TouristDestination', name: 'Ho Chi Minh City', description: 'Modern metropolis with rich history' }
+        ]
+      }
+    }
   },
   about: {
-    title: 'About Leo Loves Travel | Leading Vietnam Travel Agency | Our Story',
-    description: 'Learn about Leo Loves Travel, Vietnam\'s premier travel agency. Founded by passionate travel experts, we specialize in authentic Vietnamese experiences for international travelers.',
-    keywords: 'about leo loves travel, vietnam travel agency, vietnam tour company, travel company vietnam'
+    title: 'About Leo Loves Travel | Vietnam Travel Experts | Our Story & Mission',
+    description: 'Learn about Leo Loves Travel, Vietnam\'s premier travel agency. Founded by passionate travel experts, we specialize in authentic Vietnamese experiences for international travelers seeking cultural immersion.',
+    keywords: 'about leo loves travel, vietnam travel agency, vietnam tour company, travel company vietnam, vietnam travel experts, authentic vietnam experiences, vietnam tour guides',
+    structuredData: {
+      '@type': 'AboutPage',
+      mainEntity: {
+        '@type': 'TravelAgency',
+        name: 'Leo Loves Travel',
+        foundingDate: '2025',
+        founder: { '@type': 'Person', name: 'Leo' },
+        description: 'Vietnam travel agency specializing in authentic cultural experiences'
+      }
+    }
   },
   contact: {
-    title: 'Contact Leo Loves Travel | Vietnam Travel Agency | Get in Touch',
-    description: 'Contact Leo Loves Travel for personalized Vietnam tour planning. Expert travel consultants ready to help plan your perfect Vietnam adventure.',
-    keywords: 'contact leo loves travel, vietnam travel agency contact, vietnam tour planning'
+    title: 'Contact Leo Loves Travel | Vietnam Travel Agency | Get in Touch Today',
+    description: 'Contact Leo Loves Travel for personalized Vietnam tour planning. Expert travel consultants ready to help plan your perfect Vietnam adventure. Phone: +84-865-843-276.',
+    keywords: 'contact leo loves travel, vietnam travel agency contact, vietnam tour planning, vietnam travel consultation, plan vietnam trip',
+    structuredData: {
+      '@type': 'ContactPage',
+      mainEntity: {
+        '@type': 'TravelAgency',
+        name: 'Leo Loves Travel',
+        telephone: '+84-865-843-276',
+        email: 'info@leolovestravel.com',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Ho Chi Minh City',
+          addressCountry: 'Vietnam'
+        }
+      }
+    }
   },
-  services: {
+  travelServices: {
     title: 'Vietnam Travel Services | Complete Travel Support | Leo Loves Travel',
-    description: 'Comprehensive Vietnam travel services including visa assistance, transportation, accommodation booking, travel insurance, and 24/7 support.',
-    keywords: 'vietnam travel services, vietnam visa assistance, vietnam transportation, vietnam accommodation'
+    description: 'Comprehensive Vietnam travel services including visa assistance, transportation, accommodation booking, travel insurance, and 24/7 support for your Vietnam adventure.',
+    keywords: 'vietnam travel services, vietnam visa assistance, vietnam transportation, vietnam accommodation, vietnam travel insurance, vietnam travel support',
+    structuredData: {
+      '@type': 'Service',
+      name: 'Vietnam Travel Services',
+      provider: { '@type': 'TravelAgency', name: 'Leo Loves Travel' },
+      serviceType: 'Travel Services',
+      areaServed: 'Vietnam'
+    }
+  },
+  teamBuilding: {
+    title: 'Vietnam Team Building Tours | Corporate Travel Vietnam | Leo Loves Travel',
+    description: 'Professional team building experiences in Vietnam. Corporate retreats, team bonding activities, and business travel solutions designed to strengthen your team while exploring Vietnam.',
+    keywords: 'vietnam team building, corporate travel vietnam, business travel vietnam, team building tours, corporate retreats vietnam, vietnam incentive travel',
+    structuredData: {
+      '@type': 'Service',
+      name: 'Team Building Tours Vietnam',
+      serviceType: 'Corporate Travel',
+      audience: { '@type': 'BusinessAudience', audienceType: 'Corporate Teams' }
+    }
+  },
+  events: {
+    title: 'Vietnam Events & Conferences | Corporate Event Planning | Leo Loves Travel',
+    description: 'Expert planning and execution of business meetings, conferences, and special events in Vietnam\'s premier venues. Professional event management for corporate gatherings.',
+    keywords: 'vietnam events, vietnam conferences, corporate events vietnam, business meetings vietnam, event planning vietnam, vietnam venues',
+    structuredData: {
+      '@type': 'Service',
+      name: 'Events & Conferences Vietnam',
+      serviceType: 'Event Planning',
+      audience: { '@type': 'BusinessAudience', audienceType: 'Corporate Clients' }
+    }
+  },
+  romanticTravel: {
+    title: 'Vietnam Romantic Travel | Honeymoon Packages Vietnam | Leo Loves Travel',
+    description: 'Romantic Vietnam experiences perfect for couples. Honeymoon packages, anniversary celebrations, and intimate getaways featuring Vietnam\'s most romantic destinations.',
+    keywords: 'vietnam romantic travel, vietnam honeymoon, couples travel vietnam, romantic vietnam tours, vietnam anniversary trips, romantic getaways vietnam',
+    structuredData: {
+      '@type': 'TouristTrip',
+      name: 'Romantic Vietnam Travel',
+      audience: { '@type': 'PeopleAudience', audienceType: 'Couples' },
+      description: 'Romantic experiences for couples in Vietnam'
+    }
+  },
+  medicalTravel: {
+    title: 'Vietnam Medical Travel | Healthcare Tourism Vietnam | Leo Loves Travel',
+    description: 'Comprehensive medical travel services in Vietnam. Healthcare tourism combining world-class medical care with cultural exploration and recovery in beautiful Vietnamese settings.',
+    keywords: 'vietnam medical travel, healthcare tourism vietnam, medical tourism vietnam, vietnam hospitals, vietnam healthcare, medical vacation vietnam',
+    structuredData: {
+      '@type': 'MedicalBusiness',
+      name: 'Vietnam Medical Travel Services',
+      medicalSpecialty: 'Medical Tourism',
+      areaServed: 'Vietnam'
+    }
+  },
+  helpCenter: {
+    title: 'Help Center | Vietnam Travel Support | Leo Loves Travel FAQ',
+    description: 'Get answers to your Vietnam travel questions. Comprehensive help center with FAQs, travel tips, booking support, and 24/7 customer service for your Vietnam journey.',
+    keywords: 'vietnam travel help, vietnam travel faq, vietnam travel support, vietnam travel tips, vietnam travel questions, leo loves travel support',
+    structuredData: {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is the best time to visit Vietnam?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Vietnam can be visited year-round, with different regions having optimal seasons. Northern Vietnam is best from September to November and March to May.' }
+        }
+      ]
+    }
+  },
+  blog: {
+    title: 'Vietnam Travel Blog | Travel Tips & Guides | Leo Loves Travel',
+    description: 'Expert Vietnam travel blog with insider tips, destination guides, cultural insights, and travel inspiration. Discover hidden gems and local secrets from Vietnam travel experts.',
+    keywords: 'vietnam travel blog, vietnam travel tips, vietnam travel guide, vietnam destinations, vietnam culture, vietnam travel advice, vietnam travel inspiration',
+    structuredData: {
+      '@type': 'Blog',
+      name: 'Leo Loves Travel Blog',
+      description: 'Vietnam travel insights and destination guides',
+      publisher: { '@type': 'TravelAgency', name: 'Leo Loves Travel' }
+    }
+  },
+  interactiveMap: {
+    title: 'Vietnam Interactive Map | Explore Vietnam Destinations | Leo Loves Travel',
+    description: 'Explore Vietnam with our interactive map. Discover destinations, tour routes, attractions, and hidden gems across Vietnam from Hanoi to Ho Chi Minh City.',
+    keywords: 'vietnam map, interactive vietnam map, vietnam destinations map, vietnam attractions map, vietnam tour routes, explore vietnam map',
+    structuredData: {
+      '@type': 'Map',
+      name: 'Vietnam Interactive Travel Map',
+      mapType: 'VenueMap',
+      about: { '@type': 'Country', name: 'Vietnam' }
+    }
   }
+};
+
+// Internal linking opportunities for SEO
+export const internalLinkingMap = {
+  homepage: [
+    { text: 'Vietnam Package Tours', url: '/package-tours', rel: 'tours' },
+    { text: 'About Our Vietnam Experts', url: '/about', rel: 'company' },
+    { text: 'Contact Our Travel Consultants', url: '/contact', rel: 'contact' },
+    { text: 'Travel Services', url: '/travel-services', rel: 'services' }
+  ],
+  tours: [
+    { text: 'Halong Bay Cruise Tours', url: '/tour/2', rel: 'destination' },
+    { text: 'Sapa Trekking Adventures', url: '/tour/3', rel: 'destination' },
+    { text: 'Hoi An Cultural Tours', url: '/tour/4', rel: 'destination' },
+    { text: 'Mekong Delta Exploration', url: '/tour/5', rel: 'destination' }
+  ],
+  services: [
+    { text: 'Team Building Vietnam', url: '/team-building', rel: 'service' },
+    { text: 'Corporate Events Vietnam', url: '/events', rel: 'service' },
+    { text: 'Romantic Travel Vietnam', url: '/romantic-travel', rel: 'service' },
+    { text: 'Medical Travel Vietnam', url: '/medical-travel', rel: 'service' }
+  ]
+};
+
+// SEO Best Practices Checklist
+export const seoChecklist = {
+  technical: [
+    'Optimize page loading speed',
+    'Implement responsive design',
+    'Use semantic HTML5 elements',
+    'Optimize images with alt text',
+    'Implement structured data',
+    'Add canonical URLs',
+    'Configure XML sitemap',
+    'Implement breadcrumb navigation'
+  ],
+  content: [
+    'Write compelling meta titles (30-60 chars)',
+    'Create descriptive meta descriptions (120-160 chars)',
+    'Use heading hierarchy (H1, H2, H3)',
+    'Include target keywords naturally',
+    'Create valuable, original content',
+    'Optimize for user intent',
+    'Add internal linking',
+    'Include location-based keywords'
+  ],
+  social: [
+    'Configure Open Graph tags',
+    'Set up Twitter Card tags',
+    'Add social sharing buttons',
+    'Create shareable content',
+    'Optimize for social previews'
+  ]
 };
 
 export default {
   performSEOAudit,
   vietnamTravelKeywords,
   optimizeImageSEO,
-  pageConfigs
+  pageConfigs,
+  internalLinkingMap,
+  seoChecklist
 };

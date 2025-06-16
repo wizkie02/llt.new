@@ -5,6 +5,7 @@ import wallpaper from "../assets/images/wallpaper.png";
 import Counter from "../components/ui/Counter";
 import SEO from "../components/SEO";
 import StructuredData from "../components/StructuredData";
+import { pageConfigs } from "../utils/seoOptimization";
 
 const HomePage = () => {
   const { theme } = useTheme();
@@ -204,38 +205,41 @@ const HomePage = () => {
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>, fallbackSrc: string) => {
     const target = e.target as HTMLImageElement;
     target.src = fallbackSrc;
-  };
-  return (
+  };  return (
     <div
       className={`${theme === "light"
           ? "bg-[#F7F9FC] text-[#292F36]"
           : "bg-[#1A202C] text-[#F7F9FC]"
         }`}
-    >      <SEO
-        title="Leo Loves Travel | Vietnam Tours Loved by 10,000+ Global Travelers"
-        description="Leo Loves Travel is your trusted Vietnam travel agency for unforgettable experiences. Cruise Halong Bay, walk Hoi An, trek Sapa – all with local guides. See why travelers love us!"
-        keywords="Leo Loves Travel, leo love travel, leolovestravel, vietnam travel agency, halong bay tour, sapa trekking, vietnam tours, vietnam travel"
+    >
+      <SEO
+        title={pageConfigs.home.title}
+        description={pageConfigs.home.description}
+        keywords={pageConfigs.home.keywords}
         url="https://leolovestravel.com/"
-        image="https://leolovestravel.com/assets/og-cover.jpg"
+        image="https://leolovestravel.com/og-image.jpg"
+        type="website"
         location={{ country: 'Vietnam', region: 'Southeast Asia', city: 'Ho Chi Minh City' }}
       />
 
+      <StructuredData
+        type="TravelAgency"
+        data={pageConfigs.home.structuredData}
+      />
 
       <StructuredData
         type="Organization"
         data={{
           name: 'Leo Loves Travel',
-          description: 'Leading Vietnam travel agency specializing in authentic cultural experiences',
+          description: 'Leading Vietnam travel agency specializing in authentic cultural experiences and personalized tours for international travelers',
           foundingDate: '2025',
-          serviceArea: 'Vietnam, Southeast Asia'
-        }}
-      />
-
-      <StructuredData
-        type="TravelAgency"
-        data={{
-          name: 'Leo Loves Travel Vietnam',
-          description: 'Premier Vietnam travel agency offering personalized tours and authentic experiences'
+          serviceArea: 'Vietnam, Southeast Asia',
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.9',
+            reviewCount: '4800',
+            bestRating: '5'
+          }
         }}
       />
 

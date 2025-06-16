@@ -7,6 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 import { Separator } from '../components/ui/separator';
 import { Search, HelpCircle, MessageCircle, Phone, Mail, ArrowRight, ChevronRight } from 'lucide-react';
+import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
+import SEOBreadcrumb from '../components/SEOBreadcrumb';
+import { pageConfigs } from '../utils/seoOptimization';
 
 const HelpCenter = () => {
   const { theme } = useTheme();
@@ -117,312 +121,326 @@ const HelpCenter = () => {
     : faqCategories;
   
   return (
-    <div className={`w-full min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'} pt-24 pb-16`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">How Can We Help You?</h1>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            Find answers to frequently asked questions or contact our support team for assistance with your Vietnamese travel experience.
-          </p>
-          
-          <div className="relative max-w-2xl mx-auto">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <Input 
-              type="text" 
-              placeholder="Search for answers..." 
-              className="pl-10 py-6 text-lg"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+    <>
+      <SEO
+        title={pageConfigs.helpCenter.title}
+        description={pageConfigs.helpCenter.description}
+        keywords={pageConfigs.helpCenter.keywords}
+        url="https://leolovestravel.com/help-center"
+        type="website"
+      />
+      <StructuredData
+        type="Organization"
+        data={pageConfigs.helpCenter.structuredData}      />
+      
+      <div className={`w-full min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'} pt-24 pb-16`}>
+        <SEOBreadcrumb />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          {/* Hero Section */}
+          <div className="text-center mb-12">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">How Can We Help You?</h1>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
+              Find answers to frequently asked questions or contact our support team for assistance with your Vietnamese travel experience.
+            </p>
+            
+            <div className="relative max-w-2xl mx-auto">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Input 
+                type="text" 
+                placeholder="Search for answers..." 
+                className="pl-10 py-6 text-lg"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        
-        <Tabs defaultValue="faq" className="w-full mb-12">
-          <TabsList className="grid w-full grid-cols-3 max-w-2xl mx-auto">
-            <TabsTrigger value="faq">FAQs</TabsTrigger>
-            <TabsTrigger value="contact">Contact Us</TabsTrigger>
-            <TabsTrigger value="support">Support Options</TabsTrigger>
-          </TabsList>
           
-          <TabsContent value="faq" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="md:col-span-1">
-                <div className="sticky top-24 space-y-2">
-                  <h3 className="font-semibold mb-4">Categories</h3>
-                  {faqCategories.map(category => (
-                    <Button 
-                      key={category.id}
-                      variant="ghost" 
-                      className="w-full justify-start text-left"
-                      onClick={() => document.getElementById(category.id)?.scrollIntoView({ behavior: 'smooth' })}
-                    >
-                      {category.name}
-                    </Button>
-                  ))}
+          <Tabs defaultValue="faq" className="w-full mb-12">
+            <TabsList className="grid w-full grid-cols-3 max-w-2xl mx-auto">
+              <TabsTrigger value="faq">FAQs</TabsTrigger>
+              <TabsTrigger value="contact">Contact Us</TabsTrigger>
+              <TabsTrigger value="support">Support Options</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="faq" className="mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="md:col-span-1">
+                  <div className="sticky top-24 space-y-2">
+                    <h3 className="font-semibold mb-4">Categories</h3>
+                    {faqCategories.map(category => (
+                      <Button 
+                        key={category.id}
+                        variant="ghost" 
+                        className="w-full justify-start text-left"
+                        onClick={() => document.getElementById(category.id)?.scrollIntoView({ behavior: 'smooth' })}
+                      >
+                        {category.name}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="md:col-span-3 space-y-8">
+                  {filteredFAQs.length > 0 ? (
+                    filteredFAQs.map(category => (
+                      <div key={category.id} id={category.id}>
+                        <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
+                        <Accordion type="single" collapsible className="w-full">
+                          {category.questions.map(faq => (
+                            <AccordionItem key={faq.id} value={faq.id}>
+                              <AccordionTrigger className="text-left">
+                                {faq.question}
+                              </AccordionTrigger>
+                              <AccordionContent>
+                                <p className="text-gray-600 dark:text-gray-400">{faq.answer}</p>
+                              </AccordionContent>
+                            </AccordionItem>
+                          ))}
+                        </Accordion>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-12">
+                      <HelpCircle className="h-12 w-12 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
+                      <h3 className="text-lg font-medium mb-2">No results found</h3>
+                      <p className="text-gray-500 dark:text-gray-400 mb-4">
+                        We couldn't find any FAQs matching your search. Try different keywords or contact our support team.
+                      </p>
+                      <Button className="bg-[#0093DE] hover:bg-[#007ab8]">
+                        Contact Support
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
-              
-              <div className="md:col-span-3 space-y-8">
-                {filteredFAQs.length > 0 ? (
-                  filteredFAQs.map(category => (
-                    <div key={category.id} id={category.id}>
-                      <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
-                      <Accordion type="single" collapsible className="w-full">
-                        {category.questions.map(faq => (
-                          <AccordionItem key={faq.id} value={faq.id}>
-                            <AccordionTrigger className="text-left">
-                              {faq.question}
-                            </AccordionTrigger>
-                            <AccordionContent>
-                              <p className="text-gray-600 dark:text-gray-400">{faq.answer}</p>
-                            </AccordionContent>
-                          </AccordionItem>
-                        ))}
-                      </Accordion>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-12">
-                    <HelpCircle className="h-12 w-12 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
-                    <h3 className="text-lg font-medium mb-2">No results found</h3>
-                    <p className="text-gray-500 dark:text-gray-400 mb-4">
-                      We couldn't find any FAQs matching your search. Try different keywords or contact our support team.
-                    </p>
-                    <Button className="bg-[#0093DE] hover:bg-[#007ab8]">
-                      Contact Support
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="contact" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Send Us a Message</CardTitle>
-                  <CardDescription>
-                    Fill out the form below and we'll get back to you as soon as possible.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">First Name</label>
-                        <Input placeholder="Enter your first name" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Last Name</label>
-                        <Input placeholder="Enter your last name" />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Email Address</label>
-                      <Input type="email" placeholder="Enter your email" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Subject</label>
-                      <Input placeholder="What is your message about?" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Message</label>
-                      <textarea 
-                        className="w-full min-h-[150px] p-3 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
-                        placeholder="How can we help you?"
-                      ></textarea>
-                    </div>
-                  </form>
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full bg-[#0093DE] hover:bg-[#007ab8]">
-                    Send Message
-                  </Button>
-                </CardFooter>
-              </Card>
-              
-              <div className="space-y-6">
+            </TabsContent>
+            
+            <TabsContent value="contact" className="mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Contact Information</CardTitle>
+                    <CardTitle>Send Us a Message</CardTitle>
                     <CardDescription>
-                      Reach out to us directly using the information below.
+                      Fill out the form below and we'll get back to you as soon as possible.
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start">
-                      <Phone className="h-5 w-5 mr-3 text-[#0093DE] mt-0.5" />
-                      <div>
-                        <p className="font-medium">Phone Support</p>
-                        <p className="text-gray-600 dark:text-gray-400">+84 (28) 3822 8898</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-500">
-                          Available Mon-Fri, 9am-6pm (GMT+7)
-                        </p>
+                  <CardContent>
+                    <form className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">First Name</label>
+                          <Input placeholder="Enter your first name" />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">Last Name</label>
+                          <Input placeholder="Enter your last name" />
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex items-start">
-                      <Mail className="h-5 w-5 mr-3 text-[#0093DE] mt-0.5" />
-                      <div>
-                        <p className="font-medium">Email Support</p>
-                        <p className="text-gray-600 dark:text-gray-400">support@leolovestravel.com</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-500">
-                          We aim to respond within 24 hours
-                        </p>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Email Address</label>
+                        <Input type="email" placeholder="Enter your email" />
                       </div>
-                    </div>
-                    
-                    <div className="flex items-start">
-                      <MessageCircle className="h-5 w-5 mr-3 text-[#0093DE] mt-0.5" />
-                      <div>
-                        <p className="font-medium">Live Chat</p>
-                        <p className="text-gray-600 dark:text-gray-400">Available on our website</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-500">
-                          Chat with our team in real-time
-                        </p>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Subject</label>
+                        <Input placeholder="What is your message about?" />
                       </div>
-                    </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Message</label>
+                        <textarea 
+                          className="w-full min-h-[150px] p-3 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
+                          placeholder="How can we help you?"
+                        ></textarea>
+                      </div>
+                    </form>
                   </CardContent>
+                  <CardFooter>
+                    <Button className="w-full bg-[#0093DE] hover:bg-[#007ab8]">
+                      Send Message
+                    </Button>
+                  </CardFooter>
                 </Card>
                 
-                <Card>
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Contact Information</CardTitle>
+                      <CardDescription>
+                        Reach out to us directly using the information below.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex items-start">
+                        <Phone className="h-5 w-5 mr-3 text-[#0093DE] mt-0.5" />
+                        <div>
+                          <p className="font-medium">Phone Support</p>
+                          <p className="text-gray-600 dark:text-gray-400">+84 (28) 3822 8898</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-500">
+                            Available Mon-Fri, 9am-6pm (GMT+7)
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start">
+                        <Mail className="h-5 w-5 mr-3 text-[#0093DE] mt-0.5" />
+                        <div>
+                          <p className="font-medium">Email Support</p>
+                          <p className="text-gray-600 dark:text-gray-400">support@leolovestravel.com</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-500">
+                            We aim to respond within 24 hours
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start">
+                        <MessageCircle className="h-5 w-5 mr-3 text-[#0093DE] mt-0.5" />
+                        <div>
+                          <p className="font-medium">Live Chat</p>
+                          <p className="text-gray-600 dark:text-gray-400">Available on our website</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-500">
+                            Chat with our team in real-time
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Office Locations</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div>
+                        <h3 className="font-medium">Ho Chi Minh City (Headquarters)</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                          123 Nguyen Hue Boulevard, District 1<br />
+                          Ho Chi Minh City, Vietnam
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h3 className="font-medium">Hanoi Office</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                          45 Hang Bai Street, Hoan Kiem District<br />
+                          Hanoi, Vietnam
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="support" className="mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="text-center">
                   <CardHeader>
-                    <CardTitle>Office Locations</CardTitle>
+                    <div className="mx-auto w-12 h-12 rounded-full bg-[#0093DE]/10 flex items-center justify-center mb-2">
+                      <HelpCircle className="h-6 w-6 text-[#0093DE]" />
+                    </div>
+                    <CardTitle>Self-Service Help</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h3 className="font-medium">Ho Chi Minh City (Headquarters)</h3>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        123 Nguyen Hue Boulevard, District 1<br />
-                        Ho Chi Minh City, Vietnam
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-medium">Hanoi Office</h3>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        45 Hang Bai Street, Hoan Kiem District<br />
-                        Hanoi, Vietnam
-                      </p>
-                    </div>
+                  <CardContent>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                      Find answers quickly in our comprehensive knowledge base and FAQ section.
+                    </p>
                   </CardContent>
+                  <CardFooter className="flex justify-center">
+                    <Button variant="outline" className="group">
+                      Browse FAQs <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+                
+                <Card className="text-center">
+                  <CardHeader>
+                    <div className="mx-auto w-12 h-12 rounded-full bg-[#0093DE]/10 flex items-center justify-center mb-2">
+                      <MessageCircle className="h-6 w-6 text-[#0093DE]" />
+                    </div>
+                    <CardTitle>Live Chat Support</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                      Chat with our support team in real-time for immediate assistance with your queries.
+                    </p>
+                  </CardContent>
+                  <CardFooter className="flex justify-center">
+                    <Button className="bg-[#0093DE] hover:bg-[#007ab8]">
+                      Start Chat
+                    </Button>
+                  </CardFooter>
+                </Card>
+                
+                <Card className="text-center">
+                  <CardHeader>
+                    <div className="mx-auto w-12 h-12 rounded-full bg-[#0093DE]/10 flex items-center justify-center mb-2">
+                      <Phone className="h-6 w-6 text-[#0093DE]" />
+                    </div>
+                    <CardTitle>Phone Support</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                      Speak directly with our travel experts for personalized assistance and advice.
+                    </p>
+                  </CardContent>
+                  <CardFooter className="flex justify-center">
+                    <Button variant="outline">
+                      +84 (28) 3822 8898
+                    </Button>
+                  </CardFooter>
                 </Card>
               </div>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="support" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="text-center">
-                <CardHeader>
-                  <div className="mx-auto w-12 h-12 rounded-full bg-[#0093DE]/10 flex items-center justify-center mb-2">
-                    <HelpCircle className="h-6 w-6 text-[#0093DE]" />
-                  </div>
-                  <CardTitle>Self-Service Help</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Find answers quickly in our comprehensive knowledge base and FAQ section.
-                  </p>
-                </CardContent>
-                <CardFooter className="flex justify-center">
-                  <Button variant="outline" className="group">
-                    Browse FAQs <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
-                  </Button>
-                </CardFooter>
-              </Card>
               
-              <Card className="text-center">
-                <CardHeader>
-                  <div className="mx-auto w-12 h-12 rounded-full bg-[#0093DE]/10 flex items-center justify-center mb-2">
-                    <MessageCircle className="h-6 w-6 text-[#0093DE]" />
-                  </div>
-                  <CardTitle>Live Chat Support</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Chat with our support team in real-time for immediate assistance with your queries.
-                  </p>
-                </CardContent>
-                <CardFooter className="flex justify-center">
-                  <Button className="bg-[#0093DE] hover:bg-[#007ab8]">
-                    Start Chat
+              <div className="mt-12">
+                <h2 className="text-2xl font-bold mb-6">Common Support Topics</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <Button variant="outline" className="justify-between h-auto py-4">
+                    <span>Booking Modifications</span>
+                    <ArrowRight className="h-4 w-4" />
                   </Button>
-                </CardFooter>
-              </Card>
-              
-              <Card className="text-center">
-                <CardHeader>
-                  <div className="mx-auto w-12 h-12 rounded-full bg-[#0093DE]/10 flex items-center justify-center mb-2">
-                    <Phone className="h-6 w-6 text-[#0093DE]" />
-                  </div>
-                  <CardTitle>Phone Support</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Speak directly with our travel experts for personalized assistance and advice.
-                  </p>
-                </CardContent>
-                <CardFooter className="flex justify-center">
-                  <Button variant="outline">
-                    +84 (28) 3822 8898
+                  <Button variant="outline" className="justify-between h-auto py-4">
+                    <span>Cancellation Policy</span>
+                    <ArrowRight className="h-4 w-4" />
                   </Button>
-                </CardFooter>
-              </Card>
-            </div>
-            
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6">Common Support Topics</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Button variant="outline" className="justify-between h-auto py-4">
-                  <span>Booking Modifications</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" className="justify-between h-auto py-4">
-                  <span>Cancellation Policy</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" className="justify-between h-auto py-4">
-                  <span>Payment Issues</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" className="justify-between h-auto py-4">
-                  <span>Tour Information</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" className="justify-between h-auto py-4">
-                  <span>Travel Documentation</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" className="justify-between h-auto py-4">
-                  <span>Account Management</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
+                  <Button variant="outline" className="justify-between h-auto py-4">
+                    <span>Payment Issues</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" className="justify-between h-auto py-4">
+                    <span>Tour Information</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" className="justify-between h-auto py-4">
+                    <span>Travel Documentation</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" className="justify-between h-auto py-4">
+                    <span>Account Management</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
+            </TabsContent>
+          </Tabs>
+          
+          <Separator className="my-12" />
+          
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">Still Need Help?</h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6">
+              Our dedicated support team is ready to assist you with any questions or concerns about your Vietnamese travel experience.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="bg-[#0093DE] hover:bg-[#007ab8]">
+                <Mail className="mr-2 h-4 w-4" /> Email Support
+              </Button>
+              <Button variant="outline">
+                <Phone className="mr-2 h-4 w-4" /> Call Us
+              </Button>
             </div>
-          </TabsContent>
-        </Tabs>
-        
-        <Separator className="my-12" />
-        
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Still Need Help?</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6">
-            Our dedicated support team is ready to assist you with any questions or concerns about your Vietnamese travel experience.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-[#0093DE] hover:bg-[#007ab8]">
-              <Mail className="mr-2 h-4 w-4" /> Email Support
-            </Button>
-            <Button variant="outline">
-              <Phone className="mr-2 h-4 w-4" /> Call Us
-            </Button>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
