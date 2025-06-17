@@ -225,26 +225,6 @@ const Footer = () => {
     { name: "Cultural Immersion", path: "/package-tours", description: "Authentic Vietnamese cultural experiences" }
   ];
 
-  // Company information and support links
-  const companyLinks = [
-    { name: "About Leo Loves Travel", path: "/about", description: "Our story and mission" },
-    { name: "Why Choose Us", path: "/about", description: "Our expertise and values" },
-    { name: "Travel Blog", path: "/blog", description: "Vietnam travel tips and guides" },
-    { name: "Interactive Map", path: "/explore-map", description: "Explore Vietnam destinations" },
-    { name: "Help Center", path: "/help-center", description: "FAQs and travel support" },
-    { name: "Contact Us", path: "/contact", description: "Get in touch with our experts" }
-  ];
-
-  // Travel planning and booking links
-  const planningLinks = [
-    { name: "Plan Your Trip", path: "/contact", description: "Personalized travel consultation" },
-    { name: "Book a Tour", path: "/booking", description: "Secure online booking system" },
-    { name: "Custom Itinerary", path: "/contact", description: "Tailored Vietnam experiences" },
-    { name: "Group Travel", path: "/contact", description: "Tours for families and groups" },
-    { name: "Travel Insurance", path: "/travel-services", description: "Comprehensive coverage" },
-    { name: "Visa Assistance", path: "/travel-services", description: "Vietnam visa support" }
-  ];
-
   return (
     <footer
       className={`${
@@ -553,43 +533,6 @@ const Footer = () => {
             </div>
           </AnimatedCard>
 
-          <AnimatedCard delay={400} direction="up">
-            <div>
-              <h4 className="text-lg font-bold mb-4 text-[#0093DE]">
-                Company
-              </h4>
-              <ul className="space-y-2 text-sm">
-                {companyLinks.map((link, index) => (
-                  <FooterLink
-                    key={link.name}
-                    to={link.path}
-                    delay={index * 50}
-                  >
-                    {link.name}
-                  </FooterLink>
-                ))}
-              </ul>
-            </div>
-          </AnimatedCard>
-
-          <AnimatedCard delay={450} direction="up">
-            <div>
-              <h4 className="text-lg font-bold mb-4 text-[#0093DE]">
-                Plan Your Trip
-              </h4>
-              <ul className="space-y-2 text-sm">
-                {planningLinks.map((link, index) => (
-                  <FooterLink
-                    key={link.name}
-                    to={link.path}
-                    delay={index * 50}
-                  >
-                    {link.name}
-                  </FooterLink>
-                ))}
-              </ul>
-            </div>
-          </AnimatedCard>
 
           <AnimatedCard delay={500} direction="up">
             <div>
