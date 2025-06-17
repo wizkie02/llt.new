@@ -144,7 +144,7 @@ const Events = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative py-32 mt-20 mb-16 overflow-hidden rounded-b-3xl">
+      <section className="relative py-32 mb-16 overflow-hidden rounded-b-3xl">
         <div
           className="absolute inset-0 bg-fixed bg-center bg-cover"
           style={{ backgroundImage: `url(${bg5})` }}

@@ -279,7 +279,7 @@ const HomePage = () => {
               Explore Vietnam Tours
             </Link>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 px-8 py-4 mt-20 transition-all duration-500 shadow-xl md:gap-12 bg-black/20 backdrop-blur-sm rounded-xl animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
+          <div className="flex flex-wrap items-center justify-center gap-6 px-8 py-4 transition-all duration-500 shadow-xl mt-14 md:gap-12 bg-black/20 backdrop-blur-sm rounded-xl animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-[#0093DE]">
                 <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
@@ -505,7 +505,7 @@ const HomePage = () => {
                   src={destination.image}
                   alt={destination.name}
                   onError={(e) => handleImageError(e, destination.fallbackImage)}
-                  className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80"></div>                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <h3 className="mb-2 text-xl font-bold text-white">{destination.name}</h3>
@@ -568,21 +568,21 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
+          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto lg:grid-cols-3">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
                 className={`rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'
                   }`}
               >
-                <div className="flex items-center mb-4">
+                <div className="flex items-center h-12 gap-2 mb-4">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
                     className="object-cover w-12 h-12 mr-4 rounded-full"
                   />
-                  <div>
-                    <h4 className="font-bold">{testimonial.name}</h4>
+                  <div className="flex flex-col justify-between h-12">
+                    <h4 className="m-0 font-bold">{testimonial.name}</h4>
                     <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
                       {testimonial.location}
                     </p>
@@ -618,7 +618,7 @@ const HomePage = () => {
               to="/about"
               className="inline-flex items-center bg-transparent border border-[#0093DE] text-[#0093DE] hover:bg-[#0093DE]/10 py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              Read More Reviews
+              Read More About Us
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
