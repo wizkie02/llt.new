@@ -8,6 +8,7 @@ import bg7 from "../assets/images/backgrounds/bg7.jpg";
 import SEO from "../components/SEO";
 import StructuredData from "../components/StructuredData";
 import SEOBreadcrumb from "../components/SEOBreadcrumb";
+import { pageConfigs } from '../utils/seoOptimization';
 
 // Loading skeleton components
 const CategorySkeleton = ({ theme }: { theme: string }) => (
@@ -604,35 +605,14 @@ const PackageTours = () => {
   return (
     <>
       <SEO
-        title="Vietnam Package Tours 2025 | Best Vietnam Tour Packages | Leo Loves Travel"
-        description="Discover amazing Vietnam tour packages for every budget and interest. From luxury Halong Bay cruises to budget backpacking adventures. Authentic cultural experiences, expert local guides, and unforgettable memories await."
-        keywords="vietnam tour packages, vietnam tours, halong bay tours, hanoi tours, ho chi minh city tours, mekong delta tours, sapa trekking, hoi an tours, vietnam cultural tours, vietnam adventure tours, vietnam luxury tours, vietnam budget tours"
+        title={pageConfigs.packageTours.title}
+        description={pageConfigs.packageTours.description}
+        keywords={pageConfigs.packageTours.keywords}
         url="https://leolovestravel.com/package-tours"
-      />{" "}
+      />
       <StructuredData
         type="OfferCatalog"
-        data={{
-          name: "Vietnam Tour Packages",
-          description:
-            "Comprehensive collection of Vietnam tour packages for international travelers",
-          itemListElement: tours.map((tour, index) => ({
-            "@type": "Offer",
-            position: index + 1,
-            itemOffered: {
-              "@type": "TouristTrip",
-              name: tour.name,
-              description: tour.description,
-              image: tour.image,
-              provider: {
-                "@type": "TravelAgency",
-                name: "Leo Loves Travel",
-              },
-            },
-            price: tour.price?.toString() || "Contact for pricing",
-            priceCurrency: "USD",
-            availability: "InStock",
-          })),
-        }}
+        data={pageConfigs.packageTours.structuredData}
       />
       <div
         className={`min-h-screen ${

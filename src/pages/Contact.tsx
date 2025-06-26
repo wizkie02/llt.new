@@ -5,6 +5,7 @@ import bg2 from "../assets/images/backgrounds/bg4.jpg";
 import SEO from "../components/SEO";
 import StructuredData from "../components/StructuredData";
 import SEOBreadcrumb from "../components/SEOBreadcrumb";
+import { pageConfigs } from '../utils/seoOptimization';
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -85,9 +86,9 @@ const Contact = () => {
   return (
     <>
       <SEO
-        title="Contact Leo Loves Travel | Vietnam Travel Agency | Get in Touch"
-        description="Contact Leo Loves Travel for personalized Vietnam tour planning. Expert travel consultants ready to help plan your perfect Vietnam adventure. Phone, email, and office visit options available in Ho Chi Minh City."
-        keywords="contact leo loves travel, vietnam travel agency contact, vietnam tour planning, travel consultation vietnam, ho chi minh city travel agent, vietnam travel advice, book vietnam tour"
+        title={pageConfigs.contact.title}
+        description={pageConfigs.contact.description}
+        keywords={pageConfigs.contact.keywords}
         url="https://leolovestravel.com/contact"
         type="website"
         location={{
@@ -95,35 +96,9 @@ const Contact = () => {
           region: "Southeast Asia",
           city: "Ho Chi Minh City"
         }}
-      />
-      <StructuredData
+      />      <StructuredData
         type="LocalBusiness"
-        data={{
-          "@type": ["TravelAgency", "LocalBusiness"],
-          name: "Leo Loves Travel",
-          description: "Professional Vietnam travel agency offering personalized tour planning and travel consultation services",
-          url: "https://leolovestravel.com",
-          telephone: "+84-123-456-789",
-          email: "info@leolovestravel.com",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "123 Travel Street",
-            addressLocality: "Ho Chi Minh City",
-            addressRegion: "Ho Chi Minh City",
-            postalCode: "700000",
-            addressCountry: "VN"
-          },
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: "10.8231",
-            longitude: "106.6297"
-          },
-          openingHours: "Mo-Fr 08:00-18:00, Sa 08:00-16:00",
-          priceRange: "$$",
-          serviceArea: {
-            "@type": "Country",
-            name: "Vietnam"
-          }        }}
+        data={pageConfigs.contact.structuredData}
       />
       <div
         className={`min-h-screen ${

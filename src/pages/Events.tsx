@@ -5,6 +5,7 @@ import bg5 from "../assets/images/backgrounds/bg5.jpg";
 import SEO from "../components/SEO";
 import StructuredData from "../components/StructuredData";
 import SEOBreadcrumb from "../components/SEOBreadcrumb";
+import { pageConfigs } from '../utils/seoOptimization';
 
 const Events = () => {
   const { theme } = useTheme();
@@ -118,30 +119,15 @@ const Events = () => {
   return (
     <>
       <SEO
-        title="Vietnam Events & Festivals | Business Events | Cultural Festivals | Leo Loves Travel"
-        description="Experience Vietnam's vibrant events and festivals. Professional event planning for business conferences, cultural festivals, and special celebrations. Authentic Vietnamese cultural experiences and modern event management."
-        keywords="vietnam events, vietnam festivals, business events vietnam, cultural festivals vietnam, tet festival, mid autumn festival, lantern festival, hoi an festival, vietnam conference planning, vietnam event management"
+        title={pageConfigs.events.title}
+        description={pageConfigs.events.description}
+        keywords={pageConfigs.events.keywords}
         url="https://leolovestravel.com/events"
         type="website"
       />
       <StructuredData
         type="Organization"
-        data={{
-          "@type": "EventOrganizer",
-          name: "Leo Loves Travel - Events & Festivals",
-          description: "Professional event planning and cultural festival experiences in Vietnam",
-          url: "https://leolovestravel.com/events",
-          serviceType: [
-            "Business Events",
-            "Cultural Festivals", 
-            "Conference Planning",
-            "Festival Tours"
-          ],
-          areaServed: {
-            "@type": "Country",
-            name: "Vietnam"
-          }
-        }}
+        data={pageConfigs.events.structuredData}
       />
       <div
         className={`min-h-screen relative ${

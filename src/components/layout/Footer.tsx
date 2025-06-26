@@ -201,22 +201,28 @@ const Footer = () => {
       setShowErrorMessage(false);
     }, 5000);
   };
-
   const currentYear = new Date().getFullYear();
+  
+  // Enhanced destinations with SEO-friendly paths and descriptions
   const destinations = [
-    { name: "Halong Bay", path: "/tour/2" },
-    { name: "Hoi An Ancient Town", path: "/tour/4" },
-    { name: "Sapa Rice Terraces", path: "/tour/3" },
-    { name: "Mekong Delta", path: "/tour/5" },
-    { name: "Hanoi Old Quarter", path: "/tour/7" },
-    { name: "Hue Imperial City", path: "/tour/8" },
+    { name: "Halong Bay Cruise", path: "/tour/2", description: "UNESCO World Heritage site with limestone karsts" },
+    { name: "Hoi An Ancient Town", path: "/tour/4", description: "Historic trading port and lantern festivals" },
+    { name: "Sapa Rice Terraces", path: "/tour/3", description: "Mountain trekking and ethnic culture" },
+    { name: "Mekong Delta Tours", path: "/tour/5", description: "Floating markets and river life" },
+    { name: "Hanoi Old Quarter", path: "/tour/7", description: "Vietnamese capital cultural exploration" },
+    { name: "Hue Imperial City", path: "/tour/8", description: "Former royal capital and citadel" },
+    { name: "Da Nang & Beaches", path: "/package-tours", description: "Central coast beaches and modern city" },
+    { name: "Phu Quoc Island", path: "/package-tours", description: "Tropical paradise and pristine beaches" }
   ];
+
+  // Enhanced services with SEO-friendly descriptions
   const services = [
-    { name: "Travel Services", path: "/travel-services" },
-    { name: "Team Building", path: "/team-building" },
-    { name: "Events & Conferences", path: "/events" },
-    { name: "Romantic Travel", path: "/romantic-travel" },
-    { name: "Medical Travel", path: "/medical-travel" },
+    { name: "Vietnam Travel Services", path: "/travel-services", description: "Complete travel support and assistance" },
+    { name: "Corporate Team Building", path: "/team-building", description: "Professional team experiences in Vietnam" },
+    { name: "Events & Conferences", path: "/events", description: "Business meeting and event planning" },
+    { name: "Romantic Travel", path: "/romantic-travel", description: "Honeymoon and couples experiences" },
+    { name: "Medical Travel", path: "/medical-travel", description: "Healthcare tourism and wellness" },
+    { name: "Cultural Immersion", path: "/package-tours", description: "Authentic Vietnamese cultural experiences" }
   ];
 
   return (
@@ -489,15 +495,13 @@ const Footer = () => {
                 </SocialIcon>
               </div>
             </div>
-          </AnimatedCard>
-
-          <AnimatedCard delay={300} direction="up">
+          </AnimatedCard>          <AnimatedCard delay={300} direction="up">
             <div>
               <h4 className="text-lg font-bold mb-4 text-[#0093DE]">
-                Destinations
+                Popular Destinations
               </h4>
               <ul className="space-y-2 text-sm">
-                {destinations.map((destination, index) => (
+                {destinations.slice(0, 6).map((destination, index) => (
                   <FooterLink
                     key={destination.name}
                     to={destination.path}
@@ -508,10 +512,12 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-          </AnimatedCard>          <AnimatedCard delay={400} direction="up">
+          </AnimatedCard>
+
+          <AnimatedCard delay={350} direction="up">
             <div>
               <h4 className="text-lg font-bold mb-4 text-[#0093DE]">
-                Categories
+                Travel Services
               </h4>
               <ul className="space-y-2 text-sm">
                 {services.map((service, index) => (
@@ -526,6 +532,7 @@ const Footer = () => {
               </ul>
             </div>
           </AnimatedCard>
+
 
           <AnimatedCard delay={500} direction="up">
             <div>

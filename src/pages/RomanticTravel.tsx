@@ -7,6 +7,7 @@ import bg10 from "../assets/images/backgrounds/bg10.jpg";
 import SEO from "../components/SEO";
 import StructuredData from "../components/StructuredData";
 import SEOBreadcrumb from "../components/SEOBreadcrumb";
+import { pageConfigs } from '../utils/seoOptimization';
 
 const RomanticTravel = () => {
   const { theme } = useTheme();
@@ -167,30 +168,15 @@ const RomanticTravel = () => {
   return (
     <>
       <SEO
-        title="Romantic Vietnam Travel | Honeymoon Tours | Couples Getaway | Leo Loves Travel"
-        description="Create unforgettable romantic memories in Vietnam. Luxury honeymoon packages, couples retreats, and romantic getaways. From Ha Long Bay sunset cruises to intimate Hoi An dining experiences."
-        keywords="romantic vietnam travel, vietnam honeymoon, couples travel vietnam, romantic getaway vietnam, vietnam romantic tours, halong bay romantic cruise, hoi an romantic dinner, vietnam luxury honeymoon, couples retreat vietnam"
+        title={pageConfigs.romanticTravel.title}
+        description={pageConfigs.romanticTravel.description}
+        keywords={pageConfigs.romanticTravel.keywords}
         url="https://leolovestravel.com/romantic-travel"
         type="website"
       />
       <StructuredData
         type="TravelAgency"
-        data={{
-          "@type": "TravelAgency",
-          name: "Leo Loves Travel - Romantic Travel",
-          description: "Romantic travel experiences and honeymoon packages in Vietnam",
-          url: "https://leolovestravel.com/romantic-travel",
-          serviceType: [
-            "Honeymoon Packages",
-            "Romantic Tours",
-            "Couples Retreats",
-            "Luxury Travel"
-          ],
-          areaServed: {
-            "@type": "Country", 
-            name: "Vietnam"
-          }
-        }}
+        data={pageConfigs.romanticTravel.structuredData}
       />
       <div
         className={`min-h-screen ${

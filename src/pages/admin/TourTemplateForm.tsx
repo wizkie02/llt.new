@@ -32,13 +32,11 @@ const TourTemplateForm = ({
   submitLabel
 }: TourTemplateFormProps) => {
   const { getAuthHeaders } = useAuth();
-  
-  // ImageUpload Component
+    // ImageUpload Component
   const ImageUpload = ({ 
     onImageSelected, 
     currentImage, 
-    className = '' 
-  }: {
+    className = ''   }: {
     onImageSelected: (imageUrl: string) => void;
     currentImage?: string;
     className?: string;
@@ -49,20 +47,305 @@ const TourTemplateForm = ({
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    const validateFile = (file: File): string | null => {
+      // Image editing states
+    const [showImageEditor, setShowImageEditor] = useState(false);
+    const [originalImage, setOriginalImage] = useState<string>('');
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [imageTransform, setImageTransform] = useState({
+      scale: 1,
+      rotation: 0,
+      x: 0,
+      y: 0,
+      cropX: 0,
+      cropY: 0,
+      cropWidth: 0,
+      cropHeight: 0
+    });
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+    const [isCropping, setIsCropping] = useState(false);
+    const [cropStart, setCropStart] = useState({ x: 0, y: 0 });    const validateFile = (file: File): string | null => {
       const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
       if (!allowedTypes.includes(file.type)) {
-        return 'Vui lòng chọn file ảnh hợp lệ (JPEG, PNG, GIF, hoặc WebP)';
+        return 'Please select a valid image file (JPEG, PNG, GIF, or WebP)';
       }
       
-      const maxSize = 5 * 1024 * 1024; // 5MB
+      const maxSize = 10 * 1024 * 1024; // 10MB cho ảnh tour chất lượng cao
       if (file.size > maxSize) {
-        return 'Kích thước file phải nhỏ hơn 5MB';
+        return 'File size must be less than 10MB';
       }
       
       return null;
+    };    // Image editing functions
+    const loadImageToCanvas = (imageUrl: string) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // Set canvas size chuẩn 1280x720 - auto fit chiều ngang 1280px
+        const standardWidth = 1280;
+        const standardHeight = 720;
+        
+        // Luôn giữ chiều ngang cố định là 1280px
+        let canvasWidth = standardWidth;
+        let canvasHeight = standardHeight;
+        
+        // Tính toán chiều dọc dựa trên tỷ lệ ảnh gốc
+        const imageRatio = img.width / img.height;
+        canvasHeight = Math.round(canvasWidth / imageRatio);
+        
+        // Giới hạn chiều dọc trong khoảng hợp lý (400-1080px)
+        if (canvasHeight < 400) canvasHeight = 400;
+        if (canvasHeight > 1080) canvasHeight = 1080;
+        
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        
+        // Reset transform
+        setImageTransform({
+          scale: 1,
+          rotation: 0,
+          x: 0,
+          y: 0,
+          cropX: 0,
+          cropY: 0,
+          cropWidth: canvas.width,
+          cropHeight: canvas.height
+        });
+        
+        // Draw image
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      img.src = imageUrl;
     };
+
+    const drawImageOnCanvas = () => {
+      const canvas = canvasRef.current;
+      if (!canvas || !originalImage) return;
+      
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Save context
+        ctx.save();
+        
+        // Apply transformations
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        
+        ctx.translate(centerX + imageTransform.x, centerY + imageTransform.y);
+        ctx.scale(imageTransform.scale, imageTransform.scale);
+        ctx.rotate((imageTransform.rotation * Math.PI) / 180);
+        
+        // Draw image centered
+        ctx.drawImage(img, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        
+        // Restore context
+        ctx.restore();
+        
+        // Draw crop rectangle if cropping
+        if (isCropping && imageTransform.cropWidth > 0 && imageTransform.cropHeight > 0) {
+          ctx.strokeStyle = '#ff0000';
+          ctx.lineWidth = 2;
+          ctx.setLineDash([5, 5]);
+          ctx.strokeRect(
+            imageTransform.cropX,
+            imageTransform.cropY,
+            imageTransform.cropWidth,
+            imageTransform.cropHeight
+          );
+          ctx.setLineDash([]);
+        }
+      };
+      img.src = originalImage;
+    };
+
+    const handleCanvasMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      if (isCropping) {
+        setCropStart({ x, y });
+        setImageTransform(prev => ({ ...prev, cropX: x, cropY: y, cropWidth: 0, cropHeight: 0 }));
+      } else {
+        setIsDragging(true);
+        setDragStart({ x: x - imageTransform.x, y: y - imageTransform.y });
+      }
+    };
+
+    const handleCanvasMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      if (isCropping) {
+        const width = x - cropStart.x;
+        const height = y - cropStart.y;
+        setImageTransform(prev => ({ 
+          ...prev, 
+          cropWidth: Math.abs(width), 
+          cropHeight: Math.abs(height),
+          cropX: width < 0 ? x : cropStart.x,
+          cropY: height < 0 ? y : cropStart.y
+        }));
+        drawImageOnCanvas();
+      } else if (isDragging) {
+        setImageTransform(prev => ({ 
+          ...prev, 
+          x: x - dragStart.x, 
+          y: y - dragStart.y 
+        }));
+        drawImageOnCanvas();
+      }
+    };
+
+    const handleCanvasMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    // Apply crop to image
+    const applyCrop = () => {
+      const canvas = canvasRef.current;
+      if (!canvas || !originalImage) return;
+      
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      if (!tempCtx) return;
+      
+      tempCanvas.width = imageTransform.cropWidth;
+      tempCanvas.height = imageTransform.cropHeight;
+      
+      const img = new Image();
+      img.onload = () => {
+        // Calculate source coordinates based on crop area
+        const scaleX = img.width / canvas.width;
+        const scaleY = img.height / canvas.height;
+        
+        tempCtx.drawImage(
+          img,
+          imageTransform.cropX * scaleX,
+          imageTransform.cropY * scaleY,
+          imageTransform.cropWidth * scaleX,
+          imageTransform.cropHeight * scaleY,
+          0,
+          0,
+          imageTransform.cropWidth,
+          imageTransform.cropHeight
+        );
+        
+        // Update canvas
+        canvas.width = imageTransform.cropWidth;
+        canvas.height = imageTransform.cropHeight;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(tempCanvas, 0, 0);
+        }
+        
+        // Reset crop state
+        setIsCropping(false);
+        setImageTransform(prev => ({
+          ...prev,
+          cropX: 0,
+          cropY: 0,
+          cropWidth: canvas.width,
+          cropHeight: canvas.height,
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0
+        }));
+      };
+      img.src = originalImage;
+    };
+
+    // Resize image
+    const resizeImage = (width: number, height: number) => {
+      const canvas = canvasRef.current;
+      if (!canvas || !originalImage) return;
+      
+      const img = new Image();
+      img.onload = () => {
+        canvas.width = width;
+        canvas.height = height;
+        
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.clearRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+        }
+        
+        setImageTransform(prev => ({
+          ...prev,
+          cropWidth: width,
+          cropHeight: height,
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0
+        }));
+      };
+      img.src = originalImage;
+    };
+
+    // Save edited image
+    const saveEditedImage = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+        canvas.toBlob((blob) => {
+        if (blob) {
+          setShowImageEditor(false);
+          
+          // Upload the edited image
+          const file = new File([blob], 'edited-image.jpg', { type: 'image/jpeg' });
+          handleFileUpload(file);
+        }
+      }, 'image/jpeg', 0.9);
+    };    // Reset image editor
+    const resetImageEditor = () => {
+      setShowImageEditor(false);
+      setOriginalImage('');
+      setImageTransform({
+        scale: 1,
+        rotation: 0,
+        x: 0,
+        y: 0,
+        cropX: 0,
+        cropY: 0,
+        cropWidth: 0,
+        cropHeight: 0
+      });
+      setIsCropping(false);
+    };
+
+    // Open image editor
+    const openImageEditor = (imageUrl: string) => {
+      setOriginalImage(imageUrl);
+      setShowImageEditor(true);
+      setTimeout(() => loadImageToCanvas(imageUrl), 100);
+    };
+
+    // Update drawing when transform changes
+    useEffect(() => {
+      if (showImageEditor && originalImage) {
+        drawImageOnCanvas();
+      }
+    }, [imageTransform, showImageEditor, originalImage]);
 
     const handleFileUpload = async (file: File) => {
       const validationError = validateFile(file);
@@ -78,10 +361,10 @@ const TourTemplateForm = ({
 
       try {
         const formData = new FormData();
-        formData.append('image', file);
-
+        formData.append('image', file);        // Get auth headers
         const authHeaders = getAuthHeaders();
         
+        // Use absolute URL to avoid frontend routing confusion
         const response = await fetch('https://leolovestravel.com/api/upload-image.php', {
           method: 'POST',
           headers: {
@@ -90,41 +373,46 @@ const TourTemplateForm = ({
           body: formData
         });
 
-        if (!response.ok) {
-          throw new Error(`Upload thất bại: ${response.status} ${response.statusText}`);
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          const text = await response.text();
+          console.error('Non-JSON response:', text);
+          throw new Error('Server returned invalid response format');
         }
 
         const result = await response.json();
         
-        if (result.success && result.imageUrl) {
-          onImageSelected(result.imageUrl);
-          setSuccess('Tải ảnh lên thành công!');
+        if (!response.ok) {
+          throw new Error(result.error || `Upload failed: ${response.status} ${response.statusText}`);
+        }        if (result.success && result.url) {
+          onImageSelected(result.url);
+          setSuccess('Image uploaded successfully!');
           setError(null);
           
           setTimeout(() => setSuccess(null), 3000);
         } else {
-          throw new Error(result.error || 'Upload thất bại');
+          throw new Error(result.error || 'Upload failed - no image URL returned');
         }
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Upload thất bại';
+        const errorMessage = err instanceof Error ? err.message : 'Upload failed';
         setError(errorMessage);
         setSuccess(null);
         console.error('Upload error:', err);
       } finally {
         setIsUploading(false);
       }
-    };
-
-    const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    };    const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
       if (file) {
-        handleFileUpload(file);
+        // Create URL for image editor
+        const imageUrl = URL.createObjectURL(file);
+        openImageEditor(imageUrl);
       }
     };
 
     const handleUrlSubmit = () => {
       if (!urlInput.trim()) {
-        setError('Vui lòng nhập URL ảnh hợp lệ');
+        setError('Please enter a valid image URL');
         setSuccess(null);
         return;
       }
@@ -134,20 +422,22 @@ const TourTemplateForm = ({
         onImageSelected(urlInput.trim());
         setUrlInput('');
         setError(null);
-        setSuccess('Đã thêm URL ảnh thành công!');
+        setSuccess('Image URL added successfully!');
         
         setTimeout(() => setSuccess(null), 3000);
       } catch {
-        setError('Vui lòng nhập URL hợp lệ');
+        setError('Please enter a valid URL');
         setSuccess(null);
       }
-    };
-
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    };    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
       const file = event.dataTransfer.files[0];
       if (file && file.type.startsWith('image/')) {
-        handleFileUpload(file);
+        // Create URL for image editor
+        const imageUrl = URL.createObjectURL(file);
+        openImageEditor(imageUrl);
+      } else {
+        setError('Please drop a valid image file');
       }
     };
 
@@ -159,13 +449,252 @@ const TourTemplateForm = ({
       onImageSelected('');
       setError(null);
       setSuccess(null);
-    };
-
-    return (
+    };    return (
       <div className={`space-y-4 ${className}`}>
         <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-          Ảnh Tour
-        </Label>
+          Tour Image
+        </Label>        {/* Image Editor Modal */}
+        {showImageEditor && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl shadow-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden">
+              {/* Header */}
+              <div className="bg-gradient-to-r from-[#0093DE] to-[#0077b3] text-white p-4 flex justify-between items-center">
+                <div>
+                  <h3 className="text-xl font-bold">Image Editor</h3>
+                  <p className="text-blue-100 text-sm">Edit your tour image before uploading</p>
+                </div>
+                <Button
+                  type="button"
+                  onClick={resetImageEditor}
+                  className="bg-white/20 hover:bg-white/30 text-white border-0 h-8 w-8 p-0 rounded-full"
+                >
+                  ×
+                </Button>
+              </div>
+
+              <div className="p-6 overflow-auto max-h-[calc(95vh-140px)]">
+                <div className="space-y-6">
+                  {/* Canvas Container */}
+                  <div className="bg-gray-50 rounded-lg p-4 border-2 border-dashed border-gray-300">
+                    <div className="flex justify-center">                      <canvas
+                        ref={canvasRef}
+                        onMouseDown={handleCanvasMouseDown}
+                        onMouseMove={handleCanvasMouseMove}
+                        onMouseUp={handleCanvasMouseUp}
+                        className="border border-gray-300 rounded-lg shadow-sm bg-white cursor-crosshair max-w-full"
+                        style={{ 
+                          cursor: isCropping ? 'crosshair' : isDragging ? 'grabbing' : 'grab',
+                          maxHeight: '600px',
+                          width: 'auto',
+                          height: 'auto'
+                        }}
+                      />
+                    </div>
+                    {/* Canvas Instructions */}
+                    <div className="text-center mt-3 text-sm text-gray-600">
+                      {isCropping ? (
+                        <span className="text-blue-600 font-medium">🎯 Click and drag to select crop area</span>
+                      ) : (
+                        <span>🖱️ Click and drag to move image • Use controls below to edit</span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Control Panels */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">                    {/* Transform Controls */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-gray-700 mb-3 flex items-center">
+                        <span className="mr-2">🔄</span> Transform
+                      </h4>
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-xs text-gray-600 block mb-1">Scale: {imageTransform.scale.toFixed(1)}x</label>
+                          <input
+                            type="range"
+                            min="0.1"
+                            max="3"
+                            step="0.1"
+                            value={imageTransform.scale}
+                            onChange={(e) => setImageTransform(prev => ({ ...prev, scale: parseFloat(e.target.value) }))}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs text-gray-600 block mb-1">Rotation: {imageTransform.rotation}°</label>
+                          <input
+                            type="range"
+                            min="0"
+                            max="360"
+                            step="15"
+                            value={imageTransform.rotation}
+                            onChange={(e) => setImageTransform(prev => ({ ...prev, rotation: parseInt(e.target.value) }))}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                        </div>
+                      </div>
+                    </div>                    {/* Height Adjust Controls */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-gray-700 mb-3 flex items-center">
+                        <span className="mr-2">📏</span> Height Adjust
+                      </h4>
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-xs text-gray-600 block mb-1">
+                            Height: {canvasRef.current?.height || 720}px (Width: Fixed 1280px)
+                          </label>
+                          <input
+                            type="range"
+                            min="400"
+                            max="1080"
+                            step="20"
+                            value={canvasRef.current?.height || 720}
+                            onChange={(e) => {
+                              const newHeight = parseInt(e.target.value);
+                              resizeImage(1280, newHeight);
+                            }}
+                            className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          Drag to adjust height (400-1080px). Width always stays 1280px.
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Crop Controls */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-gray-700 mb-3 flex items-center">
+                        <span className="mr-2">✂️</span> Crop
+                      </h4>
+                      <div className="space-y-2">
+                        <Button
+                          type="button"
+                          onClick={() => setIsCropping(!isCropping)}
+                          className={`w-full text-xs h-8 ${
+                            isCropping 
+                              ? 'bg-red-500 hover:bg-red-600 text-white' 
+                              : 'bg-blue-500 hover:bg-blue-600 text-white'
+                          }`}
+                        >
+                          {isCropping ? 'Cancel Crop' : 'Start Cropping'}
+                        </Button>
+                        {isCropping && imageTransform.cropWidth > 0 && (
+                          <Button
+                            type="button"
+                            onClick={applyCrop}
+                            className="w-full text-xs h-8 bg-green-500 hover:bg-green-600 text-white"
+                          >
+                            Apply Crop
+                          </Button>
+                        )}
+                      </div>
+                    </div>                    {/* Quick Resize */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-gray-700 mb-3 flex items-center">
+                        <span className="mr-2">📐</span> Quick Resize
+                      </h4>                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          type="button"
+                          onClick={() => resizeImage(1280, 720)}
+                          className="text-xs h-8 bg-purple-500 hover:bg-purple-600 text-white font-semibold"
+                        >
+                          1280×720 ⭐
+                        </Button>
+                        <Button
+                          type="button"  
+                          onClick={() => resizeImage(1280, 960)}
+                          className="text-xs h-8 bg-purple-500 hover:bg-purple-600 text-white"
+                        >
+                          1280×960
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => resizeImage(1280, 853)}
+                          className="text-xs h-8 bg-purple-500 hover:bg-purple-600 text-white"
+                        >
+                          1280×853
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => resizeImage(1280, 640)}
+                          className="text-xs h-8 bg-purple-500 hover:bg-purple-600 text-white"
+                        >
+                          1280×640
+                        </Button>
+                      </div>
+                      <div className="mt-2 text-xs text-gray-500">
+                        Tất cả preset giữ chiều ngang 1280px
+                      </div>
+                    </div>
+
+                    {/* Quick Actions */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-gray-700 mb-3 flex items-center">
+                        <span className="mr-2">⚡</span> Quick Actions
+                      </h4>
+                      <div className="space-y-2">
+                        <Button
+                          type="button"
+                          onClick={() => setImageTransform(prev => ({ ...prev, rotation: (prev.rotation + 90) % 360 }))}
+                          className="w-full text-xs h-8 bg-orange-500 hover:bg-orange-600 text-white"
+                        >
+                          Rotate 90°
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => setImageTransform({
+                            scale: 1, rotation: 0, x: 0, y: 0,
+                            cropX: 0, cropY: 0, cropWidth: 0, cropHeight: 0
+                          })}
+                          className="w-full text-xs h-8 bg-gray-500 hover:bg-gray-600 text-white"
+                        >
+                          Reset All
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Image Info */}
+                  {canvasRef.current && (
+                    <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                      <div className="text-sm text-blue-800">
+                        <strong>Image Info:</strong> {canvasRef.current.width} × {canvasRef.current.height}px
+                        {imageTransform.cropWidth > 0 && (
+                          <span className="ml-4">
+                            <strong>Crop Area:</strong> {Math.round(imageTransform.cropWidth)} × {Math.round(imageTransform.cropHeight)}px
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Footer Actions */}
+              <div className="bg-gray-50 px-6 py-4 border-t flex justify-between items-center">
+                <div className="text-sm text-gray-600">
+                  💡 Tip: Use the canvas to drag and position your image, then use the controls to fine-tune
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    type="button"
+                    onClick={resetImageEditor}
+                    className="px-4 py-2 border-2 border-gray-400 bg-transparent text-gray-600 hover:bg-gray-100"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={saveEditedImage}
+                    className="px-6 py-2 bg-gradient-to-r from-[#0093DE] to-[#0077b3] text-white hover:from-[#0077b3] hover:to-[#005a8a] font-medium"
+                  >
+                    Save & Upload
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Method Selection */}
         <div className="flex space-x-2">
@@ -178,7 +707,7 @@ const TourTemplateForm = ({
                 : 'border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white'
             }`}
           >
-            Tải File Lên
+            Upload File
           </Button>
           <Button
             type="button"
@@ -189,7 +718,7 @@ const TourTemplateForm = ({
                 : 'border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-[#0093DE] hover:text-white'
             }`}
           >
-            Dùng URL
+            Use URL
           </Button>
         </div>
 
@@ -218,15 +747,14 @@ const TourTemplateForm = ({
               {isUploading ? (
                 <div className="text-[#0093DE]">
                   <div className="animate-spin inline-block w-6 h-6 border-2 border-current border-t-transparent rounded-full mb-2"></div>
-                  <p>Đang tải lên...</p>
+                  <p>Uploading...</p>
                 </div>
               ) : (
                 <div className="text-gray-500">
                   <svg className="mx-auto h-12 w-12 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <p className="text-lg font-medium">Nhấp để tải lên hoặc kéo thả</p>
-                  <p className="text-sm">PNG, JPG, GIF, WebP tối đa 5MB</p>
+                  </svg>                  <p className="text-lg font-medium">Click to upload or drag and drop</p>                  <p className="text-sm">PNG, JPG, GIF, WebP up to 10MB</p>
+                  <p className="text-xs text-gray-400 mt-1">Auto-fit to 1280px width, adjustable height</p>
                 </div>
               )}
             </div>
@@ -241,7 +769,7 @@ const TourTemplateForm = ({
                 type="url"
                 value={urlInput}
                 onChange={(e) => setUrlInput(e.target.value)}
-                placeholder="Nhập URL ảnh (vd: https://example.com/image.jpg)"
+                placeholder="Enter image URL (e.g., https://example.com/image.jpg)"
                 className="flex-1"
                 onKeyPress={(e) => e.key === 'Enter' && handleUrlSubmit()}
               />
@@ -250,7 +778,7 @@ const TourTemplateForm = ({
                 onClick={handleUrlSubmit}
                 className="px-4 py-2 bg-[#0093DE] text-white rounded hover:bg-[#0077b3] transition-colors"
               >
-                Sử Dụng URL
+                Use URL
               </Button>
             </div>
           </div>
@@ -268,29 +796,40 @@ const TourTemplateForm = ({
           <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
             ❌ {error}
           </div>
-        )}
-
-        {/* Current Image Preview */}
+        )}        {/* Current Image Preview */}
         {currentImage && (
           <div className="space-y-2">
-            <p className="text-sm font-medium text-gray-700">Ảnh hiện tại:</p>
+            <p className="text-sm font-medium text-gray-700">Current Image:</p>
             <div className="relative inline-block">
               <img
                 src={currentImage}
-                alt="Ảnh tour hiện tại"
-                className="h-32 w-48 object-cover rounded border"
+                alt="Current tour image"
+                className="h-40 w-60 object-cover rounded border shadow-sm"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="192" height="128" viewBox="0 0 192 128"><rect width="192" height="128" fill="%23f3f4f6"/><text x="96" y="64" text-anchor="middle" dy="0.3em" font-family="Arial" font-size="14" fill="%236b7280">Không có ảnh</text></svg>';
+                  target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="240" height="160" viewBox="0 0 240 160"><rect width="240" height="160" fill="%23f3f4f6"/><text x="120" y="80" text-anchor="middle" dy="0.3em" font-family="Arial" font-size="14" fill="%236b7280">No Image</text></svg>';
                 }}
               />
-              <Button
-                type="button"
-                onClick={clearImage}
-                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 p-0"
-              >
-                ×
-              </Button>
+              <div className="absolute -top-2 -right-2 flex gap-1">
+                <Button
+                  type="button"
+                  onClick={() => openImageEditor(currentImage)}
+                  className="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm hover:bg-blue-600 p-0 shadow-lg"
+                  title="Edit image"
+                >
+                  ✎
+                </Button>
+                <Button
+                  type="button"
+                  onClick={clearImage}
+                  className="bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm hover:bg-red-600 p-0 shadow-lg"
+                  title="Remove image"
+                >
+                  ×
+                </Button>
+              </div>
+            </div>            <div className="text-xs text-gray-500">
+              Standard: 1280px width with adjustable height
             </div>
           </div>
         )}
@@ -710,9 +1249,7 @@ const TourTemplateForm = ({
                 setFormData(prev => ({ ...prev, image: url }))
               }
               className="w-full"
-            />
-
-            <div className="space-y-2">
+            />            <div className="space-y-2">
               <Label htmlFor="description" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Description
               </Label>
@@ -721,7 +1258,7 @@ const TourTemplateForm = ({
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
-                rows={4}
+                rows={2}
                 className="w-full"
                 placeholder="Describe the tour experience, highlights, and what's included..."
               />

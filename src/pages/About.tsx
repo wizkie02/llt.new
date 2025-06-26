@@ -16,6 +16,7 @@ import ceo from '../assets/images/ceo.jpg';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 import SEOBreadcrumb from '../components/SEOBreadcrumb';
+import { pageConfigs } from '../utils/seoOptimization';
 
 
 const About = () => {
@@ -90,34 +91,16 @@ const About = () => {
     }
   ];
   return (
-    <>
-      <SEO
-        title="About Leo Loves Travel | Leading Vietnam Travel Agency | Our Story"
-        description="Learn about Leo Loves Travel, Vietnam's premier travel agency. Founded by passionate travel experts, we specialize in authentic Vietnamese experiences for international travelers. Discover our mission, values, and commitment to sustainable tourism."
-        keywords="about leo loves travel, vietnam travel agency, vietnam tour company, travel company vietnam, authentic vietnam travel, sustainable tourism vietnam, vietnam travel experts, vietnamese culture tours"
+    <>      <SEO
+        title={pageConfigs.about.title}
+        description={pageConfigs.about.description}
+        keywords={pageConfigs.about.keywords}
         url="https://leolovestravel.com/about"
-        type="website"
-      />
+        type="website"      />
       <StructuredData
         type="Organization"
-        data={{
-          name: "Leo Loves Travel",
-          description: "Leading Vietnam travel agency specializing in authentic cultural experiences and sustainable tourism for international travelers",
-          url: "https://leolovestravel.com",
-          logo: "https://leolovestravel.com/src/assets/icon-circle.svg",
-          foundingDate: "2020",
-          founder: {
-            "@type": "Person",
-            name: "Leo",
-            jobTitle: "Founder & CEO"
-          },
-          areaServed: {
-            "@type": "Country",
-            name: "Vietnam"
-          },
-          knowsAbout: ["Vietnam Tourism", "Cultural Tours", "Adventure Travel", "Sustainable Tourism"],
-          slogan: "Authentic Vietnam Experiences"
-        }}      />
+        data={pageConfigs.about.structuredData}
+      />
       <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F9FC] text-[#292F36]' : 'bg-[#1A202C] text-[#F7F9FC]'}`}>
         <SEOBreadcrumb />
         {/* Hero Section */}
