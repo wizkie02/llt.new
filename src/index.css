@@ -75,6 +75,48 @@ h1 {
   /* Ensure immediate rendering */
   will-change: auto;
   transform: translateZ(0);
+  /* Prevent layout shift from font loading */
+  font-display: swap;
+  /* Reserve space to prevent layout shift */
+  min-height: 4rem;
+}
+
+@media (min-width: 768px) {
+  .hero h1 {
+    min-height: 6rem;
+  }
+}
+
+/* Prevent layout shifts from font loading */
+* {
+  font-display: swap;
+}
+
+/* Stable dimensions for animated elements */
+.animate-fade-in-up {
+  /* Reserve space to prevent layout shift */
+  min-height: 1rem;
+}
+
+/* Prevent layout shift from counter animations */
+.counter-container {
+  display: inline-block;
+  min-width: 3ch;
+  text-align: center;
+}
+
+/* Optimize images to prevent layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+  /* Prevent layout shift during loading */
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Ensure stable button dimensions */
+.btn, .btn-primary, .btn-secondary {
+  min-height: 2.5rem;
+  min-width: 8rem;
 }
 
 h2 {

@@ -250,6 +250,8 @@ const HomePage = () => {
           src={wallpaper}
           alt="Vietnam scenic landscape"
           loading="eager"
+          width="1920"
+          height="1080"
           className="object-cover object-center absolute inset-0 w-full h-full"
         />
         <div className="absolute inset-0 z-10 w-full h-full bg-gradient-to-b from-black/60 to-black/30"></div>
@@ -260,13 +262,13 @@ const HomePage = () => {
           >
             Welcome to Vietnam
           </span>
-          <h1 className="hero text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          <h1 className="hero text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] min-h-[4rem] md:min-h-[6rem]">
             Experience <span className="text-[#0093DE]">Vietnam's</span> Hidden <span className="text-[#0093DE]">Treasures</span>
           </h1>
-          <p className="mb-10 max-w-3xl text-xl opacity-90 md:text-2xl animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+          <p className="mb-10 max-w-3xl text-xl opacity-90 md:text-2xl animate-fade-in-up min-h-[3rem] md:min-h-[4rem]" style={{ animationDelay: '0.7s' }}>
             Dive into authentic experiences from misty mountain villages to ancient coastal towns
           </p>
-          <div className="flex flex-col gap-5 sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+          <div className="flex flex-col gap-5 sm:flex-row animate-fade-in-up min-h-[3rem]" style={{ animationDelay: '0.9s' }}>
             <Link
               to="/contact"
               className="bg-[#0093DE] hover:bg-[#007ab8] text-white py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
@@ -280,7 +282,7 @@ const HomePage = () => {
               Explore Vietnam Tours
             </Link>
           </div>
-          <div className="flex flex-wrap gap-6 justify-center items-center px-8 py-4 mt-14 rounded-xl shadow-xl backdrop-blur-sm transition-all duration-500 md:gap-12 bg-black/20 animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
+          <div className="flex flex-wrap gap-6 justify-center items-center px-8 py-4 mt-14 rounded-xl shadow-xl backdrop-blur-sm transition-all duration-500 md:gap-12 bg-black/20 animate-fade-in-up hover:bg-black/30 min-h-[4rem]" style={{ animationDelay: '1.1s' }}>
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-[#0093DE]">
                 <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
@@ -365,18 +367,21 @@ const HomePage = () => {
                     <div>
                       <span className="text-lg font-medium lg:text-xl">
                         We have{" "}
-                        <span className="text-[#0093DE] font-bold">
-                          <Counter end={10} /> Years
+                        <span className="text-[#0093DE] font-bold inline-block min-w-[2ch]">
+                          <Counter end={10} shouldAnimate={false} />
                         </span>{" "}
-                        of experience
+                        Years of experience
                       </span>
                     </div>
                   </div>
-                </div><div className="grid grid-cols-2 gap-6 lg:gap-8">
+                </div>
+                <div className="grid grid-cols-2 gap-6 lg:gap-8">
                   <div className="text-center lg:text-left">
                     <div className="flex flex-col items-center lg:items-start">
                       <span className="text-3xl lg:text-4xl font-bold text-[#0093DE] flex items-center">
-                        <Counter end={30} />
+                        <span className="counter-container">
+                          <Counter end={30} shouldAnimate={false} />
+                        </span>
                         <span className="ml-1">+</span>
                       </span>
                       <span className="block mt-2 text-sm font-medium lg:text-base">
@@ -387,7 +392,9 @@ const HomePage = () => {
                   <div className="text-center lg:text-left">
                     <div className="flex flex-col items-center lg:items-start">
                       <span className="text-3xl lg:text-4xl font-bold text-[#0093DE] flex items-center">
-                        <Counter end={9} />
+                        <span className="counter-container">
+                          <Counter end={9} shouldAnimate={false} />
+                        </span>
                         <span className="ml-1">K+</span>
                       </span>
                       <span className="block mt-2 text-sm font-medium lg:text-base">
@@ -395,7 +402,8 @@ const HomePage = () => {
                       </span>
                     </div>
                   </div>
-                </div>                <Link
+                </div>
+                <Link
                   to="/package-tours"
                   className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white mt-8 py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
@@ -403,13 +411,18 @@ const HomePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                </Link></div>
-            </div>            <div className="w-full lg:w-1/2">
+                </Link>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2">
               <div className="relative">
                 <div className="overflow-hidden relative rounded-2xl shadow-2xl">
                   <img
                     src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                     alt="Vietnam landscape with traditional boats"
+                    width="800"
+                    height="600"
+                    loading="lazy"
                     className="object-cover w-full h-64 transition-transform duration-700 md:h-80 lg:h-96 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t to-transparent from-black/20"></div>
@@ -438,7 +451,8 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
-            </div>          </div>
+            </div>
+          </div>
         </div>
       </section>
       {/* About Us Area end */}
