@@ -245,24 +245,25 @@ const HomePage = () => {
 
       {/* ...existing JSX content... */}
       {" "}      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center w-full h-screen pt-32 overflow-hidden">
+      <section className="flex overflow-hidden relative flex-col justify-center items-center pt-32 w-full h-screen">
         <img
           src={wallpaper}
           alt="Vietnam scenic landscape"
-          className="absolute inset-0 object-cover object-center w-full h-full animate-slow-zoom"
+          loading="eager"
+          className="object-cover object-center absolute inset-0 w-full h-full"
         />
         <div className="absolute inset-0 z-10 w-full h-full bg-gradient-to-b from-black/60 to-black/30"></div>
-        <div className="container relative z-20 flex flex-col items-center justify-center h-full px-4 mx-auto text-center text-white">
+        <div className="container flex relative z-20 flex-col justify-center items-center px-4 mx-auto h-full text-center text-white">
           <span
-            className="inline-block px-4 py-1 mb-6 text-sm font-medium text-white transition-all duration-300 transform rounded-full shadow-lg bg-white/20 backdrop-blur-sm animate-fade-in-up hover:scale-105 hover:bg-white/30"
+            className="inline-block px-4 py-1 mb-6 text-sm font-medium text-white rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 transform bg-white/20 animate-fade-in-up hover:scale-105 hover:bg-white/30"
             style={{ animationDelay: "0.3s" }}
           >
             Welcome to Vietnam
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl animate-fade-in-up drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ animationDelay: '0.5s' }}>
+          <h1 className="hero text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight max-w-5xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             Experience <span className="text-[#0093DE]">Vietnam's</span> Hidden <span className="text-[#0093DE]">Treasures</span>
           </h1>
-          <p className="max-w-3xl mb-10 text-xl md:text-2xl opacity-90 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+          <p className="mb-10 max-w-3xl text-xl opacity-90 md:text-2xl animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
             Dive into authentic experiences from misty mountain villages to ancient coastal towns
           </p>
           <div className="flex flex-col gap-5 sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
@@ -274,12 +275,12 @@ const HomePage = () => {
             </Link>
             <Link
               to="/package-tours"
-              className="px-8 py-3 font-semibold text-white transition-all duration-300 transform border bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl border-white/30 hover:border-white/80 hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
+              className="px-8 py-3 font-semibold text-white rounded-xl border backdrop-blur-sm transition-all duration-300 transform bg-white/10 hover:bg-white/20 border-white/30 hover:border-white/80 hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
             >
               Explore Vietnam Tours
             </Link>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 px-8 py-4 transition-all duration-500 shadow-xl mt-14 md:gap-12 bg-black/20 backdrop-blur-sm rounded-xl animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
+          <div className="flex flex-wrap gap-6 justify-center items-center px-8 py-4 mt-14 rounded-xl shadow-xl backdrop-blur-sm transition-all duration-500 md:gap-12 bg-black/20 animate-fade-in-up hover:bg-black/30" style={{ animationDelay: '1.1s' }}>
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-[#0093DE]">
                 <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
@@ -300,7 +301,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>{" "}
-        <div className="absolute left-0 right-0 z-20 flex justify-center bottom-16">
+        <div className="flex absolute right-0 left-0 bottom-16 z-20 justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8 text-white animate-bounce cursor-pointer hover:text-[#0093DE] transition-colors duration-300"
@@ -318,8 +319,8 @@ const HomePage = () => {
         className={`about-us-area py-20 rel z-1 ${theme === "light" ? "bg-white" : "bg-gray-800"
           }`}
       >
-        <div className="container max-w-6xl px-6 mx-auto md:px-12 lg:px-40 xl:px-40">
-          <div className="flex flex-wrap items-center justify-center gap-4 lg:flex-nowrap">
+        <div className="container px-6 mx-auto max-w-6xl md:px-12 lg:px-40 xl:px-40">
+          <div className="flex flex-wrap gap-4 justify-center items-center lg:flex-nowrap">
             <div className="w-full pr-4 mb-8 text-center lg:w-1/2 max-w-[768px] lg:mb-0 lg:text-left transform transition-all duration-700 hover:scale-[1.02]">
               <div className="about-us-content">
                 <div className="mb-6">
@@ -343,7 +344,7 @@ const HomePage = () => {
                   with local expertise and passion.
                 </p>
 
-                <div className="flex items-center justify-center mb-8 lg:justify-start">
+                <div className="flex justify-center items-center mb-8 lg:justify-start">
                   <div className="flex items-center space-x-2">
                     <div className="w-9 h-9 bg-[#0093DE]/10 rounded-full flex items-center justify-center">
                       <svg
@@ -399,19 +400,19 @@ const HomePage = () => {
                   className="inline-flex items-center bg-[#0093DE] hover:bg-[#007ab8] text-white mt-8 py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                   Explore Vietnam
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </Link></div>
             </div>            <div className="w-full lg:w-1/2">
               <div className="relative">
-                <div className="relative overflow-hidden shadow-2xl rounded-2xl">
+                <div className="overflow-hidden relative rounded-2xl shadow-2xl">
                   <img
                     src="https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                     alt="Vietnam landscape with traditional boats"
                     className="object-cover w-full h-64 transition-transform duration-700 md:h-80 lg:h-96 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t to-transparent from-black/20"></div>
                 </div>
 
                 {/* Decorative elements */}
@@ -449,12 +450,12 @@ const HomePage = () => {
               Our Services
             </span>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">Unforgettable Vietnamese Experiences</h2>
-            <p className="max-w-2xl mx-auto text-lg opacity-80">
+            <p className="mx-auto max-w-2xl text-lg opacity-80">
               Discover our range of thoughtfully designed travel experiences that showcase the best of Vietnam
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
+          <div className="grid grid-cols-1 gap-8 mx-auto max-w-7xl md:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <Link
                 key={service.id}
@@ -473,7 +474,7 @@ const HomePage = () => {
                 </p>
                 <div className="mt-auto flex items-center text-[#0093DE] font-medium">
                   <span>Learn more</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-1 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-5 h-5 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </div>
@@ -488,16 +489,16 @@ const HomePage = () => {
             Top Destinations
           </span>
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">Vietnam's Treasured Places</h2>
-          <p className="max-w-2xl mx-auto text-lg opacity-80">
+          <p className="mx-auto max-w-2xl text-lg opacity-80">
             Discover breathtaking landscapes, ancient culture, and unforgettable adventures
           </p>
         </div>
 
-          <div className="grid grid-cols-1 gap-6 mx-auto md:grid-cols-2 lg:grid-cols-4 max-w-7xl">
+          <div className="grid grid-cols-1 gap-6 mx-auto max-w-7xl md:grid-cols-2 lg:grid-cols-4">
             {popularDestinations.slice(0, 8).map((destination) => (
               <div
                 key={destination.id}
-                className="relative overflow-hidden transition-all duration-500 transform shadow-lg rounded-2xl h-80 group destination-card hover:-translate-y-2 hover:shadow-xl"
+                className="overflow-hidden relative h-80 rounded-2xl shadow-lg transition-all duration-500 transform group destination-card hover:-translate-y-2 hover:shadow-xl"
                 onMouseEnter={() => setVisibleDestination(destination.id)}
                 onMouseLeave={() => setVisibleDestination(null)}
               >
@@ -505,9 +506,9 @@ const HomePage = () => {
                   src={destination.image}
                   alt={destination.name}
                   onError={(e) => handleImageError(e, destination.fallbackImage)}
-                  className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80"></div>                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 transition-opacity duration-300 via-black/40 group-hover:opacity-80"></div>                <div className="absolute right-0 bottom-0 left-0 p-6 text-white">
                   <h3 className="mb-2 text-xl font-bold text-white">{destination.name}</h3>
                   <p className={`text-sm text-white/80 transition-all duration-500 ease-in-out transform ${visibleDestination === destination.id ? 'opacity-100 max-h-20 translate-y-0' : 'opacity-0 max-h-0 translate-y-4'}`}>
                     {destination.description}
@@ -520,12 +521,12 @@ const HomePage = () => {
                   >
                     <Link
                       to={`/tour/${destination.tourId}`}
-                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-all duration-300 transform bg-blue-500 rounded-full hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg"
+                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-full transition-all duration-300 transform hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg"
                     >
                       Explore tours
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 ml-1"
+                        className="ml-1 w-4 h-4"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -544,10 +545,10 @@ const HomePage = () => {
 
           <div className="mt-10 text-center">            <Link
             to="/package-tours"
-            className="inline-flex items-center justify-center px-8 py-3 font-medium text-white transition-all duration-300 transform bg-blue-500 rounded-full shadow-md hover:bg-blue-600 hover:shadow-xl hover:-translate-y-1 hover:scale-105"
+            className="inline-flex justify-center items-center px-8 py-3 font-medium text-white bg-blue-500 rounded-full shadow-md transition-all duration-300 transform hover:bg-blue-600 hover:shadow-xl hover:-translate-y-1 hover:scale-105"
           >
             View All Vietnam Destinations
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </Link>
@@ -562,23 +563,23 @@ const HomePage = () => {
               Traveler Stories
             </span>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">What Our Guests Say</h2>
-            <p className="max-w-2xl mx-auto text-lg opacity-80">
+            <p className="mx-auto max-w-2xl text-lg opacity-80">
               Authentic experiences shared by travelers who explored Vietnam with us
             </p>
           </div>
 
-          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 mx-auto max-w-6xl lg:grid-cols-3">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
                 className={`rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'
                   }`}
               >
-                <div className="flex items-center h-12 gap-2 mb-4">
+                <div className="flex gap-2 items-center mb-4 h-12">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="object-cover w-12 h-12 mr-4 rounded-full"
+                    className="object-cover mr-4 w-12 h-12 rounded-full"
                   />
                   <div className="flex flex-col justify-between h-12">
                     <h4 className="m-0 font-bold">{testimonial.name}</h4>
@@ -618,7 +619,7 @@ const HomePage = () => {
               className="inline-flex items-center bg-transparent border border-[#0093DE] text-[#0093DE] hover:bg-[#0093DE]/10 py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1"
             >
               Read More About Us
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
