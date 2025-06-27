@@ -70,66 +70,66 @@ const UserProfile = () => {
   
   return (
     <div className={`w-full min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'} pt-24 pb-16`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex flex-col md:flex-row gap-8">
+      <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-8 md:flex-row">
           {/* Sidebar */}
-          <div className="w-full md:w-64 flex-shrink-0">
+          <div className="flex-shrink-0 w-full md:w-64">
             <div className="sticky top-24 space-y-6">
               <Card>
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <Avatar className="h-24 w-24 mb-4">
+                <CardContent className="flex flex-col items-center p-6 text-center">
+                  <Avatar className="mb-4 w-24 h-24">
                     <AvatarImage src={user.avatar} alt={user.name} />
                     <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <h2 className="text-xl font-bold">{user.name}</h2>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{user.email}</p>
+                  <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                   <Button variant="outline" size="sm" className="w-full">
-                    <Edit className="mr-2 h-4 w-4" /> Edit Profile
+                    <Edit className="mr-2 w-4 h-4" /> Edit Profile
                   </Button>
                 </CardContent>
               </Card>
               
               <Card>
                 <CardContent className="p-0">
-                  <div className="space-y-1 p-2">
+                  <div className="p-2 space-y-1">
                     <Button 
                       variant={activeTab === 'profile' ? 'secondary' : 'ghost'} 
-                      className="w-full justify-start"
+                      className="justify-start w-full"
                       onClick={() => setActiveTab('profile')}
                     >
-                      <User className="mr-2 h-4 w-4" /> Profile
+                      <User className="mr-2 w-4 h-4" /> Profile
                     </Button>
                     <Button 
                       variant={activeTab === 'bookings' ? 'secondary' : 'ghost'} 
-                      className="w-full justify-start"
+                      className="justify-start w-full"
                       onClick={() => setActiveTab('bookings')}
                     >
-                      <Clock className="mr-2 h-4 w-4" /> My Bookings
+                      <Clock className="mr-2 w-4 h-4" /> My Bookings
                     </Button>
                     <Button 
                       variant={activeTab === 'wishlist' ? 'secondary' : 'ghost'} 
-                      className="w-full justify-start"
+                      className="justify-start w-full"
                       onClick={() => setActiveTab('wishlist')}
                     >
-                      <Heart className="mr-2 h-4 w-4" /> Wishlist
+                      <Heart className="mr-2 w-4 h-4" /> Wishlist
                     </Button>
                     <Button 
                       variant={activeTab === 'payment' ? 'secondary' : 'ghost'} 
-                      className="w-full justify-start"
+                      className="justify-start w-full"
                       onClick={() => setActiveTab('payment')}
                     >
-                      <CreditCard className="mr-2 h-4 w-4" /> Payment Methods
+                      <CreditCard className="mr-2 w-4 h-4" /> Payment Methods
                     </Button>
                     <Button 
                       variant={activeTab === 'settings' ? 'secondary' : 'ghost'} 
-                      className="w-full justify-start"
+                      className="justify-start w-full"
                       onClick={() => setActiveTab('settings')}
                     >
-                      <Settings className="mr-2 h-4 w-4" /> Account Settings
+                      <Settings className="mr-2 w-4 h-4" /> Account Settings
                     </Button>
                     <Separator className="my-2" />
-                    <Button variant="ghost" className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20">
-                      <LogOut className="mr-2 h-4 w-4" /> Sign Out
+                    <Button variant="ghost" className="justify-start w-full text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20">
+                      <LogOut className="mr-2 w-4 h-4" /> Sign Out
                     </Button>
                   </div>
                 </CardContent>
@@ -147,7 +147,7 @@ const UserProfile = () => {
                     <CardDescription>Manage your personal details</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div className="space-y-2">
                         <label className="text-sm font-medium">Full Name</label>
                         <Input defaultValue={user.name} />
@@ -227,37 +227,40 @@ const UserProfile = () => {
                   </CardHeader>
                   <CardContent>
                     <Tabs defaultValue="upcoming">
-                      <TabsList className="grid w-full grid-cols-2 mb-6">
+                      <TabsList className="grid grid-cols-2 mb-6 w-full">
                         <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
                         <TabsTrigger value="past">Past</TabsTrigger>
                       </TabsList>
                       
                       <TabsContent value="upcoming" className="space-y-4">
                         {bookings.filter(booking => booking.status === 'upcoming').map(booking => (
-                          <div key={booking.id} className="flex flex-col md:flex-row gap-4 p-4 border rounded-xl hover:shadow-md transition-shadow">
-                            <div className="w-full md:w-32 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                          <div key={booking.id} className="flex flex-col gap-4 p-4 rounded-xl border transition-shadow md:flex-row hover:shadow-md">
+                            <div className="overflow-hidden flex-shrink-0 w-full h-24 rounded-lg md:w-32">
                               <img 
                                 src={booking.image} 
                                 alt={booking.tourName} 
-                                className="w-full h-full object-cover"
+                                className="object-cover w-full h-full"
+                                width="128"
+                                height="96"
+                                loading="lazy"
                               />
                             </div>
                             <div className="flex-1">
-                              <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
+                              <div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-start">
                                 <div>
                                   <h3 className="font-semibold">{booking.tourName}</h3>
                                   <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                                    <Clock className="h-3 w-3 mr-1" />
+                                    <Clock className="mr-1 w-3 h-3" />
                                     <span>{booking.date}</span>
                                   </div>
-                                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-1">
-                                    <MapPin className="h-3 w-3 mr-1" />
+                                  <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                    <MapPin className="mr-1 w-3 h-3" />
                                     <span>Vietnam</span>
                                   </div>
                                 </div>
                                 <div className="text-right">
                                   <Badge className="bg-[#0093DE]">Upcoming</Badge>
-                                  <p className="font-semibold mt-2">${booking.price}</p>
+                                  <p className="mt-2 font-semibold">${booking.price}</p>
                                 </div>
                               </div>
                               <div className="flex flex-wrap gap-2 mt-4">
@@ -273,30 +276,33 @@ const UserProfile = () => {
                       
                       <TabsContent value="past" className="space-y-4">
                         {bookings.filter(booking => booking.status === 'completed').map(booking => (
-                          <div key={booking.id} className="flex flex-col md:flex-row gap-4 p-4 border rounded-xl hover:shadow-md transition-shadow">
-                            <div className="w-full md:w-32 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                          <div key={booking.id} className="flex flex-col gap-4 p-4 rounded-xl border transition-shadow md:flex-row hover:shadow-md">
+                            <div className="overflow-hidden flex-shrink-0 w-full h-24 rounded-lg md:w-32">
                               <img 
                                 src={booking.image} 
                                 alt={booking.tourName} 
-                                className="w-full h-full object-cover"
+                                className="object-cover w-full h-full"
+                                width="128"
+                                height="96"
+                                loading="lazy"
                               />
                             </div>
                             <div className="flex-1">
-                              <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
+                              <div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-start">
                                 <div>
                                   <h3 className="font-semibold">{booking.tourName}</h3>
                                   <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                                    <Clock className="h-3 w-3 mr-1" />
+                                    <Clock className="mr-1 w-3 h-3" />
                                     <span>{booking.date}</span>
                                   </div>
-                                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-1">
-                                    <MapPin className="h-3 w-3 mr-1" />
+                                  <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                    <MapPin className="mr-1 w-3 h-3" />
                                     <span>Vietnam</span>
                                   </div>
                                 </div>
                                 <div className="text-right">
                                   <Badge variant="outline">Completed</Badge>
-                                  <p className="font-semibold mt-2">${booking.price}</p>
+                                  <p className="mt-2 font-semibold">${booking.price}</p>
                                 </div>
                               </div>
                               <div className="flex flex-wrap gap-2 mt-4">
@@ -323,30 +329,33 @@ const UserProfile = () => {
                     <CardDescription>Tours you've saved for later</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       {wishlist.map(item => (
-                        <div key={item.id} className="border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-                          <div className="h-40 overflow-hidden relative">
+                        <div key={item.id} className="overflow-hidden rounded-xl border transition-shadow hover:shadow-md">
+                          <div className="overflow-hidden relative h-40">
                             <img 
                               src={item.image} 
                               alt={item.name} 
-                              className="w-full h-full object-cover"
+                              className="object-cover w-full h-full"
+                              width="320"
+                              height="160"
+                              loading="lazy"
                             />
                             <Button 
                               size="icon" 
                               variant="ghost" 
-                              className="absolute top-2 right-2 bg-white/80 hover:bg-white text-red-500 hover:text-red-600 rounded-full"
+                              className="absolute top-2 right-2 text-red-500 rounded-full bg-white/80 hover:bg-white hover:text-red-600"
                             >
-                              <Heart className="h-4 w-4 fill-current" />
+                              <Heart className="w-4 h-4 fill-current" />
                             </Button>
                           </div>
                           <div className="p-4">
                             <h3 className="font-semibold">{item.name}</h3>
-                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-1">
-                              <MapPin className="h-3 w-3 mr-1" />
+                            <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400">
+                              <MapPin className="mr-1 w-3 h-3" />
                               <span>{item.location}, Vietnam</span>
                             </div>
-                            <div className="flex items-center justify-between mt-4">
+                            <div className="flex justify-between items-center mt-4">
                               <p className="font-semibold">${item.price}</p>
                               <Button size="sm" asChild className="bg-[#0093DE] hover:bg-[#007ab8]">
                                 <Link to={`/tour/${item.id}`}>View Tour</Link>
@@ -358,10 +367,10 @@ const UserProfile = () => {
                     </div>
                     
                     {wishlist.length === 0 && (
-                      <div className="text-center py-12">
-                        <Heart className="h-12 w-12 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
-                        <h3 className="text-lg font-medium mb-2">Your wishlist is empty</h3>
-                        <p className="text-gray-500 dark:text-gray-400 mb-4">
+                      <div className="py-12 text-center">
+                        <Heart className="mx-auto mb-4 w-12 h-12 text-gray-300 dark:text-gray-600" />
+                        <h3 className="mb-2 text-lg font-medium">Your wishlist is empty</h3>
+                        <p className="mb-4 text-gray-500 dark:text-gray-400">
                           Save tours you're interested in by clicking the heart icon
                         </p>
                         <Button asChild className="bg-[#0093DE] hover:bg-[#007ab8]">
@@ -382,9 +391,9 @@ const UserProfile = () => {
                     <CardDescription>Manage your payment options</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="border rounded-lg p-4 flex justify-between items-center">
+                    <div className="flex justify-between items-center p-4 rounded-lg border">
                       <div className="flex items-center">
-                        <div className="w-12 h-8 bg-blue-600 rounded mr-4 flex items-center justify-center text-white font-bold">
+                        <div className="flex justify-center items-center mr-4 w-12 h-8 font-bold text-white bg-blue-600 rounded">
                           Visa
                         </div>
                         <div>
@@ -392,15 +401,15 @@ const UserProfile = () => {
                           <p className="text-sm text-gray-500 dark:text-gray-400">Expires 05/2026</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex gap-2 items-center">
                         <Badge>Default</Badge>
                         <Button variant="ghost" size="sm">Edit</Button>
                       </div>
                     </div>
                     
-                    <div className="border rounded-lg p-4 flex justify-between items-center">
+                    <div className="flex justify-between items-center p-4 rounded-lg border">
                       <div className="flex items-center">
-                        <div className="w-12 h-8 bg-red-500 rounded mr-4 flex items-center justify-center text-white font-bold">
+                        <div className="flex justify-center items-center mr-4 w-12 h-8 font-bold text-white bg-red-500 rounded">
                           MC
                         </div>
                         <div>
@@ -408,14 +417,14 @@ const UserProfile = () => {
                           <p className="text-sm text-gray-500 dark:text-gray-400">Expires 11/2025</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex gap-2 items-center">
                         <Button variant="ghost" size="sm">Set Default</Button>
                         <Button variant="ghost" size="sm">Edit</Button>
                       </div>
                     </div>
                     
-                    <Button variant="outline" className="w-full mt-4">
-                      <CreditCard className="mr-2 h-4 w-4" /> Add New Payment Method
+                    <Button variant="outline" className="mt-4 w-full">
+                      <CreditCard className="mr-2 w-4 h-4" /> Add New Payment Method
                     </Button>
                   </CardContent>
                 </Card>
@@ -432,15 +441,15 @@ const UserProfile = () => {
                   <CardContent className="space-y-6">
                     <div className="space-y-2">
                       <h3 className="font-medium">Email Notifications</h3>
-                      <div className="flex items-center justify-between">
+                      <div className="flex justify-between items-center">
                         <label className="text-sm">Booking confirmations</label>
                         <input type="checkbox" defaultChecked className="toggle toggle-primary" />
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex justify-between items-center">
                         <label className="text-sm">Special offers and promotions</label>
                         <input type="checkbox" defaultChecked className="toggle toggle-primary" />
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex justify-between items-center">
                         <label className="text-sm">Travel tips and news</label>
                         <input type="checkbox" className="toggle toggle-primary" />
                       </div>
@@ -450,11 +459,11 @@ const UserProfile = () => {
                     
                     <div className="space-y-2">
                       <h3 className="font-medium">Privacy Settings</h3>
-                      <div className="flex items-center justify-between">
+                      <div className="flex justify-between items-center">
                         <label className="text-sm">Share my reviews publicly</label>
                         <input type="checkbox" defaultChecked className="toggle toggle-primary" />
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex justify-between items-center">
                         <label className="text-sm">Allow personalized recommendations</label>
                         <input type="checkbox" defaultChecked className="toggle toggle-primary" />
                       </div>
@@ -464,14 +473,14 @@ const UserProfile = () => {
                     
                     <div className="space-y-2">
                       <h3 className="font-medium">Account Security</h3>
-                      <Button variant="outline" className="w-full justify-between">
+                      <Button variant="outline" className="justify-between w-full">
                         Change Password
-                        <ChevronRight className="h-4 w-4" />
+                        <ChevronRight className="w-4 h-4" />
                       </Button>
-                      <Button variant="outline" className="w-full justify-between">
+                      <Button variant="outline" className="justify-between w-full">
                         Two-Factor Authentication
                         <Badge className="ml-2">Enabled</Badge>
-                        <ChevronRight className="h-4 w-4" />
+                        <ChevronRight className="w-4 h-4" />
                       </Button>
                     </div>
                     
@@ -479,7 +488,7 @@ const UserProfile = () => {
                     
                     <div className="space-y-2">
                       <h3 className="font-medium text-red-500">Danger Zone</h3>
-                      <Button variant="outline" className="w-full border-red-200 text-red-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/20">
+                      <Button variant="outline" className="w-full text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/20">
                         Delete Account
                       </Button>
                     </div>

@@ -181,27 +181,27 @@ const AdminTourManagement = () => {
   }, [tours]);
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 pt-16">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 max-w-6xl py-12">
+    <div className="pt-16 min-h-screen bg-gradient-to-br from-gray-50 to-gray-50 via-blue-50/30 dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
+      <div className="container px-6 py-12 mx-auto max-w-6xl sm:px-8 lg:px-12 xl:px-16">
         {/* Enhanced Header Section */}
         <div className="relative bg-gradient-to-r from-[#0093DE] to-[#0077b3] rounded-2xl p-8 mb-8 overflow-hidden shadow-xl">
           <div className="absolute inset-0 bg-black/5"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full translate-x-32 -translate-y-32 bg-white/10"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full -translate-x-24 translate-y-24 bg-white/5"></div>
           
-          <div className="relative flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="flex relative flex-col gap-4 justify-between items-start md:flex-row md:items-center">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-3 drop-shadow-md">
+              <h1 className="mb-3 text-4xl font-bold text-white drop-shadow-md">
                 Tour Management
               </h1>
-              <p className="text-blue-100 text-lg">Create, edit, and organize your tour packages with ease</p>
+              <p className="text-lg text-blue-100">Create, edit, and organize your tour packages with ease</p>
               <div className="flex items-center mt-4 space-x-6 text-blue-100">
                 <div className="flex items-center">
-                  <CheckCircle2 className="h-5 w-5 mr-2" />
+                  <CheckCircle2 className="mr-2 w-5 h-5" />
                   <span className="text-sm">{tours.length} Total Tours</span>
                 </div>
                 <div className="flex items-center">
-                  <Star className="h-5 w-5 mr-2" />
+                  <Star className="mr-2 w-5 h-5" />
                   <span className="text-sm">{tours.filter(tour => tour.featured).length} Featured</span>
                 </div>
               </div>
@@ -212,58 +212,58 @@ const AdminTourManagement = () => {
                 onClick={handleStartAdd} 
                 className="bg-white text-[#0093DE] hover:bg-blue-50 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl font-semibold px-6 py-3 rounded-xl"
               >
-                <PlusCircle className="mr-2 h-5 w-5" /> Add New Tour
+                <PlusCircle className="mr-2 w-5 h-5" /> Add New Tour
               </Button>
             )}
           </div>
         </div>
 
         {/* Enhanced Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
+          <Card className="overflow-hidden bg-white rounded-xl border-0 shadow-lg transition-all duration-300 dark:bg-gray-800 hover:shadow-xl hover:-translate-y-1">
             <CardContent className="p-6">
               <div className="flex items-center">
                 <div className="p-3 bg-gradient-to-br from-[#0093DE] to-[#0077b3] rounded-xl shadow-lg">
-                  <CheckCircle2 className="h-6 w-6 text-white" />
+                  <CheckCircle2 className="w-6 h-6 text-white" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Tours</p>
                   <p className="text-3xl font-bold text-gray-900 dark:text-white">{tours.length}</p>
-                  <p className="text-xs text-gray-500 mt-1">Active packages</p>
+                  <p className="mt-1 text-xs text-gray-500">Active packages</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 rounded-xl overflow-hidden">
+          <Card className="overflow-hidden bg-white rounded-xl border-0 shadow-lg transition-all duration-300 dark:bg-gray-800 hover:shadow-xl hover:-translate-y-1">
             <CardContent className="p-6">
               <div className="flex items-center">
                 <div className="p-3 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl shadow-lg">
-                  <Star className="h-6 w-6 text-white" />
+                  <Star className="w-6 h-6 text-white" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Featured Tours</p>
                   <p className="text-3xl font-bold text-gray-900 dark:text-white">
                     {tours.filter(tour => tour.featured).length}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">Highlighted packages</p>
+                  <p className="mt-1 text-xs text-gray-500">Highlighted packages</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 rounded-xl overflow-hidden">
+          <Card className="overflow-hidden bg-white rounded-xl border-0 shadow-lg transition-all duration-300 dark:bg-gray-800 hover:shadow-xl hover:-translate-y-1">
             <CardContent className="p-6">
               <div className="flex items-center">
                 <div className="p-3 bg-gradient-to-br from-green-400 to-green-500 rounded-xl shadow-lg">
-                  <Eye className="h-6 w-6 text-white" />
+                  <Eye className="w-6 h-6 text-white" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Categories</p>
                   <p className="text-3xl font-bold text-gray-900 dark:text-white">
                     {categories.length - 1}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">Different types</p>
+                  <p className="mt-1 text-xs text-gray-500">Different types</p>
                 </div>
               </div>
             </CardContent>
@@ -273,9 +273,9 @@ const AdminTourManagement = () => {
         {/* Enhanced Add/Edit Form */}
         {/* Enhanced Add/Edit Form */}
         {isAdding && (
-          <Card className="mb-8 animate-in fade-in-50 duration-500 shadow-xl rounded-2xl border-0 overflow-hidden">            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
+          <Card className="overflow-hidden mb-8 rounded-2xl border-0 shadow-xl duration-500 animate-in fade-in-50">            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
               <CardTitle className="text-[#0093DE] text-xl font-semibold flex items-center">
-                <PlusCircle className="mr-3 h-6 w-6" />
+                <PlusCircle className="mr-3 w-6 h-6" />
                 Add New Tour
               </CardTitle>
             </CardHeader>
@@ -290,10 +290,10 @@ const AdminTourManagement = () => {
         )}
         
         {isEditing && currentTour && (
-          <Card className="mb-8 animate-in fade-in-50 duration-500 shadow-xl rounded-2xl border-0 overflow-hidden">            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
+          <Card className="overflow-hidden mb-8 rounded-2xl border-0 shadow-xl duration-500 animate-in fade-in-50">            <CardHeader className="bg-gradient-to-r from-[#0093DE]/10 to-[#0077b3]/10 border-b border-[#0093DE]/20 p-6">
               <CardTitle className="text-[#0093DE] text-xl font-semibold flex items-center">
-                <Edit className="mr-3 h-6 w-6" />
-                Edit Tour: <span className="text-gray-700 dark:text-gray-300 ml-2">{currentTour.name}</span>
+                <Edit className="mr-3 w-6 h-6" />
+                Edit Tour: <span className="ml-2 text-gray-700 dark:text-gray-300">{currentTour.name}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="p-0 bg-white dark:bg-gray-800">
@@ -308,22 +308,22 @@ const AdminTourManagement = () => {
         )}
         {/* Enhanced Tours List */}
         {!isAdding && !isEditing && (
-          <Card className="shadow-xl rounded-2xl overflow-hidden border-0 bg-white dark:bg-gray-800">
-            <CardHeader className="bg-gradient-to-r from-gray-50 to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 border-b border-gray-200 dark:border-gray-700 p-6">
-              <div className="flex flex-col lg:flex-row gap-4 justify-between">
+          <Card className="overflow-hidden bg-white rounded-2xl border-0 shadow-xl dark:bg-gray-800">
+            <CardHeader className="p-6 bg-gradient-to-r from-gray-50 border-b border-gray-200 to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 dark:border-gray-700">
+              <div className="flex flex-col gap-4 justify-between lg:flex-row">
                 <div>
-                  <CardTitle className="text-2xl text-gray-900 dark:text-white font-bold flex items-center">
+                  <CardTitle className="flex items-center text-2xl font-bold text-gray-900 dark:text-white">
                     <div className="p-2 bg-[#0093DE]/10 rounded-lg mr-3">
                       <CheckCircle2 className="h-6 w-6 text-[#0093DE]" />
                     </div>
                     All Tours
                   </CardTitle>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 ml-14">
+                  <p className="mt-2 ml-14 text-sm text-gray-600 dark:text-gray-400">
                     Manage and organize your tour packages
                   </p>
-                </div>                  <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="relative flex items-center">
-                    <Search className="absolute left-3 h-4 w-4 text-gray-400 z-10 pointer-events-none" />
+                </div>                  <div className="flex flex-col gap-3 sm:flex-row">
+                  <div className="flex relative items-center">
+                    <Search className="absolute left-3 z-10 w-4 h-4 text-gray-400 pointer-events-none" />
                     <Input
                       type="text"
                       placeholder="Search tours..."
@@ -335,7 +335,7 @@ const AdminTourManagement = () => {
                   
                   <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                     <SelectTrigger className="h-12 w-full sm:w-[150px] border-gray-300 focus:border-[#0093DE] focus:ring-[#0093DE] rounded-xl">
-                      <Filter className="mr-2 h-4 w-4" />
+                      <Filter className="mr-2 w-4 h-4" />
                       <SelectValue placeholder="Filter by category" />
                     </SelectTrigger>
                     <SelectContent className="rounded-xl">
@@ -352,7 +352,7 @@ const AdminTourManagement = () => {
                     </Button>
                   )}
                     {selectedTours.length > 0 && (
-                    <Button onClick={handleBulkDelete} className="bg-red-500 hover:bg-red-600 text-white shadow-lg hover:shadow-xl transition-all rounded-xl">
+                    <Button onClick={handleBulkDelete} className="text-white bg-red-500 rounded-xl shadow-lg transition-all hover:bg-red-600 hover:shadow-xl">
                       Delete Selected ({selectedTours.length})
                     </Button>
                   )}
@@ -363,7 +363,7 @@ const AdminTourManagement = () => {
             <div className="overflow-x-auto rounded-t-xl">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-gradient-to-r from-gray-50 to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 border-b first:rounded-tl-xl last:rounded-tr-xl">
+                  <TableRow className="bg-gradient-to-r from-gray-50 border-b to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 first:rounded-tl-xl last:rounded-tr-xl">
                     <TableHead className="w-[40px] pl-6 first:rounded-tl-xl">
                       <Checkbox 
                         checked={selectedTours.length === filteredTours.length && filteredTours.length > 0}
@@ -372,7 +372,7 @@ const AdminTourManagement = () => {
                         className="border-2 border-gray-300 data-[state=checked]:bg-[#0093DE] data-[state=checked]:border-[#0093DE]"
                       />
                     </TableHead>
-                    <TableHead className="cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors font-semibold" onClick={() => handleSort('name')}>
+                    <TableHead className="font-semibold transition-colors cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50" onClick={() => handleSort('name')}>
                       <div className="flex items-center">
                         Tour
                         {sortField === 'name' && (
@@ -380,7 +380,7 @@ const AdminTourManagement = () => {
                         )}
                       </div>
                     </TableHead>
-                    <TableHead className="cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors font-semibold" onClick={() => handleSort('location')}>
+                    <TableHead className="font-semibold transition-colors cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50" onClick={() => handleSort('location')}>
                       <div className="flex items-center">
                         Location
                         {sortField === 'location' && (
@@ -388,7 +388,7 @@ const AdminTourManagement = () => {
                         )}
                       </div>
                     </TableHead>
-                    <TableHead className="cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors font-semibold" onClick={() => handleSort('price')}>
+                    <TableHead className="font-semibold transition-colors cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50" onClick={() => handleSort('price')}>
                       <div className="flex items-center">
                         Price
                         {sortField === 'price' && (
@@ -398,7 +398,7 @@ const AdminTourManagement = () => {
                     </TableHead>
                     <TableHead className="font-semibold">Duration</TableHead>
                     <TableHead className="font-semibold">Category</TableHead>
-                    <TableHead className="cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors font-semibold" onClick={() => handleSort('featured')}>
+                    <TableHead className="font-semibold transition-colors cursor-pointer hover:bg-white/50 dark:hover:bg-gray-700/50" onClick={() => handleSort('featured')}>
                       <div className="flex items-center">
                         Featured
                         {sortField === 'featured' && (
@@ -406,23 +406,23 @@ const AdminTourManagement = () => {
                         )}
                       </div>
                     </TableHead>
-                    <TableHead className="text-right font-semibold pr-6 last:rounded-tr-xl">Actions</TableHead>
+                    <TableHead className="pr-6 font-semibold text-right last:rounded-tr-xl">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredTours.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={8} className="text-center py-12">
-                        <div className="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">
-                          <Search className="h-16 w-16 mb-4 opacity-20" />
-                          <p className="text-lg font-medium mb-2">No tours found</p>
+                      <TableCell colSpan={8} className="py-12 text-center">
+                        <div className="flex flex-col justify-center items-center text-gray-500 dark:text-gray-400">
+                          <Search className="mb-4 w-16 h-16 opacity-20" />
+                          <p className="mb-2 text-lg font-medium">No tours found</p>
                           <p className="text-sm">Try adjusting your search or filters</p>
                         </div>
                       </TableCell>
                     </TableRow>
                   ) : (
                     filteredTours.map((tour) => (
-                      <TableRow key={tour.id} className="hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-transparent dark:hover:from-blue-900/20 dark:hover:to-transparent transition-all duration-200 border-b border-gray-100 dark:border-gray-800">
+                      <TableRow key={tour.id} className="border-b border-gray-100 transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-transparent dark:hover:from-blue-900/20 dark:hover:to-transparent dark:border-gray-800">
                         <TableCell className="pl-6">
                           <Checkbox 
                             checked={selectedTours.includes(tour.id)}
@@ -433,19 +433,22 @@ const AdminTourManagement = () => {
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center">
-                            <div className="flex-shrink-0 h-14 w-14 rounded-xl overflow-hidden shadow-md border-2 border-white dark:border-gray-700">
+                            <div className="overflow-hidden flex-shrink-0 w-14 h-14 rounded-xl border-2 border-white shadow-md dark:border-gray-700">
                               <img 
-                                className="h-14 w-14 object-cover transition-transform hover:scale-110 duration-300" 
+                                className="object-cover w-14 h-14 transition-transform duration-300 hover:scale-110" 
                                 src={getImageUrl(tour.image)} 
                                 alt={tour.name}
+                                width="56"
+                                height="56"
+                                loading="lazy"
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).src = 'https://via.placeholder.com/100?text=No+Image';
                                 }}
                               />
                             </div>
                             <div className="ml-4">
-                              <div className="font-semibold text-gray-900 dark:text-white text-lg">{tour.name}</div>
-                              <div className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1 mt-1">
+                              <div className="text-lg font-semibold text-gray-900 dark:text-white">{tour.name}</div>
+                              <div className="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
                                 {tour.description || 'No description available'}
                               </div>
                             </div>
@@ -453,7 +456,7 @@ const AdminTourManagement = () => {
                         </TableCell>
                         <TableCell className="font-medium text-gray-700 dark:text-gray-300">{tour.location}</TableCell>
                         <TableCell className="font-bold text-[#0093DE] text-lg">${tour.price}</TableCell>                        <TableCell>
-                          <Badge className="bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800 font-medium rounded-xl px-3 py-1">
+                          <Badge className="px-3 py-1 font-medium text-blue-700 bg-blue-50 rounded-xl border border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800">
                             {tour.duration}
                           </Badge>
                         </TableCell>                        <TableCell>
@@ -466,23 +469,23 @@ const AdminTourManagement = () => {
                             className={`h-9 px-4 text-xs bg-white border border-gray-200 hover:bg-opacity-20 ${tour.featured ? 'text-yellow-500 hover:text-yellow-600 hover:bg-yellow-50' : 'text-black hover:text-yellow-500 hover:bg-yellow-50'} transition-all duration-200 rounded-xl shadow-sm`}
                           >
                             {tour.featured ? 
-                              <Star className="h-5 w-5 fill-current" /> : 
-                              <StarOff className="h-5 w-5" />
+                              <Star className="w-5 h-5 fill-current" /> : 
+                              <StarOff className="w-5 h-5" />
                             }
                           </Button>
                         </TableCell>
-                        <TableCell className="text-right pr-6">
+                        <TableCell className="pr-6 text-right">
                           <div className="flex justify-end space-x-2">
-                            <Button asChild className="h-9 px-4 text-xs bg-white border border-gray-200 text-black hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 rounded-xl shadow-sm">
+                            <Button asChild className="px-4 h-9 text-xs text-black bg-white rounded-xl border border-gray-200 shadow-sm transition-all duration-200 hover:bg-blue-50 hover:text-blue-600">
                               <Link to={`/tour/${tour.id}`} target="_blank">
-                                <Eye className="h-4 w-4" />
+                                <Eye className="w-4 h-4" />
                               </Link>
                             </Button>
-                            <Button onClick={() => handleStartEdit(tour)} className="h-9 px-4 text-xs bg-white border border-gray-200 text-black hover:bg-green-50 hover:text-green-600 transition-all duration-200 rounded-xl shadow-sm">
-                              <Edit className="h-4 w-4" />
+                            <Button onClick={() => handleStartEdit(tour)} className="px-4 h-9 text-xs text-black bg-white rounded-xl border border-gray-200 shadow-sm transition-all duration-200 hover:bg-green-50 hover:text-green-600">
+                              <Edit className="w-4 h-4" />
                             </Button>
-                            <Button onClick={() => handleConfirmDelete(tour.id)} className="h-9 px-4 text-xs bg-white border border-gray-200 text-black hover:bg-red-50 hover:text-red-600 transition-all duration-200 rounded-xl shadow-sm">
-                              <Trash2 className="h-4 w-4" />
+                            <Button onClick={() => handleConfirmDelete(tour.id)} className="px-4 h-9 text-xs text-black bg-white rounded-xl border border-gray-200 shadow-sm transition-all duration-200 hover:bg-red-50 hover:text-red-600">
+                              <Trash2 className="w-4 h-4" />
                             </Button>
                           </div>
                         </TableCell>
@@ -493,9 +496,9 @@ const AdminTourManagement = () => {
               </Table>
             </div>
             
-            <div className="bg-gradient-to-r from-gray-50 to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-6 py-4 bg-gradient-to-r from-gray-50 border-t border-gray-200 to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 dark:border-gray-700">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-600 dark:text-gray-400 font-medium">
+                <span className="font-medium text-gray-600 dark:text-gray-400">
                   Showing <span className="text-[#0093DE] font-semibold">{filteredTours.length}</span> of <span className="text-[#0093DE] font-semibold">{tours.length}</span> tours
                 </span>
                 {selectedTours.length > 0 && (
@@ -510,21 +513,21 @@ const AdminTourManagement = () => {
         
         {/* Enhanced Delete Confirmation Dialog */}
         <Dialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
-          <DialogContent className="sm:max-w-md rounded-2xl border-0 shadow-2xl">
+          <DialogContent className="rounded-2xl border-0 shadow-2xl sm:max-w-md">
             <DialogHeader>
-              <DialogTitle className="text-center text-red-600 text-xl font-semibold">Confirm Deletion</DialogTitle>
+              <DialogTitle className="text-xl font-semibold text-center text-red-600">Confirm Deletion</DialogTitle>
             </DialogHeader>
             <div className="py-6 text-center">
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-br from-red-100 to-red-200 mb-6 shadow-lg">
-                <Trash2 className="h-8 w-8 text-red-600" />
+              <div className="flex justify-center items-center mx-auto mb-6 w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-full shadow-lg">
+                <Trash2 className="w-8 h-8 text-red-600" />
               </div>
-              <p className="text-gray-900 dark:text-white mb-2 text-lg font-medium">Are you sure you want to delete this tour?</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">This action cannot be undone and will permanently remove the tour from your system.</p>              <div className="flex justify-center gap-4">
+              <p className="mb-2 text-lg font-medium text-gray-900 dark:text-white">Are you sure you want to delete this tour?</p>
+              <p className="mb-8 text-sm text-gray-500 dark:text-gray-400">This action cannot be undone and will permanently remove the tour from your system.</p>              <div className="flex gap-4 justify-center">
                 <Button onClick={() => setShowDeleteConfirm(false)} className="px-6 border-2 border-[#0093DE] bg-transparent text-[#0093DE] hover:bg-gray-50 transition-colors rounded-xl">
-                  <XCircle className="mr-2 h-4 w-4" /> Cancel
+                  <XCircle className="mr-2 w-4 h-4" /> Cancel
                 </Button>
-                <Button onClick={handleDelete} className="px-6 bg-red-500 hover:bg-red-600 text-white shadow-lg hover:shadow-xl transition-all rounded-xl">
-                  <Trash2 className="mr-2 h-4 w-4" /> Delete Tour
+                <Button onClick={handleDelete} className="px-6 text-white bg-red-500 rounded-xl shadow-lg transition-all hover:bg-red-600 hover:shadow-xl">
+                  <Trash2 className="mr-2 w-4 h-4" /> Delete Tour
                 </Button>
               </div>
             </div>
